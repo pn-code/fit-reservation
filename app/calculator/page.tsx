@@ -39,15 +39,10 @@ const CalculatorModal = () => {
     };
 
     return (
-        <form className="bg-[#05204A] text-[#FAFAFA] p-4 rounded-md flex-col flex gap-4 max-w-md fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50">
+        <div className="flex justify-center mt-[6%]">
+        <form className="bg-[#05204A] text-[#FAFAFA] w-[92%] p-4 rounded-md flex-col flex gap-4 max-w-md">
             <header className="flex justify-between items-center border-b-violet-800 border-b-2 pb-2">
                 <h1 className="text-3xl font-semibold">Calculator</h1>
-                <button
-                    className="font-bold text-xl cursor-pointer hover:bg-[#493fdd] px-2 rounded-full"
-                    type="button"
-                >
-                    X
-                </button>
             </header>
 
             {/* Unit Button Sections */}
@@ -220,6 +215,7 @@ const CalculatorModal = () => {
                 <p>{calories} kCal</p>
             </section>
         </form>
+        </div>
     );
 };
 
