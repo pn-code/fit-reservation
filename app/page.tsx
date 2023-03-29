@@ -1,13 +1,10 @@
-import Image from 'next/image'
-import { Inter } from '@next/font/google'
-import styles from './page.module.css'
-
-const inter = Inter({ subsets: ['latin'] })
+import CalculatorModal from '../components/CalculatorModal'
 
 export default function Home() {
   return (
-    <main className={styles.main}>
+    <main>
       <h1>Hello NextJS 13</h1>
+      <CalculatorModal/>
     </main>
   )
 }
