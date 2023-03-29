@@ -2,13 +2,6 @@
 import React, { useState } from "react";
 
 const CalculatorModal = () => {
-    // Mifflin-St Jeor Formula
-
-    // Males: (10*weight [kg]) + (6.25*height [cm]) – (5*age [years]) + 5
-    // Females: (10*weight [kg]) + (6.25*height [cm]) – (5*age [years]) – 161
-
-    //  ----------------------------------------------------------------------
-
     const [age, setAge] = useState(25);
     const [gender, setGender] = useState("male");
     const [height, setHeight] = useState({ feet: 5, inches: 10 });
@@ -46,8 +39,16 @@ const CalculatorModal = () => {
     };
 
     return (
-        <form className="bg-[#05204A] text-[#FAFAFA] p-4 rounded-md flex-col flex gap-4">
-            <h1 className="text-3xl font-semibold">Calculator</h1>
+        <form className="bg-[#05204A] text-[#FAFAFA] p-4 rounded-md flex-col flex gap-4 max-w-md fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50">
+            <header className="flex justify-between items-center border-b-violet-800 border-b-2 pb-2">
+                <h1 className="text-3xl font-semibold">Calculator</h1>
+                <button
+                    className="font-bold text-xl cursor-pointer hover:bg-[#493fdd] px-2 rounded-full"
+                    type="button"
+                >
+                    X
+                </button>
+            </header>
 
             {/* Unit Button Sections */}
             {/* <section>
@@ -174,9 +175,7 @@ const CalculatorModal = () => {
                         <option value={1.55}>
                             moderate exercise 3-5 days/wk
                         </option>
-                        <option value={1.725}>
-                            hard exercise 6-7 days/wk
-                        </option>
+                        <option value={1.725}>hard exercise 6-7 days/wk</option>
                         <option value={1.9}>
                             2x hard exercise 6-7 days/wk
                         </option>
@@ -202,15 +201,15 @@ const CalculatorModal = () => {
             </section>
 
             {/* Action Buttons Section */}
-            <section className="flex gap-4">
+            <section className="flex justify-between gap-4 mt-4">
                 <button
                     onClick={handleCalculate}
-                    className="px-4 bg-[#493fdd] rounded-md py-3"
+                    className="px-4 bg-[#493fdd] rounded-md py-3 flex-1"
                     type="button"
                 >
                     Calculate
                 </button>
-                <button className="px-4 bg-[#424242] rounded-md py-3 ">
+                <button className="px-4 bg-[#424242] rounded-md py-3 flex-1">
                     Apply to Profile
                 </button>
             </section>
