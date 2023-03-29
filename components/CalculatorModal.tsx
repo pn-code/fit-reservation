@@ -7,6 +7,7 @@ const CalculatorModal = () => {
     const [height, setHeight] = useState({ feet: 5, inches: 10 });
     const [weight, setWeight] = useState(160);
     const [activity, setActivity] = useState(1.2);
+    const [plan, setPlan] = useState(0);
 
     return (
         <form className="bg-[#05204A] text-[#FAFAFA] p-4 rounded-md flex-col flex gap-4">
@@ -121,7 +122,7 @@ const CalculatorModal = () => {
                     </section>
                 </div>
 
-                <div className="flex gap-4 flex-col">
+                <div className="flex gap-4 flex-col sm:flex-row">
                     <label htmlFor="activity">Activity Level</label>
                     <select
                         onChange={(e) => setActivity(Number(e.target.value))}
@@ -144,6 +145,23 @@ const CalculatorModal = () => {
                         </option>
                     </select>
                 </div>
+
+                <div className="flex gap-4 flex-col sm:flex-row">
+                    <label htmlFor="plan">Diet Plan</label>
+                    <select
+                        onChange={(e) => setPlan(Number(e.target.value))}
+                        value={plan}
+                        name="plan"
+                        id="plan"
+                    >
+                        <option value={0}>Maintain Weight</option>
+                        <option value={-500}>Lose 1 pound/week</option>
+                        <option value={-1000}>Lose 2 pounds/week</option>
+                        <option value={250}>Gain 0.5 pound/week</option>
+                        <option value={500}>Gain 1 pound/week</option>
+                        <option value={1000}>Gain 2 pounds/week</option>
+                    </select>
+                </div>
             </section>
 
             {/* Action Buttons Section */}
@@ -157,7 +175,10 @@ const CalculatorModal = () => {
             </section>
 
             {/* Display Calories Section */}
-            <section></section>
+            <section>
+                <h2 className="text-2xl">Daily Calories:</h2>
+                <p>Your Calories</p>
+            </section>
         </form>
     );
 };
