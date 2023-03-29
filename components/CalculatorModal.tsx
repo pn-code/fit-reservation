@@ -2,26 +2,62 @@
 import React, { useState } from "react";
 
 const CalculatorModal = () => {
+    // Mifflin-St Jeor Formula
+
+    // Males: (10*weight [kg]) + (6.25*height [cm]) – (5*age [years]) + 5
+    // Females: (10*weight [kg]) + (6.25*height [cm]) – (5*age [years]) – 161
+
+    //  ----------------------------------------------------------------------
+
     const [age, setAge] = useState(25);
     const [gender, setGender] = useState("male");
     const [height, setHeight] = useState({ feet: 5, inches: 10 });
     const [weight, setWeight] = useState(160);
     const [activity, setActivity] = useState(1.2);
     const [plan, setPlan] = useState(0);
+    const [calories, setCalories] = useState(2000);
+
+    const handleCalculate = () => {
+        if (gender == "male") {
+            const { feet, inches } = height;
+            const totalHeightInCm = feet * 12 * 2.54 + inches * 2.54;
+            const formulaMale =
+                (10 * weight * 0.453592 +
+                    6.25 * totalHeightInCm -
+                    5 * age +
+                    5) *
+                    activity +
+                plan;
+            setCalories(Math.round(formulaMale));
+        }
+
+        if (gender == "female") {
+            const { feet, inches } = height;
+            const totalHeightInCm = feet * 12 * 2.54 + inches * 2.54;
+            const formulaFemale =
+                (10 * weight * 0.453592 +
+                    6.25 * totalHeightInCm -
+                    5 * age -
+                    161) *
+                    activity +
+                plan;
+            setCalories(Math.round(formulaFemale));
+        }
+    };
 
     return (
         <form className="bg-[#05204A] text-[#FAFAFA] p-4 rounded-md flex-col flex gap-4">
             <h1 className="text-3xl font-semibold">Calculator</h1>
 
             {/* Unit Button Sections */}
-            <section>
+            {/* <section>
                 <button className="px-4 bg-[#493fdd] rounded-tl-md rounded-bl-md py-3 border-r-2">
                     US Units
                 </button>
                 <button className="px-4 bg-[#493fdd] rounded-tr-md rounded-br-md py-3">
                     Metric Units
                 </button>
-            </section>
+            </section> */}
 
             {/* Input Section */}
             <section className="flex flex-col gap-4">
@@ -32,7 +68,7 @@ const CalculatorModal = () => {
                         onChange={(e) => setAge(Number(e.target.value))}
                         value={age}
                         id="age"
-                        type="number"
+                        type="tel"
                     />
                 </div>
 
@@ -40,6 +76,7 @@ const CalculatorModal = () => {
                     <label>Gender</label>
                     <section className="flex gap-2">
                         <input
+                            defaultChecked
                             id="male"
                             onClick={() => setGender("male")}
                             name="gender"
@@ -94,7 +131,7 @@ const CalculatorModal = () => {
                                     inches: Number(e.target.value),
                                 }))
                             }
-                            value={height.feet}
+                            value={height.inches}
                             type="tel"
                         />
                         <label
@@ -132,16 +169,16 @@ const CalculatorModal = () => {
                     >
                         <option value={1.2}>little to no exercise</option>
                         <option value={1.375}>
-                            light exercise 1-3 days/week
+                            light exercise 1-3 days/wk
                         </option>
                         <option value={1.55}>
-                            moderate exercise 3-5 days/week
+                            moderate exercise 3-5 days/wk
                         </option>
                         <option value={1.725}>
-                            hard exercise 6-7 days/week
+                            hard exercise 6-7 days/wk
                         </option>
                         <option value={1.9}>
-                            very hard exercise & physical job OR 2x training
+                            2x hard exercise 6-7 days/wk
                         </option>
                     </select>
                 </div>
@@ -166,10 +203,14 @@ const CalculatorModal = () => {
 
             {/* Action Buttons Section */}
             <section className="flex gap-4">
-                <button className="px-4 bg-[#493fdd] rounded-md py-3">
+                <button
+                    onClick={handleCalculate}
+                    className="px-4 bg-[#493fdd] rounded-md py-3"
+                    type="button"
+                >
                     Calculate
                 </button>
-                <button className="px-4 bg-[#493fdd] rounded-md py-3 ">
+                <button className="px-4 bg-[#424242] rounded-md py-3 ">
                     Apply to Profile
                 </button>
             </section>
@@ -177,7 +218,7 @@ const CalculatorModal = () => {
             {/* Display Calories Section */}
             <section>
                 <h2 className="text-2xl">Daily Calories:</h2>
-                <p>Your Calories</p>
+                <p>{calories} kCal</p>
             </section>
         </form>
     );
