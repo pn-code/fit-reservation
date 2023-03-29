@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from "react";
 
 const CalculatorModal = () => {
@@ -29,10 +30,10 @@ const CalculatorModal = () => {
 
                 <div>
                     <label>Gender</label>
-                    <input type="radio" />
-                    <label htmlFor="">male</label>
-                    <input type="radio" />
-                    <label htmlFor="">female</label>
+                    <input id="male" onClick={() => setGender("male")} name="gender" type="radio" />
+                    <label htmlFor="male">male</label>
+                    <input id="female" onClick={() => setGender("female")} value="female" name="gender" type="radio" />
+                    <label htmlFor="female">female</label>
                 </div>
 
                 <div>
@@ -70,8 +71,13 @@ const CalculatorModal = () => {
                 </div>
 
                 <div>
-                    <label htmlFor="">Activity Level</label>
-                    <select name="" id="">
+                    <label htmlFor="activity">Activity Level</label>
+                    <select
+                        onChange={(e) => setActivity(Number(e.target.value))}
+                        value={activity}
+                        name="activity"
+                        id="activity"
+                    >
                         <option value={1.2}>little to no exercise</option>
                         <option value={1.375}>
                             light exercise 1-3 days/week
