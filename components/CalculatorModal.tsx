@@ -9,18 +9,25 @@ const CalculatorModal = () => {
     const [activity, setActivity] = useState(1.2);
 
     return (
-        <form>
+        <form className="bg-[#05204A] text-[#FAFAFA] p-4 rounded-md flex-col flex gap-4">
+            <h1 className="text-3xl font-semibold">Calculator</h1>
+
             {/* Unit Button Sections */}
             <section>
-                <button>US Units</button>
-                <button>Metric Units</button>
+                <button className="px-4 bg-[#493fdd] rounded-tl-md rounded-bl-md py-3 border-r-2">
+                    US Units
+                </button>
+                <button className="px-4 bg-[#493fdd] rounded-tr-md rounded-br-md py-3">
+                    Metric Units
+                </button>
             </section>
 
             {/* Input Section */}
-            <section>
-                <div>
+            <section className="flex flex-col gap-4">
+                <div className="flex gap-4 items-center">
                     <label htmlFor="age">Age</label>
                     <input
+                        className="w-32"
                         onChange={(e) => setAge(Number(e.target.value))}
                         value={age}
                         id="age"
@@ -28,49 +35,93 @@ const CalculatorModal = () => {
                     />
                 </div>
 
-                <div>
+                <div className="flex gap-4 items-center">
                     <label>Gender</label>
-                    <input id="male" onClick={() => setGender("male")} name="gender" type="radio" />
-                    <label htmlFor="male">male</label>
-                    <input id="female" onClick={() => setGender("female")} value="female" name="gender" type="radio" />
-                    <label htmlFor="female">female</label>
+                    <section className="flex gap-2">
+                        <input
+                            id="male"
+                            onClick={() => setGender("male")}
+                            name="gender"
+                            type="radio"
+                        />
+                        <label htmlFor="male">male</label>
+                    </section>
+
+                    <section className="flex gap-2 items-center">
+                        <input
+                            id="female"
+                            onClick={() => setGender("female")}
+                            value="female"
+                            name="gender"
+                            type="radio"
+                        />
+                        <label htmlFor="female">female</label>
+                    </section>
                 </div>
 
-                <div>
-                    <label>Height</label>
-                    <input
-                        onChange={(e) =>
-                            setHeight((height) => ({
-                                ...height,
-                                feet: Number(e.target.value),
-                            }))
-                        }
-                        value={height.feet}
-                        type="number"
-                    />
-                    <input
-                        onChange={(e) =>
-                            setHeight((height) => ({
-                                ...height,
-                                inches: Number(e.target.value),
-                            }))
-                        }
-                        value={height.feet}
-                        type="number"
-                    />
+                <div className="flex gap-4 items-center">
+                    <label htmlFor="feet">Height</label>
+                    <section className="relative">
+                        <input
+                            className="w-16 pr-5"
+                            id="feet"
+                            onChange={(e) =>
+                                setHeight((height) => ({
+                                    ...height,
+                                    feet: Number(e.target.value),
+                                }))
+                            }
+                            value={height.feet}
+                            type="tel"
+                        />
+
+                        <label
+                            className="absolute right-4 top-1 text-black"
+                            htmlFor="feet"
+                        >
+                            ft
+                        </label>
+                    </section>
+
+                    <section className="relative">
+                        <input
+                            className="w-16"
+                            id="inches"
+                            onChange={(e) =>
+                                setHeight((height) => ({
+                                    ...height,
+                                    inches: Number(e.target.value),
+                                }))
+                            }
+                            value={height.feet}
+                            type="tel"
+                        />
+                        <label
+                            className="absolute right-4 top-1 text-black"
+                            htmlFor="inches"
+                        >
+                            in
+                        </label>
+                    </section>
                 </div>
 
-                <div>
+                <div className="flex gap-4 relative items-center">
                     <label htmlFor="weight">Weight</label>
-                    <input
-                        onChange={(e) => setWeight(Number(e.target.value))}
-                        value={weight}
-                        id="weight"
-                        type="number"
-                    />
+                    <section className="relative">
+                        <input
+                            className="w-24 appearance-none"
+                            onChange={(e) => setWeight(Number(e.target.value))}
+                            value={weight}
+                            id="weight"
+                            type="tel"
+                        />
+                        <span className="absolute right-4 top-1 text-black">
+                            lb
+                        </span>
+                    </section>
                 </div>
 
-                <div>
+                <div className="flex gap-4 flex-col">
                     <label htmlFor="activity">Activity Level</label>
                     <select
                         onChange={(e) => setActivity(Number(e.target.value))}
@@ -96,9 +147,13 @@ const CalculatorModal = () => {
             </section>
 
             {/* Action Buttons Section */}
-            <section>
-                <button>Calculate</button>
-                <button>Apply to Profile</button>
+            <section className="flex gap-4">
+                <button className="px-4 bg-[#493fdd] rounded-md py-3">
+                    Calculate
+                </button>
+                <button className="px-4 bg-[#493fdd] rounded-md py-3 ">
+                    Apply to Profile
+                </button>
             </section>
 
             {/* Display Calories Section */}
