@@ -1,6 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 
 const CalculatorModal = () => {
+    const [age, setAge] = useState(25);
+    const [gender, setGender] = useState("male");
+    const [height, setHeight] = useState({ feet: 5, inches: 10 });
+    const [weight, setWeight] = useState(160);
+    const [activity, setActivity] = useState(1.2);
+
     return (
         <form>
             {/* Unit Button Sections */}
@@ -12,8 +18,13 @@ const CalculatorModal = () => {
             {/* Input Section */}
             <section>
                 <div>
-                    <label htmlFor="">Age</label>
-                    <input type="text" />
+                    <label htmlFor="age">Age</label>
+                    <input
+                        onChange={(e) => setAge(Number(e.target.value))}
+                        value={age}
+                        id="age"
+                        type="number"
+                    />
                 </div>
 
                 <div>
@@ -25,24 +36,55 @@ const CalculatorModal = () => {
                 </div>
 
                 <div>
-                    <label htmlFor="">Height</label>
-                    <input type="text" />
+                    <label>Height</label>
+                    <input
+                        onChange={(e) =>
+                            setHeight((height) => ({
+                                ...height,
+                                feet: Number(e.target.value),
+                            }))
+                        }
+                        value={height.feet}
+                        type="number"
+                    />
+                    <input
+                        onChange={(e) =>
+                            setHeight((height) => ({
+                                ...height,
+                                inches: Number(e.target.value),
+                            }))
+                        }
+                        value={height.feet}
+                        type="number"
+                    />
                 </div>
 
                 <div>
-                    <label htmlFor="">Weight</label>
-                    <input type="text" />
+                    <label htmlFor="weight">Weight</label>
+                    <input
+                        onChange={(e) => setWeight(Number(e.target.value))}
+                        value={weight}
+                        id="weight"
+                        type="number"
+                    />
                 </div>
 
                 <div>
                     <label htmlFor="">Activity Level</label>
                     <select name="" id="">
-                        <option value="">SELECT AN OPTION</option>
                         <option value={1.2}>little to no exercise</option>
-                        <option value={1.375}>light exercise 1-3 days/week</option>
-                        <option value={1.55}>moderate exercise 3-5 days/week</option>
-                        <option value={1.725}>hard exercise 6-7 days/week</option>
-                        <option value={1.9}>very hard exercise & physical job OR 2x training</option>
+                        <option value={1.375}>
+                            light exercise 1-3 days/week
+                        </option>
+                        <option value={1.55}>
+                            moderate exercise 3-5 days/week
+                        </option>
+                        <option value={1.725}>
+                            hard exercise 6-7 days/week
+                        </option>
+                        <option value={1.9}>
+                            very hard exercise & physical job OR 2x training
+                        </option>
                     </select>
                 </div>
             </section>
@@ -54,9 +96,7 @@ const CalculatorModal = () => {
             </section>
 
             {/* Display Calories Section */}
-            <section>
-
-            </section>
+            <section></section>
         </form>
     );
 };
