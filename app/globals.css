@@ -2,3 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+input, select {
+ @apply   text-black px-2 rounded-sm py-1
+}
+
