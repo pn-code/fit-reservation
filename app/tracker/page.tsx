@@ -15,20 +15,37 @@ const Tracker = () => {
                     <h2 className="text-lg font-semibold underline mb-2 ">
                         Nutrition
                     </h2>
-                    <div className="flex flex-col gap-4 md:flex-row bg-gray-100 py-2 md:items-center">
-                        <label htmlFor="">Item Name</label>
+                    <form className="flex flex-col gap-4 md:flex-row bg-gray-100 py-2 md:items-center">
+                        <label htmlFor="">Food</label>
                         <input type="text" />
                         <label htmlFor="">Calories</label>
                         <input type="text" />
                         <button className="bg-[#05204A] text-[#fafafa] px-4 py-2 rounded-md">
                             Add Item
                         </button>
-                    </div>
+                    </form>
                 </header>
             </section>
 
-            <h2 className="text-lg font-semibold underline">Exercise</h2>
-            <section></section>
+            {/* Exercise */}
+            <section className="bg-gray-100 text-black rounded-sm">
+                <header>
+                    <h2 className="text-lg font-semibold underline mb-2 ">
+                        Exercise
+                    </h2>
+                    <form className="flex flex-col gap-4 md:flex-row bg-gray-100 py-2 md:items-center">
+                        <label htmlFor="">Exercise</label>
+                        <input type="text" />
+                        <label htmlFor="">Weight</label>
+                        <input className="w-16" type="text" />
+                        <label htmlFor="">Reps</label>
+                        <input className="w-16" type="text" />
+                        <button className="bg-[#05204A] text-[#fafafa] px-4 py-2 rounded-md">
+                            Add Item
+                        </button>
+                    </form>
+                </header>
+            </section>
         </div>
     );
 };
