@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-input, select {
- @apply   text-black px-2 rounded-sm py-1
+input,
+select {
+    @apply text-black px-2 rounded-sm py-1 shadow-sm focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50;
 }
-
