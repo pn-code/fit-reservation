@@ -8,5 +8,11 @@ select {
 }
 
 body {
-    @apply bg-[#cacaca]
+    @apply bg-[#cacaca];
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
 }
