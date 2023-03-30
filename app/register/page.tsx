@@ -1,21 +1,32 @@
 "use client";
 import { useState } from "react";
+import axios from "axios";
 
 function RegisterPage() {
     const [fullName, setFullName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [formError, setFormError] = useState('');
+    const [formError, setFormError] = useState("");
 
-    const handleSubmit = (e: React.SyntheticEvent) => {
-      e.preventDefault();
-  
-      if (!fullName || !email || !password) {
-        setFormError('Please fill in all fields');
-        return;
-      }
-  
-      // Submit form data to backend
+    const handleSubmit = async (e: React.SyntheticEvent) => {
+        e.preventDefault();
+
+        if (!fullName || !email || !password) {
+            setFormError("Please fill in all fields");
+            return;
+        }
+
+        // Submit form data to backend
+        try {
+            const response = await axios.post("/api/users/register", {
+                fullName,
+                email,
+                password,
+            });
+            console.log(response.data);
+        } catch (error) {
+            console.error(error);
+        }
     };
 
     return (
