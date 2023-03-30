@@ -2,6 +2,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import axios from "axios";
 
 const SignInPage = () => {
     const [email, setEmail] = useState("");
@@ -11,9 +12,9 @@ const SignInPage = () => {
         password: "",
     });
 
-      const router = useRouter();
+    const router = useRouter();
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (!email || !password) {
             setFormErrors({
@@ -23,14 +24,23 @@ const SignInPage = () => {
             return;
         }
         // TODO: Submit form data to server
-        router.push("/");
+        try {
+            const response = await axios.post("/api/users/login", {
+                email,
+                password,
+            });
+            console.log(response.data);
+        } catch (error) {
+            console.error(error);
+        }
+        // router.push("/");
     };
 
     return (
         <div className="min-h-screen flex flex-col justify-center items-center bg-gray-100">
             <h1 className="text-3xl font-bold mb-6">Sign In</h1>
             <form
-                onSubmit={handleSubmit}
+                onSubmit={handleLogin}
                 className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
             >
                 <div className="mb-4">
@@ -91,10 +101,10 @@ const SignInPage = () => {
                         Sign In
                     </button>
                     <Link
-                        className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
-                        href="/forgotpassword"
+                        className="inline-block font-bold text-sm text-blue-500 hover:text-blue-800 mr-4"
+                        href="/register"
                     >
-                        Forgot Password?
+                        Register
                     </Link>
                 </div>
             </form>
