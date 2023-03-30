@@ -8,7 +8,7 @@ function RegisterPage() {
     const [password, setPassword] = useState("");
     const [formError, setFormError] = useState("");
 
-    const handleSubmit = async (e: React.SyntheticEvent) => {
+    const handleRegister = async (e: React.SyntheticEvent) => {
         e.preventDefault();
 
         if (!fullName || !email || !password) {
@@ -33,7 +33,7 @@ function RegisterPage() {
         <div className="flex flex-col items-center justify-center h-screen bg-[#F5F5F5]">
             <form
                 className="bg-white rounded px-8 pt-6 pb-8 mb-4 shadow-md"
-                onSubmit={handleSubmit}
+                onSubmit={(e) => handleRegister(e)}
             >
                 <h2 className="text-2xl font-bold text-center mb-4 text-blue-500">
                     Create an account
