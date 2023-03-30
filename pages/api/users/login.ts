@@ -16,9 +16,10 @@ export default async function handle(
     }
 
     const { email, password } = req.body;
-
     const user = await prisma.user.findUnique({
-        where: email as CustomUserWhereUniqueInput,
+        where: {
+            email: email,
+        } as CustomUserWhereUniqueInput,
     });
 
     if (!user) {
