@@ -47,5 +47,5 @@ export default async function handle(
 
     res.setHeader("Set-Cookie", cookie);
 
-    res.status(200).json({ message: "Successfully logged in" });
+    res.status(200).json({ token });
 }
