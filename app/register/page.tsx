@@ -1,15 +1,19 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import axios from "axios";
 
 function RegisterPage() {
     const nameRef = useRef<HTMLInputElement>();
-    const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
+    const errorRef = useRef<HTMLInputElement>();
+
+    const NAME_REGEX = /^[a-zA-Z][a-zA-Z ]{2,28}[a-zA-Z]$/;
+    const PASSWORD_REGEX =
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
     const [fullName, setFullName] = useState("");
     const [validName, setValidName] = useState(false);
     const [nameFocus, setNameFocus] = useState(false);
-
 
     const [email, setEmail] = useState("");
     const [validEmail, setValidEmail] = useState(false);
@@ -25,31 +29,32 @@ function RegisterPage() {
     // Autofocus on name when loaded.
     useEffect(() => {
         nameRef.current.focus();
-    }, [])
+    }, []);
 
     // Validate user's name
     useEffect(() => {
-        const nameValidation = fullName.trim().length >= 4
-        setValidName(nameValidation)
-    }, [fullName])
+        const nameValidation = NAME_REGEX.test(fullName);
+        setValidName(nameValidation);
+    }, [fullName]);
 
     // Validate password
     useEffect(() => {
-        const passwordValidation = PASSWORD_REGEX.test(password)
-        setValidPassword(passwordValidation)
-    }, [password])
+        const passwordValidation = PASSWORD_REGEX.test(password);
+        setValidPassword(passwordValidation);
+    }, [password]);
 
     // Clear out error message if user is making changes
     useEffect(() => {
-        setErrorMessage("")
-    }, [fullName, email, password])
-
+        setErrorMessage("");
+    }, [fullName, email, password]);
 
     const handleRegister = async (e: React.SyntheticEvent) => {
         e.preventDefault();
 
-        if (!fullName || !email || !password) {
-            setErrorMessage("Please fill in all fields");
+        if (!validName || !validEmail || !validPassword) {
+            setErrorMessage(
+                "Please fill in all fields with appropriate values."
+            );
             return;
         }
 
@@ -68,18 +73,22 @@ function RegisterPage() {
 
     return (
         <section className="flex flex-col items-center justify-center h-screen bg-[#F5F5F5]">
-            <h1 className="text-2xl font-bold text-center mb-4 text-blue-500">
-                Register
-            </h1>
+            <header>
+                <h1 className="text-2xl font-bold text-center mb-4 text-blue-500">
+                    Register
+                </h1>
 
-            {errorMessage && (
-                <p className="text-red-500 text-sm mb-4">{errorMessage}</p>
-            )}
+                {errorMessage && (
+                    <p className="text-red-500 text-sm mb-4">{errorMessage}</p>
+                )}
+            </header>
+
             <form
-                className="bg-white rounded px-8 pt-6 pb-8 mb-4 shadow-md"
+                className="bg-white rounded px-8 pt-6 pb-8 mb-4 shadow-md w-[300px]"
+                autoComplete="off"
                 onSubmit={(e) => handleRegister(e)}
             >
-                <div className="mb-4">
+                <section className="mb-4">
                     <label
                         className="block text-gray-700 font-bold mb-2"
                         htmlFor="fullName"
@@ -93,9 +102,20 @@ function RegisterPage() {
                         type="text"
                         value={fullName}
                         onChange={(e) => setFullName(e.target.value)}
-                        autoComplete="off"
+                        onFocus={() => setNameFocus(true)}
+                        onBlur={() => setNameFocus(false)}
+                        required
                     />
-                </div>
+                    <p
+                        className={
+                            nameFocus && fullName && !validName
+                                ? "text-sm text-gray-500 mt-2"
+                                : "absolute left-[-1000px]"
+                        }
+                    >
+                        Must begin with a letter and 4-30 characters in length.
+                    </p>
+                </section>
                 <div className="mb-4">
                     <label
                         className="block text-gray-700 font-bold mb-2"
@@ -109,8 +129,20 @@ function RegisterPage() {
                         type="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        autoComplete="off"
+                        required
+                        onFocus={() => setEmailFocus(true)}
+                        onBlur={() => setEmailFocus(false)}
                     />
+                    <p
+                        id="emailnote"
+                        className={
+                            emailFocus && email
+                                ? "text-sm text-gray-500 mt-2"
+                                : "absolute left-[-1000px]"
+                        }
+                    >
+                        Please enter a valid email.
+                    </p>
                 </div>
                 <div className="mb-4">
                     <label
@@ -125,11 +157,23 @@ function RegisterPage() {
                         type={showPassword ? "text" : "password"}
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        autoComplete="off"
+                        required
+                        onFocus={() => setPasswordFocus(true)}
+                        onBlur={() => setPasswordFocus(false)}
                     />
+                    <p
+                        className={
+                            passwordFocus && password && !validPassword
+                                ? "text-sm text-gray-500 mt-2"
+                                : "absolute left-[-1000px]"
+                        }
+                    >
+                        Please enter at least 8 characters, 1 uppercase, 1
+                        lowercase, 1 number, and 1 special character.
+                    </p>
                     <section className="flex gap-2 mt-4">
                         <input
-                            onClick={() => setShowPassword((show) => !show)}
+                            onChange={() => setShowPassword((show) => !show)}
                             checked={showPassword}
                             id="show-password"
                             type="checkbox"
@@ -137,14 +181,21 @@ function RegisterPage() {
                         <label htmlFor="show-password">Show Password</label>
                     </section>
                 </div>
-                <div className="flex items-center justify-between">
+                <section className="flex flex-col gap-4">
                     <button
-                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                        disabled={!validName || !validEmail || !validPassword}
+                        className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline disabled:bg-gray-400 disabled:cursor-not-allowed"
                         type="submit"
                     >
                         Register
                     </button>
-                </div>
+                    <span>
+                        Already have an account?{" "}
+                        <Link className="underline" href="/login">
+                            Login.
+                        </Link>
+                    </span>
+                </section>
             </form>
         </section>
     );
