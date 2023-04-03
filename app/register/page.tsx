@@ -2,10 +2,12 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
 function RegisterPage() {
     const nameRef = useRef<HTMLInputElement>();
-    const errorRef = useRef<HTMLInputElement>();
+
+    const router = useRouter();
 
     const NAME_REGEX = /^[a-zA-Z][a-zA-Z ]{2,28}[a-zA-Z]$/;
     const PASSWORD_REGEX =
@@ -16,7 +18,6 @@ function RegisterPage() {
     const [nameFocus, setNameFocus] = useState(false);
 
     const [email, setEmail] = useState("");
-    const [validEmail, setValidEmail] = useState(false);
     const [emailFocus, setEmailFocus] = useState(false);
 
     const [password, setPassword] = useState("");
@@ -25,6 +26,7 @@ function RegisterPage() {
 
     const [showPassword, setShowPassword] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
+    const [registerSuccess, setRegisterSuccess] = useState(false)
 
     // Autofocus on name when loaded.
     useEffect(() => {
@@ -48,10 +50,16 @@ function RegisterPage() {
         setErrorMessage("");
     }, [fullName, email, password]);
 
+    useEffect(() => {
+        if (registerSuccess) {
+            router.push("/login")
+        }
+    }, [registerSuccess])
+
     const handleRegister = async (e: React.SyntheticEvent) => {
         e.preventDefault();
 
-        if (!validName || !validEmail || !validPassword) {
+        if (!validName || !email || !validPassword) {
             setErrorMessage(
                 "Please fill in all fields with appropriate values."
             );
@@ -65,7 +73,9 @@ function RegisterPage() {
                 email,
                 password,
             });
-            console.log(response.data);
+            if(response.status === 200) {
+                setRegisterSuccess(true);
+            }
         } catch (error) {
             console.error(error);
         }
@@ -80,6 +90,9 @@ function RegisterPage() {
 
                 {errorMessage && (
                     <p className="text-red-500 text-sm mb-4">{errorMessage}</p>
+                )}
+                {registerSuccess && (
+                    <p className="text-blue-500 text-sm mb-4">Register Success. Redirecting...</p>
                 )}
             </header>
 
@@ -181,9 +194,10 @@ function RegisterPage() {
                         <label htmlFor="show-password">Show Password</label>
                     </section>
                 </div>
+
                 <section className="flex flex-col gap-4">
                     <button
-                        disabled={!validName || !validEmail || !validPassword}
+                        disabled={!validName || !email || !validPassword}
                         className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline disabled:bg-gray-400 disabled:cursor-not-allowed"
                         type="submit"
                     >
