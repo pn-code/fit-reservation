@@ -6,6 +6,7 @@ function RegisterPage() {
     const [fullName, setFullName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
     const [formError, setFormError] = useState("");
 
     const handleRegister = async (e: React.SyntheticEvent) => {
@@ -81,10 +82,19 @@ function RegisterPage() {
                     <input
                         className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         id="password"
-                        type="password"
+                        type={showPassword ? "text" : "password"}
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                     />
+                    <section className="flex gap-2 mt-4">
+                        <input
+                            onClick={() => setShowPassword((show) => !show)}
+                            checked={showPassword}
+                            id="show-password"
+                            type="checkbox"
+                        />
+                        <label htmlFor="show-password">Show Password</label>
+                    </section>
                 </div>
                 <div className="flex items-center justify-between">
                     <button
