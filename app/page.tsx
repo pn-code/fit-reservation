@@ -1,7 +1,10 @@
+"use client"
+import ProtectedRoute from "../components/ProtectedRoute";
 
 export default function Home() {
     return (
-        <main>
-        </main>
+        <ProtectedRoute>
+            <main></main>
+        </ProtectedRoute>
     );
 }
