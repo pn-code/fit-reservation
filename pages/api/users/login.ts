@@ -35,7 +35,9 @@ export default async function handle(
         return res.status(401).json({ message: "Invalid email or password" });
     }
 
-    const token = generateToken({ email });
+    const userWithoutPwd = { id: user.id, name: user.name, email: user.email };
+
+    const token = generateToken(userWithoutPwd);
 
     const cookie = serialize("jwt", token, {
         httpOnly: true,
