@@ -22,7 +22,7 @@ const Navbar = () => {
                 >
                     Calculator
                 </Link>
-                <Link className="hover:underline font-medium" href="/tracker">
+                <Link className="hover:underline font-medium" href="/tracker/overview">
                     Tracker
                 </Link>
                 <Link className="hover:underline font-medium" href="/profile">
