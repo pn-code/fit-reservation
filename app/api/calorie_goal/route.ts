@@ -2,6 +2,25 @@ import { NextResponse } from "next/server";
 import { prisma } from "../../../lib/client";
 import { currentUser } from "@clerk/nextjs/app-beta";
 
+export async function GET(req: Request) {
+	try {
+		const user = await currentUser();
+
+		if (!user) throw Error;
+
+		const calorieGoal = await prisma.calorieGoal.findFirst({
+			where: {
+				userId: user.id
+			}
+		})
+
+		return NextResponse.json(calorieGoal)
+
+	} catch{
+		return NextResponse.json({ error: "Ran into an error..." });
+	}
+}
+
 export async function PUT(req: Request) {
 	try {
 		const user = await currentUser();
