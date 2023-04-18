@@ -1,5 +1,8 @@
 "use client";
 import React, { useState } from "react";
+import { calculatorValidator } from "../../validations/calculatorValidator";
+import { toast } from "react-hot-toast";
+import { ZodError } from "zod";
 
 const CalculatorModal = () => {
 	const [age, setAge] = useState(25);
@@ -11,31 +14,51 @@ const CalculatorModal = () => {
 	const [calories, setCalories] = useState(2000);
 
 	const handleCalculate = () => {
-		if (gender == "male") {
-			const { feet, inches } = height;
-			const totalHeightInCm = feet * 12 * 2.54 + inches * 2.54;
-			const formulaMale =
-				(10 * weight * 0.453592 +
-					6.25 * totalHeightInCm -
-					5 * age +
-					5) *
-					activity +
-				plan;
-			setCalories(Math.round(formulaMale));
+		try {
+			calculatorValidator.parse({
+				age,
+				gender,
+				height,
+				weight,
+				activity,
+				plan,
+			});
+
+			if (gender == "male") {
+				const { feet, inches } = height;
+				const totalHeightInCm = feet * 12 * 2.54 + inches * 2.54;
+				const formulaMale =
+					(10 * weight * 0.453592 +
+						6.25 * totalHeightInCm -
+						5 * age +
+						5) *
+						activity +
+					plan;
+				setCalories(Math.round(formulaMale));
+			}
+
+			if (gender == "female") {
+				const { feet, inches } = height;
+				const totalHeightInCm = feet * 12 * 2.54 + inches * 2.54;
+				const formulaFemale =
+					(10 * weight * 0.453592 +
+						6.25 * totalHeightInCm -
+						5 * age -
+						161) *
+						activity +
+					plan;
+				setCalories(Math.round(formulaFemale));
+			}
+		} catch (error) {
+			if (error instanceof ZodError) {
+				console.error(error)
+			}
+
 		}
 
-		if (gender == "female") {
-			const { feet, inches } = height;
-			const totalHeightInCm = feet * 12 * 2.54 + inches * 2.54;
-			const formulaFemale =
-				(10 * weight * 0.453592 +
-					6.25 * totalHeightInCm -
-					5 * age -
-					161) *
-					activity +
-				plan;
-			setCalories(Math.round(formulaFemale));
-		}
+
+
+
 	};
 
 	return (
