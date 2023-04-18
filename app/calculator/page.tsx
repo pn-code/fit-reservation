@@ -2,7 +2,8 @@
 import React, { useState } from "react";
 import { calculatorValidator } from "../../validations/calculatorValidator";
 import { toast } from "react-hot-toast";
-import { ZodError, z } from "zod";
+import { ZodError} from "zod";
+import axios from "axios"
 
 const CalculatorModal = () => {
 	const [age, setAge] = useState(25);
@@ -62,6 +63,11 @@ const CalculatorModal = () => {
 			toast.error("An error has occurred. Please try again later...");
 		}
 	};
+
+	const submitCalorieGoal = async () => {
+		const res = await axios.put("/api/calorie_goal", { goal: calories})
+		console.log(res)
+	}
 
 	return (
 		<main className="h-screen w-full flex justify-center items-center">
@@ -225,7 +231,7 @@ const CalculatorModal = () => {
 					>
 						Calculate
 					</button>
-					<button className="px-4 bg-[#424242] rounded-md py-3 flex-1">
+					<button onClick={submitCalorieGoal} type="button" className="px-4 bg-[#424242] rounded-md py-3 flex-1">
 						Apply to Profile
 					</button>
 				</section>

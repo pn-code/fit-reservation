@@ -8,27 +8,21 @@ generator client {
   provider = "prisma-client-js"
 }
 
-model User {
-  id                  Int                  @id @default(autoincrement())
-  name                String
-  email               String               @unique
-  password            String
-  entries             Entry[]
-  weightMeasurements  WeightMeasurement[]
-  bodyFatMeasurements BodyFatMeasurement[]
+model CalorieGoal {
+  userId String @id
+  goal   Int
 }
 
 model Entry {
-  id          Int         @id @default(autoincrement())
-  createdAt   DateTime    @default(now())
-  updatedAt   DateTime    @updatedAt
-  userId      Int
-  user        User        @relation(fields: [userId], references: [id])
-  exercises   Exercise[]
-  foodEntries FoodEntry[]
+  id              Int             @id @default(autoincrement())
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+  userId          Int
+  exerciseEntries ExerciseEntry[]
+  foodEntries     FoodEntry[]
 }
 
-model Exercise {
+model ExerciseEntry {
   id       Int    @id @default(autoincrement())
   name     String
   duration Int?
@@ -37,6 +31,8 @@ model Exercise {
   weight   Float?
   entryId  Int
   entry    Entry  @relation(fields: [entryId], references: [id])
+
+  @@index([entryId])
 }
 
 model FoodEntry {
@@ -45,20 +41,21 @@ model FoodEntry {
   calories Int    @default(0)
   entryId  Int
   entry    Entry  @relation(fields: [entryId], references: [id])
+
+  @@index([entryId])
 }
 
 model WeightMeasurement {
-  id        Int      @id @default(autoincrement())
-  value     Float
-  createdAt DateTime @default(now())
-  user      User     @relation(fields: [userId], references: [id])
-  userId    Int
+  id         Int      @id @default(autoincrement())
+  value      Float
+  createdAt  DateTime @default(now())
+  userId     String
+  userUserId String?
 }
 
 model BodyFatMeasurement {
   id        Int      @id @default(autoincrement())
   value     Float
   createdAt DateTime @default(now())
-  user      User     @relation(fields: [userId], references: [id])
-  userId    Int
+  userId    String
 }
