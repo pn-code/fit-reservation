@@ -3,6 +3,8 @@ import { Roboto } from "next/font/google";
 import Navbar from "../components/Navbar";
 import Head from "./head";
 import "./globals.css";
+import { Toaster } from "react-hot-toast";
+import ToastProvider from "../components/ToastProvider";
 
 const roboto = Roboto({
 	weight: ["400", "500", "700"],
@@ -17,9 +19,10 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang="en">
-			<Head/>
+			<Head />
 			<ClerkProvider>
 				<body className={`${roboto.className}`}>
+					<ToastProvider />
 					<Navbar />
 					{children}
 				</body>
