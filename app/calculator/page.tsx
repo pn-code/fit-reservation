@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { calculatorValidator } from "../../validations/calculatorValidator";
 import { toast } from "react-hot-toast";
-import { ZodError } from "zod";
+import { ZodError, z } from "zod";
 
 const CalculatorModal = () => {
 	const [age, setAge] = useState(25);
@@ -49,16 +49,18 @@ const CalculatorModal = () => {
 					plan;
 				setCalories(Math.round(formulaFemale));
 			}
-		} catch (error) {
-			if (error instanceof ZodError) {
-				console.error(error)
+		} catch (errors) {
+			if (errors instanceof ZodError) {
+				const errorFields = Object.keys(errors.formErrors.fieldErrors);
+				return toast.error(
+					`The following field${
+						errorFields.length > 1 ? "s are" : " is"
+					} not filled in correctly: ${errorFields.join(", ")}`
+				);
 			}
 
+			toast.error("An error has occurred. Please try again later...");
 		}
-
-
-
-
 	};
 
 	return (
