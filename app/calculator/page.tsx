@@ -13,7 +13,7 @@ const CalculatorModal = () => {
 	const [weight, setWeight] = useState(160);
 	const [activity, setActivity] = useState(1.2);
 	const [plan, setPlan] = useState(0);
-	const [calories, setCalories] = useState(2000);
+	const [calories, setCalories] = useState(2060);
 
 	const router = useRouter();
 
