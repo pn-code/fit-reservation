@@ -2,8 +2,9 @@
 import React, { useState } from "react";
 import { calculatorValidator } from "../../validations/calculatorValidator";
 import { toast } from "react-hot-toast";
-import { ZodError} from "zod";
+import { ZodError, z} from "zod";
 import axios from "axios"
+import { useRouter } from "next/navigation";
 
 const CalculatorModal = () => {
 	const [age, setAge] = useState(25);
@@ -13,6 +14,8 @@ const CalculatorModal = () => {
 	const [activity, setActivity] = useState(1.2);
 	const [plan, setPlan] = useState(0);
 	const [calories, setCalories] = useState(2000);
+
+	const router = useRouter();
 
 	const handleCalculate = () => {
 		try {
@@ -65,8 +68,20 @@ const CalculatorModal = () => {
 	};
 
 	const submitCalorieGoal = async () => {
-		const res = await axios.put("/api/calorie_goal", { goal: calories})
-		console.log(res)
+		try {
+			const calorieValidator = z.number().gt(400).lt(20000).parse(calories)
+
+			if (calorieValidator) {
+				await axios.put("/api/calorie_goal", { goal: calories})
+				toast.success("Successfully updated profile.")
+				router.refresh()
+			}
+		} catch (error) {
+			if (error instanceof ZodError) {
+				return toast.error("Calories is not valid")
+			}
+			return toast.error("An error has occurred.")
+		}
 	}
 
 	return (
