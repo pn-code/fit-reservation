@@ -16,9 +16,9 @@ const Navbar = async () => {
                     width={160}
                     height={100}
                 />
-                <section>
-                    <span className="hidden text-sm md:flex">
-                        Calorie Goal:{" "}
+                <section className="hidden text-sm md:flex gap-1">
+                    <Link className="hover:underline" href="/calculator">Calorie Goal: </Link>
+                    <span>
                         {calorieGoal != null ? `${calorieGoal} kCal` : "NONE"}
                     </span>
                 </section>
