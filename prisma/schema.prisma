@@ -13,36 +13,26 @@ model CalorieGoal {
   goal   Int
 }
 
-model Entry {
-  id              Int             @id @default(autoincrement())
-  createdAt       DateTime        @default(now())
-  updatedAt       DateTime        @updatedAt
-  userId          Int
-  exerciseEntries ExerciseEntry[]
-  foodEntries     FoodEntry[]
-}
-
 model ExerciseEntry {
-  id       Int    @id @default(autoincrement())
+  id       Int      @id @default(autoincrement())
   name     String
   duration Int?
   sets     Int?
   reps     Int?
   weight   Float?
-  entryId  Int
-  entry    Entry  @relation(fields: [entryId], references: [id])
-
-  @@index([entryId])
+  userId   String
+  date     DateTime @default(now())
 }
 
 model FoodEntry {
-  id       Int    @id @default(autoincrement())
+  id       Int      @id @default(autoincrement())
   name     String
-  calories Int    @default(0)
-  entryId  Int
-  entry    Entry  @relation(fields: [entryId], references: [id])
-
-  @@index([entryId])
+  calories Int      @default(0)
+  carbs    Int
+  fats     Int
+  protein  Int
+  userId   String
+  date     DateTime @default(now())
 }
 
 model WeightMeasurement {
