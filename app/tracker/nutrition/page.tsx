@@ -3,6 +3,7 @@ import { useState } from "react";
 import TrackerHeader from "../../../components/TrackerHeader";
 import { foodIntakeSchema } from "../../../validations/foodIntake";
 import { ZodError } from "zod";
+import axios from "axios";
 
 function NutritionPage() {
 	const [name, setName] = useState("");
@@ -22,20 +23,32 @@ function NutritionPage() {
 
 		try {
 			foodIntakeSchema.parse(foodIntake);
-			console.log("works")
+			console.log("works");
 		} catch (error) {
-			if(error instanceof ZodError){
-				console.log("zod error")
+			if (error instanceof ZodError) {
+				console.log("zod error");
 			}
 		}
+	};
+
+	const createFoodEntry = async () => {
+		validateFoodIntake()
+		const res = await axios.post("/api/food_entries", {
+			name,
+			calories,
+			carbs,
+			fats,
+			protein,
+		});
+
+		console.log(res);
 	};
 
 	return (
 		<main className="w-full h-full mt-24 bg-[#f3f3f3] px-4 py-6 rounded-md flex flex-col gap-4 shadow-md">
 			<TrackerHeader title="Nutrition" />
-
+			<h2 className="text-xl font-semibold">Food Info</h2>
 			<form className="flex flex-col gap-4 md:flex-row bg-gray-100 py-2 md:items-center">
-				<h2 className="text-xl font-semibold">Food Info</h2>
 				<label htmlFor="name">Name</label>
 				<input
 					onChange={(e) => setName(e.target.value)}
@@ -44,6 +57,7 @@ function NutritionPage() {
 					value={name}
 					required
 				/>
+
 				<label htmlFor="calories">Calories</label>
 				<input
 					onChange={(e) => setCalories(Number(e.target.value))}
@@ -82,7 +96,7 @@ function NutritionPage() {
 				/>
 				<button
 					type="button"
-					onClick={validateFoodIntake}
+					onClick={createFoodEntry}
 					className="bg-[#05204A] text-[#fafafa] px-4 py-2 rounded-md"
 				>
 					Add Item
