@@ -4,6 +4,7 @@ import TrackerHeader from "../../../components/TrackerHeader";
 import { foodIntakeSchema } from "../../../validations/foodIntake";
 import { ZodError } from "zod";
 import axios from "axios";
+import { toast } from "react-hot-toast";
 
 function NutritionPage() {
 	const [name, setName] = useState("");
@@ -11,6 +12,8 @@ function NutritionPage() {
 	const [carbs, setCarbs] = useState(0);
 	const [fats, setFats] = useState(0);
 	const [protein, setProtein] = useState(0);
+
+	const [loading, setLoading] = useState(false);
 
 	const validateFoodIntake = () => {
 		const foodIntake = {
@@ -23,25 +26,34 @@ function NutritionPage() {
 
 		try {
 			foodIntakeSchema.parse(foodIntake);
-			console.log("works");
 		} catch (error) {
 			if (error instanceof ZodError) {
-				console.log("zod error");
+				toast.error("An error has occurred during validation.");
 			}
 		}
 	};
 
 	const createFoodEntry = async () => {
-		validateFoodIntake()
-		const res = await axios.post("/api/food_entries", {
-			name,
-			calories,
-			carbs,
-			fats,
-			protein,
-		});
+		setLoading(true);
 
-		console.log(res);
+		try {
+			if (validateFoodIntake()) {
+				await axios.post("/api/food_entries", {
+					name,
+					calories,
+					carbs,
+					fats,
+					protein,
+				});
+
+				toast.success(`${name} has been added.`);
+			}
+		} catch (error) {
+			toast.error("An error has occurred.");
+			console.log(error);
+		} finally {
+			setLoading(false);
+		}
 	};
 
 	return (
@@ -56,6 +68,7 @@ function NutritionPage() {
 					id="name"
 					value={name}
 					required
+					disabled={loading}
 				/>
 
 				<label htmlFor="calories">Calories</label>
@@ -65,6 +78,7 @@ function NutritionPage() {
 					id="calories"
 					value={calories}
 					required
+					disabled={loading}
 				/>
 
 				<h2 className="text-xl font-semibold mt-4">
@@ -77,6 +91,7 @@ function NutritionPage() {
 					id="carbs"
 					value={carbs}
 					required
+					disabled={loading}
 				/>
 				<label htmlFor="fats">Fats</label>
 				<input
@@ -85,6 +100,7 @@ function NutritionPage() {
 					id="fats"
 					value={fats}
 					required
+					disabled={loading}
 				/>
 				<label htmlFor="protein">Protein</label>
 				<input
@@ -93,13 +109,15 @@ function NutritionPage() {
 					id="protein"
 					value={protein}
 					required
+					disabled={loading}
 				/>
 				<button
+					disabled={loading}
 					type="button"
 					onClick={createFoodEntry}
-					className="bg-[#05204A] text-[#fafafa] px-4 py-2 rounded-md"
+					className="bg-[#05204A] text-[#fafafa] px-4 py-2 rounded-md disabled:bg-slate-400 disabled:cursor-wait"
 				>
-					Add Item
+					{loading ? "Adding..." : "Add Item"}
 				</button>
 			</form>
 		</main>
