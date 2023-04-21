@@ -59,14 +59,20 @@ const TrackerOverview = async () => {
 					<h3 className="text-xl text-slate-900 font-bold">
 						Total Calories
 					</h3>
-					<span className="text-lg text-slate-800">1800 kcal</span>
+					<span className="text-lg text-slate-800">
+						{totalCalories} kcal
+					</span>
 				</article>
 
 				<article className="flex flex-col items-center w-[80%]">
 					<h3 className="text-xl text-slate-900 font-bold">
 						Macronutrients
 					</h3>
-					<MacroChart carbs={300} fats={60} protein={200} />
+					<MacroChart
+						carbs={totalCarbs || 0}
+						fats={totalFats || 0}
+						protein={totalProtein || 0}
+					/>
 				</article>
 			</section>
 
@@ -81,10 +87,12 @@ const TrackerOverview = async () => {
 						<th>Carbs</th>
 						<th>Fats</th>
 						<th>Protein</th>
+						<th>Action</th>			
 					</tbody>
 					<tbody className="text-sm">
 						{foodEntries?.map((foodEntry) => (
 							<FoodEntryCard
+								id={foodEntry.id}
 								name={foodEntry.name}
 								calories={foodEntry.calories}
 								carbs={foodEntry.carbs}
