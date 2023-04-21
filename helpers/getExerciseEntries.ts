@@ -1,15 +1,15 @@
 import { prisma } from "../lib/client";
 import { currentUser } from "@clerk/nextjs/app-beta";
-import getLocalTimezone from "../helpers/getLocalTimezone";
+import getLocalTimezone from "./getLocalTimezone";
 
-const getFoodEntries = async () => {
+const getExerciseEntries = async () => {
 	try {
 		const user = await currentUser();
 		if (!user) throw Error("This action is forbidden.");
 
 		const localTime = getLocalTimezone();
 
-		const foodEntry = await prisma.foodEntry.findMany({
+		const exerciseEntries = await prisma.exerciseEntry.findMany({
 			where: {
 				userId: user.id,
 				date: {
@@ -19,10 +19,10 @@ const getFoodEntries = async () => {
 			},
 		});
 
-		return foodEntry;
+		return exerciseEntries;
 	} catch (error) {
 		console.error(error);
 	}
 };
 
-export default getFoodEntries;
+export default getExerciseEntries;
