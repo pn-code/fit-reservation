@@ -26,6 +26,7 @@ function NutritionPage() {
 
 		try {
 			foodIntakeSchema.parse(foodIntake);
+			return true;
 		} catch (error) {
 			if (error instanceof ZodError) {
 				toast.error("An error has occurred during validation.");
@@ -45,7 +46,7 @@ function NutritionPage() {
 					fats,
 					protein,
 				});
-
+	
 				toast.success(`${name} has been added.`);
 			}
 		} catch (error) {
@@ -112,7 +113,7 @@ function NutritionPage() {
 					disabled={loading}
 				/>
 				<button
-					disabled={loading}
+					disabled={loading || !validateFoodIntake()}
 					type="button"
 					onClick={createFoodEntry}
 					className="bg-[#05204A] text-[#fafafa] px-4 py-2 rounded-md disabled:bg-slate-400 disabled:cursor-wait"
