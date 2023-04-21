@@ -3,6 +3,7 @@ import MacroChart from "../../../components/MacroChart";
 import LineDivider from "../../../components/LineDivider";
 import getFoodEntries from "../../../helpers/getFoodEntries";
 import FoodEntryCard from "../../../components/FoodEntryCard";
+import ExerciseEntryCard from "../../../components/ExerciseEntryCard";
 
 const TrackerOverview = async () => {
 	const foodEntries = await getFoodEntries();
@@ -48,7 +49,7 @@ const TrackerOverview = async () => {
 						</h3>
 						<span className="text-lg text-slate-800">96 mins</span>
 					</article>
-					<LineDivider hidden={true}/>
+					<LineDivider hidden={true} />
 				</section>
 
 				{/* Nutrition Section */}
@@ -79,6 +80,7 @@ const TrackerOverview = async () => {
 			</section>
 
 			<section className="flex flex-col items-center gap-4 mt-5">
+				<LineDivider />
 				<h2 className="text-2xl font-semibold text-indigo-700">
 					Nutrition Journal
 				</h2>
@@ -112,6 +114,24 @@ const TrackerOverview = async () => {
 							<th>{totalFats}g</th>
 							<th>{totalProtein}g</th>
 						</tr>
+					</tbody>
+				</table>
+			</section>
+
+			<section className="flex flex-col items-center gap-4 mt-5">
+				<LineDivider />
+				<h2 className="text-2xl font-semibold text-indigo-700">
+					Exercise Journal
+				</h2>
+				<table className="w-full text-left">
+					<tbody>
+						<th>Exercise</th>
+						<th>Type</th>
+						<th>Reps</th>
+						<th>Action</th>
+					</tbody>
+					<tbody className="text-sm">
+						<ExerciseEntryCard/>
 					</tbody>
 				</table>
 			</section>
