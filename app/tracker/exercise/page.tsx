@@ -1,6 +1,9 @@
 "use client";
 import { useState } from "react";
 import TrackerHeader from "../../../components/TrackerHeader";
+import { exerciseEntrySchema } from "../../../validations/exerciseEntryValidator";
+import { toast } from "react-hot-toast";
+import axios from "axios";
 
 function ExercisePage() {
 	const [exercise, setExercise] = useState("");
@@ -10,6 +13,50 @@ function ExercisePage() {
 	const [duration, setDuration] = useState(0);
 	const [sets, setSets] = useState(0);
 	const [reps, setReps] = useState(0);
+
+	const [loading, setLoading] = useState(false);
+
+	const validateExerciseSchema = () => {
+		try {
+			exerciseEntrySchema.parse({
+				name: exercise,
+				type,
+				weight,
+				calories,
+				duration,
+				sets,
+				reps,
+			});
+			return true;
+		} catch (error) {
+			toast.error(`An error has occurred in one of the input fields!}`);
+			return false;
+		}
+	};
+
+	const createExerciseEntry = async () => {
+		setLoading(true);
+		try {
+			const validated = validateExerciseSchema();
+			if (validated) {
+				await axios.post("/api/exercise_entries", {
+					name: exercise,
+					type,
+					weight,
+					calories,
+					duration,
+					sets,
+					reps,
+				});
+
+				toast.success(`${exercise} has been added.`);
+			}
+		} catch (error) {
+			console.error(error);
+		} finally {
+			setLoading(false);
+		}
+	};
 
 	return (
 		<main className="w-full h-full mt-24 bg-[#f3f3f3] px-4 py-6 rounded-md flex flex-col gap-4 shadow-md">
@@ -50,7 +97,7 @@ function ExercisePage() {
 									id="duration"
 									onChange={(e) =>
 										setDuration(
-											Number.parseInt(e.target.value)
+											Number(e.target.value)
 										)
 									}
 									value={duration}
@@ -65,7 +112,7 @@ function ExercisePage() {
 									id="calories"
 									onChange={(e) =>
 										setCalories(
-											Number.parseInt(e.target.value)
+											Number(e.target.value)
 										)
 									}
 									value={calories}
@@ -94,7 +141,7 @@ function ExercisePage() {
 								type="text"
 								id="sets"
 								onChange={(e) =>
-									setSets(Number.parseInt(e.target.value))
+									setSets(Number(e.target.value))
 								}
 								value={sets}
 								min={0}
@@ -106,7 +153,7 @@ function ExercisePage() {
 								type="text"
 								id="reps"
 								onChange={(e) =>
-									setReps(Number.parseInt(e.target.value))
+									setReps(Number(e.target.value))
 								}
 								value={reps}
 								min={0}
@@ -114,7 +161,7 @@ function ExercisePage() {
 						</section>
 					)}
 
-					<button className="bg-[#05204A] text-[#fafafa] px-4 py-2 rounded-md">
+					<button disabled={loading} onClick={createExerciseEntry} type="button" className="bg-[#05204A] text-[#fafafa] px-4 py-2 rounded-md disabled:bg-slate-400 disabled:cursor-not-allowed">
 						Add Item
 					</button>
 				</form>
