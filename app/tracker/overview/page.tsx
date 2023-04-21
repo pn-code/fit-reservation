@@ -1,8 +1,12 @@
 import TrackerHeader from "../../../components/TrackerHeader";
 import MacroChart from "../../../components/MacroChart";
 import LineDivider from "../../../components/LineDivider";
+import getFoodEntries from "../../../helpers/getFoodEntries";
+import FoodEntryCard from "../../../components/FoodEntryCard";
 
-const Tracker = () => {
+const TrackerOverview = async () => {
+	const foodEntries = await getFoodEntries();
+
 	return (
 		<main className="w-full h-full mt-24 bg-[#f3f3f3] px-4 py-6 rounded-md flex flex-col gap-4 shadow-md">
 			<TrackerHeader title={"Tracker Overview"} />
@@ -55,8 +59,33 @@ const Tracker = () => {
 					<MacroChart carbs={300} fats={60} protein={200} />
 				</article>
 			</section>
+
+			<section className="flex flex-col items-center gap-4 mt-5">
+				<h2 className="text-2xl font-semibold text-indigo-700">Nutrition Journal</h2>
+				<table className="w-full text-left">
+					<tbody>
+						<th>Name</th>
+						<th>Calories</th>
+						<th>Carbs</th>
+						<th>Fats</th>
+						<th>Protein</th>
+					</tbody>
+					<tbody className="text-sm">
+						{foodEntries?.map((foodEntry) => (
+							<FoodEntryCard
+								name={foodEntry.name}
+								calories={foodEntry.calories}
+								carbs={foodEntry.carbs}
+								fats={foodEntry.fats}
+								protein={foodEntry.protein}
+								key={foodEntry.id}
+							/>
+						))}
+					</tbody>
+				</table>
+			</section>
 		</main>
 	);
 };
 
-export default Tracker;
+export default TrackerOverview;
