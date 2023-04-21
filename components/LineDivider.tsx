@@ -1,9 +1,17 @@
-import React from 'react'
+import React from "react";
 
-function LineDivider() {
-  return (
-    <div className="w-full border-b-2 border-b-orange-600 pb-4"/>
-  )
+interface LineDividerProps {
+	hidden?: boolean;
 }
 
-export default LineDivider
+function LineDivider({ hidden }: LineDividerProps) {
+	return (
+		<div
+			className={`w-full border-b-2 border-b-orange-600 pb-4 ${
+				hidden ? "md:hidden" : ""
+			}`}
+		/>
+	);
+}
+
+export default LineDivider;

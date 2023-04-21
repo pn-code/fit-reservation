@@ -28,52 +28,54 @@ const TrackerOverview = async () => {
 				<LineDivider />
 			</section>
 
-			{/* Physical Activity Section */}
-			<section className="flex flex-col items-center gap-4">
-				<h2 className="text-2xl font-semibold text-indigo-700">
-					Your Physical Activity
-				</h2>
+			<section className="flex flex-col md:flex-row md:justify-around">
+				{/* Physical Activity Section */}
+				<section className="flex flex-col items-center gap-4 md:w-full">
+					<h2 className="text-2xl font-semibold text-indigo-700">
+						Your Physical Activity
+					</h2>
 
-				<article className="flex flex-col items-center">
-					<h3 className="text-xl text-slate-900 font-bold">
-						Activity Goal
-					</h3>
-					<span className="text-lg text-slate-800">90 mins</span>
-				</article>
+					<article className="flex flex-col items-center">
+						<h3 className="text-xl text-slate-900 font-bold">
+							Activity Goal
+						</h3>
+						<span className="text-lg text-slate-800">90 mins</span>
+					</article>
 
-				<article className="flex flex-col items-center">
-					<h3 className="text-xl text-slate-900 font-bold">
-						Total Activity
-					</h3>
-					<span className="text-lg text-slate-800">96 mins</span>
-				</article>
-				<LineDivider />
-			</section>
+					<article className="flex flex-col items-center">
+						<h3 className="text-xl text-slate-900 font-bold">
+							Total Activity
+						</h3>
+						<span className="text-lg text-slate-800">96 mins</span>
+					</article>
+					<LineDivider hidden={true}/>
+				</section>
 
-			{/* Nutrition Section */}
-			<section className="flex flex-col items-center gap-4">
-				<h2 className="text-2xl font-semibold text-indigo-700">
-					Your Nutrition
-				</h2>
-				<article className="flex flex-col items-center">
-					<h3 className="text-xl text-slate-900 font-bold">
-						Total Calories
-					</h3>
-					<span className="text-lg text-slate-800">
-						{totalCalories} kcal
-					</span>
-				</article>
+				{/* Nutrition Section */}
+				<section className="flex flex-col items-center gap-4 md:w-full">
+					<h2 className="text-2xl font-semibold text-indigo-700">
+						Your Nutrition
+					</h2>
+					<article className="flex flex-col items-center">
+						<h3 className="text-xl text-slate-900 font-bold">
+							Total Calories
+						</h3>
+						<span className="text-lg text-slate-800">
+							{totalCalories} kcal
+						</span>
+					</article>
 
-				<article className="flex flex-col items-center w-[80%]">
-					<h3 className="text-xl text-slate-900 font-bold">
-						Macronutrients
-					</h3>
-					<MacroChart
-						carbs={totalCarbs || 0}
-						fats={totalFats || 0}
-						protein={totalProtein || 0}
-					/>
-				</article>
+					<article className="flex flex-col items-center w-[80%] md:w-full max-w-[400px]">
+						<h3 className="text-xl text-slate-900 font-bold">
+							Macronutrients
+						</h3>
+						<MacroChart
+							carbs={totalCarbs || 0}
+							fats={totalFats || 0}
+							protein={totalProtein || 0}
+						/>
+					</article>
+				</section>
 			</section>
 
 			<section className="flex flex-col items-center gap-4 mt-5">
@@ -87,7 +89,7 @@ const TrackerOverview = async () => {
 						<th>Carbs</th>
 						<th>Fats</th>
 						<th>Protein</th>
-						<th>Action</th>			
+						<th>Action</th>
 					</tbody>
 					<tbody className="text-sm">
 						{foodEntries?.map((foodEntry) => (
