@@ -38,16 +38,15 @@ model FoodEntry {
 }
 
 model WeightMeasurement {
-  id         Int      @id @default(autoincrement())
-  value      Float
-  createdAt  DateTime @default(now())
-  userId     String
-  userUserId String?
+  id        Int      @id @default(autoincrement())
+  weight    Float
+  createdAt DateTime @default(now())
+  userId    String
 }
 
 model BodyFatMeasurement {
   id        Int      @id @default(autoincrement())
-  value     Float
+  bodyfat   Float
   createdAt DateTime @default(now())
   userId    String
 }
