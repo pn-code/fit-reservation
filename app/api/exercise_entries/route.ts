@@ -16,8 +16,8 @@ export async function POST(req: Request) {
 					duration: res.duration,
 					sets: res.sets,
 					reps: res.reps,
-                    weight: res.weight,
-                    calories: res.calories,
+					weight: res.weight,
+					calories: res.calories,
 					userId: user.id,
 				},
 			});
@@ -26,5 +26,34 @@ export async function POST(req: Request) {
 		}
 	} catch (error) {
 		return console.error(error);
+	}
+}
+
+export async function DELETE(req: Request) {
+	try {
+		const user = await currentUser();
+		const res = await req.json();
+
+		if (!user) throw Error("This action is forbidden.");
+
+		// Check to see if this entry is this user's
+		const foundEntryOwner = await prisma.exerciseEntry.findFirst({
+			where: { id: res.id },
+			select: {
+				userId: true,
+			},
+		});
+
+		if (foundEntryOwner?.userId != user.id) return NextResponse.error();
+
+		const exerciseEntry = await prisma.exerciseEntry.delete({
+			where: {
+				id: res.id,
+			},
+		});
+
+		return NextResponse.json(exerciseEntry);
+	} catch (error) {
+		console.error(error);
 	}
 }
