@@ -4,8 +4,10 @@ import LineDivider from "../../../components/LineDivider";
 import getFoodEntries from "../../../helpers/getFoodEntries";
 import FoodEntryCard from "../../../components/FoodEntryCard";
 import ExerciseEntryCard from "../../../components/ExerciseEntryCard";
+import getExerciseEntries from "../../../helpers/getExerciseEntries";
 
 const TrackerOverview = async () => {
+	// Nutrition Data
 	const foodEntries = await getFoodEntries();
 	const totalCalories = foodEntries?.reduce(
 		(acc, curr) => curr.calories + acc,
@@ -17,6 +19,9 @@ const TrackerOverview = async () => {
 		(acc, curr) => curr.protein + acc,
 		0
 	);
+
+	// Exercise Data
+	const exerciseEntries = await getExerciseEntries();
 
 	return (
 		<main className="w-full h-full mt-24 bg-[#f3f3f3] px-4 py-6 rounded-md flex flex-col gap-4 shadow-md">
@@ -94,15 +99,15 @@ const TrackerOverview = async () => {
 						<th>Action</th>
 					</tbody>
 					<tbody className="text-sm">
-						{foodEntries?.map((foodEntry) => (
+						{foodEntries?.map((entry) => (
 							<FoodEntryCard
-								id={foodEntry.id}
-								name={foodEntry.name}
-								calories={foodEntry.calories}
-								carbs={foodEntry.carbs}
-								fats={foodEntry.fats}
-								protein={foodEntry.protein}
-								key={foodEntry.id}
+								id={entry.id}
+								name={entry.name}
+								calories={entry.calories}
+								carbs={entry.carbs}
+								fats={entry.fats}
+								protein={entry.protein}
+								key={entry.id}
 							/>
 						))}
 					</tbody>
@@ -128,11 +133,24 @@ const TrackerOverview = async () => {
 						<th>Exercise</th>
 						<th>Type</th>
 						<th>Reps</th>
+						<th>Weight</th>
 						<th>Calories</th>
 						<th>Action</th>
 					</tbody>
 					<tbody className="text-sm">
-						<ExerciseEntryCard/>
+						{exerciseEntries?.map((entry) => (
+							<ExerciseEntryCard
+								id={entry.id}
+								name={entry.name}
+								type={entry.type}
+								duration={entry.duration}
+								weight={entry.weight}
+								sets={entry.sets}
+								reps={entry.reps}
+								calories={entry.calories}
+								key={entry.id}
+							/>
+						))}
 					</tbody>
 				</table>
 			</section>

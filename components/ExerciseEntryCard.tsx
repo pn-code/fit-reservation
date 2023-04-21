@@ -1,17 +1,40 @@
 import { X } from "lucide-react";
-import React from "react";
 
-function ExerciseEntryCard() {
+interface ExerciseEntryCardProps {
+	id: number;
+	name: string;
+	type: string;
+	duration: number;
+	weight: number;
+	sets: number;
+	reps: number;
+	calories: number;
+}
+
+function ExerciseEntryCard({
+	id,
+	name,
+	type,
+	duration,
+	weight,
+	sets,
+	reps,
+	calories,
+}: ExerciseEntryCardProps) {
 	return (
 		<>
 			<tr className="hover:bg-slate-200 cursor-pointer hover:text-indigo-600">
 				<td>
-                    exercise
-					{/* {name.length > 30 ? name.substring(0, 30) + "..." : name} */}
+					{name.length > 30 ? name.substring(0, 30) + "..." : name}
 				</td>
-				<td>type</td>
-				<td>3 x 10</td>
-				<td>300</td>
+				<td>{type}</td>
+				<td>
+					{type == "resistance"
+						? `${sets} x ${reps}`
+						: duration + " mins"}
+				</td>
+				<td>{weight} lbs</td>
+				<td>{calories}</td>
 				<td>
 					<button>
 						<X
