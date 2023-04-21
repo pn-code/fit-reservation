@@ -5,6 +5,7 @@ import getFoodEntries from "../../../helpers/getFoodEntries";
 import FoodEntryCard from "../../../components/FoodEntryCard";
 import ExerciseEntryCard from "../../../components/ExerciseEntryCard";
 import getExerciseEntries from "../../../helpers/getExerciseEntries";
+import moment from "moment";
 
 const TrackerOverview = async () => {
 	// Nutrition Data
@@ -29,7 +30,7 @@ const TrackerOverview = async () => {
 
 			<section className="flex flex-col items-center w-full">
 				<h2 className="text-2xl font-semibold text-slate-900 text-center">
-					April 19, 2023
+					{moment().format("MMMM D, YYYY")}
 				</h2>
 				<LineDivider />
 			</section>
