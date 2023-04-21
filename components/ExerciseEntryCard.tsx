@@ -11,6 +11,7 @@ function ExerciseEntryCard() {
 				</td>
 				<td>type</td>
 				<td>3 x 10</td>
+				<td>300</td>
 				<td>
 					<button>
 						<X

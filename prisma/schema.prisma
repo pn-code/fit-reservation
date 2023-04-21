@@ -16,10 +16,12 @@ model CalorieGoal {
 model ExerciseEntry {
   id       Int      @id @default(autoincrement())
   name     String
+  type     String
   duration Int?
   sets     Int?
   reps     Int?
   weight   Float?
+  calories Int?
   userId   String
   date     DateTime @default(now())
 }

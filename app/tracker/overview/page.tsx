@@ -128,6 +128,7 @@ const TrackerOverview = async () => {
 						<th>Exercise</th>
 						<th>Type</th>
 						<th>Reps</th>
+						<th>Calories</th>
 						<th>Action</th>
 					</tbody>
 					<tbody className="text-sm">
