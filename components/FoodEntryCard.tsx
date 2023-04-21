@@ -19,9 +19,9 @@ function FoodEntryCard({
 		<tr>
 			<td>{name.length > 30 ? name.substring(0, 30) + "..." : name}</td>
 			<td>{calories}</td>
-			<td>{carbs}</td>
-			<td>{fats}</td>
-			<td>{protein}</td>
+			<td>{carbs}g</td>
+			<td>{fats}g</td>
+			<td>{protein}g</td>
 		</tr>
 	);
 }

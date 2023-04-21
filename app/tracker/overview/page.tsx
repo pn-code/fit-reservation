@@ -6,6 +6,16 @@ import FoodEntryCard from "../../../components/FoodEntryCard";
 
 const TrackerOverview = async () => {
 	const foodEntries = await getFoodEntries();
+	const totalCalories = foodEntries?.reduce(
+		(acc, curr) => curr.calories + acc,
+		0
+	);
+	const totalCarbs = foodEntries?.reduce((acc, curr) => curr.carbs + acc, 0);
+	const totalFats = foodEntries?.reduce((acc, curr) => curr.fats + acc, 0);
+	const totalProtein = foodEntries?.reduce(
+		(acc, curr) => curr.protein + acc,
+		0
+	);
 
 	return (
 		<main className="w-full h-full mt-24 bg-[#f3f3f3] px-4 py-6 rounded-md flex flex-col gap-4 shadow-md">
@@ -61,7 +71,9 @@ const TrackerOverview = async () => {
 			</section>
 
 			<section className="flex flex-col items-center gap-4 mt-5">
-				<h2 className="text-2xl font-semibold text-indigo-700">Nutrition Journal</h2>
+				<h2 className="text-2xl font-semibold text-indigo-700">
+					Nutrition Journal
+				</h2>
 				<table className="w-full text-left">
 					<tbody>
 						<th>Name</th>
@@ -81,6 +93,15 @@ const TrackerOverview = async () => {
 								key={foodEntry.id}
 							/>
 						))}
+					</tbody>
+					<tbody className="border-t border-slate-900 text-sm">
+						<tr>
+							<th>Total</th>
+							<th>{totalCalories}</th>
+							<th>{totalCarbs}g</th>
+							<th>{totalFats}g</th>
+							<th>{totalProtein}g</th>
+						</tr>
 					</tbody>
 				</table>
 			</section>
