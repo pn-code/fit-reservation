@@ -2,8 +2,8 @@
 import React, { useState } from "react";
 import { calculatorValidator } from "../../validations/calculatorValidator";
 import { toast } from "react-hot-toast";
-import { ZodError, z} from "zod";
-import axios from "axios"
+import { ZodError, z } from "zod";
+import axios from "axios";
 import { useRouter } from "next/navigation";
 
 const CalculatorModal = () => {
@@ -69,32 +69,35 @@ const CalculatorModal = () => {
 
 	const submitCalorieGoal = async () => {
 		try {
-			const calorieValidator = z.number().gt(400).lt(20000).parse(calories)
+			const calorieValidator = z
+				.number()
+				.gt(400)
+				.lt(20000)
+				.parse(calories);
 
 			if (calorieValidator) {
-				await axios.put("/api/calorie_goal", { goal: calories})
-				toast.success("Successfully updated profile.")
-				router.refresh()
+				await axios.put("/api/calorie_goal", { goal: calories });
+				toast.success("Successfully updated profile.");
+				router.refresh();
 			}
 		} catch (error) {
 			if (error instanceof ZodError) {
-				return toast.error("Calories is not valid")
+				return toast.error("Calories is not valid");
 			}
-			return toast.error("An error has occurred.")
+			return toast.error("An error has occurred.");
 		}
-	}
+	};
 
 	return (
-		<main className="h-screen w-full flex justify-center items-center">
-			<form className="bg-[#05204A] text-[#FAFAFA] w-[92%] p-4 rounded-md flex-col flex gap-4 max-w-md">
-				<header className="flex justify-between items-center border-b-violet-800 border-b-2 pb-2">
-					<h1 className="text-3xl font-semibold">Calculator</h1>
-				</header>
-
+		<main className="w-full h-full mt-24 bg-[#f3f3f3] px-4 py-6 rounded-md flex flex-col gap-4 shadow-md md:items-center">
+			<header className="flex justify-between font-bold pb-2 border-b-2 border-b-[#F15B2A] items-center">
+				<h1 className="text-3xl">Calculator</h1>
+			</header>
+			<form className="w-full p-4 rounded-md flex-col flex gap-4 md:items-center">
 				{/* Input Section */}
 				<section className="flex flex-col gap-4">
 					<div className="flex gap-4 items-center">
-						<label htmlFor="age">Age</label>
+						<label htmlFor="age">Age:</label>
 						<input
 							className="w-32"
 							onChange={(e) => setAge(Number(e.target.value))}
@@ -105,7 +108,7 @@ const CalculatorModal = () => {
 					</div>
 
 					<div className="flex gap-4 items-center">
-						<label>Gender</label>
+						<label>Gender:</label>
 						<section className="flex gap-2">
 							<input
 								defaultChecked
@@ -130,7 +133,7 @@ const CalculatorModal = () => {
 					</div>
 
 					<div className="flex gap-4 items-center">
-						<label htmlFor="feet">Height</label>
+						<label htmlFor="feet">Height:</label>
 						<section className="relative">
 							<input
 								className="w-16 pr-5"
@@ -176,7 +179,7 @@ const CalculatorModal = () => {
 					</div>
 
 					<div className="flex gap-4 relative items-center">
-						<label htmlFor="weight">Weight</label>
+						<label htmlFor="weight">Weight:</label>
 						<section className="relative">
 							<input
 								className="w-24 appearance-none"
@@ -194,7 +197,7 @@ const CalculatorModal = () => {
 					</div>
 
 					<div className="flex gap-4 flex-col sm:flex-row">
-						<label htmlFor="activity">Activity Level</label>
+						<label htmlFor="activity">Activity Level:</label>
 						<select
 							onChange={(e) =>
 								setActivity(Number(e.target.value))
@@ -220,7 +223,7 @@ const CalculatorModal = () => {
 					</div>
 
 					<div className="flex gap-4 flex-col sm:flex-row">
-						<label htmlFor="plan">Diet Plan</label>
+						<label htmlFor="plan">Diet Plan:</label>
 						<select
 							onChange={(e) => setPlan(Number(e.target.value))}
 							value={plan}
@@ -238,23 +241,42 @@ const CalculatorModal = () => {
 				</section>
 
 				{/* Action Buttons Section */}
-				<section className="flex justify-between gap-4 mt-4">
+				<section className="flex justify-between gap-4 mt-4 text-white font-semibold md:w-[370px]">
 					<button
 						onClick={handleCalculate}
-						className="px-4 bg-[#493fdd] rounded-md py-3 flex-1"
+						className="px-4 bg-indigo-600 hover:bg-indigo-700 rounded-md py-3 flex-1 w-full"
 						type="button"
 					>
 						Calculate
 					</button>
-					<button onClick={submitCalorieGoal} type="button" className="px-4 bg-[#424242] rounded-md py-3 flex-1">
+					<button
+						onClick={submitCalorieGoal}
+						type="button"
+						className="px-4 bg-slate-600 hover:bg-slate-700 rounded-md py-3 flex-1 w-full"
+					>
 						Apply to Profile
 					</button>
 				</section>
 
 				{/* Display Calories Section */}
-				<section>
-					<h2 className="text-2xl">Daily Calories:</h2>
-					<p>{calories} kCal</p>
+				<section className="flex flex-col gap-2">
+					<section className="flex gap-4 items-center">
+						<label className="text-xl">Daily Calories:</label>
+						<input
+							onChange={(e) =>
+								setCalories(Number(e.target.value))
+							}
+							type="text"
+							value={calories}
+							className="w-20"
+						/>
+						<span>kcal</span>
+					</section>
+
+					<span className="text-sm text-red-600">
+						* Calculate using form above or manually set by clicking
+						calories.
+					</span>
 				</section>
 			</form>
 		</main>
