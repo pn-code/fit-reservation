@@ -23,6 +23,18 @@ const TrackerOverview = async () => {
 
 	// Exercise Data
 	const exerciseEntries = await getExerciseEntries();
+	const totalActivity = exerciseEntries?.reduce(
+		(acc, curr) => {
+			if (curr.type === "cardio") {
+				acc.cardio = acc.cardio + curr.duration!;
+			} else {
+				acc.resistance = acc.resistance + curr.reps! * curr.sets!;
+			}
+			return acc;
+		},
+		{ resistance: 0, cardio: 0 }
+	);
+
 
 	return (
 		<main className="w-full h-full mt-24 bg-[#f3f3f3] px-4 py-6 rounded-md flex flex-col gap-4 shadow-md">
@@ -44,16 +56,20 @@ const TrackerOverview = async () => {
 
 					<article className="flex flex-col items-center">
 						<h3 className="text-xl text-slate-900 font-bold">
-							Activity Goal
+							Total Cardio
 						</h3>
-						<span className="text-lg text-slate-800">90 mins</span>
+						<span className="text-lg text-slate-800">
+							{totalActivity?.cardio} minutes
+						</span>
 					</article>
 
 					<article className="flex flex-col items-center">
 						<h3 className="text-xl text-slate-900 font-bold">
-							Total Activity
+							Total Tonnage
 						</h3>
-						<span className="text-lg text-slate-800">96 mins</span>
+						<span className="text-lg text-slate-800">
+							{totalActivity?.resistance} lbs
+						</span>
 					</article>
 					<LineDivider hidden={true} />
 				</section>
