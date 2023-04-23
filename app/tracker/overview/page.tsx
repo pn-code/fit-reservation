@@ -91,8 +91,8 @@ const TrackerOverview = async () => {
 				</section>
 			</section>
 
-			<section className="flex flex-col gap-4 md:flex-row md:justify-around md:gap-0">
-				<section className="flex flex-col items-center gap-4 my-5">
+			<section className="flex flex-col md:flex-row md:justify-around my-5">
+				<section className="flex flex-col items-center gap-4 md:w-full py-5">
 					<LineDivider />
 					<h2 className="text-2xl font-semibold text-indigo-700">
 						Exercise Journal
@@ -130,7 +130,7 @@ const TrackerOverview = async () => {
 						</table>
 					)}
 				</section>
-				<section className="flex flex-col items-center gap-4 mt-5">
+				<section className="flex flex-col items-center gap-4 md:w-full py-5">
 					<LineDivider />
 					<h2 className="text-2xl font-semibold text-indigo-700">
 						Nutrition Journal
