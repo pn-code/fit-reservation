@@ -12,4 +12,4 @@ export const calculatorValidator = z.object({
 	plan: z.number(),
 });
 
-export const calorieValidator = z.number();
+export const calorieValidator = z.number().min(0).max(12000);

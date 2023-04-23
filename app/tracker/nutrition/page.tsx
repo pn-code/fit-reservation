@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import TrackerHeader from "../../../components/TrackerHeader";
-import { foodIntakeSchema } from "../../../validations/foodIntake";
+import { foodEntrySchema } from "../../../validations/foodEntryValidator";
 import { ZodError } from "zod";
 import axios from "axios";
 import { toast } from "react-hot-toast";
@@ -25,7 +25,7 @@ function NutritionPage() {
 		};
 
 		try {
-			foodIntakeSchema.parse(foodIntake);
+			foodEntrySchema.parse(foodIntake);
 			return true;
 		} catch (error) {
 			if (error instanceof ZodError) {
@@ -113,7 +113,7 @@ function NutritionPage() {
 					disabled={loading}
 				/>
 				<button
-					disabled={loading || !validateFoodIntake()}
+					disabled={loading}
 					type="button"
 					onClick={createFoodEntry}
 					className="bg-[#05204A] text-[#fafafa] px-4 py-2 rounded-md disabled:bg-slate-400 disabled:cursor-wait"
