@@ -35,7 +35,6 @@ const TrackerOverview = async () => {
 		{ resistance: 0, cardio: 0 }
 	);
 
-
 	return (
 		<main className="w-full h-full mt-24 bg-[#f3f3f3] px-4 py-6 rounded-md flex flex-col gap-4 shadow-md">
 			<TrackerHeader title={"Tracker Overview"} />
@@ -120,14 +119,17 @@ const TrackerOverview = async () => {
 					)}
 					{exerciseEntries?.length! > 0 && (
 						<table className="w-full text-left">
-							<tbody>
-								<th>Exercise</th>
-								<th>Type</th>
-								<th>Reps</th>
-								<th>Weight</th>
-								<th>Calories</th>
-								<th>Action</th>
-							</tbody>
+							<thead>
+								<tr>
+									<th>Exercise</th>
+									<th>Type</th>
+									<th>Reps</th>
+									<th>Weight</th>
+									<th>Calories</th>
+									<th>Action</th>
+								</tr>
+							</thead>
+
 							<tbody className="text-sm">
 								{exerciseEntries?.map((entry) => (
 									<ExerciseEntryCard
@@ -158,14 +160,16 @@ const TrackerOverview = async () => {
 					)}
 					{foodEntries?.length! > 0 && (
 						<table className="w-full text-left">
-							<tbody>
-								<th>Name</th>
-								<th>Calories</th>
-								<th>Carbs</th>
-								<th>Fats</th>
-								<th>Protein</th>
-								<th>Action</th>
-							</tbody>
+							<thead>
+								<tr>
+									<th>Name</th>
+									<th>Calories</th>
+									<th>Carbs</th>
+									<th>Fats</th>
+									<th>Protein</th>
+									<th>Action</th>
+								</tr>
+							</thead>
 
 							<tbody className="text-sm">
 								{foodEntries?.map((entry) => (
@@ -180,7 +184,7 @@ const TrackerOverview = async () => {
 									/>
 								))}
 							</tbody>
-							<tbody className="border-t border-slate-900 text-sm">
+							<tfoot>
 								<tr>
 									<th>Total</th>
 									<th>{totalCalories}</th>
@@ -188,7 +192,7 @@ const TrackerOverview = async () => {
 									<th>{totalFats}g</th>
 									<th>{totalProtein}g</th>
 								</tr>
-							</tbody>
+							</tfoot>
 						</table>
 					)}
 				</section>
