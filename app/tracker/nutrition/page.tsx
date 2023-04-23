@@ -48,8 +48,13 @@ function NutritionPage() {
 					fats,
 					protein,
 				});
-	
+
 				toast.success(`${name} has been added.`);
+				setName("");
+				setCalories(0);
+				setCarbs(0);
+				setFats(0);
+				setProtein(0);
 				router.refresh();
 			}
 		} catch (error) {

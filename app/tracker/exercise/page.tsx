@@ -52,6 +52,13 @@ function ExercisePage() {
 				});
 
 				toast.success(`${exercise} has been added.`);
+				setExercise("");
+				setType("resistance");
+				setWeight(0);
+				setCalories(0);
+				setDuration(0);
+				setSets(0);
+				setReps(0);
 				router.refresh();
 			}
 		} catch (error) {
