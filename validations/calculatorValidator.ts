@@ -2,7 +2,7 @@ import { z } from "zod";
 
 export const calculatorValidator = z.object({
 	age: z.number().gt(4),
-	gender: z.literal("male") || z.literal("female"),
+	gender: z.union([z.literal("male"), z.literal("female")]),
 	height: z.object({
 		feet: z.number().lt(9).gt(2),
 		inches: z.number().lt(12),
