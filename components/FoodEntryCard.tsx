@@ -5,6 +5,7 @@ import axios from "axios";
 import { toast } from "react-hot-toast";
 
 interface FoodEntryCardProps {
+	id: number;
 	name: string;
 	calories: number;
 	carbs: number;

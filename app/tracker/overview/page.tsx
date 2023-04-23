@@ -118,11 +118,11 @@ const TrackerOverview = async () => {
 										id={entry.id}
 										name={entry.name}
 										type={entry.type}
-										duration={entry.duration}
-										weight={entry.weight}
-										sets={entry.sets}
-										reps={entry.reps}
-										calories={entry.calories}
+										duration={entry.duration!}
+										weight={entry.weight!}
+										sets={entry.sets!}
+										reps={entry.reps!}
+										calories={entry.calories!}
 										key={entry.id}
 									/>
 								))}
