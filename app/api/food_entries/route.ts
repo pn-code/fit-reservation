@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { prisma } from "../../../lib/client";
 import { currentUser } from "@clerk/nextjs/app-beta";
+import { foodEntrySchema } from "../../../validations/foodEntryValidator";
 
 export async function POST(req: Request) {
 	try {
@@ -8,19 +9,23 @@ export async function POST(req: Request) {
 
 		if (user) {
 			const res = await req.json();
+			const validateFoodEntry = foodEntrySchema.parse(res);
 
-			const newFoodEntry = await prisma.foodEntry.create({
-				data: {
-					name: res.name,
-					calories: res.calories,
-					carbs: res.carbs,
-					fats: res.fats,
-					protein: res.protein,
-					userId: user.id,
-				},
-			});
+			if (validateFoodEntry) {
+				const newFoodEntry = await prisma.foodEntry.create({
+					data: {
+						name: res.name,
+						calories: res.calories,
+						carbs: res.carbs,
+						fats: res.fats,
+						protein: res.protein,
+						userId: user.id,
+					},
+				});
 
-			return NextResponse.json(newFoodEntry);
+				return NextResponse.json(newFoodEntry);
+			}
+			return NextResponse.error();
 		}
 	} catch (error) {
 		return console.error(error);
