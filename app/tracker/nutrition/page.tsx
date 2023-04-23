@@ -5,6 +5,7 @@ import { foodEntrySchema } from "../../../validations/foodEntryValidator";
 import { ZodError } from "zod";
 import axios from "axios";
 import { toast } from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 function NutritionPage() {
 	const [name, setName] = useState("");
@@ -14,6 +15,7 @@ function NutritionPage() {
 	const [protein, setProtein] = useState(0);
 
 	const [loading, setLoading] = useState(false);
+	const router = useRouter();
 
 	const validateFoodIntake = () => {
 		const foodIntake = {
@@ -48,6 +50,7 @@ function NutritionPage() {
 				});
 	
 				toast.success(`${name} has been added.`);
+				router.refresh();
 			}
 		} catch (error) {
 			toast.error("An error has occurred.");

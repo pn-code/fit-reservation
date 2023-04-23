@@ -74,7 +74,7 @@ const TrackerOverview = async () => {
 				</section>
 
 				{/* Nutrition Section */}
-				<section className="flex flex-col items-center gap-4 md:w-full">
+				<section className="flex flex-col items-center gap-4 md:w-full pt-4">
 					<h2 className="text-2xl font-semibold text-indigo-700">
 						Your Nutrition
 					</h2>
@@ -91,8 +91,8 @@ const TrackerOverview = async () => {
 						<h3 className="text-xl text-slate-900 font-bold">
 							Macronutrients
 						</h3>
-						{totalCarbs != 0 &&
-						totalFats != 0 &&
+						{totalCarbs != 0 ||
+						totalFats != 0 ||
 						totalProtein != 0 ? (
 							<MacroChart
 								carbs={totalCarbs || 0}
@@ -106,8 +106,8 @@ const TrackerOverview = async () => {
 				</section>
 			</section>
 
-			<section className="flex flex-col md:flex-row md:justify-around my-5">
-				<section className="flex flex-col items-center gap-4 md:w-full py-5">
+			<section className="flex flex-col my-5 lg:items-center lg:justify-center">
+				<section className="flex flex-col items-center gap-4 py-5 lg:w-[60%]">
 					<LineDivider />
 					<h2 className="text-2xl font-semibold text-indigo-700">
 						Exercise Journal
@@ -118,7 +118,7 @@ const TrackerOverview = async () => {
 						</p>
 					)}
 					{exerciseEntries?.length! > 0 && (
-						<table className="w-full text-left">
+						<table className="w-full text-left border-slate-900">
 							<thead>
 								<tr>
 									<th>Exercise</th>
@@ -148,7 +148,7 @@ const TrackerOverview = async () => {
 						</table>
 					)}
 				</section>
-				<section className="flex flex-col items-center gap-4 md:w-full py-5">
+				<section className="flex flex-col items-center gap-4 py-5 lg:w-[60%]">
 					<LineDivider />
 					<h2 className="text-2xl font-semibold text-indigo-700">
 						Nutrition Journal
@@ -184,7 +184,7 @@ const TrackerOverview = async () => {
 									/>
 								))}
 							</tbody>
-							<tfoot>
+							<tfoot className="border-t border-slate-900 pt-2">
 								<tr>
 									<th>Total</th>
 									<th>{totalCalories}</th>
