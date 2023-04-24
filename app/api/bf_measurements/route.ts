@@ -32,7 +32,7 @@ export async function POST(req: Request) {
 					data: {
 						bodyfat: res.bodyfat,
 						userId: user.id,
-					},
+					} as BodyFatMeasurementInput,
 				});
 
 			return NextResponse.json(newBodyFatMeasurement);
@@ -40,4 +40,9 @@ export async function POST(req: Request) {
 	} catch (error) {
 		return console.error(error);
 	}
+}
+
+interface BodyFatMeasurementInput {
+	bodyfat: number;
+	userId: string;
 }
