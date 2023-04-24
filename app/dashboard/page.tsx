@@ -9,15 +9,9 @@ async function DashboardPage() {
 			</header>
 
 			{/* Statistics */}
-			<h2 className="text-slate-800 text-2xl font-semibold">
-				Your Stats
-			</h2>
-			<StatisticsSection />
+			<StatisticsSection/>
 
 			{/* Add Measurements */}
-			<h2 className="text-slate-800 text-2xl font-semibold">
-				Add Measurements
-			</h2>
 			<MeasurementsForm />
 
 			{/* Calorie Goals */}
