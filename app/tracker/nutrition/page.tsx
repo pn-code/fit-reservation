@@ -1,10 +1,11 @@
 "use client";
 import { useState } from "react";
 import TrackerHeader from "../../../components/TrackerHeader";
-import { foodIntakeSchema } from "../../../validations/foodIntake";
+import { foodEntrySchema } from "../../../validations/foodEntryValidator";
 import { ZodError } from "zod";
 import axios from "axios";
 import { toast } from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 function NutritionPage() {
 	const [name, setName] = useState("");
@@ -14,6 +15,7 @@ function NutritionPage() {
 	const [protein, setProtein] = useState(0);
 
 	const [loading, setLoading] = useState(false);
+	const router = useRouter();
 
 	const validateFoodIntake = () => {
 		const foodIntake = {
@@ -25,7 +27,7 @@ function NutritionPage() {
 		};
 
 		try {
-			foodIntakeSchema.parse(foodIntake);
+			foodEntrySchema.parse(foodIntake);
 			return true;
 		} catch (error) {
 			if (error instanceof ZodError) {
@@ -46,8 +48,14 @@ function NutritionPage() {
 					fats,
 					protein,
 				});
-	
+
 				toast.success(`${name} has been added.`);
+				setName("");
+				setCalories(0);
+				setCarbs(0);
+				setFats(0);
+				setProtein(0);
+				router.refresh();
 			}
 		} catch (error) {
 			toast.error("An error has occurred.");
@@ -113,7 +121,7 @@ function NutritionPage() {
 					disabled={loading}
 				/>
 				<button
-					disabled={loading || !validateFoodIntake()}
+					disabled={loading}
 					type="button"
 					onClick={createFoodEntry}
 					className="bg-[#05204A] text-[#fafafa] px-4 py-2 rounded-md disabled:bg-slate-400 disabled:cursor-wait"

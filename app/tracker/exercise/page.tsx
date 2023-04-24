@@ -4,6 +4,7 @@ import TrackerHeader from "../../../components/TrackerHeader";
 import { exerciseEntrySchema } from "../../../validations/exerciseEntryValidator";
 import { toast } from "react-hot-toast";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
 function ExercisePage() {
 	const [exercise, setExercise] = useState("");
@@ -15,6 +16,7 @@ function ExercisePage() {
 	const [reps, setReps] = useState(0);
 
 	const [loading, setLoading] = useState(false);
+	const router = useRouter();
 
 	const validateExerciseSchema = () => {
 		try {
@@ -50,6 +52,14 @@ function ExercisePage() {
 				});
 
 				toast.success(`${exercise} has been added.`);
+				setExercise("");
+				setType("resistance");
+				setWeight(0);
+				setCalories(0);
+				setDuration(0);
+				setSets(0);
+				setReps(0);
+				router.refresh();
 			}
 		} catch (error) {
 			console.error(error);
@@ -62,31 +72,35 @@ function ExercisePage() {
 		<main className="w-full h-full mt-24 bg-[#f3f3f3] px-4 py-6 rounded-md flex flex-col gap-4 shadow-md">
 			<TrackerHeader title="Exercise" />
 			<section className="bg-gray-100 text-black rounded-sm">
-				<form className="flex flex-col gap-4 md:flex-row bg-gray-100 py-2 md:items-center">
-					<label htmlFor="exercise">Exercise: </label>
-					<input
-						type="text"
-						id="exercise"
-						onChange={(e) => setExercise(e.target.value)}
-						value={exercise}
-						placeholder="exercise name"
-						required
-					/>
+				<form className="flex flex-col gap-8 lg:flex-row bg-gray-100 py-2 lg:items-center">
+					<section className="flex items-center space-x-2">
+						<label htmlFor="exercise">Exercise: </label>
+						<input
+							type="text"
+							id="exercise"
+							onChange={(e) => setExercise(e.target.value)}
+							value={exercise}
+							placeholder="exercise name"
+							required
+						/>
+					</section>
 
-					<label htmlFor="type">Type: </label>
-					<select
-						name="type"
-						id="type"
-						onChange={(e) => setType(e.target.value)}
-						value={type}
-						required
-					>
-						<option value="resistance">Resistance</option>
-						<option value="cardio">Cardio</option>
-					</select>
+					<section className="flex items-center space-x-2">
+						<label htmlFor="type">Type: </label>
+						<select
+							name="type"
+							id="type"
+							onChange={(e) => setType(e.target.value)}
+							value={type}
+							required
+						>
+							<option value="resistance">Resistance</option>
+							<option value="cardio">Cardio</option>
+						</select>
+					</section>
 
 					{type === "cardio" && (
-						<section className="flex justify-between my-4">
+						<section className="flex lg:justify-between gap-4">
 							<>
 								<label htmlFor="duration">
 									Duration (minutes):
@@ -96,9 +110,7 @@ function ExercisePage() {
 									type="number"
 									id="duration"
 									onChange={(e) =>
-										setDuration(
-											Number(e.target.value)
-										)
+										setDuration(Number(e.target.value))
 									}
 									value={duration}
 									min={0}
@@ -111,9 +123,7 @@ function ExercisePage() {
 									type="text"
 									id="calories"
 									onChange={(e) =>
-										setCalories(
-											Number(e.target.value)
-										)
+										setCalories(Number(e.target.value))
 									}
 									value={calories}
 								/>
@@ -122,46 +132,59 @@ function ExercisePage() {
 					)}
 
 					{type === "resistance" && (
-						<section className="flex justify-between my-4">
-							<label htmlFor="weight">Weight (lbs):</label>
-							<input
-								className="w-16"
-								type="number"
-								id="weight"
-								onChange={(e) =>
-									setWeight(Number.parseFloat(e.target.value))
-								}
-								value={weight}
-								min={0}
-							/>
+						<section className="flex lg:justify-between gap-4">
+							<section className="flex items-center space-x-2">
+								<label htmlFor="weight">Weight (lbs):</label>
+								<input
+									className="w-16"
+									type="number"
+									id="weight"
+									onChange={(e) =>
+										setWeight(
+											Number.parseFloat(e.target.value)
+										)
+									}
+									value={weight}
+									min={0}
+								/>
+							</section>
 
-							<label htmlFor="sets">Sets:</label>
-							<input
-								className="w-16"
-								type="text"
-								id="sets"
-								onChange={(e) =>
-									setSets(Number(e.target.value))
-								}
-								value={sets}
-								min={0}
-							/>
+							<section className="flex items-center space-x-2">
+								<label htmlFor="sets">Sets:</label>
+								<input
+									className="w-16"
+									type="text"
+									id="sets"
+									onChange={(e) =>
+										setSets(Number(e.target.value))
+									}
+									value={sets}
+									min={0}
+								/>
+							</section>
 
-							<label htmlFor="reps">Reps:</label>
-							<input
-								className="w-16"
-								type="text"
-								id="reps"
-								onChange={(e) =>
-									setReps(Number(e.target.value))
-								}
-								value={reps}
-								min={0}
-							/>
+							<section className="flex items-center space-x-2">
+								<label htmlFor="reps">Reps:</label>
+								<input
+									className="w-16"
+									type="text"
+									id="reps"
+									onChange={(e) =>
+										setReps(Number(e.target.value))
+									}
+									value={reps}
+									min={0}
+								/>
+							</section>
 						</section>
 					)}
 
-					<button disabled={loading} onClick={createExerciseEntry} type="button" className="bg-[#05204A] text-[#fafafa] px-4 py-2 rounded-md disabled:bg-slate-400 disabled:cursor-not-allowed">
+					<button
+						disabled={loading}
+						onClick={createExerciseEntry}
+						type="button"
+						className="bg-[#05204A] text-[#fafafa] px-4 py-2 rounded-md disabled:bg-slate-400 disabled:cursor-not-allowed"
+					>
 						Add Item
 					</button>
 				</form>

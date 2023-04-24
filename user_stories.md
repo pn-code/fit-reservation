@@ -1,10 +1,10 @@
 # user_stories
 
 ## Fitness Basics
-1. [] Users can track their workouts.  
-2. [] Users can log their nutrition.  
+1. [X] Users can track their workouts.  
+2. [X] Users can log their nutrition.  
 3. [] Users can view progress reports.  
-4. [] Users can calculate their calories.  
+4. [X] Users can calculate their calories.  
 
 ## Achievements and Rewards
 1. [] Users can receive achievements/rewards when they reach specific milestones.  

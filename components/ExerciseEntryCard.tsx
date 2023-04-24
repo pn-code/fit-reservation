@@ -35,7 +35,7 @@ function ExerciseEntryCard({
 				},
 			});
 
-			toast.success(`Successfully deleted item ${name.length > 30 ? name.substring(0, 30) + "..." : name}!`);
+			toast.success(`Successfully deleted: ${name.length > 30 ? name.substring(0, 30) + "..." : name}!`);
 			router.refresh();
 		} catch (error) {
 			toast.error(

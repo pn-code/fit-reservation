@@ -23,6 +23,17 @@ const TrackerOverview = async () => {
 
 	// Exercise Data
 	const exerciseEntries = await getExerciseEntries();
+	const totalActivity = exerciseEntries?.reduce(
+		(acc, curr) => {
+			if (curr.type === "cardio") {
+				acc.cardio = acc.cardio + curr.duration!;
+			} else {
+				acc.resistance = acc.resistance + curr.reps! * curr.sets!;
+			}
+			return acc;
+		},
+		{ resistance: 0, cardio: 0 }
+	);
 
 	return (
 		<main className="w-full h-full mt-24 bg-[#f3f3f3] px-4 py-6 rounded-md flex flex-col gap-4 shadow-md">
@@ -44,22 +55,26 @@ const TrackerOverview = async () => {
 
 					<article className="flex flex-col items-center">
 						<h3 className="text-xl text-slate-900 font-bold">
-							Activity Goal
+							Total Cardio
 						</h3>
-						<span className="text-lg text-slate-800">90 mins</span>
+						<span className="text-lg text-slate-800">
+							{totalActivity?.cardio} minutes
+						</span>
 					</article>
 
 					<article className="flex flex-col items-center">
 						<h3 className="text-xl text-slate-900 font-bold">
-							Total Activity
+							Total Tonnage
 						</h3>
-						<span className="text-lg text-slate-800">96 mins</span>
+						<span className="text-lg text-slate-800">
+							{totalActivity?.resistance} lbs
+						</span>
 					</article>
 					<LineDivider hidden={true} />
 				</section>
 
 				{/* Nutrition Section */}
-				<section className="flex flex-col items-center gap-4 md:w-full">
+				<section className="flex flex-col items-center gap-4 md:w-full pt-4">
 					<h2 className="text-2xl font-semibold text-indigo-700">
 						Your Nutrition
 					</h2>
@@ -76,8 +91,8 @@ const TrackerOverview = async () => {
 						<h3 className="text-xl text-slate-900 font-bold">
 							Macronutrients
 						</h3>
-						{totalCarbs != 0 &&
-						totalFats != 0 &&
+						{totalCarbs != 0 ||
+						totalFats != 0 ||
 						totalProtein != 0 ? (
 							<MacroChart
 								carbs={totalCarbs || 0}
@@ -91,8 +106,8 @@ const TrackerOverview = async () => {
 				</section>
 			</section>
 
-			<section className="flex flex-col gap-4 md:flex-row md:justify-around md:gap-0">
-				<section className="flex flex-col items-center gap-4 my-5">
+			<section className="flex flex-col my-5 lg:items-center lg:justify-center">
+				<section className="flex flex-col items-center gap-4 py-5 lg:w-[60%]">
 					<LineDivider />
 					<h2 className="text-2xl font-semibold text-indigo-700">
 						Exercise Journal
@@ -103,26 +118,29 @@ const TrackerOverview = async () => {
 						</p>
 					)}
 					{exerciseEntries?.length! > 0 && (
-						<table className="w-full text-left">
-							<tbody>
-								<th>Exercise</th>
-								<th>Type</th>
-								<th>Reps</th>
-								<th>Weight</th>
-								<th>Calories</th>
-								<th>Action</th>
-							</tbody>
+						<table className="w-full text-left border-slate-900">
+							<thead>
+								<tr>
+									<th>Exercise</th>
+									<th>Type</th>
+									<th>Reps</th>
+									<th>Weight</th>
+									<th>Calories</th>
+									<th>Action</th>
+								</tr>
+							</thead>
+
 							<tbody className="text-sm">
 								{exerciseEntries?.map((entry) => (
 									<ExerciseEntryCard
 										id={entry.id}
 										name={entry.name}
 										type={entry.type}
-										duration={entry.duration}
-										weight={entry.weight}
-										sets={entry.sets}
-										reps={entry.reps}
-										calories={entry.calories}
+										duration={entry.duration!}
+										weight={entry.weight!}
+										sets={entry.sets!}
+										reps={entry.reps!}
+										calories={entry.calories!}
 										key={entry.id}
 									/>
 								))}
@@ -130,7 +148,7 @@ const TrackerOverview = async () => {
 						</table>
 					)}
 				</section>
-				<section className="flex flex-col items-center gap-4 mt-5">
+				<section className="flex flex-col items-center gap-4 py-5 lg:w-[60%]">
 					<LineDivider />
 					<h2 className="text-2xl font-semibold text-indigo-700">
 						Nutrition Journal
@@ -142,14 +160,16 @@ const TrackerOverview = async () => {
 					)}
 					{foodEntries?.length! > 0 && (
 						<table className="w-full text-left">
-							<tbody>
-								<th>Name</th>
-								<th>Calories</th>
-								<th>Carbs</th>
-								<th>Fats</th>
-								<th>Protein</th>
-								<th>Action</th>
-							</tbody>
+							<thead>
+								<tr>
+									<th>Name</th>
+									<th>Calories</th>
+									<th>Carbs</th>
+									<th>Fats</th>
+									<th>Protein</th>
+									<th>Action</th>
+								</tr>
+							</thead>
 
 							<tbody className="text-sm">
 								{foodEntries?.map((entry) => (
@@ -164,7 +184,7 @@ const TrackerOverview = async () => {
 									/>
 								))}
 							</tbody>
-							<tbody className="border-t border-slate-900 text-sm">
+							<tfoot className="border-t border-slate-900 pt-2">
 								<tr>
 									<th>Total</th>
 									<th>{totalCalories}</th>
@@ -172,7 +192,7 @@ const TrackerOverview = async () => {
 									<th>{totalFats}g</th>
 									<th>{totalProtein}g</th>
 								</tr>
-							</tbody>
+							</tfoot>
 						</table>
 					)}
 				</section>

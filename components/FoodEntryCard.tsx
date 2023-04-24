@@ -5,6 +5,7 @@ import axios from "axios";
 import { toast } from "react-hot-toast";
 
 interface FoodEntryCardProps {
+	id: number;
 	name: string;
 	calories: number;
 	carbs: number;
@@ -29,7 +30,7 @@ function FoodEntryCard({
 					id: id,
 				},
 			});
-			toast.success(`Successfully deleted item ${name.length > 30 ? name.substring(0, 30) + "..." : name}!`);
+			toast.success(`Successfully deleted: ${name.length > 30 ? name.substring(0, 30) + "..." : name}!`);
 			router.refresh();
 		} catch (error) {
 			toast.error(
