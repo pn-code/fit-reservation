@@ -35,7 +35,7 @@ export async function POST(req: Request) {
 			const newBodyFatMeasurement =
 				await prisma.bodyFatMeasurement.create({
 					data: {
-						bodyfat: res.bodyfat,
+						bodyfat: Number(res.bodyfat),
 						userId: user.id,
 					} as BodyFatMeasurementInput,
 				});
