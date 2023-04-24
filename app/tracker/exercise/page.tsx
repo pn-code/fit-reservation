@@ -4,6 +4,7 @@ import TrackerHeader from "../../../components/TrackerHeader";
 import { exerciseEntrySchema } from "../../../validations/exerciseEntryValidator";
 import { toast } from "react-hot-toast";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
 function ExercisePage() {
 	const [exercise, setExercise] = useState("");
@@ -15,6 +16,7 @@ function ExercisePage() {
 	const [reps, setReps] = useState(0);
 
 	const [loading, setLoading] = useState(false);
+	const router = useRouter();
 
 	const validateExerciseSchema = () => {
 		try {
@@ -50,6 +52,14 @@ function ExercisePage() {
 				});
 
 				toast.success(`${exercise} has been added.`);
+				setExercise("");
+				setType("resistance");
+				setWeight(0);
+				setCalories(0);
+				setDuration(0);
+				setSets(0);
+				setReps(0);
+				router.refresh();
 			}
 		} catch (error) {
 			console.error(error);

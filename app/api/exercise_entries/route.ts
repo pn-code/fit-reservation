@@ -2,6 +2,32 @@ import { NextResponse } from "next/server";
 import { prisma } from "../../../lib/client";
 import { currentUser } from "@clerk/nextjs/app-beta";
 import { exerciseEntrySchema } from "../../../validations/exerciseEntryValidator";
+import getLocalTimezones from "../../../helpers/getLocalTimezone";
+
+export async function GET(req: Request) {
+	try {
+		const user = await currentUser();
+		const localTime = getLocalTimezones();
+
+		if (user) {
+			const exerciseEntries = await prisma.exerciseEntry.findMany({
+				where: {
+					userId: user.id,
+					date: {
+						gte: localTime.startOfDay,
+						lt: localTime.endOfDay,
+					},
+				},
+			});
+
+			return NextResponse.json(exerciseEntries);
+		} else {
+			return NextResponse.error();
+		}
+	} catch (error) {
+		return NextResponse.error();
+	}
+}
 
 export async function POST(req: Request) {
 	try {
