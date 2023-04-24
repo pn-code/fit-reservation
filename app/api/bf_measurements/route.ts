@@ -2,6 +2,11 @@ import { NextResponse } from "next/server";
 import { prisma } from "../../../lib/client";
 import { currentUser } from "@clerk/nextjs/app-beta";
 
+interface BodyFatMeasurementInput {
+	bodyfat: number;
+	userId: string;
+}
+
 export async function GET(req: Request) {
 	try {
 		const user = await currentUser();
@@ -40,9 +45,4 @@ export async function POST(req: Request) {
 	} catch (error) {
 		return console.error(error);
 	}
-}
-
-interface BodyFatMeasurementInput {
-	bodyfat: number;
-	userId: string;
 }
