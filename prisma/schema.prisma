@@ -39,7 +39,7 @@ model FoodEntry {
 
 model WeightMeasurement {
   id         Int      @id @default(autoincrement())
-  value      Float
+  weight     Float
   createdAt  DateTime @default(now())
   userId     String
   userUserId String?
@@ -47,7 +47,7 @@ model WeightMeasurement {
 
 model BodyFatMeasurement {
   id        Int      @id @default(autoincrement())
-  value     Float
+  bodyfat   Float
   createdAt DateTime @default(now())
   userId    String
 }

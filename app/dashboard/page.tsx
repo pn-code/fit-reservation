@@ -1,4 +1,5 @@
 import MeasurementsForm from "../../components/MeasurementsForm";
+import StatisticsSection from "../../components/StatisticsSection";
 
 async function DashboardPage() {
 	return (
@@ -7,10 +8,10 @@ async function DashboardPage() {
 				<h1 className="text-3xl">Dashboard</h1>
 			</header>
 
+			{/* Statistics */}
+			<StatisticsSection/>
+
 			{/* Add Measurements */}
-			<h2 className="text-slate-800 text-2xl font-semibold">
-				Add Measurements
-			</h2>
 			<MeasurementsForm />
 
 			{/* Calorie Goals */}
