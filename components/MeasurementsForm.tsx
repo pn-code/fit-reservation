@@ -4,29 +4,55 @@ import axios from "axios";
 import { useState } from "react";
 import { weightSchema } from "../validations/weightValidator";
 import { toast } from "react-hot-toast";
+import { bodyFatSchema } from "../validations/bodyFatValidator";
 
 function MeasurementsForm() {
-	const [weight, setWeight] = useState<number>();
-	const [bodyFat, setBodyFat] = useState<number>();
+	const [weight, setWeight] = useState<number>(160);
+	const [bodyFat, setBodyFat] = useState<number>(15);
 
 	const submitCurrentWeight = async () => {
 		try {
-			const validateWeight = weightSchema.parse(weight)
+			const validateWeight = weightSchema.parse(weight);
 
 			if (validateWeight) {
 				const res = await axios.post("/api/weight_measurements", {
 					weight,
 				});
 
-				if (res.status === 200){
-					toast.success(`Current weight has been updated to ${weight} lbs.`)
+				if (res.status === 200) {
+					toast.success(
+						`Current weight has been updated to ${weight} lbs.`
+					);
 				} else {
 					throw Error;
 				}
 			}
 		} catch (error) {
 			console.error(error);
-			toast.error("We ran into an error...")
+			toast.error("We ran into an error...");
+		}
+	};
+
+	const submitCurrentBodyFat = async () => {
+		try {
+			const validateBodyFat = bodyFatSchema.parse(bodyFat);
+
+			if (validateBodyFat) {
+				const res = await axios.post("/api/bf_measurements", {
+					bodyfat: bodyFat,
+				});
+
+				if (res.status === 200) {
+					toast.success(
+						`Current body fat has been updated to ${bodyFat} %.`
+					);
+				} else {
+					throw Error;
+				}
+			}
+		} catch (error) {
+			console.error(error);
+			toast.error("We ran into an error...");
 		}
 	};
 
@@ -64,7 +90,11 @@ function MeasurementsForm() {
 						id="bf"
 						placeholder="Body Fat Percentage"
 					/>
-					<button className="bg-indigo-600 hover:bg-indigo-700 rounded-lg text-white px-4 py-2 hover:underline">
+					<button
+						onClick={submitCurrentBodyFat}
+						type="button"
+						className="bg-indigo-600 hover:bg-indigo-700 rounded-lg text-white px-4 py-2 hover:underline"
+					>
 						Submit Body Fat
 					</button>
 				</form>
