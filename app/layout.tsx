@@ -23,7 +23,7 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<ClerkProvider>
-				<body className={`${roboto.className}`}>
+				<body className={`${roboto.className} bg-gradient-to-b from-[#172554] to-blue-900`}>
 					<Navbar />
 					<ToastProvider />
 					{children}
