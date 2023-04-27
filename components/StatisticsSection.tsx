@@ -27,10 +27,10 @@ function StatisticsSection() {
 
 	return (
 		<>
-			<h2 className="text-slate-800 text-2xl font-semibold">
+			<h2 className="text-2xl font-semibold">
 				Your Stats
 			</h2>
-			<table className="w-full text-sm text-left text-slate-700">
+			<table className="w-full text-sm text-left">
 				<tbody>
 					<tr className="flex gap-6 text-[18px] mb-3">
 						<th className="w-32 flex items-center gap-2">

@@ -58,7 +58,7 @@ function MeasurementsForm() {
 
 	return (
 		<>
-			<h2 className="text-slate-800 text-2xl font-semibold">
+			<h2 className="text-2xl font-semibold">
 				Add Measurements
 			</h2>
 
