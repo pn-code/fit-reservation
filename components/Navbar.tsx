@@ -1,10 +1,7 @@
 import { Shield } from "lucide-react";
 import Link from "next/link";
-import { currentUser } from "@clerk/nextjs/app-beta";
 
-const Navbar = async () => {
-    const user = await currentUser();
-
+const Navbar = () => {
     return (
         <nav className="h-[100px] bg-[#172554] text-white py-6 px-6 flex justify-between items-center w-full top-0 left-0 z-50">
             <header>
@@ -17,34 +14,26 @@ const Navbar = async () => {
                 </Link>
             </header>
 
-            {user && (
-                <ul className="flex gap-4">
-                    <Link
-                        className="hover:underline font-medium"
-                        href="/dashboard"
-                    >
-                        Dashboard
-                    </Link>
-                    <Link
-                        className="hover:underline font-medium"
-                        href="/calculator"
-                    >
-                        Calculator
-                    </Link>
-                    <Link
-                        className="hover:underline font-medium"
-                        href="/tracker/overview"
-                    >
-                        Tracker
-                    </Link>
-                    <Link
-                        className="hover:underline font-medium"
-                        href="/profile"
-                    >
-                        Profile
-                    </Link>
-                </ul>
-            )}
+            <ul className="flex gap-4">
+                <Link className="hover:underline font-medium" href="/dashboard">
+                    Dashboard
+                </Link>
+                <Link
+                    className="hover:underline font-medium"
+                    href="/calculator"
+                >
+                    Calculator
+                </Link>
+                <Link
+                    className="hover:underline font-medium"
+                    href="/tracker/overview"
+                >
+                    Tracker
+                </Link>
+                <Link className="hover:underline font-medium" href="/profile">
+                    Profile
+                </Link>
+            </ul>
         </nav>
     );
 };
