@@ -12,10 +12,7 @@ const roboto = Roboto({
 
 export const metadata = {
 	title: "FitHeroes",
-	openGraph: {
-		title: "FitHeroes",
-		description: "FitHeroes is a fitness app",
-	},
+	description: "Created by Philip Nguyen"
 };
 
 export default function RootLayout({
