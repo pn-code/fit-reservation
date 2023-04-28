@@ -1,23 +1,13 @@
 "use client";
-import { useEffect, useState } from "react";
 import LineDivider from "./LineDivider";
-import axios from "axios";
 import ExerciseEntryCard from "./ExerciseEntryCard";
 import { ExerciseEntry } from "@prisma/client";
 
-export default function ExerciseJournal() {
-    const [exercises, setExercises] = useState<ExerciseEntry[]>([]);
+interface Props {
+    exercises: ExerciseEntry[];
+}
 
-    useEffect(() => {
-        const getExerciseData = async () => {
-            const res = await axios.get("/api/exercise_entries");
-            setExercises(res.data);
-        };
-        getExerciseData();
-    }, []);
-
-    console.log(exercises)
-
+export default function ExerciseJournal({ exercises }: Props) {
     return (
         <section className="flex flex-col items-center gap-4 py-5 w-full lg:w-[60%]">
             <LineDivider />

@@ -1,10 +1,9 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TrackerHeader from "../../../components/TrackerHeader";
 import { exerciseEntrySchema } from "../../../validations/exerciseEntryValidator";
 import { toast } from "react-hot-toast";
 import axios from "axios";
-import { useRouter } from "next/navigation";
 import ExerciseJournal from "../../../components/ExerciseJournal";
 
 function ExercisePage() {
@@ -16,9 +15,17 @@ function ExercisePage() {
     const [sets, setSets] = useState(0);
     const [reps, setReps] = useState(0);
 
-    const [loading, setLoading] = useState(false);
+    const [exercises, setExercises] = useState<ExerciseEntry[]>([]);
 
-    const router = useRouter();
+    useEffect(() => {
+        const getExerciseData = async () => {
+            const res = await axios.get("/api/exercise_entries");
+            setExercises(res.data);
+        };
+        getExerciseData();
+    }, []);
+
+    const [loading, setLoading] = useState(false);
 
     const validateExerciseSchema = () => {
         try {
@@ -43,7 +50,7 @@ function ExercisePage() {
         try {
             const validated = validateExerciseSchema();
             if (validated) {
-                await axios.post("/api/exercise_entries", {
+                const res = await axios.post("/api/exercise_entries", {
                     name: exercise,
                     type,
                     weight,
@@ -54,6 +61,10 @@ function ExercisePage() {
                 });
 
                 toast.success(`${exercise} has been added.`);
+
+                setExercises((prev: ExerciseEntry[]) => [...prev, res.data]);
+
+                // Clear Inputs
                 setExercise("");
                 setType("resistance");
                 setWeight(0);
@@ -61,7 +72,6 @@ function ExercisePage() {
                 setDuration(0);
                 setSets(0);
                 setReps(0);
-                router.refresh();
             }
         } catch (error) {
             console.error(error);
@@ -192,7 +202,7 @@ function ExercisePage() {
                 </form>
             </section>
 
-            <ExerciseJournal />
+            <ExerciseJournal exercises={exercises} />
         </main>
     );
 }
