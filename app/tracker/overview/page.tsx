@@ -3,7 +3,6 @@ import MacroChart from "../../../components/MacroChart";
 import LineDivider from "../../../components/LineDivider";
 import getFoodEntries from "../../../helpers/getFoodEntries";
 import FoodEntryCard from "../../../components/FoodEntryCard";
-import ExerciseEntryCard from "../../../components/ExerciseEntryCard";
 import getExerciseEntries from "../../../helpers/getExerciseEntries";
 import moment from "moment";
 
@@ -93,57 +92,6 @@ const TrackerOverview = async () => {
                             <p>No Stats Available</p>
                         )}
                     </article>
-                </section>
-            </section>
-
-            <section className="flex flex-col my-5 lg:items-center lg:justify-center">
-                <section className="flex flex-col items-center gap-4 py-5 lg:w-[60%]">
-                    <LineDivider />
-                    <h2 className="text-2xl font-semibold text-amber-400">
-                        Nutrition Journal
-                    </h2>
-                    {foodEntries?.length === 0 && (
-                        <p className="font-semibold text-sm">
-                            Currently has no entries.
-                        </p>
-                    )}
-                    {foodEntries?.length! > 0 && (
-                        <table className="w-full text-left">
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Calories</th>
-                                    <th>Carbs</th>
-                                    <th>Fats</th>
-                                    <th>Protein</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-
-                            <tbody className="text-sm">
-                                {foodEntries?.map((entry) => (
-                                    <FoodEntryCard
-                                        id={entry.id}
-                                        name={entry.name}
-                                        calories={entry.calories}
-                                        carbs={entry.carbs}
-                                        fats={entry.fats}
-                                        protein={entry.protein}
-                                        key={entry.id}
-                                    />
-                                ))}
-                            </tbody>
-                            <tfoot className="border-t border-slate-50 pt-2">
-                                <tr>
-                                    <th>Total</th>
-                                    <th>{totalCalories}</th>
-                                    <th>{totalCarbs}g</th>
-                                    <th>{totalFats}g</th>
-                                    <th>{totalProtein}g</th>
-                                </tr>
-                            </tfoot>
-                        </table>
-                    )}
                 </section>
             </section>
         </main>
