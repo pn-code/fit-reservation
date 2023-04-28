@@ -68,7 +68,6 @@ function NutritionPage() {
             }
         } catch (error) {
             toast.error("An error has occurred.");
-            console.log(error);
         } finally {
             setLoading(false);
         }

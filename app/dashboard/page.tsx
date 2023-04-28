@@ -29,7 +29,6 @@ function DashboardPage() {
 
     useEffect(() => {
 		if(weights.length > 0) {
-			console.log(weights)
 			setCurrentWeight(weights[weights.length - 1].weight);
 		}
 
