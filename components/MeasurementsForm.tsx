@@ -6,101 +6,106 @@ import { weightSchema } from "../validations/weightValidator";
 import { toast } from "react-hot-toast";
 import { bodyFatSchema } from "../validations/bodyFatValidator";
 
-function MeasurementsForm() {
-	const [weight, setWeight] = useState<number>(160);
-	const [bodyFat, setBodyFat] = useState<number>(15);
+interface Props {
+    setWeights: Function;
+    setBodyFats: Function;
+}
 
-	const submitCurrentWeight = async () => {
-		try {
-			const validateWeight = weightSchema.parse(weight);
+function MeasurementsForm({ setWeights, setBodyFats }: Props) {
+    const [weight, setWeight] = useState<number>(160);
+    const [bodyFat, setBodyFat] = useState<number>(15);
 
-			if (validateWeight) {
-				const res = await axios.post("/api/weight_measurements", {
-					weight,
-				});
+    const submitCurrentWeight = async () => {
+        try {
+            const validateWeight = weightSchema.parse(weight);
 
-				if (res.status === 200) {
-					toast.success(
-						`Current weight has been updated to ${weight} lbs.`
-					);
-				} else {
-					throw Error;
-				}
-			}
-		} catch (error) {
-			console.error(error);
-			toast.error("We ran into an error...");
-		}
-	};
+            if (validateWeight) {
+                const res = await axios.post("/api/weight_measurements", {
+                    weight,
+                });
 
-	const submitCurrentBodyFat = async () => {
-		try {
-			const validateBodyFat = bodyFatSchema.parse(bodyFat);
+                if (res.status === 200) {
+                    toast.success(
+                        `Current weight has been updated to ${weight} lbs.`
+                    );
+					setWeights((prev: any[]) => ([...prev, res.data]))
+                } else {
+                    throw Error;
+                }
+            }
+        } catch (error) {
+            console.error(error);
+            toast.error("We ran into an error...");
+        }
+    };
 
-			if (validateBodyFat) {
-				const res = await axios.post("/api/bf_measurements", {
-					bodyfat: bodyFat,
-				});
+    const submitCurrentBodyFat = async () => {
+        try {
+            const validateBodyFat = bodyFatSchema.parse(bodyFat);
 
-				if (res.status === 200) {
-					toast.success(
-						`Current body fat has been updated to ${bodyFat} %.`
-					);
-				} else {
-					throw Error;
-				}
-			}
-		} catch (error) {
-			console.error(error);
-			toast.error("We ran into an error...");
-		}
-	};
+            if (validateBodyFat) {
+                const res = await axios.post("/api/bf_measurements", {
+                    bodyfat: bodyFat,
+                });
 
-	return (
-		<>
-			<h2 className="text-2xl font-semibold">
-				Add Measurements
-			</h2>
+                if (res.status === 200) {
+                    toast.success(
+                        `Current body fat has been updated to ${bodyFat} %.`
+                    );
+					setBodyFats((prev: any[]) => ([...prev, res.data]))
+                } else {
+                    throw Error;
+                }
+            }
+        } catch (error) {
+            console.error(error);
+            toast.error("We ran into an error...");
+        }
+    };
 
-			<section className="flex flex-col gap-4 md:flex-row md:justify-start">
-				<form className="flex flex-col gap-4 md:flex-row md:justify-start md:items-center">
-					<label htmlFor="weight">Current Weight (lbs):</label>
-					<input
-						onChange={(e) => setWeight(Number(e.target.value))}
-						value={weight}
-						type="number"
-						id="weight"
-						placeholder="weight"
-					/>
-					<button
-						onClick={submitCurrentWeight}
-						type="button"
-						className="bg-indigo-600 hover:bg-indigo-700 rounded-lg text-white px-4 py-2 hover:underline"
-					>
-						Submit Weight
-					</button>
-				</form>
+    return (
+        <>
+            <h2 className="text-2xl font-semibold">Add Measurements</h2>
 
-				<form className="flex flex-col gap-2 md:flex-row md:justify-start md:items-center">
-					<label htmlFor="bf">Current Body Fat (%):</label>
-					<input
-						onChange={(e) => setBodyFat(Number(e.target.value))}
-						value={bodyFat}
-						type="number"
-						id="bf"
-						placeholder="Body Fat Percentage"
-					/>
-					<button
-						onClick={submitCurrentBodyFat}
-						type="button"
-						className="bg-indigo-600 hover:bg-indigo-700 rounded-lg text-white px-4 py-2 hover:underline"
-					>
-						Submit Body Fat
-					</button>
-				</form>
-			</section>
-		</>
-	);
+            <section className="flex flex-col gap-4 md:flex-row md:justify-start">
+                <form className="flex flex-col gap-4 md:flex-row md:justify-start md:items-center">
+                    <label htmlFor="weight">Current Weight (lbs):</label>
+                    <input
+                        onChange={(e) => setWeight(Number(e.target.value))}
+                        value={weight}
+                        type="number"
+                        id="weight"
+                        placeholder="weight"
+                    />
+                    <button
+                        onClick={submitCurrentWeight}
+                        type="button"
+                        className="bg-indigo-600 hover:bg-indigo-700 rounded-lg text-white px-4 py-2 hover:underline"
+                    >
+                        Submit Weight
+                    </button>
+                </form>
+
+                <form className="flex flex-col gap-2 md:flex-row md:justify-start md:items-center">
+                    <label htmlFor="bf">Current Body Fat (%):</label>
+                    <input
+                        onChange={(e) => setBodyFat(Number(e.target.value))}
+                        value={bodyFat}
+                        type="number"
+                        id="bf"
+                        placeholder="Body Fat Percentage"
+                    />
+                    <button
+                        onClick={submitCurrentBodyFat}
+                        type="button"
+                        className="bg-indigo-600 hover:bg-indigo-700 rounded-lg text-white px-4 py-2 hover:underline"
+                    >
+                        Submit Body Fat
+                    </button>
+                </form>
+            </section>
+        </>
+    );
 }
 
 export default MeasurementsForm;
