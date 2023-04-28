@@ -36,37 +36,37 @@ const TrackerOverview = async () => {
 	);
 
 	return (
-		<main className="w-full h-full mt-24 bg-[#f3f3f3] px-4 py-6 rounded-md flex flex-col gap-4 shadow-md">
+		<main className="w-full h-full bg-slate-800 py-6 rounded-md flex flex-col gap-4 shadow-md px-10 text-white/90">
 			<TrackerHeader title={"Tracker Overview"} />
 
 			<section className="flex flex-col items-center w-full">
-				<h2 className="text-2xl font-semibold text-slate-900 text-center">
+				<h2 className="text-2xl font-semibold text-center">
 					{moment().format("MMMM D, YYYY")}
 				</h2>
 				<LineDivider />
 			</section>
 
-			<section className="flex flex-col md:flex-row md:justify-around">
+			<section className="flex flex-col justify-center md:flex-row md:justify-around">
 				{/* Physical Activity Section */}
-				<section className="flex flex-col items-center gap-4 md:w-full">
-					<h2 className="text-2xl font-semibold text-indigo-700">
+				<section className="flex flex-col items-center gap-4 md:w-full mt-4">
+					<h2 className="text-2xl font-semibold text-indigo-600">
 						Your Physical Activity
 					</h2>
 
 					<article className="flex flex-col items-center">
-						<h3 className="text-xl text-slate-900 font-bold">
+						<h3 className="text-xl font-bold">
 							Total Cardio
 						</h3>
-						<span className="text-lg text-slate-800">
+						<span className="text-lg">
 							{totalActivity?.cardio} minutes
 						</span>
 					</article>
 
 					<article className="flex flex-col items-center">
-						<h3 className="text-xl text-slate-900 font-bold">
+						<h3 className="text-xl font-bold">
 							Total Tonnage
 						</h3>
-						<span className="text-lg text-slate-800">
+						<span className="text-lg">
 							{totalActivity?.resistance} lbs
 						</span>
 					</article>
@@ -75,20 +75,20 @@ const TrackerOverview = async () => {
 
 				{/* Nutrition Section */}
 				<section className="flex flex-col items-center gap-4 md:w-full pt-4">
-					<h2 className="text-2xl font-semibold text-indigo-700">
+					<h2 className="text-2xl font-semibold text-indigo-600">
 						Your Nutrition
 					</h2>
 					<article className="flex flex-col items-center">
-						<h3 className="text-xl text-slate-900 font-bold">
+						<h3 className="text-xl font-bold">
 							Total Calories
 						</h3>
-						<span className="text-lg text-slate-800">
+						<span className="text-lg">
 							{totalCalories} kcal
 						</span>
 					</article>
 
 					<article className="flex flex-col items-center w-[80%] md:w-full max-w-[400px]">
-						<h3 className="text-xl text-slate-900 font-bold">
+						<h3 className="text-xl font-bold">
 							Macronutrients
 						</h3>
 						{totalCarbs != 0 ||
@@ -100,7 +100,7 @@ const TrackerOverview = async () => {
 								protein={totalProtein || 0}
 							/>
 						) : (
-							<p className="text-slate-800">No Stats Available</p>
+							<p>No Stats Available</p>
 						)}
 					</article>
 				</section>
@@ -109,16 +109,16 @@ const TrackerOverview = async () => {
 			<section className="flex flex-col my-5 lg:items-center lg:justify-center">
 				<section className="flex flex-col items-center gap-4 py-5 lg:w-[60%]">
 					<LineDivider />
-					<h2 className="text-2xl font-semibold text-indigo-700">
+					<h2 className="text-2xl font-semibold text-indigo-600">
 						Exercise Journal
 					</h2>
 					{exerciseEntries?.length === 0 && (
-						<p className="font-semibold text-sm text-slate-800">
+						<p className="font-semibold text-sm">
 							Currently has no entries.
 						</p>
 					)}
 					{exerciseEntries?.length! > 0 && (
-						<table className="w-full text-left border-slate-900">
+						<table className="w-full text-left border-slate-50">
 							<thead>
 								<tr>
 									<th>Exercise</th>
@@ -150,11 +150,11 @@ const TrackerOverview = async () => {
 				</section>
 				<section className="flex flex-col items-center gap-4 py-5 lg:w-[60%]">
 					<LineDivider />
-					<h2 className="text-2xl font-semibold text-indigo-700">
+					<h2 className="text-2xl font-semibold text-indigo-600">
 						Nutrition Journal
 					</h2>
 					{foodEntries?.length === 0 && (
-						<p className="font-semibold text-sm text-slate-800">
+						<p className="font-semibold text-sm">
 							Currently has no entries.
 						</p>
 					)}
@@ -184,7 +184,7 @@ const TrackerOverview = async () => {
 									/>
 								))}
 							</tbody>
-							<tfoot className="border-t border-slate-900 pt-2">
+							<tfoot className="border-t border-slate-50 pt-2">
 								<tr>
 									<th>Total</th>
 									<th>{totalCalories}</th>
