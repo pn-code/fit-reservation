@@ -226,7 +226,7 @@ function ExercisePage() {
                 </form>
             </section>
 
-            <ExerciseJournal exercises={exercises} setExercises={setExercises} deleteExerciseEntry={deleteExerciseEntry}/>
+            <ExerciseJournal exercises={exercises} deleteExerciseEntry={deleteExerciseEntry}/>
         </main>
     );
 }

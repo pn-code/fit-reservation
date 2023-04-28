@@ -1,8 +1,6 @@
 "use client";
 import LineDivider from "./LineDivider";
 import ExerciseEntryCard from "./ExerciseEntryCard";
-import axios from "axios";
-import toast from "react-hot-toast";
 
 interface Props {
     exercises: ExerciseEntry[];
