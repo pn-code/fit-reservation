@@ -49,7 +49,7 @@ const TrackerOverview = async () => {
 			<section className="flex flex-col justify-center md:flex-row md:justify-around">
 				{/* Physical Activity Section */}
 				<section className="flex flex-col items-center gap-4 md:w-full mt-4">
-					<h2 className="text-2xl font-semibold text-indigo-600">
+					<h2 className="text-2xl font-semibold text-amber-400">
 						Your Physical Activity
 					</h2>
 
@@ -75,7 +75,7 @@ const TrackerOverview = async () => {
 
 				{/* Nutrition Section */}
 				<section className="flex flex-col items-center gap-4 md:w-full pt-4">
-					<h2 className="text-2xl font-semibold text-indigo-600">
+					<h2 className="text-2xl font-semibold text-amber-400">
 						Your Nutrition
 					</h2>
 					<article className="flex flex-col items-center">
@@ -109,7 +109,7 @@ const TrackerOverview = async () => {
 			<section className="flex flex-col my-5 lg:items-center lg:justify-center">
 				<section className="flex flex-col items-center gap-4 py-5 lg:w-[60%]">
 					<LineDivider />
-					<h2 className="text-2xl font-semibold text-indigo-600">
+					<h2 className="text-2xl font-semibold text-amber-400">
 						Exercise Journal
 					</h2>
 					{exerciseEntries?.length === 0 && (
@@ -150,7 +150,7 @@ const TrackerOverview = async () => {
 				</section>
 				<section className="flex flex-col items-center gap-4 py-5 lg:w-[60%]">
 					<LineDivider />
-					<h2 className="text-2xl font-semibold text-indigo-600">
+					<h2 className="text-2xl font-semibold text-amber-400">
 						Nutrition Journal
 					</h2>
 					{foodEntries?.length === 0 && (

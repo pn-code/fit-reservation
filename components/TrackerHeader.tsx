@@ -8,7 +8,7 @@ interface TrackerHeaderProps {
 
 function TrackerHeader({ title }: TrackerHeaderProps) {
 	return (
-		<header className="flex justify-between font-bold pb-2 border-b-2 border-b-[#F15B2A] items-center">
+		<header className="flex justify-between font-bold pb-2 border-b-2 border-b-indigo-600 items-center">
 			<h1 className="text-3xl">{title}</h1>
 			<nav>
 				<ul className="flex gap-5 text-white">
