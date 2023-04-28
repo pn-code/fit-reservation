@@ -89,7 +89,7 @@ function CalculatorForm() {
 		}
 	};
 	return (
-		<form className="w-full p-4 rounded-md flex-col flex gap-4 md:items-center">
+		<form className="w-full rounded-md flex-col flex gap-4">
 			{/* Input Section */}
 			<section className="flex flex-col gap-4">
 				<div className="flex gap-4 items-center">
@@ -261,7 +261,7 @@ function CalculatorForm() {
 					<span>kcal</span>
 				</section>
 
-				<span className="text-sm text-red-600">
+				<span className="text-sm text-red-400">
 					* Calculate using form above or manually set by clicking
 					calories.
 				</span>
