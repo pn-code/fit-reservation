@@ -2,8 +2,8 @@
 import { Crown, Flame } from "lucide-react";
 
 interface Props {
-    currentWeight: number;
-    currentBF: number;
+    currentWeight: number | null;
+    currentBF: number | null;
 }
 
 function StatisticsSection({ currentWeight, currentBF }: Props) {
