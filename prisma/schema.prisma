@@ -42,7 +42,6 @@ model WeightMeasurement {
   weight     Float
   createdAt  DateTime @default(now())
   userId     String
-  userUserId String?
 }
 
 model BodyFatMeasurement {
