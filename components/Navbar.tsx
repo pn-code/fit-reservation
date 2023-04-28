@@ -1,4 +1,10 @@
-import { Shield } from "lucide-react";
+import {
+    Calculator,
+    ClipboardSignature,
+    LayoutDashboard,
+    Shield,
+    User,
+} from "lucide-react";
 import Link from "next/link";
 
 const Navbar = () => {
@@ -15,23 +21,32 @@ const Navbar = () => {
             </header>
 
             <ul className="flex gap-4">
-                <Link className="hover:underline font-medium" href="/dashboard">
-                    Dashboard
+                <Link className="group relative" href="/dashboard">
+                    <LayoutDashboard className="text-white/90 hover:text-white" />
+                    <span className="bg-indigo-700 py-0.5 px-2 rounded-lg hidden group-hover:flex text-sm font-semibold absolute -left-8 top-8">
+                        Dashboard
+                    </span>
+                </Link>
+                <Link className="group relative" href="/calculator">
+                    <Calculator className="text-white/90 hover:text-white" />
+                    <span className="bg-indigo-700 py-0.5 px-2 rounded-lg hidden group-hover:flex text-sm font-semibold absolute -left-7 top-8">
+                        Calculator
+                    </span>
                 </Link>
                 <Link
-                    className="hover:underline font-medium"
-                    href="/calculator"
-                >
-                    Calculator
-                </Link>
-                <Link
-                    className="hover:underline font-medium"
+                    className="group relative"
                     href="/tracker/overview"
                 >
-                    Tracker
+                    <ClipboardSignature className="text-white/90 hover:text-white" />
+                    <span className="bg-indigo-700 py-0.5 px-2 rounded-lg hidden group-hover:flex text-sm font-semibold absolute -left-4 top-8">
+                        Tracker
+                    </span>
                 </Link>
-                <Link className="hover:underline font-medium" href="/profile">
-                    Profile
+                <Link className="group relative" href="/profile">
+                    <User className="text-white/90 hover:text-white" />
+                    <span className="bg-indigo-700 py-0.5 px-2 rounded-lg hidden group-hover:flex text-sm font-semibold absolute -left-4 top-8">
+                        Profile
+                    </span>
                 </Link>
             </ul>
         </nav>
