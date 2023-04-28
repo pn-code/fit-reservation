@@ -24,3 +24,14 @@ interface ExerciseEntry {
     userId: string;
     weight: number;
 }
+
+interface FoodEntry {
+    calories: number;
+    carbs: number;
+    date: string;
+    fats: number;
+    id: number;
+    name: string;
+    protein: number;
+    userId: string;
+}
