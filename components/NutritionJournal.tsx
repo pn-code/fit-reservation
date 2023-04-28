@@ -4,9 +4,10 @@ import LineDivider from "./LineDivider";
 
 interface Props {
     foodEntries: FoodEntry[];
+    deleteFoodEntry: any
 }
 
-export default function NutritionJournal({ foodEntries }: Props) {
+export default function NutritionJournal({ foodEntries, deleteFoodEntry }: Props) {
     const totalCalories = foodEntries?.reduce(
         (acc, curr) => curr.calories + acc,
         0
@@ -52,6 +53,7 @@ export default function NutritionJournal({ foodEntries }: Props) {
                                 fats={entry.fats}
                                 protein={entry.protein}
                                 key={entry.id}
+                                deleteFoodEntry={deleteFoodEntry}
                             />
                         ))}
                     </tbody>

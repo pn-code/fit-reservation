@@ -74,6 +74,27 @@ function NutritionPage() {
         }
     };
 
+    const deleteFoodEntry = async (id: number) => {
+        try {
+            const res = await axios.delete("/api/food_entries", {
+                data: {
+                    id: id,
+                },
+            });
+            toast.success(
+                `Successfully deleted: ${res.data.name.substring(0, 30)}!`
+            );
+            const updatedFoodEntries = foodEntries.filter(
+                (entry) => entry.id != id
+            );
+            setFoodEntries(updatedFoodEntries);
+        } catch (error) {
+            toast.error(
+                `An error has occurred while attempting to delete ${name}.`
+            );
+        }
+    };
+
     return (
         <main className="w-full h-full bg-slate-800 py-6 rounded-md flex flex-col gap-4 shadow-md px-10 text-white/90">
             <TrackerHeader title="Nutrition" />
@@ -164,7 +185,10 @@ function NutritionPage() {
                 </button>
             </form>
 
-            <NutritionJournal foodEntries={foodEntries} />
+            <NutritionJournal
+                foodEntries={foodEntries}
+                deleteFoodEntry={deleteFoodEntry}
+            />
         </main>
     );
 }

@@ -11,6 +11,7 @@ interface FoodEntryCardProps {
 	carbs: number;
 	fats: number;
 	protein: number;
+	deleteFoodEntry: any
 }
 
 function FoodEntryCard({
@@ -20,25 +21,8 @@ function FoodEntryCard({
 	carbs,
 	fats,
 	protein,
+	deleteFoodEntry
 }: FoodEntryCardProps) {
-	const router = useRouter();
-
-	const handleDeleteFoodEntry = async (id: number) => {
-		try {
-			await axios.delete("/api/food_entries", {
-				data: {
-					id: id,
-				},
-			});
-			toast.success(`Successfully deleted: ${name.length > 30 ? name.substring(0, 30) + "..." : name}!`);
-			router.refresh();
-		} catch (error) {
-			toast.error(
-				`An error has occurred while attempting to delete ${name}.`
-			);
-		}
-	};
-
 	return (
 		<>
 			<tr className="hover:bg-slate-200 cursor-pointer hover:text-indigo-600">
@@ -50,7 +34,7 @@ function FoodEntryCard({
 				<td>{fats}g</td>
 				<td>{protein}g</td>
 				<td>
-					<button onClick={() => handleDeleteFoodEntry(id)}>
+					<button onClick={() => deleteFoodEntry(id)}>
 						<X
 							className="hover:bg-slate-300 ml-3 rounded-full"
 							color="red"

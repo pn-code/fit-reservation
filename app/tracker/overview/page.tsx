@@ -2,7 +2,6 @@ import TrackerHeader from "../../../components/TrackerHeader";
 import MacroChart from "../../../components/MacroChart";
 import LineDivider from "../../../components/LineDivider";
 import getFoodEntries from "../../../helpers/getFoodEntries";
-import FoodEntryCard from "../../../components/FoodEntryCard";
 import getExerciseEntries from "../../../helpers/getExerciseEntries";
 import moment from "moment";
 
