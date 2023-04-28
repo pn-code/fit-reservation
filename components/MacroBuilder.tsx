@@ -3,7 +3,7 @@ import { ChangeEvent, useEffect, useState } from "react";
 import { diets } from "../lib/diets";
 
 interface Props {
-    currentCalorieGoal: number;
+    currentCalorieGoal: number | undefined;
 }
 
 export default function MacroBuilder({ currentCalorieGoal }: Props) {
@@ -38,7 +38,7 @@ export default function MacroBuilder({ currentCalorieGoal }: Props) {
         setCarbs(Math.min(carbs, maxCarbs));
     };
 
-    const [calories, setCalories] = useState(currentCalorieGoal);
+    const [calories, setCalories] = useState<number>(currentCalorieGoal || 2000);
     const [dietPlan, setDietPlan] = useState<string>("zone");
 
     useEffect(() => {

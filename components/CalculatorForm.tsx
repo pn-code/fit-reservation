@@ -89,7 +89,7 @@ function CalculatorForm() {
 		}
 	};
 	return (
-		<form className="w-full rounded-md flex-col flex gap-4">
+		<form className="w-full rounded-md flex-col flex gap-4 flex-[2]">
 			{/* Input Section */}
 			<section className="flex flex-col gap-4">
 				<div className="flex gap-4 items-center">
