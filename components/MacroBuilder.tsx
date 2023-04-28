@@ -1,14 +1,15 @@
 "use client";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
+import { diets } from "../lib/diets";
 
 interface Props {
     currentCalorieGoal: number;
 }
 
 export default function MacroBuilder({ currentCalorieGoal }: Props) {
-    const [carbs, setCarbs] = useState(40);
-    const [fats, setFats] = useState(30);
-    const [protein, setProtein] = useState(30);
+    const [carbs, setCarbs] = useState<number>(40);
+    const [fats, setFats] = useState<number>(30);
+    const [protein, setProtein] = useState<number>(30);
 
     const handleProteinChange = (event: ChangeEvent<HTMLInputElement>) => {
         const value = parseInt(event.target.value);
@@ -38,6 +39,13 @@ export default function MacroBuilder({ currentCalorieGoal }: Props) {
     };
 
     const [calories, setCalories] = useState(currentCalorieGoal);
+    const [dietPlan, setDietPlan] = useState<string>("zone");
+
+    useEffect(() => {
+      setCarbs(diets[dietPlan].carbs)
+      setFats(diets[dietPlan].fats)
+      setProtein(diets[dietPlan].protein)
+    }, [dietPlan])
 
     return (
         <section className="bg-slate-900 py-4 px-6 rounded-md flex-1">
@@ -50,8 +58,8 @@ export default function MacroBuilder({ currentCalorieGoal }: Props) {
                 </p>
             </header>
 
-            <form className="my-2">
-                <section>
+            <form className="my-2 flex flex-col gap-2">
+                <section className="flex flex-col gap-1">
                     <label htmlFor="calories">Calories</label>
                     <input
                         onChange={(e) => setCalories(Number(e.target.value))}
@@ -62,10 +70,26 @@ export default function MacroBuilder({ currentCalorieGoal }: Props) {
                 </section>
 
                 <section className="flex flex-col gap-1">
+                    <label htmlFor="diet">Diet</label>
+                    <select
+                        onChange={(e) => setDietPlan(e.target.value)}
+                        value={dietPlan}
+                        name="diet"
+                        id="diet"
+                    >
+                        <option value="zone">Zone</option>
+                        <option value="med">Mediterranean</option>
+                        <option value="keto">Ketogenic</option>
+                        <option value="paleo">Paleo</option>
+                        <option value="lowfat">Low Fat</option>
+                    </select>
+                </section>
+
+                <section className="flex flex-col gap-1">
                     <label htmlFor="carbs">Carbohydrates ({carbs}%)</label>
                     <input
                         id="carbs"
-                        onChange={(e) => setCarbs(Number(e.target.value))}
+                        onChange={(e) => handleCarbsChange(e)}
                         value={carbs}
                         type="range"
                         min={0}
@@ -79,7 +103,7 @@ export default function MacroBuilder({ currentCalorieGoal }: Props) {
                     <label htmlFor="fats">Fats ({fats}%)</label>
                     <input
                         id="fats"
-                        onChange={(e) => setFats(Number(e.target.value))}
+                        onChange={(e) => handleFatChange(e)}
                         value={fats}
                         type="range"
                         min={0}
@@ -92,7 +116,7 @@ export default function MacroBuilder({ currentCalorieGoal }: Props) {
                     <label htmlFor="protein">Protein ({protein}%)</label>
                     <input
                         id="protein"
-                        onChange={(e) => setProtein(Number(e.target.value))}
+                        onChange={(e) => handleProteinChange(e)}
                         value={protein}
                         type="range"
                         min={0}
