@@ -1,13 +1,15 @@
 "use client";
 import LineDivider from "./LineDivider";
 import ExerciseEntryCard from "./ExerciseEntryCard";
-import { ExerciseEntry } from "@prisma/client";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 interface Props {
     exercises: ExerciseEntry[];
+    deleteExerciseEntry: any;
 }
 
-export default function ExerciseJournal({ exercises }: Props) {
+export default function ExerciseJournal({ exercises, deleteExerciseEntry }: Props) {
     return (
         <section className="flex flex-col items-center gap-4 py-5 w-full lg:w-[60%]">
             <LineDivider />
@@ -44,6 +46,7 @@ export default function ExerciseJournal({ exercises }: Props) {
                                 reps={entry.reps!}
                                 calories={entry.calories!}
                                 key={entry.id}
+                                deleteExerciseEntry={deleteExerciseEntry}
                             />
                         ))}
                     </tbody>

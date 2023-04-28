@@ -80,6 +80,30 @@ function ExercisePage() {
         }
     };
 
+	const deleteExerciseEntry = async (id: number) => {
+        try {
+            const res = await axios.delete("/api/exercise_entries", {
+                data: {
+                    id: id,
+                },
+            });
+
+            toast.success(
+                `Successfully deleted: ${res.data.name.substring(0, 30)}!`
+            );
+
+            const updatedExercises = exercises.filter(
+                (exercise) => exercise.id != id
+            );
+
+            setExercises(updatedExercises);
+        } catch (error) {
+            toast.error(
+                `An error has occurred while attempting to delete item.`
+            );
+        }
+    };
+
     return (
         <main className="w-full h-full bg-slate-800 py-6 rounded-md flex flex-col gap-4 shadow-md px-10 text-white/90">
             <TrackerHeader title="Exercise" />
@@ -202,7 +226,7 @@ function ExercisePage() {
                 </form>
             </section>
 
-            <ExerciseJournal exercises={exercises} />
+            <ExerciseJournal exercises={exercises} setExercises={setExercises} deleteExerciseEntry={deleteExerciseEntry}/>
         </main>
     );
 }
