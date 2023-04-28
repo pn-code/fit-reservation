@@ -68,13 +68,13 @@ function NutritionPage() {
     return (
         <main className="w-full h-full bg-slate-800 py-6 rounded-md flex flex-col gap-4 shadow-md px-10 text-white/90">
             <TrackerHeader title="Nutrition" />
-
-            <form className="flex flex-col gap-4 py-2">
-                <h2 className="text-xl font-semibold">Food Info</h2>
-                <section className="flex flex-col gap-4">
+            <h2 className="text-xl font-semibold">Add Nutrition Item</h2>
+            <form className="flex flex-col gap-4 py-2 sm:flex-row sm:items-center">
+                <section className="flex flex-col gap-4 sm:flex-row">
                     <section className="flex flex-col gap-2">
                         <label htmlFor="name">Name:</label>
                         <input
+                            className="w-54"
                             onChange={(e) => setName(e.target.value)}
                             type="text"
                             id="name"
@@ -83,65 +83,65 @@ function NutritionPage() {
                             disabled={loading}
                         />
                     </section>
+                    <section className="flex justify-between w-full sm:justify-start sm:gap-4">
+                        <section className="flex flex-col gap-2">
+                            <label htmlFor="calories">Calories: </label>
+                            <input
+                                className="w-20"
+                                onChange={(e) =>
+                                    setCalories(Number(e.target.value))
+                                }
+                                type="number"
+                                id="calories"
+                                value={calories}
+                                required
+                                disabled={loading}
+                            />
+                        </section>
+                        <section className="flex flex-col gap-2">
+                            <label htmlFor="carbs">Carbs: </label>
+                            <input
+                                className="w-14"
+                                onChange={(e) =>
+                                    setCarbs(Number(e.target.value))
+                                }
+                                type="number"
+                                id="carbs"
+                                value={carbs}
+                                required
+                                disabled={loading}
+                            />
+                        </section>
 
-                    <section className="flex flex-col gap-2">
-                        <label htmlFor="calories">Calories: </label>
-                        <input
-                            className="w-24"
-                            onChange={(e) =>
-                                setCalories(Number(e.target.value))
-                            }
-                            type="number"
-                            id="calories"
-                            value={calories}
-                            required
-                            disabled={loading}
-                        />
-                    </section>
-                </section>
+                        <section className="flex flex-col gap-2">
+                            <label htmlFor="fats">Fats: </label>
+                            <input
+                                className="w-14"
+                                onChange={(e) =>
+                                    setFats(Number(e.target.value))
+                                }
+                                type="number"
+                                id="fats"
+                                value={fats}
+                                required
+                                disabled={loading}
+                            />
+                        </section>
 
-                <h2 className="text-xl font-semibold">
-                    Macronutrients (optional)
-                </h2>
-
-                <section className="w-full flex flex-col gap-4">
-                    <section className="flex flex-col gap-2">
-                        <label htmlFor="carbs">Carbs: </label>
-                        <input
-                            className="w-16"
-                            onChange={(e) => setCarbs(Number(e.target.value))}
-                            type="number"
-                            id="carbs"
-                            value={carbs}
-                            required
-                            disabled={loading}
-                        />
-                    </section>
-
-                    <section className="flex flex-col gap-2">
-                        <label htmlFor="fats">Fats: </label>
-                        <input
-                            className="w-16"
-                            onChange={(e) => setFats(Number(e.target.value))}
-                            type="number"
-                            id="fats"
-                            value={fats}
-                            required
-                            disabled={loading}
-                        />
-                    </section>
-
-                    <section className="flex flex-col gap-2">
-                        <label htmlFor="protein">Protein: </label>
-                        <input
-                            className="w-16"
-                            onChange={(e) => setProtein(Number(e.target.value))}
-                            type="number"
-                            id="protein"
-                            value={protein}
-                            required
-                            disabled={loading}
-                        />
+                        <section className="flex flex-col gap-2">
+                            <label htmlFor="protein">Protein: </label>
+                            <input
+                                className="w-14"
+                                onChange={(e) =>
+                                    setProtein(Number(e.target.value))
+                                }
+                                type="number"
+                                id="protein"
+                                value={protein}
+                                required
+                                disabled={loading}
+                            />
+                        </section>
                     </section>
                 </section>
 
@@ -149,9 +149,9 @@ function NutritionPage() {
                     disabled={loading}
                     type="button"
                     onClick={createFoodEntry}
-                    className="bg-[#05204A] text-[#fafafa] px-4 py-2 rounded-md disabled:bg-slate-400 disabled:cursor-wait"
+                    className="bg-indigo-600 hover:bg-indigo-500 text-[#fafafa] px-4 h-10 mt-7 rounded-md disabled:bg-slate-400 disabled:cursor-wait sm"
                 >
-                    {loading ? "Adding..." : "Add Item"}
+                    {loading ? "Adding..." : "Submit"}
                 </button>
             </form>
         </main>
