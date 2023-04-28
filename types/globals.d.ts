@@ -35,3 +35,12 @@ interface FoodEntry {
     protein: number;
     userId: string;
 }
+
+type DietMacros = {
+    zone: { carbs: number; fats: number; protein: number };
+    paleo: { carbs: number; fats: number; protein: number };
+    med: { carbs: number; fats: number; protein: number };
+    keto: { carbs: number; fats: number; protein: number };
+    lowfat: { carbs: number; fats: number; protein: number };
+    [key: string]: { carbs: number; fats: number; protein: number };
+};
