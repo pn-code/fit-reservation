@@ -69,10 +69,10 @@ function ExercisePage() {
 	};
 
 	return (
-		<main className="w-full h-full mt-24 bg-[#f3f3f3] px-4 py-6 rounded-md flex flex-col gap-4 shadow-md">
+		<main className="w-full h-full bg-slate-800 py-6 rounded-md flex flex-col gap-4 shadow-md px-10 text-white/90">
 			<TrackerHeader title="Exercise" />
-			<section className="bg-gray-100 text-black rounded-sm">
-				<form className="flex flex-col gap-8 lg:flex-row bg-gray-100 py-2 lg:items-center">
+			<section>
+				<form className="flex flex-col gap-8 lg:flex-row py-2 lg:items-center">
 					<section className="flex items-center space-x-2">
 						<label htmlFor="exercise">Exercise: </label>
 						<input
@@ -183,7 +183,7 @@ function ExercisePage() {
 						disabled={loading}
 						onClick={createExerciseEntry}
 						type="button"
-						className="bg-[#05204A] text-[#fafafa] px-4 py-2 rounded-md disabled:bg-slate-400 disabled:cursor-not-allowed"
+						className="bg-indigo-600 hover:bg-indigo-500 text-[#fafafa] px-4 py-2 rounded-md disabled:bg-slate-400 disabled:cursor-not-allowed"
 					>
 						Add Item
 					</button>
