@@ -1,11 +1,12 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TrackerHeader from "../../../components/TrackerHeader";
 import { foodEntrySchema } from "../../../validations/foodEntryValidator";
 import { ZodError } from "zod";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import NutritionJournal from "../../../components/NutritionJournal";
 
 function NutritionPage() {
     const [name, setName] = useState("");
@@ -14,8 +15,17 @@ function NutritionPage() {
     const [fats, setFats] = useState(0);
     const [protein, setProtein] = useState(0);
 
+    const [foodEntries, setFoodEntries] = useState<FoodEntry[]>([]);
+
+    useEffect(() => {
+        const getFoodData = async () => {
+            const res = await axios.get("/api/food_entries");
+            setFoodEntries(res.data);
+        };
+        getFoodData();
+    }, []);
+
     const [loading, setLoading] = useState(false);
-    const router = useRouter();
 
     const validateFoodIntake = () => {
         const foodIntake = {
@@ -38,10 +48,9 @@ function NutritionPage() {
 
     const createFoodEntry = async () => {
         setLoading(true);
-
         try {
             if (validateFoodIntake()) {
-                await axios.post("/api/food_entries", {
+                const res = await axios.post("/api/food_entries", {
                     name,
                     calories,
                     carbs,
@@ -50,12 +59,12 @@ function NutritionPage() {
                 });
 
                 toast.success(`${name} has been added.`);
+                setFoodEntries((prev: FoodEntry[]) => [...prev, res.data]);
                 setName("");
                 setCalories(0);
                 setCarbs(0);
                 setFats(0);
                 setProtein(0);
-                router.refresh();
             }
         } catch (error) {
             toast.error("An error has occurred.");
@@ -154,6 +163,8 @@ function NutritionPage() {
                     {loading ? "Adding..." : "Submit"}
                 </button>
             </form>
+
+            <NutritionJournal foodEntries={foodEntries} />
         </main>
     );
 }
