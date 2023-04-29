@@ -86,33 +86,53 @@ const Navbar = () => {
             </nav>
             <section className="absolute h-[87%] w-full bg-black flex items-center justify-center flex-col pb-32 text-white font-semibold text-3xl">
                 <section className="flex flex-col gap-8">
-                    <Link className="flex gap-4 items-center" href="">
+                    <Link
+                        className="flex gap-4 items-center hover:text-white text-white/90 group"
+                        href="/dashboard"
+                    >
                         <LayoutDashboard
-                            className="text-white/90 hover:text-white"
+                            className="text-white/90 group-hover:text-indigo-500"
                             size={45}
                         />
-                        <span>Dashboard</span>
+                        <span className="border-b-4 border-b-transparent group-hover:border-b-indigo-500">
+                            Dashboard
+                        </span>
                     </Link>
-                    <Link className="flex gap-4 items-center" href="">
+                    <Link
+                        className="flex gap-4 items-center hover:text-white text-white/90 group"
+                        href="/calculator"
+                    >
                         <Calculator
-                            className="text-white/90 hover:text-white"
+                            className="text-white/90 group-hover:text-indigo-500"
                             size={45}
                         />
-                        <span>Calculator</span>
+                        <span className="border-b-4 border-b-transparent group-hover:border-b-indigo-500">
+                            Calculator
+                        </span>
                     </Link>
-                    <Link className="flex gap-4 items-center" href="">
+                    <Link
+                        className="flex gap-4 items-center hover:text-white text-white/90 group"
+                        href="/tracker/overview"
+                    >
                         <ClipboardSignature
-                            className="text-white/90 hover:text-white"
+                            className="text-white/90 group-hover:text-indigo-500"
                             size={45}
                         />
-                        <span>Tracker</span>
+                        <span className="border-b-4 border-b-transparent group-hover:border-b-indigo-500">
+                            Track Progress
+                        </span>
                     </Link>
-                    <Link className="flex gap-4 items-center" href="">
+                    <Link
+                        className="flex gap-4 items-center hover:text-white text-white/90 group"
+                        href="/profile"
+                    >
                         <User
-                            className="text-white/90 hover:text-white"
+                            className="text-white/90 group-hover:text-indigo-500"
                             size={45}
                         />
-                        <span>Profile</span>
+                        <span className="border-b-4 border-b-transparent group-hover:border-b-indigo-500">
+                            View Profile
+                        </span>
                     </Link>
                 </section>
             </section>
