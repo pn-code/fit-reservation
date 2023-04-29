@@ -6,14 +6,16 @@ import {
     Menu,
     Shield,
     User,
+    X,
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 const Navbar = () => {
-    const pathname = usePathname();
+    const [openMobileNavbar, setOpenMobileNavbar] = useState(false);
 
+    const pathname = usePathname();
     const currentPathStyles = "border-b-2 border-amber-300";
 
     return (
@@ -29,10 +31,15 @@ const Navbar = () => {
                     </Link>
                 </header>
 
-                <button className="sm:hidden p-2 hover:bg-blue-900 rounded-lg">
-                    <Menu />
+                <button
+                    onClick={() => setOpenMobileNavbar((prev) => !prev)}
+                    type="button"
+                    className="sm:hidden p-2 hover:bg-blue-900 rounded-lg"
+                >
+                    {openMobileNavbar ? <X /> : <Menu />}
                 </button>
 
+                {/* Navbar on medium to larger devices */}
                 <ul className="hidden sm:flex sm:gap-4">
                     <Link
                         className={`group relative ${
@@ -84,58 +91,62 @@ const Navbar = () => {
                     </Link>
                 </ul>
             </nav>
-            <section className="absolute h-[87%] w-full bg-black flex items-center justify-center flex-col pb-32 text-white font-semibold text-3xl">
-                <section className="flex flex-col gap-8">
-                    <Link
-                        className="flex gap-4 items-center hover:text-white text-white/90 group"
-                        href="/dashboard"
-                    >
-                        <LayoutDashboard
-                            className="text-white/90 group-hover:text-indigo-500"
-                            size={45}
-                        />
-                        <span className="border-b-4 border-b-transparent group-hover:border-b-indigo-500">
-                            Dashboard
-                        </span>
-                    </Link>
-                    <Link
-                        className="flex gap-4 items-center hover:text-white text-white/90 group"
-                        href="/calculator"
-                    >
-                        <Calculator
-                            className="text-white/90 group-hover:text-indigo-500"
-                            size={45}
-                        />
-                        <span className="border-b-4 border-b-transparent group-hover:border-b-indigo-500">
-                            Calculator
-                        </span>
-                    </Link>
-                    <Link
-                        className="flex gap-4 items-center hover:text-white text-white/90 group"
-                        href="/tracker/overview"
-                    >
-                        <ClipboardSignature
-                            className="text-white/90 group-hover:text-indigo-500"
-                            size={45}
-                        />
-                        <span className="border-b-4 border-b-transparent group-hover:border-b-indigo-500">
-                            Track Progress
-                        </span>
-                    </Link>
-                    <Link
-                        className="flex gap-4 items-center hover:text-white text-white/90 group"
-                        href="/profile"
-                    >
-                        <User
-                            className="text-white/90 group-hover:text-indigo-500"
-                            size={45}
-                        />
-                        <span className="border-b-4 border-b-transparent group-hover:border-b-indigo-500">
-                            View Profile
-                        </span>
-                    </Link>
+
+            {/* Mobile Navbar */}
+            {openMobileNavbar && (
+                <section className="absolute h-[87%] w-full bg-black flex items-center justify-center flex-col pb-32 text-white font-semibold text-3xl">
+                    <section className="flex flex-col gap-8">
+                        <Link
+                            className="flex gap-4 items-center hover:text-white text-white/90 group"
+                            href="/dashboard"
+                        >
+                            <LayoutDashboard
+                                className="text-white/90 group-hover:text-indigo-500"
+                                size={45}
+                            />
+                            <span className="border-b-4 border-b-transparent group-hover:border-b-indigo-500">
+                                Dashboard
+                            </span>
+                        </Link>
+                        <Link
+                            className="flex gap-4 items-center hover:text-white text-white/90 group"
+                            href="/calculator"
+                        >
+                            <Calculator
+                                className="text-white/90 group-hover:text-indigo-500"
+                                size={45}
+                            />
+                            <span className="border-b-4 border-b-transparent group-hover:border-b-indigo-500">
+                                Calculator
+                            </span>
+                        </Link>
+                        <Link
+                            className="flex gap-4 items-center hover:text-white text-white/90 group"
+                            href="/tracker/overview"
+                        >
+                            <ClipboardSignature
+                                className="text-white/90 group-hover:text-indigo-500"
+                                size={45}
+                            />
+                            <span className="border-b-4 border-b-transparent group-hover:border-b-indigo-500">
+                                Track Progress
+                            </span>
+                        </Link>
+                        <Link
+                            className="flex gap-4 items-center hover:text-white text-white/90 group"
+                            href="/profile"
+                        >
+                            <User
+                                className="text-white/90 group-hover:text-indigo-500"
+                                size={45}
+                            />
+                            <span className="border-b-4 border-b-transparent group-hover:border-b-indigo-500">
+                                View Profile
+                            </span>
+                        </Link>
+                    </section>
                 </section>
-            </section>
+            )}
         </>
     );
 };
