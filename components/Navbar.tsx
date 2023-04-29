@@ -94,9 +94,10 @@ const Navbar = () => {
 
             {/* Mobile Navbar */}
             {openMobileNavbar && (
-                <section className="absolute h-[87%] w-full bg-black flex items-center justify-center flex-col pb-32 text-white font-semibold text-3xl">
+                <section className="absolute h-[87%] w-full z-10 bg-black flex items-center justify-center flex-col pb-32 text-white font-semibold text-3xl">
                     <section className="flex flex-col gap-8">
                         <Link
+                            onClick={() => setOpenMobileNavbar(false)}
                             className="flex gap-4 items-center hover:text-white text-white/90 group"
                             href="/dashboard"
                         >
@@ -109,10 +110,12 @@ const Navbar = () => {
                             </span>
                         </Link>
                         <Link
+                            onClick={() => setOpenMobileNavbar(false)}
                             className="flex gap-4 items-center hover:text-white text-white/90 group"
                             href="/calculator"
                         >
                             <Calculator
+                                onClick={() => setOpenMobileNavbar(false)}
                                 className="text-white/90 group-hover:text-indigo-500"
                                 size={45}
                             />
@@ -121,6 +124,7 @@ const Navbar = () => {
                             </span>
                         </Link>
                         <Link
+                            onClick={() => setOpenMobileNavbar(false)}
                             className="flex gap-4 items-center hover:text-white text-white/90 group"
                             href="/tracker/overview"
                         >
@@ -133,6 +137,7 @@ const Navbar = () => {
                             </span>
                         </Link>
                         <Link
+                            onClick={() => setOpenMobileNavbar(false)}
                             className="flex gap-4 items-center hover:text-white text-white/90 group"
                             href="/profile"
                         >
