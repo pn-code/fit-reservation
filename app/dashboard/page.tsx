@@ -3,13 +3,25 @@ import { useEffect, useState } from "react";
 import MeasurementsForm from "../../components/MeasurementsForm";
 import StatisticsSection from "../../components/StatisticsSection";
 import axios from "axios";
+import LineChart from "../../components/LineChart";
+import moment from "moment";
 
 function DashboardPage() {
     const [weights, setWeights] = useState<WeightMeasurement[]>([]);
     const [bodyFats, setBodyFats] = useState<BodyFatMeasurement[]>([]);
 
-    const [currentWeight, setCurrentWeight] = useState<number | null>(null);
+    // Format weights and body fat for charts
+    const formattedWeights = weights.map((data) => ({
+        x: moment(data.createdAt),
+        y: data.weight,
+    }));
 
+    const formattedBodyFats = bodyFats.map((data) => ({
+        x: moment(data.createdAt),
+        y: data.bodyfat,
+    }));
+
+    const [currentWeight, setCurrentWeight] = useState<number | null>(null);
     const [currentBF, setCurrentBF] = useState<number | null>(null);
 
     useEffect(() => {
@@ -28,13 +40,13 @@ function DashboardPage() {
     }, []);
 
     useEffect(() => {
-		if(weights.length > 0) {
-			setCurrentWeight(weights[weights.length - 1].weight);
-		}
+        if (weights.length > 0) {
+            setCurrentWeight(weights[weights.length - 1].weight);
+        }
 
-		if(bodyFats.length > 0) {
-			setCurrentBF(bodyFats[bodyFats.length - 1].bodyfat);
-		}
+        if (bodyFats.length > 0) {
+            setCurrentBF(bodyFats[bodyFats.length - 1].bodyfat);
+        }
     }, [weights, bodyFats]);
 
     return (
@@ -49,14 +61,24 @@ function DashboardPage() {
                 currentWeight={currentWeight}
             />
 
+            {/* Charts */}
+            <LineChart
+                title="Your Body Weight"
+                label="Weight over Time"
+                userData={formattedWeights}
+            />
+
+            <LineChart
+                title="Your Body Fat"
+                label="Body fat over Time"
+                userData={formattedBodyFats}
+            />
+
             {/* Add Measurements */}
             <MeasurementsForm
                 setWeights={setWeights}
                 setBodyFats={setBodyFats}
             />
-
-            {/* Calorie Goals */}
-            <section></section>
         </main>
     );
 }
