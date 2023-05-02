@@ -97,8 +97,11 @@ function NutritionPage() {
     return (
         <main className="w-full h-full bg-slate-800 py-6 rounded-md flex flex-col gap-4 shadow-md px-10 text-white/90">
             <TrackerHeader title="Nutrition" />
-            <h2 className="text-xl font-semibold">Add Nutrition Item</h2>
-            <form className="flex flex-col gap-4 py-2 sm:flex-row sm:items-center">
+            <h2 className="lg:text-center text-2xl font-semibold text-amber-400">
+                Add Nutrition Item
+            </h2>
+
+            <form className="w-full flex flex-col gap-8 lg:flex-row py-2 lg:items-center lg:justify-center">
                 <section className="flex flex-col gap-4 sm:flex-row">
                     <section className="flex flex-col gap-2">
                         <label htmlFor="name">Name:</label>
@@ -178,7 +181,7 @@ function NutritionPage() {
                     disabled={loading}
                     type="button"
                     onClick={createFoodEntry}
-                    className="bg-indigo-600 hover:bg-indigo-500 text-[#fafafa] px-4 h-10 mt-7 rounded-md disabled:bg-slate-400 disabled:cursor-wait sm"
+                    className="bg-indigo-600 hover:bg-indigo-500 text-[#fafafa] px-4 h-10 lg:mt-7 rounded-md disabled:bg-slate-400 disabled:cursor-wait sm"
                 >
                     {loading ? "Adding..." : "Submit"}
                 </button>
