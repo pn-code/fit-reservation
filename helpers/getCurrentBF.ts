@@ -15,7 +15,7 @@ const getCurrentBF = async () => {
 
         if (bodyfats.length === 0) return undefined;
 
-        return bodyfats[bodyfats.length - 1].bodyfat;
+        return bodyfats[bodyfats.length - 1].bodyfat!;
     } catch (error) {
         console.error(error);
     }
