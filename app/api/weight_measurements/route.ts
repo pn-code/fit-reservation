@@ -3,7 +3,7 @@ import { prisma } from "../../../lib/client";
 import { currentUser } from "@clerk/nextjs/app-beta";
 import { weightSchema } from "../../../validations/weightValidator";
 
-export async function GET(req: Request) {
+export async function GET() {
     try {
         const user = await currentUser();
 
