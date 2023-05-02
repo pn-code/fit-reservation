@@ -34,6 +34,7 @@ export async function POST(req: Request) {
                 const newWeightMeasurement =
                     await prisma.weightMeasurement.create({
                         data: {
+                            // @ts-ignore
                             weight: res.weight,
                             userId: user.id,
                         },
