@@ -11,9 +11,11 @@ import {
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { useUser } from "@clerk/nextjs";
 
 const Navbar = () => {
     const [openMobileNavbar, setOpenMobileNavbar] = useState(false);
+    const user = useUser().user;
 
     const pathname = usePathname();
     const currentPathStyles = "border-b-2 border-amber-300";
@@ -82,7 +84,7 @@ const Navbar = () => {
                         className={`group relative ${
                             pathname === "/profile" ? currentPathStyles : ""
                         }`}
-                        href="/profile"
+                        href={`/profile/${user?.id}`}
                     >
                         <User className="text-white/90 hover:text-white" />
                         <span className="bg-indigo-700 py-0.5 px-2 rounded-lg hidden group-hover:flex text-sm font-semibold absolute -left-4 top-8">
@@ -139,14 +141,14 @@ const Navbar = () => {
                         <Link
                             onClick={() => setOpenMobileNavbar(false)}
                             className="flex gap-4 items-center hover:text-white text-white/90 group"
-                            href="/profile"
+                            href={`/profile/${user?.id}`}
                         >
                             <User
                                 className="text-white/90 group-hover:text-indigo-500"
                                 size={45}
                             />
                             <span className="border-b-4 border-b-transparent group-hover:border-b-indigo-500">
-                                View Profile
+                                My Profile
                             </span>
                         </Link>
                     </section>
