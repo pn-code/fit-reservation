@@ -24,12 +24,12 @@ async function ProfilePage({ params }: Props) {
                 <Image
                     className="rounded-full"
                     src={user?.profileImageUrl || ""}
-                    alt={`${user?.fullName} profile picture`}
+                    alt={`${user?.firstName} profile picture`}
                     width={60}
                     height={60}
                 />
                 <h2 className="text-2xl font-semibold text-amber-300">
-                    {user?.fullName}
+                {`${user?.firstName} ${user?.lastName}`}
                 </h2>
             </section>
         </main>
