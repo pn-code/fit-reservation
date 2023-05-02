@@ -3,6 +3,10 @@ import { prisma } from "../../../lib/client";
 import { currentUser } from "@clerk/nextjs/app-beta";
 import { bodyFatSchema } from "../../../validations/bodyFatValidator";
 
+interface BodyFatMeasurementData {
+    bodyfat: number;
+}
+
 export async function GET() {
     try {
         const user = await currentUser();
@@ -26,7 +30,7 @@ export async function POST(req: Request) {
         const user = await currentUser();
 
         if (user) {
-            const res = await req.json();
+            const res: BodyFatMeasurementData = await req.json();
 
             const validateBF = bodyFatSchema.parse(res.bodyfat);
 
