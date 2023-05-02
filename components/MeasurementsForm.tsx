@@ -1,9 +1,6 @@
 "use client";
 import axios from "axios";
 import { useState } from "react";
-
-import axios from "axios";
-import { useState } from "react";
 import { weightSchema } from "../validations/weightValidator";
 import { toast } from "react-hot-toast";
 import { bodyFatSchema } from "../validations/bodyFatValidator";
