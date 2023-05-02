@@ -1,11 +1,15 @@
 "use client";
+import Image from "next/image";
 import { useAuth } from "@clerk/nextjs";
-import { auth, currentUser } from "@clerk/nextjs/app-beta";
 import { useRouter } from "next/navigation";
+import { useUser } from "@clerk/nextjs";
 
 function ProfilePage() {
     const { signOut } = useAuth();
     const router = useRouter();
+
+    const user = useUser().user;
+    console.log(user);
 
     const signOutUser = async () => {
         await signOut();
@@ -23,8 +27,17 @@ function ProfilePage() {
                     Sign out
                 </button>
             </header>
-            <section>
-                <p>Currently, not much to see...</p>
+
+            {/* User Information */}
+            <section className="flex gap-4 items-center">
+                <Image
+                    className="rounded-full"
+                    src={user?.profileImageUrl || ""}
+                    alt={`${user?.fullName} profile picture`}
+                    width={60}
+                    height={60}
+                />
+                <h2 className="text-2xl font-semibold text-amber-400">{user?.fullName}</h2>
             </section>
         </main>
     );
