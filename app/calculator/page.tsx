@@ -1,20 +1,50 @@
 import CalculatorForm from "../../components/CalculatorForm";
+import MacroBuilder from "../../components/MacroBuilder";
+import MacroRecommendations from "../../components/MacroRecommendations";
 import getCalorieGoal from "../../helpers/getCalorieGoal";
+import getCurrentBF from "../../helpers/getCurrentBF";
+import getCurrentWeight from "../../helpers/getCurrentWeight";
 
 const CalculatorPage = async () => {
-	const currentCalorieGoal = await getCalorieGoal();
-	return (
-		<main className="w-full h-full mt-24 bg-[#f3f3f3] px-4 py-6 rounded-md flex flex-col gap-4 shadow-md md:items-center">
-			<header className="flex justify-between  pb-2 border-b-2 border-b-[#F15B2A] items-center md:gap-32">
-				<h1 className="text-3xl font-bold">Calculator</h1>
-				<span className="text-sm">
-					Current Goal: {currentCalorieGoal} kcal
-				</span>
-			</header>
+    const currentCalorieGoal = await getCalorieGoal();
+    const currentWeight = await getCurrentWeight();
+    const currentBF = await getCurrentBF();
 
-			<CalculatorForm />
-		</main>
-	);
+    const calculateRecommendedProteinIntake = (
+        bodyfat: number | undefined,
+        weight: number | undefined
+    ) => {
+        // Return lean body mass * .8
+        if (!bodyfat || !weight) return null;
+        const leanBodyMass = (1 - bodyfat * 0.01) * weight;
+        return Math.round(leanBodyMass * 0.8);
+    };
+
+    const recommendedProteinIntake = calculateRecommendedProteinIntake(
+        currentBF,
+        currentWeight
+    );
+
+    return (
+        <main className="w-full h-full bg-slate-800 py-6 rounded-md flex flex-col gap-4 shadow-md px-10 text-white/90">
+            <header className="flex flex-col w-full gap-2">
+                <h1 className="text-3xl font-bold border-b-indigo-600 border-b-2">
+                    Calculator
+                </h1>
+                <span className="text-[16px] font-semibold text-amber-400">
+                    Current Goal: {currentCalorieGoal} kcal
+                </span>
+            </header>
+
+            <section className="flex flex-col sm:flex-row sm:justify-between gap-4">
+                <CalculatorForm />
+                <MacroBuilder currentCalorieGoal={currentCalorieGoal} />
+                <MacroRecommendations
+                    recommendedProteinIntake={recommendedProteinIntake}
+                />
+            </section>
+        </main>
+    );
 };
 
 export default CalculatorPage;
