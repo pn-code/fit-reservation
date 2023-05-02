@@ -9,7 +9,6 @@ function ProfilePage() {
     const router = useRouter();
 
     const user = useUser().user;
-    console.log(user);
 
     const signOutUser = async () => {
         await signOut();
@@ -37,7 +36,7 @@ function ProfilePage() {
                     width={60}
                     height={60}
                 />
-                <h2 className="text-2xl font-semibold text-amber-400">{user?.fullName}</h2>
+                <h2 className="text-2xl font-semibold text-amber-300">{user?.fullName}</h2>
             </section>
         </main>
     );
