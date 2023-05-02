@@ -6,8 +6,8 @@ import { toast } from "react-hot-toast";
 import { bodyFatSchema } from "../validations/bodyFatValidator";
 
 interface Props {
-    setWeights: Function;
-    setBodyFats: Function;
+    setWeights: any;
+    setBodyFats: any;
 }
 
 function MeasurementsForm({ setWeights, setBodyFats }: Props) {

@@ -1,8 +1,5 @@
 "use client";
 import { X } from "lucide-react";
-import { useRouter } from "next/navigation";
-import axios from "axios";
-import { toast } from "react-hot-toast";
 
 interface FoodEntryCardProps {
 	id: number;

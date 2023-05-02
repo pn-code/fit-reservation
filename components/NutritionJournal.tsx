@@ -25,12 +25,12 @@ export default function NutritionJournal({ foodEntries, deleteFoodEntry }: Props
             <h2 className="text-2xl font-semibold text-amber-400">
                 Nutrition Journal
             </h2>
-            {foodEntries?.length === 0 && (
+            {foodEntries.length === 0 && (
                 <p className="font-semibold text-sm">
                     Currently has no entries.
                 </p>
             )}
-            {foodEntries?.length! > 0 && (
+            {foodEntries.length! > 0 ? (
                 <table className="w-full text-left lg:w-[60%]">
                     <thead>
                         <tr>
@@ -67,7 +67,7 @@ export default function NutritionJournal({ foodEntries, deleteFoodEntry }: Props
                         </tr>
                     </tfoot>
                 </table>
-            )}
+            ): ""}
         </section>
     );
 }

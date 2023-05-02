@@ -4,7 +4,7 @@ import { currentUser } from "@clerk/nextjs/app-beta";
 import { foodEntrySchema } from "../../../validations/foodEntryValidator";
 import getLocalTimezones from "../../../helpers/getLocalTimezone";
 
-export async function GET(req: Request) {
+export async function GET() {
 	try {
 		const user = await currentUser();
 		const localTime = getLocalTimezones();

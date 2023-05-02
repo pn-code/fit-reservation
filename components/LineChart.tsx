@@ -90,7 +90,6 @@ export default function LineChart({
 
     return (
         <section className="w-full">
-            {/* @ts-ignore */}
             <Line data={data} options={options} />
         </section>
     );

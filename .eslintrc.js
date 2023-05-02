@@ -1,9 +1,9 @@
 module.exports = {
-    parser: '@typescript-eslint/parser',
-    plugins: ['@typescript-eslint'],
+    parser: "@typescript-eslint/parser",
+    plugins: ["@typescript-eslint"],
     extends: [
-      'plugin:@typescript-eslint/recommended',
-      'next',
-      'next/core-web-vitals',
+        "plugin:@typescript-eslint/recommended",
+        "next",
+        "next/core-web-vitals",
     ],
-  };
+};
