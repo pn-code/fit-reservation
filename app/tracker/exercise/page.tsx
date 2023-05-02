@@ -107,7 +107,7 @@ function ExercisePage() {
     return (
         <main className="w-full h-full bg-slate-800 py-6 rounded-md flex flex-col gap-4 shadow-md px-10 text-white/90">
             <TrackerHeader title="Exercise" />
-            <h2 className="text-xl font-semibold max-w-[120px]">
+            <h2 className="lg:text-center text-2xl font-semibold text-amber-400">
                 Add Exercise
             </h2>
 
