@@ -20,7 +20,7 @@ export default function NutritionJournal({ foodEntries, deleteFoodEntry }: Props
     );
 
     return (
-        <section className="flex flex-col items-center gap-4 py-5 lg:w-[60%]">
+        <section className="flex flex-col items-center gap-4 py-5 w-full">
             <LineDivider />
             <h2 className="text-2xl font-semibold text-amber-400">
                 Nutrition Journal
@@ -31,7 +31,7 @@ export default function NutritionJournal({ foodEntries, deleteFoodEntry }: Props
                 </p>
             )}
             {foodEntries?.length! > 0 && (
-                <table className="w-full text-left">
+                <table className="w-full text-left lg:w-[60%]">
                     <thead>
                         <tr>
                             <th>Name</th>

@@ -3,6 +3,24 @@ import { prisma } from "../../../lib/client";
 import { NextResponse } from "next/server";
 import { calorieValidator } from "../../../validations/calculatorValidator";
 
+export async function GET() {
+	try {
+		const user = await currentUser();
+
+		if (user) {
+			const calorieGoal = await prisma.calorieGoal.findFirst({
+				where: {
+					userId: user.id,
+				},
+			});
+
+			return NextResponse.json(calorieGoal);
+		}
+	} catch (error) {
+		return console.error(error);
+	}
+}
+
 export async function PUT(req: Request) {
 	try {
 		const user = await currentUser();

@@ -1,15 +1,18 @@
 "use client";
-import LineDivider from "./LineDivider";
 import ExerciseEntryCard from "./ExerciseEntryCard";
+import LineDivider from "./LineDivider";
 
 interface Props {
     exercises: ExerciseEntry[];
     deleteExerciseEntry: any;
 }
 
-export default function ExerciseJournal({ exercises, deleteExerciseEntry }: Props) {
+export default function ExerciseJournal({
+    exercises,
+    deleteExerciseEntry,
+}: Props) {
     return (
-        <section className="flex flex-col items-center gap-4 py-5 w-full lg:w-[60%]">
+        <section className="flex flex-col items-center gap-4 py-5 w-full">
             <LineDivider />
             <h2 className="text-2xl font-semibold text-amber-400">
                 Exercise Journal
@@ -20,7 +23,7 @@ export default function ExerciseJournal({ exercises, deleteExerciseEntry }: Prop
                 </p>
             )}
             {exercises.length! > 0 && (
-                <table className="w-full text-left border-slate-50">
+                <table className="w-full text-left border-slate-50 lg:w-[60%]">
                     <thead>
                         <tr>
                             <th>Exercise</th>
