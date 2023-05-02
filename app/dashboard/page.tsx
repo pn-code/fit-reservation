@@ -9,6 +9,7 @@ import moment from "moment";
 function DashboardPage() {
     const [weights, setWeights] = useState<WeightMeasurement[]>([]);
     const [bodyFats, setBodyFats] = useState<BodyFatMeasurement[]>([]);
+    const [calorieGoal, setCalorieGoal] = useState<number | null>(null);
 
     // Format weights and body fat for charts
     const formattedWeights = weights.map((data) => ({
@@ -35,6 +36,12 @@ function DashboardPage() {
             setBodyFats(res.data);
         };
 
+        const getCalorieGoalData = async () => {
+            const res = await axios.get("/api/calorie_goal");
+            setCalorieGoal(res.data.goal);
+        };
+
+        getCalorieGoalData();
         getWeightData();
         getBFData();
     }, []);
@@ -55,24 +62,33 @@ function DashboardPage() {
                 <h1 className="text-3xl">Dashboard</h1>
             </header>
 
-            {/* Statistics */}
-            <StatisticsSection
-                currentBF={currentBF}
-                currentWeight={currentWeight}
-            />
+            <section className="flex flex-col gap-8 sm:flex-row sm:justify-between">
+                {/* Statistics */}
+                <StatisticsSection
+                    currentBF={currentBF}
+                    currentWeight={currentWeight}
+                    calorieGoal={calorieGoal}
+                />
 
-            {/* Charts */}
-            <LineChart
-                title="Your Body Weight"
-                label="Weight over Time"
-                userData={formattedWeights}
-            />
+                {/* Charts */}
+                <section className="flex flex-col gap-4 justify-center items-center bg-blue-900/60 rounded-md py-2 px-4 xl:flex-row sm:flex-[2]">
+                    <LineChart
+                        title="Your Body Weight"
+                        label="Weight (lbs)"
+                        userData={formattedWeights}
+                        pointColor="rgb(163, 245, 157)"
+                        borderColor="rgb(87, 224, 76)"
+                    />
 
-            <LineChart
-                title="Your Body Fat"
-                label="Body fat over Time"
-                userData={formattedBodyFats}
-            />
+                    <LineChart
+                        title="Your Body Fat"
+                        label="Body Fat (%)"
+                        userData={formattedBodyFats}
+                        pointColor="rgb(222, 155, 129)"
+                        borderColor="rgb(232, 151, 70)"
+                    />
+                </section>
+            </section>
 
             {/* Add Measurements */}
             <MeasurementsForm
