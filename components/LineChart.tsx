@@ -41,11 +41,15 @@ export default function LineChart({
         responsive: true,
         plugins: {
             legend: {
+                labels: {
+                    color: "rgb(224, 224, 224)",
+                },
                 position: "top" as const,
             },
             title: {
                 display: true,
                 text: title,
+                color: "rgb(240, 240, 240)",
             },
         },
         scales: {
@@ -57,11 +61,15 @@ export default function LineChart({
                         day: "MMM DD",
                     },
                 },
+                ticks: {
+                    color: "rgb(224, 224, 224)",
+                },
             },
             y: {
                 beginAtZero: false,
                 ticks: {
-                    stepSize: 10,
+                    stepSize: 1,
+                    color: "rgb(224, 224, 224)",
                 },
             },
         },
@@ -80,6 +88,10 @@ export default function LineChart({
         ],
     };
 
-    // @ts-ignore
-    return <Line data={data} options={options} />;
+    return (
+        <section className="w-full">
+            {/* @ts-ignore */}
+            <Line data={data} options={options} />
+        </section>
+    );
 }
