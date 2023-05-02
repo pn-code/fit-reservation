@@ -71,7 +71,7 @@ function DashboardPage() {
                 />
 
                 {/* Charts */}
-                <section className="flex flex-col gap-4 justify-center items-center bg-blue-900/60 rounded-md py-2 px-4 xl:flex-row sm:flex-[2]">
+                <section className="flex flex-col gap-4 justify-center items-center bg-blue-900/60 rounded-md py-2 px-4 xl:flex-row flex-1 sm:flex-[2]">
                     <LineChart
                         title="Your Body Weight"
                         label="Weight (lbs)"
