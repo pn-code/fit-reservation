@@ -1,5 +1,4 @@
 "use client";
-
 import axios from "axios";
 import { useState } from "react";
 import { weightSchema } from "../validations/weightValidator";
@@ -7,8 +6,8 @@ import { toast } from "react-hot-toast";
 import { bodyFatSchema } from "../validations/bodyFatValidator";
 
 interface Props {
-    setWeights: Function;
-    setBodyFats: Function;
+    setWeights: any;
+    setBodyFats: any;
 }
 
 function MeasurementsForm({ setWeights, setBodyFats }: Props) {
@@ -107,5 +106,4 @@ function MeasurementsForm({ setWeights, setBodyFats }: Props) {
         </>
     );
 }
-
 export default MeasurementsForm;

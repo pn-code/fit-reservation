@@ -5,7 +5,6 @@ import { foodEntrySchema } from "../../../validations/foodEntryValidator";
 import { ZodError } from "zod";
 import axios from "axios";
 import { toast } from "react-hot-toast";
-import { useRouter } from "next/navigation";
 import NutritionJournal from "../../../components/NutritionJournal";
 
 function NutritionPage() {
