@@ -1,15 +1,16 @@
-"use client";
-import React, { useEffect } from "react";
+"use client"
 import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 const stripePromise = loadStripe(
     process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
 );
 
-export default function PreviewPage() {
+export default function StripeCheckOutButton() {
     const router = useRouter();
+    
     useEffect(() => {
         const query = new URLSearchParams(window.location.search);
         if (query.get("success")) {
@@ -33,14 +34,13 @@ export default function PreviewPage() {
             console.error(error);
         }
     };
-
+    
     return (
-        <form>
-            <section>
-                <button onClick={handleCheckOut} type="button" role="link">
-                    Checkout
-                </button>
-            </section>
-        </form>
+        <button
+            onClick={handleCheckOut}
+            className="rounded-md px-4 py-2 bg-green-500 hover:bg-green-600 text-white/90 hover:text-white font-semibold"
+        >
+            Upgrade
+        </button>
     );
 }
