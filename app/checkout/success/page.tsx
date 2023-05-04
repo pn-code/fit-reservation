@@ -1,6 +1,7 @@
 "use client";
 import axios from "axios";
 import moment from "moment";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export default function CheckoutSuccessPage() {
@@ -28,7 +29,14 @@ export default function CheckoutSuccessPage() {
         <main className="w-full h-full bg-slate-800 py-6 rounded-md flex flex-col gap-4 shadow-md px-10 text-white/90">
             <header className="flex justify-between font-bold pb-2 border-b-2 border-b-indigo-600 items-center">
                 <h1 className="text-3xl">Checkout Success</h1>
+                <Link
+                    className="px-4 py-2 rounded-md bg-gray-500 text-white text-lg w-fit"
+                    href="/"
+                >
+                    Return Home
+                </Link>
             </header>
+
 
             <section className="flex flex-col gap-2">
                 <header>
