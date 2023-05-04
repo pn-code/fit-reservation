@@ -22,7 +22,7 @@ const Navbar = () => {
 
     return (
         <>
-            <nav className="relative h-[100px] bg-[#172554] text-white py-6 px-6 flex justify-between items-center w-full top-0 left-0 z-50">
+            <nav className="relative h-[82px] bg-[#172554] text-white py-6 px-6 flex justify-between items-center w-full top-0 left-0 z-50">
                 <header>
                     <Link
                         className="hover:underline font-medium flex gap-2 items-center"
