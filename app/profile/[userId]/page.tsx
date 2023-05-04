@@ -1,6 +1,7 @@
 import Image from "next/image";
 import SignOutButton from "../../../components/SignOutButton";
 import { clerkClient } from "@clerk/nextjs/app-beta";
+import StripeCheckOutButton from "../../../components/StripeCheckOutButton";
 
 interface Props {
     params: {
@@ -43,9 +44,7 @@ async function ProfilePage({ params }: Props) {
                     </h2>
                     <p>Gain immediate access to the Builder Page</p>
                 </section>
-                <button className="rounded-md px-4 py-2 bg-green-500 hover:bg-green-600 text-white/90 hover:text-white font-semibold">
-                    Upgrade
-                </button>
+                <StripeCheckOutButton />
             </section>
         </main>
     );
