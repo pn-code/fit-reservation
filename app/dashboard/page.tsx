@@ -12,15 +12,21 @@ function DashboardPage() {
     const [calorieGoal, setCalorieGoal] = useState<number | null>(null);
 
     // Format weights and body fat for charts
-    const formattedWeights = weights.map((data) => ({
-        x: moment(data.createdAt),
-        y: data.weight,
-    }));
+    const formattedWeights =
+        weights.length > 0
+            ? weights?.map((data) => ({
+                  x: moment(data.createdAt),
+                  y: data.weight,
+              }))
+            : [];
 
-    const formattedBodyFats = bodyFats.map((data) => ({
-        x: moment(data.createdAt),
-        y: data.bodyfat,
-    }));
+    const formattedBodyFats =
+        bodyFats.length > 0
+            ? bodyFats.map((data) => ({
+                  x: moment(data.createdAt),
+                  y: data.bodyfat,
+              }))
+            : [];
 
     const [currentWeight, setCurrentWeight] = useState<number | null>(null);
     const [currentBF, setCurrentBF] = useState<number | null>(null);
@@ -38,7 +44,9 @@ function DashboardPage() {
 
         const getCalorieGoalData = async () => {
             const res = await axios.get("/api/calorie_goal");
-            setCalorieGoal(res.data.goal);
+            if (res.data?.goal) {
+                setCalorieGoal(res.data.goal);
+            }
         };
 
         getCalorieGoalData();

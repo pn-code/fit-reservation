@@ -80,17 +80,19 @@ const Navbar = () => {
                             Tracker
                         </span>
                     </Link>
-                    <Link
-                        className={`group relative ${
-                            pathname === "/profile" ? currentPathStyles : ""
-                        }`}
-                        href={`/profile/${user?.id}`}
-                    >
-                        <User className="text-white/90 hover:text-white" />
-                        <span className="bg-indigo-700 py-0.5 px-2 rounded-lg hidden group-hover:flex text-sm font-semibold absolute -left-4 top-8">
-                            Profile
-                        </span>
-                    </Link>
+                    {user != undefined && (
+                        <Link
+                            className={`group relative ${
+                                pathname === "/profile" ? currentPathStyles : ""
+                            }`}
+                            href={`/profile/${user?.id}`}
+                        >
+                            <User className="text-white/90 hover:text-white" />
+                            <span className="bg-indigo-700 py-0.5 px-2 rounded-lg hidden group-hover:flex text-sm font-semibold absolute -left-4 top-8">
+                                Profile
+                            </span>
+                        </Link>
+                    )}
                 </ul>
             </nav>
 

@@ -8,7 +8,7 @@ interface FoodEntryCardProps {
 	carbs: number;
 	fats: number;
 	protein: number;
-	deleteFoodEntry: any
+	deleteFoodEntry: (id: number) => void;
 }
 
 function FoodEntryCard({

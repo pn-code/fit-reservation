@@ -18,7 +18,11 @@ const getCalorieGoal = async () => {
             },
         })) as calorieGoal;
 
-        return calorieGoal.goal;
+        if (calorieGoal) {
+            return calorieGoal.goal;
+        } else {
+            return null
+        }
     } catch (error) {
         console.error(error);
     }

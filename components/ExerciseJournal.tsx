@@ -22,7 +22,7 @@ export default function ExerciseJournal({
                     Currently has no entries.
                 </p>
             )}
-            {exercises.length! > 0 && (
+            {exercises.length > 0 && (
                 <table className="w-full text-left border-slate-50 lg:w-[60%]">
                     <thead>
                         <tr>
@@ -41,11 +41,11 @@ export default function ExerciseJournal({
                                 id={entry.id}
                                 name={entry.name}
                                 type={entry.type}
-                                duration={entry.duration!}
-                                weight={entry.weight!}
-                                sets={entry.sets!}
-                                reps={entry.reps!}
-                                calories={entry.calories!}
+                                duration={entry.duration}
+                                weight={entry.weight}
+                                sets={entry.sets}
+                                reps={entry.reps}
+                                calories={entry.calories}
                                 key={entry.id}
                                 deleteExerciseEntry={deleteExerciseEntry}
                             />

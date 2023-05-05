@@ -23,7 +23,7 @@ export default function CheckoutSuccessPage() {
             }
         };
         checkForPayment();
-    }, []);
+    }, [sessionId]);
 
     return (
         <main className="w-full h-full bg-slate-800 py-6 rounded-md flex flex-col gap-4 shadow-md px-10 text-white/90">

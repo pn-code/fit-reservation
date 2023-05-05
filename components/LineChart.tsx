@@ -23,7 +23,7 @@ Chart.register(
 );
 
 interface Props {
-    userData: any[];
+    userData: unknown[];
     label: string;
     title: string;
     borderColor?: string;
