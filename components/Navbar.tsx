@@ -47,6 +47,7 @@ const Navbar = () => {
                         className={`group relative ${
                             pathname === "/dashboard" ? currentPathStyles : ""
                         }`}
+                        passHref={true}
                         href="/dashboard"
                     >
                         <LayoutDashboard className="text-white/90 hover:text-white" />
@@ -58,6 +59,7 @@ const Navbar = () => {
                         className={`group relative ${
                             pathname === "/calculator" ? currentPathStyles : ""
                         }`}
+                        passHref={true}
                         href="/calculator"
                     >
                         <Calculator className="text-white/90 hover:text-white" />
@@ -73,6 +75,7 @@ const Navbar = () => {
                                 ? currentPathStyles
                                 : ""
                         }`}
+                        passHref={true}
                         href="/tracker/overview"
                     >
                         <ClipboardSignature className="text-white/90 hover:text-white" />
@@ -85,6 +88,7 @@ const Navbar = () => {
                             className={`group relative ${
                                 pathname === "/profile" ? currentPathStyles : ""
                             }`}
+                            passHref={true}
                             href={`/profile/${user?.id}`}
                         >
                             <User className="text-white/90 hover:text-white" />
@@ -98,12 +102,13 @@ const Navbar = () => {
 
             {/* Mobile Navbar */}
             {openMobileNavbar && (
-                <section className="absolute h-[87%] w-full z-10 bg-black flex items-center justify-center flex-col pb-32 text-white font-semibold text-3xl">
+                <section className="absolute h-[87%] w-full z-10 bg-black flex items-center justify-center flex-col pb-[20%] sm:pb-32 text-white font-semibold text-3xl">
                     <section className="flex flex-col gap-8">
                         <Link
                             onClick={() => setOpenMobileNavbar(false)}
                             className="flex gap-4 items-center hover:text-white text-white/90 group"
                             href="/dashboard"
+                            passHref={true}
                         >
                             <LayoutDashboard
                                 className="text-white/90 group-hover:text-indigo-500"
@@ -117,6 +122,7 @@ const Navbar = () => {
                             onClick={() => setOpenMobileNavbar(false)}
                             className="flex gap-4 items-center hover:text-white text-white/90 group"
                             href="/calculator"
+                            passHref={true}
                         >
                             <Calculator
                                 onClick={() => setOpenMobileNavbar(false)}
@@ -131,6 +137,7 @@ const Navbar = () => {
                             onClick={() => setOpenMobileNavbar(false)}
                             className="flex gap-4 items-center hover:text-white text-white/90 group"
                             href="/tracker/overview"
+                            passHref={true}
                         >
                             <ClipboardSignature
                                 className="text-white/90 group-hover:text-indigo-500"
@@ -144,6 +151,7 @@ const Navbar = () => {
                             onClick={() => setOpenMobileNavbar(false)}
                             className="flex gap-4 items-center hover:text-white text-white/90 group"
                             href={`/profile/${user?.id}`}
+                            passHref={true}
                         >
                             <User
                                 className="text-white/90 group-hover:text-indigo-500"
