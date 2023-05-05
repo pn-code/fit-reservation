@@ -74,11 +74,7 @@ function NutritionPage() {
 
     const deleteFoodEntry = async (id: number) => {
         try {
-            const res = await axios.delete("/api/food_entries", {
-                data: {
-                    id: id,
-                },
-            });
+            const res = await axios.delete(`/api/food_entries/${id}`);
             toast.success(
                 `Successfully deleted: ${res.data.name.substring(0, 30)}!`
             );
