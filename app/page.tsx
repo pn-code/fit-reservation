@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function Home() {
     return (
-        <main className="w-full h-full bg-gradient-to-b from-[#172554] to-blue-900 flex flex-col gap-4 shadow-md text-white/90 px-10 pb-10">
+        <main className="w-full h-full bg-gradient-to-b from-[#172554] to-blue-900 flex flex-col gap-4 shadow-md text-white/90 px-2 sm:px-10 pb-10">
             <header className="mt-[20%] sm:mt-56 sm:mb-14 w-full">
                 <h1 className="text-center text-5xl font-bold tracking-tight sm:text-5xl sm:tracking-tight lg:text-[4rem] xl:text-[6rem] xl:tracking-tight 2xl:text-[6.5rem]">
                     The best way to <span>jumpstart</span> your

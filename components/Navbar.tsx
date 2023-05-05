@@ -26,7 +26,7 @@ const Navbar = () => {
                 <header>
                     <Link
                         className="hover:underline font-medium flex gap-2 items-center"
-                        href="/dashboard"
+                        href="/"
                     >
                         <Shield size={40} />
                         <h1 className="text-3xl font-bold">FitHeroes</h1>
