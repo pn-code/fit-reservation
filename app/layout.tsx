@@ -11,8 +11,8 @@ const roboto = Roboto({
 });
 
 export const metadata = {
-    title: "FitHeroes",
-    description: "Created by Philip Nguyen",
+    title: "Home | FitHeroes",
+    description: "For all your fitness related needs.",
 };
 
 export default function RootLayout({

@@ -11,6 +11,14 @@ interface Props {
     };
 }
 
+export async function generateMetadata({ params }: Props) {
+    const user = await clerkClient.users.getUser(params.userId);
+
+    return {
+        title: `${user?.firstName} ${user?.lastName}`,
+    };
+}
+
 async function ProfilePage({ params }: Props) {
     const { userId } = params;
     const user = await clerkClient.users.getUser(userId);
