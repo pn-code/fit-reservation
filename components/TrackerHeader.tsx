@@ -16,6 +16,7 @@ function TrackerHeader({ title }: TrackerHeaderProps) {
                         <Link
                             className="bg-slate-600 hover:bg-slate-700 rounded-lg text-white px-2 sm:px-4 py-2"
                             href="/tracker/overview"
+                            passHref={true}
                         >
                             Overview
                         </Link>
@@ -24,18 +25,19 @@ function TrackerHeader({ title }: TrackerHeaderProps) {
                         <Link
                             className="bg-indigo-600 hover:bg-indigo-700 rounded-lg text-white px-2 sm:px-4 py-2"
                             href="/tracker/exercise"
+                            passHref={true}
                         >
                             Exercise
                         </Link>
                     </li>
-                    <li
-                        className={
-                            title == "Nutrition"
-                                ? "hidden"
-                            : ""
-                        }
-                    >
-                        <Link className="bg-indigo-600 hover:bg-indigo-700 rounded-lg text-white px-2 sm:px-4 py-2" href="/tracker/nutrition">Nutrition</Link>
+                    <li className={title == "Nutrition" ? "hidden" : ""}>
+                        <Link
+                            className="bg-indigo-600 hover:bg-indigo-700 rounded-lg text-white px-2 sm:px-4 py-2"
+                            href="/tracker/nutrition"
+                            passHref={true}
+                        >
+                            Nutrition
+                        </Link>
                     </li>
                 </ul>
             </nav>
