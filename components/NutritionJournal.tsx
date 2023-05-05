@@ -30,7 +30,7 @@ export default function NutritionJournal({ foodEntries, deleteFoodEntry }: Props
                     Currently has no entries.
                 </p>
             )}
-            {foodEntries.length! > 0 ? (
+            {foodEntries.length > 0 ? (
                 <table className="w-full text-left lg:w-[60%]">
                     <thead>
                         <tr>

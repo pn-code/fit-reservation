@@ -3,11 +3,17 @@ import { headers } from "next/headers";
 import Stripe from "stripe";
 import { currentUser } from "@clerk/nextjs/app-beta";
 
-export async function POST() {
-    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-        apiVersion: "2022-11-15",
-    });
+const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY as string;
 
+if (!STRIPE_SECRET_KEY) {
+    console.error("STRIPE SECRET KEY NOT FOUND");
+}
+
+const stripe = new Stripe(STRIPE_SECRET_KEY, {
+    apiVersion: "2022-11-15",
+});
+
+export async function POST() {
     const user = await currentUser();
     const headersList = headers();
     const currentDomain = headersList.get("origin");

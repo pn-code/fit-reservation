@@ -23,15 +23,15 @@ const TrackerOverview = async () => {
     const exerciseEntries = await getExerciseEntries();
     const totalActivity = exerciseEntries?.reduce(
         (acc, curr) => {
-            if (curr.type === "cardio") {
-                acc.cardio = acc.cardio + curr.duration!;
-            } else {
-                acc.resistance = acc.resistance + curr.reps! * curr.sets!;
+            if (curr.type === "cardio" && curr.duration != null) {
+                acc.cardio = acc.cardio + curr.duration;
+            } else if (curr.type === "resistance" && curr.reps != null && curr.sets != null) {
+                acc.resistance = acc.resistance + curr.reps * curr.sets;
             }
             return acc;
         },
         { resistance: 0, cardio: 0 }
-    );
+    )
 
     return (
         <main className="w-full h-full bg-slate-800 py-6 rounded-md flex flex-col gap-4 shadow-md px-10 text-white/90">

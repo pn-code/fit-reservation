@@ -27,7 +27,7 @@ function MeasurementsForm({ setWeights, setBodyFats }: Props) {
                     toast.success(
                         `Current weight has been updated to ${weight} lbs.`
                     );
-					setWeights((prev: any[]) => ([...prev, res.data]))
+					setWeights((prev: unknown[]) => ([...prev, res.data]))
                 } else {
                     throw Error;
                 }
@@ -51,7 +51,7 @@ function MeasurementsForm({ setWeights, setBodyFats }: Props) {
                     toast.success(
                         `Current body fat has been updated to ${bodyFat} %.`
                     );
-					setBodyFats((prev: any[]) => ([...prev, res.data]))
+					setBodyFats((prev: unknown[]) => ([...prev, res.data]))
                 } else {
                     throw Error;
                 }

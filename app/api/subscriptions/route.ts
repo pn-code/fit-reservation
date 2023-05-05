@@ -3,7 +3,13 @@ import Stripe from "stripe";
 import { prisma } from "../../../lib/client";
 import { NextResponse } from "next/server";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
+const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY as string;
+    
+if (!STRIPE_SECRET_KEY) {
+    console.error("STRIPE SECRET KEY NOT FOUND");
+}
+
+const stripe = new Stripe(STRIPE_SECRET_KEY, {
     apiVersion: "2022-11-15",
 });
 

@@ -10,7 +10,7 @@ interface ExerciseEntryCardProps {
     sets: number;
     reps: number;
     calories: number;
-    deleteExerciseEntry: any;
+    deleteExerciseEntry: (id: number) => void;
 }
 
 function ExerciseEntryCard({
