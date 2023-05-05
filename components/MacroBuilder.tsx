@@ -3,7 +3,7 @@ import { ChangeEvent, useEffect, useState } from "react";
 import { diets } from "../lib/diets";
 
 interface Props {
-    currentCalorieGoal: number | undefined;
+    currentCalorieGoal: number | null | undefined;
 }
 
 export default function MacroBuilder({ currentCalorieGoal }: Props) {
