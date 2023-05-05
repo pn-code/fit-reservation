@@ -1,6 +1,6 @@
 import Image from "next/image";
 import SignOutButton from "../../../components/SignOutButton";
-import { clerkClient } from "@clerk/nextjs/app-beta";
+import { clerkClient, currentUser } from "@clerk/nextjs/app-beta";
 import StripeCheckOutButton from "../../../components/StripeCheckOutButton";
 import { prisma } from "../../../lib/client";
 import { Check } from "lucide-react";
@@ -20,10 +20,12 @@ export async function generateMetadata({ params }: Props) {
 }
 
 async function ProfilePage({ params }: Props) {
+    const user = await currentUser();
     const { userId } = params;
-    const user = await clerkClient.users.getUser(userId);
+
+    const userOnProfile = await clerkClient.users.getUser(userId);
     const userIsSubscribed = await prisma.subscription.findFirst({
-        where: { userId: user.id },
+        where: { userId: userOnProfile.id },
     });
 
     return (
@@ -37,13 +39,13 @@ async function ProfilePage({ params }: Props) {
             <section className="flex gap-4 items-center">
                 <Image
                     className="rounded-full"
-                    src={user?.profileImageUrl || ""}
-                    alt={`${user?.firstName} profile picture`}
+                    src={userOnProfile?.profileImageUrl || ""}
+                    alt={`${userOnProfile?.firstName} profile picture`}
                     width={60}
                     height={60}
                 />
                 <h2 className="text-2xl font-semibold text-amber-300">
-                    {`${user?.firstName} ${user?.lastName}`}
+                    {`${userOnProfile?.firstName} ${userOnProfile?.lastName}`}
                 </h2>
                 {userIsSubscribed && (
                     <span className="bg-indigo-600 rounded-full p-1 border-2 border-indigo-700 flex justify-center items-center">
@@ -55,7 +57,7 @@ async function ProfilePage({ params }: Props) {
             {/* User Stats */}
 
             {/* Upgrade Profile */}
-            {!userIsSubscribed && (
+            {!userIsSubscribed && userId === user?.id && (
                 <section className="flex flex-col gap-4 sm:flex-row sm:justify-between">
                     <section>
                         <h2 className="text-2xl font-semibold text-amber-300">

@@ -53,6 +53,6 @@ model BodyFatMeasurement {
 
 model Subscription {
   userId          String   @id
-  expirationDate  DateTime
+  expirationDate  DateTime?
   lastPaymentDate DateTime
 }

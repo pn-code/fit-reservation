@@ -26,82 +26,92 @@ const Navbar = () => {
                 <header>
                     <Link
                         className="hover:underline font-medium flex gap-2 items-center"
-                        href="/dashboard"
+                        href="/"
                     >
                         <Shield size={40} />
-                        <h1 className="text-3xl font-bold ">FitHeroes</h1>
+                        <h1 className="text-3xl font-bold">FitHeroes</h1>
                     </Link>
                 </header>
 
-                <button
-                    onClick={() => setOpenMobileNavbar((prev) => !prev)}
-                    type="button"
-                    className="sm:hidden p-2 hover:bg-blue-900 rounded-lg"
-                >
-                    {openMobileNavbar ? <X /> : <Menu />}
-                </button>
+                {user && (
+                    <button
+                        onClick={() => setOpenMobileNavbar((prev) => !prev)}
+                        type="button"
+                        className="sm:hidden p-2 hover:bg-blue-900 rounded-lg"
+                    >
+                        {openMobileNavbar ? <X /> : <Menu />}
+                    </button>
+                )}
 
                 {/* Navbar on medium to larger devices */}
-                <ul className="hidden sm:flex sm:gap-4">
-                    <Link
-                        className={`group relative ${
-                            pathname === "/dashboard" ? currentPathStyles : ""
-                        }`}
-                        passHref={true}
-                        href="/dashboard"
-                    >
-                        <LayoutDashboard className="text-white/90 hover:text-white" />
-                        <span className="bg-indigo-700 py-0.5 px-2 rounded-lg hidden group-hover:flex text-sm font-semibold absolute -left-8 top-8">
-                            Dashboard
-                        </span>
-                    </Link>
-                    <Link
-                        className={`group relative ${
-                            pathname === "/calculator" ? currentPathStyles : ""
-                        }`}
-                        passHref={true}
-                        href="/calculator"
-                    >
-                        <Calculator className="text-white/90 hover:text-white" />
-                        <span className="bg-indigo-700 py-0.5 px-2 rounded-lg hidden group-hover:flex text-sm font-semibold absolute -left-7 top-8">
-                            Calculator
-                        </span>
-                    </Link>
-                    <Link
-                        className={`group relative ${
-                            pathname === "/tracker/overview" ||
-                            pathname === "/tracker/exercise" ||
-                            pathname === "/tracker/nutrition"
-                                ? currentPathStyles
-                                : ""
-                        }`}
-                        passHref={true}
-                        href="/tracker/overview"
-                    >
-                        <ClipboardSignature className="text-white/90 hover:text-white" />
-                        <span className="bg-indigo-700 py-0.5 px-2 rounded-lg hidden group-hover:flex text-sm font-semibold absolute -left-4 top-8">
-                            Tracker
-                        </span>
-                    </Link>
-                    {user != undefined && (
+                {user && (
+                    <ul className="hidden sm:flex sm:gap-4">
                         <Link
                             className={`group relative ${
-                                pathname === "/profile" ? currentPathStyles : ""
+                                pathname === "/dashboard"
+                                    ? currentPathStyles
+                                    : ""
                             }`}
                             passHref={true}
-                            href={`/profile/${user?.id}`}
+                            href="/dashboard"
                         >
-                            <User className="text-white/90 hover:text-white" />
-                            <span className="bg-indigo-700 py-0.5 px-2 rounded-lg hidden group-hover:flex text-sm font-semibold absolute -left-4 top-8">
-                                Profile
+                            <LayoutDashboard className="text-white/90 hover:text-white" />
+                            <span className="bg-indigo-700 py-0.5 px-2 rounded-lg hidden group-hover:flex text-sm font-semibold absolute -left-8 top-8">
+                                Dashboard
                             </span>
                         </Link>
-                    )}
-                </ul>
+                        <Link
+                            className={`group relative ${
+                                pathname === "/calculator"
+                                    ? currentPathStyles
+                                    : ""
+                            }`}
+                            passHref={true}
+                            href="/calculator"
+                        >
+                            <Calculator className="text-white/90 hover:text-white" />
+                            <span className="bg-indigo-700 py-0.5 px-2 rounded-lg hidden group-hover:flex text-sm font-semibold absolute -left-7 top-8">
+                                Calculator
+                            </span>
+                        </Link>
+                        <Link
+                            className={`group relative ${
+                                pathname === "/tracker/overview" ||
+                                pathname === "/tracker/exercise" ||
+                                pathname === "/tracker/nutrition"
+                                    ? currentPathStyles
+                                    : ""
+                            }`}
+                            passHref={true}
+                            href="/tracker/overview"
+                        >
+                            <ClipboardSignature className="text-white/90 hover:text-white" />
+                            <span className="bg-indigo-700 py-0.5 px-2 rounded-lg hidden group-hover:flex text-sm font-semibold absolute -left-4 top-8">
+                                Tracker
+                            </span>
+                        </Link>
+                        {user != undefined && (
+                            <Link
+                                className={`group relative ${
+                                    pathname === "/profile"
+                                        ? currentPathStyles
+                                        : ""
+                                }`}
+                                passHref={true}
+                                href={`/profile/${user?.id}`}
+                            >
+                                <User className="text-white/90 hover:text-white" />
+                                <span className="bg-indigo-700 py-0.5 px-2 rounded-lg hidden group-hover:flex text-sm font-semibold absolute -left-4 top-8">
+                                    Profile
+                                </span>
+                            </Link>
+                        )}
+                    </ul>
+                )}
             </nav>
 
             {/* Mobile Navbar */}
-            {openMobileNavbar && (
+            {openMobileNavbar && user != undefined && (
                 <section className="absolute h-[87%] w-full z-10 bg-black flex items-center justify-center flex-col pb-[20%] sm:pb-32 text-white font-semibold text-3xl">
                     <section className="flex flex-col gap-8">
                         <Link
