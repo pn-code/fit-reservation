@@ -40,7 +40,7 @@ function ExercisePage() {
             });
             return true;
         } catch (error) {
-            toast.error(`An error has occurred in one of the input fields!}`);
+            toast.error(`An error has occurred in one of the input fields!`);
             return false;
         }
     };
