@@ -22,7 +22,7 @@ function FoodEntryCard({
 }: FoodEntryCardProps) {
 	return (
 		<>
-			<tr className="hover:bg-slate-200 cursor-pointer hover:text-indigo-600">
+			<tr className="hover:bg-slate-50 cursor-pointer hover:text-indigo-600">
 				<td>
 					{name.length > 30 ? name.substring(0, 30) + "..." : name}
 				</td>

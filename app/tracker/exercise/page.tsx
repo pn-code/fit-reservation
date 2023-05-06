@@ -107,7 +107,7 @@ function ExercisePage() {
                 Add Exercise
             </h2>
 
-            <form className="w-full flex flex-col gap-8 lg:flex-row py-2 sm:items-center sm:justify-center">
+            <form className="w-full flex flex-col gap-8 lg:flex-row py-2 lg:items-center lg:justify-center">
                 <section className="flex flex-col gap-2">
                     <label htmlFor="exercise">Exercise: </label>
                     <input
