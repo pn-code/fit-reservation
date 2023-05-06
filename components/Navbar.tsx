@@ -112,7 +112,7 @@ const Navbar = () => {
 
             {/* Mobile Navbar */}
             {openMobileNavbar && user != undefined && (
-                <section className="absolute h-[87%] w-full z-10 bg-black flex items-center justify-center flex-col pb-[20%] sm:pb-32 text-white font-semibold text-3xl">
+                <section className="absolute h-[300%] w-full z-10 bg-black flex items-center pt-[25%] flex-col sm:pb-32 text-white font-semibold text-3xl">
                     <section className="flex flex-col gap-8">
                         <Link
                             onClick={() => setOpenMobileNavbar(false)}
