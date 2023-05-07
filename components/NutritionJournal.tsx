@@ -54,6 +54,7 @@ export default function NutritionJournal({ foodEntries, deleteFoodEntry }: Props
                                 protein={entry.protein}
                                 key={entry.id}
                                 deleteFoodEntry={deleteFoodEntry}
+                                allowDelete={true}
                             />
                         ))}
                     </tbody>
