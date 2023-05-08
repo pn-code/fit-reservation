@@ -53,32 +53,32 @@ export default async function UserExerciseJournals() {
 
 			{/* Render Journals */}
 			<section>
-				<div>
+				<div className="flex flex-col gap-4">
 					{dates.map((date) => (
 						<div key={date}>
 							<h2 className="text-lg text-amber-300">{date}</h2>
-							<table>
+							<table className="w-full">
 								<thead className="text-left">
 									<tr>
-										<th>Name</th>
-										<th>Calories</th>
-										<th>Carbs</th>
-										<th>Fats</th>
-										<th>Protein</th>
+										<th className="w-44">Exercise Name</th>
+										<th>Exercise Details</th>
 									</tr>
 								</thead>
-								{sortedJournals[date].map((item: ExerciseEntry) => (
-									<tbody key={item.id}>
-										<tr>
-											<td>{item.name}</td>
-											<td>{item.type}</td>
-											<td>{item.weight} g</td>
-											<td>{item.sets} g</td>
-											<td>{item.reps} g</td>
-											<td>{item.duration} g</td>
-										</tr>
-									</tbody>
-								))}
+								{sortedJournals[date].map(
+									(item: ExerciseEntry) => (
+										<tbody key={item.id}>
+											<tr>
+												<td>{item.name}</td>
+
+												{item.type == "resistance" ? (
+													<td>{`${item.sets} x ${item.reps} at ${item.weight}lbs`}</td>
+												) : (
+													<td>{item.duration} mins</td>
+												)}
+											</tr>
+										</tbody>
+									)
+								)}
 							</table>
 						</div>
 					))}
