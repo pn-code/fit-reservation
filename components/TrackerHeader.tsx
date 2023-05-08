@@ -23,7 +23,7 @@ function TrackerHeader({ title }: TrackerHeaderProps) {
 							Overview
 						</Link>
 					</li>
-					<li className={title == "Exercise" ? "hidden" : ""}>
+					<li className={title == "Exercise Tracker" ? "hidden" : ""}>
 						<Link
 							className="bg-indigo-600 hover:bg-indigo-700 rounded-lg text-white px-4 py-3"
 							href="/tracker/exercise"
@@ -32,7 +32,7 @@ function TrackerHeader({ title }: TrackerHeaderProps) {
 							Exercise
 						</Link>
 					</li>
-					<li className={title == "Nutrition" ? "hidden" : ""}>
+					<li className={title == "Nutrition Tracker" ? "hidden" : ""}>
 						<Link
 							className="bg-indigo-600 hover:bg-indigo-700 rounded-lg text-white px-4 py-3"
 							href="/tracker/nutrition"

@@ -12,7 +12,7 @@ async function NutritionPage() {
 
 	return (
 		<main className="w-full h-full bg-slate-800 py-6 rounded-md flex flex-col gap-4 shadow-md px-10 text-white/90">
-			<TrackerHeader title="Nutrition" />
+			<TrackerHeader title="Nutrition Tracker" />
 			<Link
 				className="text-sm text-amber-400 hover:text-amber-300 hover:underline-offset-2 hover:underline"
 				href={`/tracker/nutrition/user/${user?.id}`}
