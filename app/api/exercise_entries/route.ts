@@ -35,7 +35,7 @@ export async function POST(req: Request) {
 
 		if (user) {
 			const res = await req.json();
-			console.log(res)
+
 			const validateExerciseEntry = exerciseEntrySchema.parse(res);
 
 			if (validateExerciseEntry) {
