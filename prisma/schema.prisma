@@ -52,7 +52,8 @@ model BodyFatMeasurement {
 }
 
 model Subscription {
-  userId          String   @id
+  id              Int       @id @default(autoincrement())
+  userId          String    @unique
+  lastPaymentDate DateTime  @default(now())
   expirationDate  DateTime?
-  lastPaymentDate DateTime
 }
