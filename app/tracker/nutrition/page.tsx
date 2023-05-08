@@ -11,7 +11,7 @@ async function NutritionPage() {
 			<TrackerHeader title="Nutrition" />
 			<Link
 				className="text-sm text-amber-400 hover:text-amber-300 hover:underline-offset-2 hover:underline"
-				href={`/journals/nutrition/user/${user?.id}`}
+				href={`/tracker/nutrition/user/${user?.id}`}
 			>
 				See previous journals
 			</Link>
