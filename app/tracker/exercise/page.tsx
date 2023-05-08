@@ -3,6 +3,10 @@ import ExerciseEntryClientComponent from "../../../components/ExerciseEntryClien
 import TrackerHeader from "../../../components/TrackerHeader";
 import { currentUser } from "@clerk/nextjs/app-beta";
 
+export const metadata = {
+    title: "Exercise Tracker | FitHeroes",
+};
+
 async function ExercisePage() {
 	const user = await currentUser();
     

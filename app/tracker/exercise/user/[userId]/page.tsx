@@ -2,7 +2,11 @@ import { currentUser } from "@clerk/nextjs/app-beta";
 import { prisma } from "../../../../../lib/client";
 import Link from "next/link";
 
-async function fetchUserNutritionJournals(userId: string) {
+export const metadata = {
+    title: "All Exercise Journals | FitHeroes",
+};
+
+async function fetchUserExerciseJournals(userId: string) {
 	const journals = await prisma.exerciseEntry.findMany({
 		where: { userId: userId },
 		orderBy: {
@@ -39,7 +43,7 @@ function sortEntriesByDate(entriesArr: any[]) {
 
 export default async function UserExerciseJournals() {
 	const user = await currentUser();
-	const journals = await fetchUserNutritionJournals(user?.id as string);
+	const journals = await fetchUserExerciseJournals(user?.id as string);
 
 	const sortedJournals = journals ? sortEntriesByDate(journals) : [];
 	const dates = Object.keys(sortedJournals);

@@ -5,6 +5,10 @@ import getCalorieGoal from "../../helpers/getCalorieGoal";
 import getCurrentBF from "../../helpers/getCurrentBF";
 import getCurrentWeight from "../../helpers/getCurrentWeight";
 
+export const metadata = {
+    title: "Calculator | FitHeroes",
+};
+
 const CalculatorPage = async () => {
     const currentCalorieGoal = await getCalorieGoal();
     const currentWeight = await getCurrentWeight();

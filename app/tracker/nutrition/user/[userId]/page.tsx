@@ -2,6 +2,10 @@ import { currentUser } from "@clerk/nextjs/app-beta";
 import { prisma } from "../../../../../lib/client";
 import Link from "next/link";
 
+export const metadata = {
+    title: "All Nutrition Journals | FitHeroes",
+};
+
 async function fetchUserNutritionJournals(userId: string) {
 	const journals = await prisma.foodEntry.findMany({
 		where: { userId: userId },

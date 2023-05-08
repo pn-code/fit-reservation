@@ -3,6 +3,10 @@ import FoodEntryClientComponent from "../../../components/FoodEntryClientCompone
 import TrackerHeader from "../../../components/TrackerHeader";
 import { currentUser } from "@clerk/nextjs/app-beta";
 
+export const metadata = {
+    title: "Nutrition Tracker | FitHeroes",
+};
+
 async function NutritionPage() {
 	const user = await currentUser();
 

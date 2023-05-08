@@ -1,5 +1,9 @@
 import DashboardClientComponent from "../../components/DashboardClientComponent";
 
+export const metadata = {
+    title: "Dashboard | FitHeroes",
+};
+
 async function DashboardPage() {
 	return (
 		<main className="w-full h-full bg-slate-800 py-6 rounded-md flex flex-col gap-4 shadow-md px-10 text-white/90">
