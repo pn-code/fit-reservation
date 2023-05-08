@@ -1,5 +1,6 @@
 import { currentUser } from "@clerk/nextjs/app-beta";
 import { prisma } from "../../../../../lib/client";
+import Link from "next/link";
 
 async function fetchUserNutritionJournals(userId: string) {
 	const journals = await prisma.exerciseEntry.findMany({
@@ -49,6 +50,13 @@ export default async function UserExerciseJournals() {
 				<h1 className="text-3xl">
 					{`${user?.firstName || "User"}'s Exercise Journals`}
 				</h1>
+				<Link
+					className="bg-indigo-600 hover:bg-indigo-700 rounded-lg text-white px-4 py-3"
+					passHref={true}
+					href="/tracker/exercise"
+				>
+					Back
+				</Link>
 			</header>
 
 			{/* Render Journals */}
@@ -73,7 +81,9 @@ export default async function UserExerciseJournals() {
 												{item.type == "resistance" ? (
 													<td>{`${item.sets} x ${item.reps} at ${item.weight}lbs`}</td>
 												) : (
-													<td>{item.duration} mins</td>
+													<td>
+														{item.duration} mins
+													</td>
 												)}
 											</tr>
 										</tbody>

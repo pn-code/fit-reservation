@@ -12,6 +12,7 @@ async function ExercisePage() {
 			<Link
 				className="text-sm text-amber-400 hover:text-amber-300 hover:underline-offset-2 hover:underline"
 				href={`/tracker/exercise/user/${user?.id}`}
+				passHref={true}
 			>
 				See previous journals
 			</Link>

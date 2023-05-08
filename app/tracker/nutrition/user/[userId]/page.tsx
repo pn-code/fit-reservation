@@ -1,5 +1,6 @@
 import { currentUser } from "@clerk/nextjs/app-beta";
 import { prisma } from "../../../../../lib/client";
+import Link from "next/link";
 
 async function fetchUserNutritionJournals(userId: string) {
 	const journals = await prisma.foodEntry.findMany({
@@ -49,6 +50,13 @@ export default async function UserNutritionJournals() {
 				<h1 className="text-3xl">
 					{`${user?.firstName || "User"}'s Nutrition Journals`}
 				</h1>
+				<Link
+					className="bg-indigo-600 hover:bg-indigo-700 rounded-lg text-white px-4 py-3"
+					passHref={true}
+					href="/tracker/nutrition"
+				>
+					Back
+				</Link>
 			</header>
 
 			{/* Render Journals */}
@@ -57,10 +65,10 @@ export default async function UserNutritionJournals() {
 					{dates.map((date) => (
 						<div key={date}>
 							<h2 className="text-lg text-amber-300">{date}</h2>
-							<table>
+							<table className="w-full">
 								<thead className="text-left">
 									<tr>
-										<th>Name</th>
+										<th className="w-56">Name</th>
 										<th>Calories</th>
 										<th>Carbs</th>
 										<th>Fats</th>
@@ -70,7 +78,14 @@ export default async function UserNutritionJournals() {
 								{sortedJournals[date].map((item: FoodEntry) => (
 									<tbody key={item.id}>
 										<tr>
-											<td>{item.name}</td>
+											<td>
+												{item.name.length > 20
+													? `${item.name.substring(
+															0,
+															20
+													  )}...`
+													: item.name}
+											</td>
 											<td>{item.calories}</td>
 											<td>{item.carbs} g</td>
 											<td>{item.fats} g</td>

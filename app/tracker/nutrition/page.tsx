@@ -12,6 +12,7 @@ async function NutritionPage() {
 			<Link
 				className="text-sm text-amber-400 hover:text-amber-300 hover:underline-offset-2 hover:underline"
 				href={`/tracker/nutrition/user/${user?.id}`}
+				passHref={true}
 			>
 				See previous journals
 			</Link>
