@@ -9,6 +9,7 @@ interface FoodEntryCardProps {
 	fats: number;
 	protein: number;
 	deleteFoodEntry: (id: number) => void;
+	allowDelete?: boolean;
 }
 
 function FoodEntryCard({
@@ -18,11 +19,12 @@ function FoodEntryCard({
 	carbs,
 	fats,
 	protein,
-	deleteFoodEntry
+	deleteFoodEntry,
+	allowDelete,
 }: FoodEntryCardProps) {
 	return (
 		<>
-			<tr className="hover:bg-slate-200 cursor-pointer hover:text-indigo-600">
+			<tr className="hover:bg-slate-50 cursor-pointer hover:text-indigo-600">
 				<td>
 					{name.length > 30 ? name.substring(0, 30) + "..." : name}
 				</td>
@@ -30,14 +32,16 @@ function FoodEntryCard({
 				<td>{carbs}g</td>
 				<td>{fats}g</td>
 				<td>{protein}g</td>
-				<td>
-					<button onClick={() => deleteFoodEntry(id)}>
-						<X
-							className="hover:bg-slate-300 ml-3 rounded-full"
-							color="red"
-						/>
-					</button>
-				</td>
+				{allowDelete && (
+					<td>
+						<button onClick={() => deleteFoodEntry(id)}>
+							<X
+								className="hover:bg-slate-300 ml-3 rounded-full"
+								color="red"
+							/>
+						</button>
+					</td>
+				)}
 			</tr>
 		</>
 	);

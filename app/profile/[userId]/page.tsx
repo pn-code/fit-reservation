@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: Props) {
     const user = await clerkClient.users.getUser(params.userId);
 
     return {
-        title: `${user?.firstName} ${user?.lastName}`,
+        title: `${user?.firstName} ${user?.lastName} | FitHeroes`,
     };
 }
 

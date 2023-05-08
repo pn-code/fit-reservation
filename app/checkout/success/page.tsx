@@ -2,11 +2,12 @@
 import axios from "axios";
 import moment from "moment";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function CheckoutSuccessPage() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const sessionId = urlParams.get("session_id");
+    const searchParams = useSearchParams();
+    const sessionId = searchParams.get("session_id");
 
     const [subscription, setSubscription] = useState({
         expirationDate: "",
@@ -16,7 +17,7 @@ export default function CheckoutSuccessPage() {
 
     useEffect(() => {
         const checkForPayment = async () => {
-            const res = await axios.put("/api/subscriptions", { sessionId });
+            const res = await axios.post("/api/subscriptions", { sessionId });
 
             if (res.status === 200) {
                 setSubscription(res.data.subscription);

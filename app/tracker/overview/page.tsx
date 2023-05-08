@@ -5,6 +5,10 @@ import getFoodEntries from "../../../helpers/getFoodEntries";
 import getExerciseEntries from "../../../helpers/getExerciseEntries";
 import moment from "moment";
 
+export const metadata = {
+    title: "Tracker Overview | FitHeroes",
+};
+
 const TrackerOverview = async () => {
     // Nutrition Data
     const foodEntries = await getFoodEntries();
