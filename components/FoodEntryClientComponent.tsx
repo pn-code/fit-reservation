@@ -121,6 +121,8 @@ export default function FoodEntryClientComponent() {
 								value={calories}
 								required
 								disabled={loading}
+								min={0}
+								max={10000}
 							/>
 						</section>
 						<section className="flex flex-col gap-2">
@@ -135,6 +137,8 @@ export default function FoodEntryClientComponent() {
 								value={carbs}
 								required
 								disabled={loading}
+								min={0}
+								max={1000}
 							/>
 						</section>
 
@@ -150,6 +154,8 @@ export default function FoodEntryClientComponent() {
 								value={fats}
 								required
 								disabled={loading}
+								min={0}
+								max={1000}
 							/>
 						</section>
 
@@ -165,6 +171,8 @@ export default function FoodEntryClientComponent() {
 								value={protein}
 								required
 								disabled={loading}
+								min={0}
+								max={1000}
 							/>
 						</section>
 					</section>
