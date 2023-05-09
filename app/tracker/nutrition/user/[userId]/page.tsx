@@ -74,7 +74,7 @@ export default async function UserNutritionJournals() {
                                     <table className="table-auto w-full">
                                         <thead className="h-8 text-xs sm:text-[16px] font-semibold uppercase text-yellow-50 bg-blue-900/60">
                                             <tr className="p-2 whitespace-nowrap">
-                                                <th className="w-56">
+                                                <th className="w-40 sm:w-56">
                                                     <div className="font-semibold text-left">
                                                         Name
                                                     </div>
@@ -84,19 +84,24 @@ export default async function UserNutritionJournals() {
                                                         Calories
                                                     </div>
                                                 </th>
-                                                <th>
+                                                <th className="hidden sm:flex">
                                                     <div className="font-semibold text-left">
                                                         Carbs
                                                     </div>
                                                 </th>
-                                                <th>
+                                                <th className="hidden sm:flex">
                                                     <div className="font-semibold text-left">
                                                         Fats
                                                     </div>
                                                 </th>
-                                                <th>
+                                                <th className="hidden sm:flex">
                                                     <div className="font-semibold text-left">
                                                         Protein
+                                                    </div>
+                                                </th>
+                                                <th className="sm:hidden">
+                                                    <div className="font-semibold text-left">
+                                                        C/F/P
                                                     </div>
                                                 </th>
                                             </tr>
@@ -117,18 +122,20 @@ export default async function UserNutritionJournals() {
                                                                   )}...`
                                                                 : item.name}
                                                         </td>
+
                                                         <td className="py-2 whitespace-nowrap">
                                                             {item.calories}
                                                         </td>
-                                                        <td className="py-2 whitespace-nowrap">
+                                                        <td className="py-2 whitespace-nowrap hidden sm:flex">
                                                             {item.carbs} g
                                                         </td>
-                                                        <td className="py-2 whitespace-nowrap">
+                                                        <td className="py-2 whitespace-nowrap hidden sm:flex">
                                                             {item.fats} g
                                                         </td>
-                                                        <td className="py-2 whitespace-nowrap">
+                                                        <td className="py-2 whitespace-nowrap hidden sm:flex">
                                                             {item.protein} g
                                                         </td>
+                                                        <td className="sm:hidden">{`${item.carbs}/${item.fats}/${item.protein}`}</td>
                                                     </tr>
                                                 </tbody>
                                             )
