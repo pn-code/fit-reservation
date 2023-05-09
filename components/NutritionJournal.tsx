@@ -1,15 +1,18 @@
 "use client";
 import FoodEntryCard from "./FoodEntryCard";
 import LineDivider from "./LineDivider";
+import Spinner from "./Spinner";
 
 interface Props {
     foodEntries: FoodEntry[];
     deleteFoodEntry: any;
+    loadingNutrition: boolean;
 }
 
 export default function NutritionJournal({
     foodEntries,
     deleteFoodEntry,
+    loadingNutrition,
 }: Props) {
     const totalCalories = foodEntries?.reduce(
         (acc, curr) => curr.calories + acc,
@@ -28,12 +31,19 @@ export default function NutritionJournal({
             <h2 className="text-2xl font-semibold text-amber-400">
                 Nutrition Journal
             </h2>
-            {foodEntries.length === 0 && (
+
+            {/* When loading entries */}
+            {loadingNutrition && <Spinner />}
+
+            {/* When no entries are found */}
+            {foodEntries.length === 0 && !loadingNutrition && (
                 <p className="font-semibold text-sm">
                     Currently has no entries.
                 </p>
             )}
-            {foodEntries.length > 0 ? (
+
+            {/* When entries exist and are found */}
+            {foodEntries.length > 0 && !loadingNutrition ? (
                 <div className="p-3 w-full sm:w-[75%]">
                     <div className="overflow-x-auto w-full">
                         <table className="table-auto w-full">
@@ -49,19 +59,24 @@ export default function NutritionJournal({
                                             Calories
                                         </div>
                                     </th>
-                                    <th>
+                                    <th className="hidden sm:flex">
                                         <div className="font-semibold text-left">
                                             Carbs
                                         </div>
                                     </th>
-                                    <th>
+                                    <th className="hidden sm:flex">
                                         <div className="font-semibold text-left">
                                             Fats
                                         </div>
                                     </th>
-                                    <th>
+                                    <th className="hidden sm:flex">
                                         <div className="font-semibold text-left">
                                             Protein
+                                        </div>
+                                    </th>
+                                    <th className="sm:hidden">
+                                        <div className="font-semibold text-left">
+                                            C/F/P
                                         </div>
                                     </th>
                                     <th>
@@ -95,16 +110,21 @@ export default function NutritionJournal({
                                     <th className="font-semibold text-left">
                                         <div>{totalCalories}</div>
                                     </th>
-                                    <th className="font-semibold text-left">
+                                    <th className="font-semibold text-left hidden sm:flex">
                                         <div>{totalCarbs}g</div>
                                     </th>
-                                    <th className="font-semibold text-left">
+                                    <th className="font-semibold text-left hidden sm:flex">
                                         <div>{totalFats}g</div>
                                     </th>
-                                    <th className="font-semibold text-left">
+                                    <th className="font-semibold text-left hidden sm:flex">
                                         <div>{totalProtein}g</div>
                                     </th>
-                                    <th><div></div></th>
+                                    <th className="font-semibold text-left sm:hidden">
+                                        <div>{`${totalCarbs}/${totalFats}/${totalProtein}`}</div>
+                                    </th>
+                                    <th>
+                                        <div></div>
+                                    </th>
                                 </tr>
                             </tfoot>
                         </table>
