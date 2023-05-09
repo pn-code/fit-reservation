@@ -11,7 +11,7 @@ async function ExercisePage() {
 	const user = await currentUser();
     
 	return (
-		<main className="w-full h-full bg-slate-800 py-6 rounded-md flex flex-col gap-4 shadow-md px-10 text-white/90">
+		<main className="w-full h-full bg-slate-800 py-6 rounded-md flex flex-col gap-4 shadow-md px-2 sm:px-10 text-white/90">
 			<TrackerHeader title="Exercise Tracker" />
 			<Link
 				className="text-sm text-amber-400 hover:text-amber-300 hover:underline-offset-2 hover:underline"

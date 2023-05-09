@@ -1,13 +1,19 @@
 "use client";
 import FoodEntryCard from "./FoodEntryCard";
 import LineDivider from "./LineDivider";
+import Spinner from "./Spinner";
 
 interface Props {
     foodEntries: FoodEntry[];
-    deleteFoodEntry: any
+    deleteFoodEntry: any;
+    loadingNutrition: boolean;
 }
 
-export default function NutritionJournal({ foodEntries, deleteFoodEntry }: Props) {
+export default function NutritionJournal({
+    foodEntries,
+    deleteFoodEntry,
+    loadingNutrition,
+}: Props) {
     const totalCalories = foodEntries?.reduce(
         (acc, curr) => curr.calories + acc,
         0
@@ -25,50 +31,108 @@ export default function NutritionJournal({ foodEntries, deleteFoodEntry }: Props
             <h2 className="text-2xl font-semibold text-amber-400">
                 Nutrition Journal
             </h2>
-            {foodEntries.length === 0 && (
+
+            {/* When loading entries */}
+            {loadingNutrition && <Spinner />}
+
+            {/* When no entries are found */}
+            {foodEntries.length === 0 && !loadingNutrition && (
                 <p className="font-semibold text-sm">
                     Currently has no entries.
                 </p>
             )}
-            {foodEntries.length > 0 ? (
-                <table className="w-full text-left lg:w-[60%]">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Calories</th>
-                            <th>Carbs</th>
-                            <th>Fats</th>
-                            <th>Protein</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
 
-                    <tbody className="text-sm">
-                        {foodEntries?.map((entry) => (
-                            <FoodEntryCard
-                                id={entry.id}
-                                name={entry.name}
-                                calories={entry.calories}
-                                carbs={entry.carbs}
-                                fats={entry.fats}
-                                protein={entry.protein}
-                                key={entry.id}
-                                deleteFoodEntry={deleteFoodEntry}
-                                allowDelete={true}
-                            />
-                        ))}
-                    </tbody>
-                    <tfoot className="border-t border-slate-50 pt-2">
-                        <tr>
-                            <th>Total</th>
-                            <th>{totalCalories}</th>
-                            <th>{totalCarbs}g</th>
-                            <th>{totalFats}g</th>
-                            <th>{totalProtein}g</th>
-                        </tr>
-                    </tfoot>
-                </table>
-            ): ""}
+            {/* When entries exist and are found */}
+            {foodEntries.length > 0 && !loadingNutrition ? (
+                <div className="p-3 w-full sm:w-[75%]">
+                    <div className="overflow-x-auto w-full">
+                        <table className="table-auto w-full">
+                            <thead className="h-8 text-xs sm:text-[16px] font-semibold uppercase text-yellow-50 bg-blue-900/60">
+                                <tr className="p-2 whitespace-nowrap">
+                                    <th>
+                                        <div className="font-semibold text-left">
+                                            Name
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div className="font-semibold text-left">
+                                            Calories
+                                        </div>
+                                    </th>
+                                    <th className="hidden sm:flex">
+                                        <div className="font-semibold text-left">
+                                            Carbs
+                                        </div>
+                                    </th>
+                                    <th className="hidden sm:flex">
+                                        <div className="font-semibold text-left">
+                                            Fats
+                                        </div>
+                                    </th>
+                                    <th className="hidden sm:flex">
+                                        <div className="font-semibold text-left">
+                                            Protein
+                                        </div>
+                                    </th>
+                                    <th className="sm:hidden">
+                                        <div className="font-semibold text-left">
+                                            C/F/P
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div className="font-semibold text-left">
+                                            Action
+                                        </div>
+                                    </th>
+                                </tr>
+                            </thead>
+
+                            <tbody className="text-sm divide-y divide-gray-100">
+                                {foodEntries?.map((entry) => (
+                                    <FoodEntryCard
+                                        id={entry.id}
+                                        name={entry.name}
+                                        calories={entry.calories}
+                                        carbs={entry.carbs}
+                                        fats={entry.fats}
+                                        protein={entry.protein}
+                                        key={entry.id}
+                                        deleteFoodEntry={deleteFoodEntry}
+                                        allowDelete={true}
+                                    />
+                                ))}
+                            </tbody>
+                            <tfoot className="h-8 text-xs sm:text-[16px] font-semibold uppercase text-yellow-50 bg-blue-900/60">
+                                <tr className="p-2 whitespace-nowrap">
+                                    <th className="font-semibold text-left">
+                                        <div>Total</div>
+                                    </th>
+                                    <th className="font-semibold text-left">
+                                        <div>{totalCalories}</div>
+                                    </th>
+                                    <th className="font-semibold text-left hidden sm:flex">
+                                        <div>{totalCarbs}g</div>
+                                    </th>
+                                    <th className="font-semibold text-left hidden sm:flex">
+                                        <div>{totalFats}g</div>
+                                    </th>
+                                    <th className="font-semibold text-left hidden sm:flex">
+                                        <div>{totalProtein}g</div>
+                                    </th>
+                                    <th className="font-semibold text-left sm:hidden">
+                                        <div>{`${totalCarbs}/${totalFats}/${totalProtein}`}</div>
+                                    </th>
+                                    <th>
+                                        <div></div>
+                                    </th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            ) : (
+                ""
+            )}
         </section>
     );
 }

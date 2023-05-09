@@ -11,6 +11,7 @@ import {
 
 import "chartjs-adapter-moment";
 import { Line } from "react-chartjs-2";
+import LineDivider from "./LineDivider";
 
 Chart.register(
     TimeScale,
@@ -44,7 +45,7 @@ export default function LineChart({
                 labels: {
                     color: "rgb(224, 224, 224)",
                 },
-                position: "top" as const,
+                position: "bottom" as const,
             },
             title: {
                 display: true,
@@ -89,10 +90,11 @@ export default function LineChart({
     };
 
     return (
-        <section className="w-full">
+        <section className="w-full h-full">
             {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
             {/* @ts-ignore */}
             <Line data={data} options={options} />
+            <LineDivider />
         </section>
     );
 }
