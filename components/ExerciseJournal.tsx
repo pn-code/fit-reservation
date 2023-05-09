@@ -1,15 +1,18 @@
 "use client";
 import ExerciseEntryCard from "./ExerciseEntryCard";
 import LineDivider from "./LineDivider";
+import Spinner from "./Spinner";
 
 interface Props {
     exercises: ExerciseEntry[];
     deleteExerciseEntry: any;
+    loadingExercises: boolean;
 }
 
 export default function ExerciseJournal({
     exercises,
     deleteExerciseEntry,
+    loadingExercises,
 }: Props) {
     return (
         <section className="flex flex-col items-center gap-4 py-5 w-full">
@@ -17,34 +20,53 @@ export default function ExerciseJournal({
             <h2 className="text-2xl font-semibold text-amber-400">
                 Exercise Journal
             </h2>
-            {exercises.length === 0 && (
+
+            {/* When loading exercises */}
+            {loadingExercises && <Spinner />}
+
+            {/* When no exercises could be found. */}
+            {exercises.length === 0 && !loadingExercises && (
                 <p className="font-semibold text-sm">
                     Currently has no entries.
                 </p>
             )}
-            {exercises.length > 0 && (
+
+            {/* Successfully loaded exercises  */}
+            {exercises.length > 0 && !loadingExercises && (
                 <div className="p-3 w-full sm:w-[75%]">
                     <div className="overflow-x-auto w-full">
                         <table className="table-auto w-full">
                             <thead className="h-8 text-xs sm:text-[16px] font-semibold uppercase text-yellow-50 bg-blue-900/60">
                                 <tr className="p-2 whitespace-nowrap">
                                     <th>
-                                        <div className="font-semibold text-left">Exercise</div>
+                                        <div className="font-semibold text-left">
+                                            Exercise
+                                        </div>
+                                    </th>
+                                    <th className="hidden sm:flex">
+                                        <div className="font-semibold text-left">
+                                            Type
+                                        </div>
                                     </th>
                                     <th>
-                                        <div className="font-semibold text-left">Type</div>
+                                        <div className="font-semibold text-left">
+                                            Reps
+                                        </div>
                                     </th>
                                     <th>
-                                        <div className="font-semibold text-left">Reps</div>
+                                        <div className="font-semibold text-left">
+                                            Weight
+                                        </div>
+                                    </th>
+                                    <th className="hidden sm:flex">
+                                        <div className="font-semibold text-left">
+                                            Calories
+                                        </div>
                                     </th>
                                     <th>
-                                        <div className="font-semibold text-left">Weight</div>
-                                    </th>
-                                    <th>
-                                        <div className="font-semibold text-left">Calories</div>
-                                    </th>
-                                    <th>
-                                        <div className="font-semibold text-left">Action</div>
+                                        <div className="font-semibold text-left">
+                                            Action
+                                        </div>
                                     </th>
                                 </tr>
                             </thead>
