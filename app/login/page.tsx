@@ -7,7 +7,7 @@ export const metadata = {
 
 export default function LoginPage() {
 	return (
-		<main className="h-[calc(100vh-100px)] w-full flex justify-center items-center">
+		<main className="w-full h-full bg-slate-800 py-6 rounded-md flex flex-col gap-4 shadow-md px-2 sm:px-10 text-white/90">
 			<SignIn signUpUrl="/register" />
 		</main>
 	);
