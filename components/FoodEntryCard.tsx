@@ -1,5 +1,5 @@
 "use client";
-import { X } from "lucide-react";
+import { Edit, X } from "lucide-react";
 
 interface FoodEntryCardProps {
 	id: number;
@@ -24,20 +24,21 @@ function FoodEntryCard({
 }: FoodEntryCardProps) {
 	return (
 		<>
-			<tr className="hover:bg-slate-50 cursor-pointer hover:text-indigo-600">
-				<td>
+			<tr className="text-[14px] bg-blue-900/20 hover:bg-indigo-600 cursor-pointer hover:text-white">
+				<td className="p-2 whitespace-nowrap">
 					{name.length > 30 ? name.substring(0, 30) + "..." : name}
 				</td>
-				<td>{calories}</td>
-				<td>{carbs}g</td>
-				<td>{fats}g</td>
-				<td>{protein}g</td>
+				<td className="p-2 whitespace-nowrap">{calories}</td>
+				<td className="p-2 whitespace-nowrap">{carbs}g</td>
+				<td className="p-2 whitespace-nowrap">{fats}g</td>
+				<td className="p-2 whitespace-nowrap">{protein}g</td>
 				{allowDelete && (
-					<td>
+					<td className="p-2 whitespace-nowrap">
 						<button onClick={() => deleteFoodEntry(id)}>
 							<X
-								className="hover:bg-slate-300 ml-3 rounded-full"
+								className="hover:bg-white ml-3 rounded-full"
 								color="red"
+								size={24}
 							/>
 						</button>
 					</td>

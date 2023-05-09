@@ -26,19 +26,19 @@ function ExerciseEntryCard({
 }: ExerciseEntryCardProps) {
     return (
         <>
-            <tr className="hover:bg-slate-50 cursor-pointer hover:text-indigo-600">
-                <td>
+            <tr className="text-[14px] bg-blue-900/20 hover:bg-indigo-600 cursor-pointer hover:text-white">
+                <td className="p-2 whitespace-nowrap">
                     {name.length > 30 ? name.substring(0, 30) + "..." : name}
                 </td>
-                <td>{type}</td>
-                <td>
+                <td className="p-2 whitespace-nowrap">{type}</td>
+                <td className="p-2 whitespace-nowrap">
                     {type == "resistance"
                         ? `${sets} x ${reps}`
                         : duration + " mins"}
                 </td>
-                <td>{weight} lbs</td>
-                <td>{calories}</td>
-                <td>
+                <td className="p-2 whitespace-nowrap">{weight} lbs</td>
+                <td className="p-2 whitespace-nowrap">{calories}</td>
+                <td className="p-2 whitespace-nowrap">
                     <button onClick={() => deleteExerciseEntry(id)}>
                         <X
                             className="hover:bg-slate-300 ml-3 rounded-full"
