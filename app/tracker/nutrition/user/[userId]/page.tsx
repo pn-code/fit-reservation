@@ -84,17 +84,17 @@ export default async function UserNutritionJournals() {
                                                         Calories
                                                     </div>
                                                 </th>
-                                                <th className="hidden sm:flex">
+                                                <th className="hidden sm:table-cell">
                                                     <div className="font-semibold text-left">
                                                         Carbs
                                                     </div>
                                                 </th>
-                                                <th className="hidden sm:flex">
+                                                <th className="hidden sm:table-cell">
                                                     <div className="font-semibold text-left">
                                                         Fats
                                                     </div>
                                                 </th>
-                                                <th className="hidden sm:flex">
+                                                <th className="hidden sm:table-cell">
                                                     <div className="font-semibold text-left">
                                                         Protein
                                                     </div>
@@ -126,13 +126,13 @@ export default async function UserNutritionJournals() {
                                                         <td className="py-2 whitespace-nowrap">
                                                             {item.calories}
                                                         </td>
-                                                        <td className="py-2 whitespace-nowrap hidden sm:flex">
+                                                        <td className="py-2 whitespace-nowrap hidden sm:table-cell">
                                                             {item.carbs} g
                                                         </td>
-                                                        <td className="py-2 whitespace-nowrap hidden sm:flex">
+                                                        <td className="py-2 whitespace-nowrap hidden sm:table-cell">
                                                             {item.fats} g
                                                         </td>
-                                                        <td className="py-2 whitespace-nowrap hidden sm:flex">
+                                                        <td className="py-2 whitespace-nowrap hidden sm:table-cell">
                                                             {item.protein} g
                                                         </td>
                                                         <td className="sm:hidden">{`${item.carbs}/${item.fats}/${item.protein}`}</td>
