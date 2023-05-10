@@ -5,13 +5,32 @@ import getFoodEntries from "../../../helpers/getFoodEntries";
 import getExerciseEntries from "../../../helpers/getExerciseEntries";
 import moment from "moment";
 
+interface Props {
+    foodEntries: FoodEntry[];
+    exerciseEntries: ExerciseEntry[];
+}
+
 export const metadata = {
     title: "Tracker Overview | FitHeroes",
 };
 
-const TrackerOverview = async () => {
+export async function getStaticProps() {
     // Nutrition Data
     const foodEntries = await getFoodEntries();
+
+    // Exercise Data
+    const exerciseEntries = await getExerciseEntries();
+
+    return {
+        props: {
+            foodEntries,
+            exerciseEntries,
+        },
+        revalidate: 5,
+    };
+}
+
+const TrackerOverview = async ({ foodEntries, exerciseEntries }: Props) => {
     const totalCalories = foodEntries?.reduce(
         (acc, curr) => curr.calories + acc,
         0
@@ -23,19 +42,21 @@ const TrackerOverview = async () => {
         0
     );
 
-    // Exercise Data
-    const exerciseEntries = await getExerciseEntries();
     const totalActivity = exerciseEntries?.reduce(
         (acc, curr) => {
             if (curr.type === "cardio" && curr.duration != null) {
                 acc.cardio = acc.cardio + curr.duration;
-            } else if (curr.type === "resistance" && curr.reps != null && curr.sets != null) {
+            } else if (
+                curr.type === "resistance" &&
+                curr.reps != null &&
+                curr.sets != null
+            ) {
                 acc.resistance = acc.resistance + curr.reps * curr.sets;
             }
             return acc;
         },
         { resistance: 0, cardio: 0 }
-    )
+    );
 
     return (
         <main className="w-full h-full bg-slate-800 py-6 rounded-md flex flex-col gap-4 shadow-md px-2 sm:px-10 text-white/90">
