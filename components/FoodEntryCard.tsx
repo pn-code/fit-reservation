@@ -29,13 +29,13 @@ function FoodEntryCard({
                     {name.length > 30 ? name.substring(0, 30) + "..." : name}
                 </td>
                 <td className="py-2 whitespace-nowrap">{calories}</td>
-                <td className="py-2 whitespace-nowrap hidden sm:flex">
+                <td className="py-2 whitespace-nowrap hidden sm:table-cell">
                     {carbs}g
                 </td>
-                <td className="py-2 whitespace-nowrap hidden sm:flex">
+                <td className="py-2 whitespace-nowrap hidden sm:table-cell">
                     {fats}g
                 </td>
-                <td className="py-2 whitespace-nowrap hidden sm:flex">
+                <td className="py-2 whitespace-nowrap hidden sm:table-cell">
                     {protein}g
                 </td>
                 <td className="sm:hidden">{`${carbs}/${fats}/${protein}`}</td>

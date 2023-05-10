@@ -59,21 +59,25 @@ export default function NutritionJournal({
                                             Calories
                                         </div>
                                     </th>
-                                    <th className="hidden sm:flex">
+
+                                    <th className="hidden sm:table-cell">
                                         <div className="font-semibold text-left">
                                             Carbs
                                         </div>
                                     </th>
-                                    <th className="hidden sm:flex">
+
+                                    <th className="hidden sm:table-cell">
                                         <div className="font-semibold text-left">
                                             Fats
                                         </div>
                                     </th>
-                                    <th className="hidden sm:flex">
+
+                                    <th className="hidden sm:table-cell">
                                         <div className="font-semibold text-left">
                                             Protein
                                         </div>
                                     </th>
+                                    
                                     <th className="sm:hidden">
                                         <div className="font-semibold text-left">
                                             C/F/P
@@ -110,13 +114,13 @@ export default function NutritionJournal({
                                     <th className="font-semibold text-left">
                                         <div>{totalCalories}</div>
                                     </th>
-                                    <th className="font-semibold text-left hidden sm:flex">
+                                    <th className="font-semibold text-left hidden sm:table-cell">
                                         <div>{totalCarbs}g</div>
                                     </th>
-                                    <th className="font-semibold text-left hidden sm:flex">
+                                    <th className="font-semibold text-left hidden sm:table-cell">
                                         <div>{totalFats}g</div>
                                     </th>
-                                    <th className="font-semibold text-left hidden sm:flex">
+                                    <th className="font-semibold text-left hidden sm:table-cell">
                                         <div>{totalProtein}g</div>
                                     </th>
                                     <th className="font-semibold text-left sm:hidden">

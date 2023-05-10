@@ -81,7 +81,7 @@ function MeasurementsForm({ setWeights, setBodyFats }: Props) {
                         type="button"
                         className="bg-indigo-600 hover:bg-indigo-700 rounded-lg text-white px-4 py-2 hover:underline"
                     >
-                        Submit Weight
+                        Submit
                     </button>
                 </form>
 
@@ -99,7 +99,7 @@ function MeasurementsForm({ setWeights, setBodyFats }: Props) {
                         type="button"
                         className="bg-indigo-600 hover:bg-indigo-700 rounded-lg text-white px-4 py-2 hover:underline"
                     >
-                        Submit Body Fat
+                        Submit
                     </button>
                 </form>
             </section>
