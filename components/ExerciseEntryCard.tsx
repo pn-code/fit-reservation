@@ -30,14 +30,14 @@ function ExerciseEntryCard({
                 <td className="py-2 whitespace-nowrap">
                     {name.length > 30 ? name.substring(0, 30) + "..." : name}
                 </td>
-                <td className="py-2 whitespace-nowrap hidden sm:flex">{type}</td>
+                <td className="py-2 whitespace-nowrap hidden sm:table-cell">{type}</td>
                 <td className="py-2 whitespace-nowrap">
                     {type == "resistance"
                         ? `${sets} x ${reps}`
                         : duration + " mins"}
                 </td>
                 <td className="py-2 whitespace-nowrap">{weight} lbs</td>
-                <td className="py-2 whitespace-nowrap hidden sm:flex">{calories}</td>
+                <td className="py-2 whitespace-nowrap hidden sm:table-cell">{calories}</td>
                 <td className="py-2 whitespace-nowrap">
                     <button onClick={() => deleteExerciseEntry(id)}>
                         <X

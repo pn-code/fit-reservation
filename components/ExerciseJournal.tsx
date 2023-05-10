@@ -43,7 +43,7 @@ export default function ExerciseJournal({
                                             Exercise
                                         </div>
                                     </th>
-                                    <th className="hidden sm:flex">
+                                    <th className="hidden sm:table-cell">
                                         <div className="font-semibold text-left">
                                             Type
                                         </div>
@@ -58,7 +58,7 @@ export default function ExerciseJournal({
                                             Weight
                                         </div>
                                     </th>
-                                    <th className="hidden sm:flex">
+                                    <th className="hidden sm:table-cell">
                                         <div className="font-semibold text-left">
                                             Calories
                                         </div>
