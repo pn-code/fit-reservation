@@ -142,10 +142,10 @@ export default function ExerciseEntryClientComponent() {
                 </section>
 
                 {type === "cardio" && (
-                    <section className="flex lg:justify-between gap-4">
-                        <>
+                    <section className="flex flex-col gap-4 sm:flex-row sm:justify-between">
+                        <section className="flex flex-col gap-2">
                             <label htmlFor="duration">
-                                Duration (minutes):
+                                Duration (min):
                             </label>
                             <input
                                 className="w-16"
@@ -157,8 +157,8 @@ export default function ExerciseEntryClientComponent() {
                                 value={duration}
                                 min={0}
                             />
-                        </>
-                        <>
+                        </section>
+                        <section className="flex flex-col gap-2">
                             <label htmlFor="calories">Calories:</label>
                             <input
                                 className="w-16"
@@ -169,7 +169,7 @@ export default function ExerciseEntryClientComponent() {
                                 }
                                 value={calories}
                             />
-                        </>
+                        </section>
                     </section>
                 )}
 
