@@ -1,11 +1,12 @@
-"use client"
+"use client";
 import axios from "axios";
+import { ChevronsUp } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
 export default function StripeCheckOutButton() {
     const router = useRouter();
-    
+
     useEffect(() => {
         const query = new URLSearchParams(window.location.search);
         if (query.get("success")) {
@@ -29,13 +30,16 @@ export default function StripeCheckOutButton() {
             console.error(error);
         }
     };
-    
+
     return (
         <button
             onClick={handleCheckOut}
-            className="rounded-md px-4 py-2 bg-green-500 hover:bg-green-600 text-white/90 hover:text-white font-semibold"
+            className="rounded-md px-4 py-2 bg-green-500 hover:bg-green-600 text-white/90 hover:text-white"
         >
-            Upgrade
+            <div className="flex gap-4 justify-center items-center">
+                <ChevronsUp />
+                <p>Upgrade Now!</p>
+            </div>
         </button>
     );
 }
