@@ -1,9 +1,9 @@
-import Image from "next/image";
 import SignOutButton from "../../../components/SignOutButton";
 import { clerkClient, currentUser } from "@clerk/nextjs/app-beta";
 import StripeCheckOutButton from "../../../components/StripeCheckOutButton";
 import { prisma } from "../../../lib/client";
 import { Check } from "lucide-react";
+import UpdateUserComponent from "../../../components/UpdateUserComponent";
 
 interface Props {
     params: {
@@ -29,22 +29,15 @@ async function ProfilePage({ params }: Props) {
     });
 
     return (
-        <main className="w-full h-full bg-slate-800 py-6 rounded-md flex flex-col gap-4 shadow-md px-2 sm:px-10 text-white/90">
+        <main className="w-full min-h-[calc(100vh-90px)] bg-slate-800 py-6 rounded-md flex flex-col gap-4 shadow-md px-2 sm:px-10 text-white/90">
             <header className="flex justify-between font-bold pb-2 border-b-2 border-b-indigo-600 items-center">
                 <h1 className="text-3xl">Profile</h1>
                 <SignOutButton />
             </header>
 
             {/* User Information */}
-            <section className="flex gap-4 items-center">
-                <Image
-                    className="rounded-full"
-                    src={userOnProfile?.profileImageUrl || ""}
-                    alt={`${userOnProfile?.firstName} profile picture`}
-                    width={60}
-                    height={60}
-                />
-                <h2 className="text-2xl font-semibold text-amber-300">
+            <section className="flex gap-4 items-center mb-5">
+                <h2 className="text-3xl font-semibold text-amber-300 flex gap-4">
                     {`${userOnProfile?.firstName} ${userOnProfile?.lastName}`}
                 </h2>
                 {userIsSubscribed && (
@@ -54,8 +47,6 @@ async function ProfilePage({ params }: Props) {
                 )}
             </section>
 
-            {/* User Stats */}
-
             {/* Upgrade Profile */}
             {!userIsSubscribed && userId === user?.id && (
                 <section className="flex flex-col gap-4 sm:flex-row sm:justify-between">
@@ -63,11 +54,13 @@ async function ProfilePage({ params }: Props) {
                         <h2 className="text-2xl font-semibold text-amber-300">
                             Upgrade account to premium
                         </h2>
-                        <p>Gain immediate access to the Builder Page</p>
+                        <p>Get a cool verified check</p>
                     </section>
                     <StripeCheckOutButton />
                 </section>
             )}
+
+            {user?.id === userId && <UpdateUserComponent />}
         </main>
     );
 }

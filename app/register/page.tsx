@@ -5,10 +5,10 @@ export const metadata = {
     description: "Sign up for FitHeroes",
 };
 
-export default function Page() {
-	return (
-		<main className="w-full h-full bg-slate-800 py-6 rounded-md flex flex-col gap-4 shadow-md px-2 sm:px-10 text-white/90">
-			<SignUp signInUrl="/login" />
-		</main>
-	);
+export default function RegisterPage() {
+    return (
+        <main className="w-full h-[calc(100vh-90px)] bg-slate-800 py-6 rounded-md flex flex-col gap-4 shadow-md px-2 sm:px-10 text-white/90 justify-center items-center">
+            <SignUp signInUrl="/login" />
+        </main>
+    );
 }

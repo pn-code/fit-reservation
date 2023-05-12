@@ -49,7 +49,7 @@ export default async function UserExerciseJournals() {
     const dates = Object.keys(sortedJournals);
 
     return (
-        <main className="w-full h-full bg-slate-800 py-6 rounded-md flex flex-col gap-4 shadow-md px-2 sm:px-10 text-white/90">
+        <main className="w-full min-h-[calc(100vh-90px)] bg-slate-800 py-6 rounded-md flex flex-col gap-4 shadow-md px-2 sm:px-10 text-white/90">
             <header className="flex justify-between font-bold pb-2 border-b-2 border-b-indigo-600 items-center">
                 <h1 className="text-3xl">
                     {`${user?.firstName || "User"}'s Exercise Journals`}
@@ -62,6 +62,8 @@ export default async function UserExerciseJournals() {
                     Back
                 </Link>
             </header>
+
+            {journals.length === 0 && <span>No journals were found.</span>}
 
             {/* Render Journals */}
             <section>
@@ -88,9 +90,14 @@ export default async function UserExerciseJournals() {
                                         </thead>
                                         {sortedJournals[date].map(
                                             (item: ExerciseEntry) => (
-                                                <tbody className="text-sm divide-y divide-gray-100" key={item.id}>
+                                                <tbody
+                                                    className="text-sm divide-y divide-gray-100"
+                                                    key={item.id}
+                                                >
                                                     <tr className="text-[14px] bg-blue-900/20 hover:bg-indigo-600 cursor-pointer hover:text-white">
-                                                        <td className="py-2 whitespace-nowrap">{item.name}</td>
+                                                        <td className="py-2 whitespace-nowrap">
+                                                            {item.name}
+                                                        </td>
 
                                                         {item.type ==
                                                         "resistance" ? (
