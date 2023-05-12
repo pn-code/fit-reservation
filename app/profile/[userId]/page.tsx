@@ -1,9 +1,9 @@
-import Image from "next/image";
 import SignOutButton from "../../../components/SignOutButton";
 import { clerkClient, currentUser } from "@clerk/nextjs/app-beta";
 import StripeCheckOutButton from "../../../components/StripeCheckOutButton";
 import { prisma } from "../../../lib/client";
 import { Check } from "lucide-react";
+import UpdateUserComponent from "../../../components/UpdateUserComponent";
 
 interface Props {
     params: {
@@ -37,14 +37,7 @@ async function ProfilePage({ params }: Props) {
 
             {/* User Information */}
             <section className="flex gap-4 items-center">
-                <Image
-                    className="rounded-full"
-                    src={userOnProfile?.profileImageUrl || ""}
-                    alt={`${userOnProfile?.firstName} profile picture`}
-                    width={60}
-                    height={60}
-                />
-                <h2 className="text-2xl font-semibold text-amber-300">
+                <h2 className="text-2xl font-semibold text-amber-300 flex gap-4">
                     {`${userOnProfile?.firstName} ${userOnProfile?.lastName}`}
                 </h2>
                 {userIsSubscribed && (
@@ -54,7 +47,9 @@ async function ProfilePage({ params }: Props) {
                 )}
             </section>
 
-            {/* User Stats */}
+            <section className="flex gap-4">
+                {user?.id === userId && <UpdateUserComponent />}
+            </section>
 
             {/* Upgrade Profile */}
             {!userIsSubscribed && userId === user?.id && (
