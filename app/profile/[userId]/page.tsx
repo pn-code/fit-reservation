@@ -36,8 +36,8 @@ async function ProfilePage({ params }: Props) {
             </header>
 
             {/* User Information */}
-            <section className="flex gap-4 items-center">
-                <h2 className="text-2xl font-semibold text-amber-300 flex gap-4">
+            <section className="flex gap-4 items-center mb-5">
+                <h2 className="text-3xl font-semibold text-amber-300 flex gap-4">
                     {`${userOnProfile?.firstName} ${userOnProfile?.lastName}`}
                 </h2>
                 {userIsSubscribed && (
@@ -47,10 +47,6 @@ async function ProfilePage({ params }: Props) {
                 )}
             </section>
 
-            <section className="flex gap-4">
-                {user?.id === userId && <UpdateUserComponent />}
-            </section>
-
             {/* Upgrade Profile */}
             {!userIsSubscribed && userId === user?.id && (
                 <section className="flex flex-col gap-4 sm:flex-row sm:justify-between">
@@ -58,11 +54,13 @@ async function ProfilePage({ params }: Props) {
                         <h2 className="text-2xl font-semibold text-amber-300">
                             Upgrade account to premium
                         </h2>
-                        <p>Gain immediate access to the Builder Page</p>
+                        <p>Get a cool verified check</p>
                     </section>
                     <StripeCheckOutButton />
                 </section>
             )}
+
+            {user?.id === userId && <UpdateUserComponent />}
         </main>
     );
 }
