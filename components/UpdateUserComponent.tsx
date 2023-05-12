@@ -1,20 +1,43 @@
 "use client";
 
 import axios from "axios";
-import { Edit, X } from "lucide-react";
+import { Edit } from "lucide-react";
 import { useState } from "react";
+import { toast } from "react-hot-toast";
+import Spinner from "./Spinner";
+import { useRouter } from "next/navigation";
 
 export default function UpdateUsernameComponent() {
     const [isUpdating, setIsUpdating] = useState(false);
 
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
+    const [loading, setLoading] = useState(false);
+
+    const router = useRouter();
 
     const updateUserNames = async () => {
-        await axios.put("/api/users/full_name", {
-            firstName,
-            lastName,
-        });
+        try {
+            setLoading(true);
+            const res = await axios.put("/api/users/full_name", {
+                firstName,
+                lastName,
+            });
+
+            if (res.status === 200) {
+                toast.success("Successfully updated your name.");
+            }
+
+            setIsUpdating(false);
+            setFirstName("");
+            setLastName("");
+            router.refresh();
+        } catch (error) {
+            console.error(error, "Ran into an error. Try again later.");
+            toast.error("Ran into an error. Try again later.");
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
@@ -62,10 +85,11 @@ export default function UpdateUsernameComponent() {
                         />
                     </section>
                     <button
+                        disabled={loading}
                         onClick={updateUserNames}
-                        className="sm:w-72 text-gray-100 group flex cursor-pointer py-2 px-4 bg-blue-600 hover:bg-blue-700 rounded-md justify-center"
+                        className="sm:w-72 text-gray-100 group flex cursor-pointer py-2 px-4 bg-blue-600 hover:bg-blue-700 rounded-md justify-center disabled:bg-gray-50"
                     >
-                        Submit New Name
+                        {loading ? <Spinner /> : "Submit New Name"}
                     </button>
                 </section>
             )}
