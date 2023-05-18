@@ -93,7 +93,7 @@ const Navbar = () => {
                         {user != undefined && (
                             <Link
                                 className={`group relative ${
-                                    pathname === "/profile"
+                                    pathname.includes("/profile")
                                         ? currentPathStyles
                                         : ""
                                 }`}
