@@ -1,6 +1,5 @@
 "use client";
 import { useEffect, useState } from "react";
-import MeasurementsForm from "./MeasurementsForm";
 import StatisticsSection from "./StatisticsSection";
 import axios from "axios";
 import LineChart from "./LineChart";
