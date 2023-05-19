@@ -51,11 +51,11 @@ export default function UpdateUsernameComponent() {
                 </section>
                 <button
                     onClick={() => setIsUpdating((prev) => !prev)}
-                    className="text-gray-100 group flex cursor-pointer items-center py-2 px-4 bg-indigo-600 hover:bg-indigo-700 rounded-md justify-center"
+                    className="text-gray-100 group flex cursor-pointer items-center py-2 px-4 bg-indigo-600 hover:bg-indigo-700 rounded-md justify-center sm:w-42"
                 >
-                    <div className="flex gap-4 justify-center items-center">
+                    <div className="flex gap-4 justify-center items-center sm:w-42">
                         <Edit />
-                        {!isUpdating ? <h3>Update Name</h3> : <h3>Close</h3>}
+                        {!isUpdating ? <h3>Update Name</h3> : <h3>Cancel</h3>}
                     </div>
                 </button>
             </section>

@@ -34,11 +34,11 @@ export default function StripeCheckOutButton() {
     return (
         <button
             onClick={handleCheckOut}
-            className="rounded-md px-4 py-2 bg-green-500 hover:bg-green-600 text-white/90 hover:text-white"
+            className="rounded-md px-4 py-2 bg-green-600 hover:bg-green-700 text-white/90 hover:text-white sm:w-42"
         >
             <div className="flex gap-4 justify-center items-center">
                 <ChevronsUp />
-                <p>Upgrade Now!</p>
+                <p>Upgrade Now</p>
             </div>
         </button>
     );
