@@ -1,6 +1,7 @@
 import { clerkClient } from "@clerk/nextjs/server";
 import { GlobeIcon, HammerIcon } from "lucide-react";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 
 export const metadata = {
     title: "Plans | FitHeroes",
@@ -11,7 +12,11 @@ interface Props {
 }
 
 export default async function Plans({ params }: Props) {
-    const user = await clerkClient.users.getUser(params.userId);
+    const user = await clerkClient.users.getUser(params.userId)
+
+    if (!user) {
+        notFound();
+    }
 
     return (
         <main className="w-full h-[calc(100vh-90px)] bg-slate-800 py-6 rounded-md flex flex-col gap-4 shadow-md px-2 sm:px-10 text-white/90">
@@ -22,14 +27,14 @@ export default async function Plans({ params }: Props) {
                         className="flex justify-center items-center gap-2 bg-green-600 hover:bg-green-700 rounded-lg text-white p-2"
                         href="/plans/build"
                     >
-                        <HammerIcon size={24}/>
+                        <HammerIcon size={24} />
                         <span className="hidden sm:flex">Build</span>
                     </Link>
                     <Link
                         className="flex justify-center items-center gap-2 bg-indigo-600 hover:bg-indigo-700 rounded-lg text-white p-2"
                         href="/plans/explore"
                     >
-                        <GlobeIcon size={24}/>
+                        <GlobeIcon size={24} />
                         <span className="hidden sm:flex">Explore</span>
                     </Link>
                 </section>
