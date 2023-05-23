@@ -11,7 +11,7 @@ export default function BuildPlanForm() {
     const [duration, setDuration] = useState<number>(0);
 
     return (
-        <section>
+        <section className="flex flex-col gap-4 lg:flex-row">
             <form className="flex flex-col gap-4 justify-center bg-gray-800 px-4 py-2 rounded-md">
                 {/* Plan Name */}
                 <section className="flex flex-col gap-2">
@@ -101,7 +101,49 @@ export default function BuildPlanForm() {
                         onChange={(e) => setDuration(Number(e.target.value))}
                     />
                 </section>
+
+                <button
+                    onClick={() => console.log("hello")}
+                    type="button"
+                    className="w-full sm:w-72 bg-indigo-600 hover:bg-indigo-700 rounded-lg mt-4 text-white px-4 py-2 hover:underline"
+                >
+                    Submit
+                </button>
             </form>
+
+            {/* Exercise List */}
+            <section className="w-full">
+                <h2 className="text-lg font-bold">Exercise List</h2>
+
+                <table className="table-auto w-full">
+                    <thead className="h-8 text-xs sm:text-[16px] font-semibold uppercase text-yellow-50 bg-blue-900/60">
+                        <tr className="p-2 whitespace-nowrap">
+                            <th>
+                                <div className="font-semibold text-left">
+                                    Exercise
+                                </div>
+                            </th>
+                            <th>
+                                <div className="font-semibold text-left">
+                                    Reps
+                                </div>
+                            </th>
+                            <th>
+                                <div className="font-semibold text-left">
+                                    Duration
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                </table>
+
+                <tbody className="text-sm divide-y divide-gray-100">
+                    <tr className="text-xs sm:text-[14px] bg-blue-900/20 hover:bg-indigo-600 cursor-pointer hover:text-white">
+                        <td className="py-2 whitespace-nowrap">
+                        </td>
+                    </tr>
+                </tbody>
+            </section>
         </section>
     );
 }
