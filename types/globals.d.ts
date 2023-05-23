@@ -44,3 +44,11 @@ type DietMacros = {
     lowfat: { carbs: number; fats: number; protein: number };
     [key: string]: { carbs: number; fats: number; protein: number };
 };
+
+type Exercise = {
+    name: string;
+    type: string;
+    sets: number;
+    reps: number;
+    duration: number;
+};
