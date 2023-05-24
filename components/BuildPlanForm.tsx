@@ -30,10 +30,9 @@ export default function BuildPlanForm() {
 
     const handleSubmitPlan = async () => {
         const planObj = { name: planName, description, exercises };
-        console.log(planObj)
         const res = await axios.post("/api/plans", planObj);
 
-        console.log(res)
+
     };
 
     return (
@@ -173,8 +172,11 @@ export default function BuildPlanForm() {
                         </thead>
 
                         <tbody className="text-sm divide-y divide-gray-100 w-full">
-                            {exercises.map((exercise) => (
-                                <tr className="w-full text-xs sm:text-[14px] bg-blue-900/20 hover:bg-indigo-600 cursor-pointer hover:text-white">
+                            {exercises.map((exercise, idx) => (
+                                <tr
+                                    key={idx}
+                                    className="w-full text-xs sm:text-[14px] bg-blue-900/20 hover:bg-indigo-600 cursor-pointer hover:text-white"
+                                >
                                     <td className="py-2 whitespace-nowrap">
                                         {exercise.name}
                                     </td>
