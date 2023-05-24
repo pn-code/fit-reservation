@@ -53,7 +53,7 @@ export default async function Plans({ params }: Props) {
             {/* User Plans Here */}
             <section>
                 {userPlans.map((plan: any) => (
-                    <div key={plan.id}>{plan.name}</div>
+                    <Link key={plan.id} href={`/plans/details/${plan.id}`}>{plan.name}</Link>
                 ))}
             </section>
         </main>
