@@ -53,7 +53,7 @@ model BodyFatMeasurement {
 
 model Subscription {
   id              Int       @id @default(autoincrement())
-  userId          String    
+  userId          String
   lastPaymentDate DateTime  @default(now())
   expirationDate  DateTime?
 }
@@ -65,6 +65,7 @@ model TrainingPlan {
   modifiedAt  DateTime   @default(now())
   name        String
   description String
+  reviews     Review[]
   exercises   Exercise[]
 }
 
@@ -77,6 +78,19 @@ model Exercise {
   duration       Int
   TrainingPlan   TrainingPlan? @relation(fields: [trainingPlanId], references: [id])
   trainingPlanId Int
+
+  @@index([trainingPlanId])
+}
+
+model Review {
+  id             Int           @id @default(autoincrement())
+  userId         String
+  rating         Float
+  comment        String
+  createdAt      DateTime      @default(now())
+  modifiedAt     DateTime      @default(now())
+  TrainingPlan   TrainingPlan? @relation(fields: [trainingPlanId], references: [id])
+  trainingPlanId Int?
 
   @@index([trainingPlanId])
 }
