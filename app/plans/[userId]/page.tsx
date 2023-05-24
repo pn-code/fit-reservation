@@ -2,6 +2,7 @@ import { clerkClient } from "@clerk/nextjs/server";
 import { GlobeIcon, HammerIcon } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { prisma } from "../../../lib/client";
 
 export const metadata = {
     title: "Plans | FitHeroes",
@@ -12,16 +13,25 @@ interface Props {
 }
 
 export default async function Plans({ params }: Props) {
-    const user = await clerkClient.users.getUser(params.userId)
+    const user = await clerkClient.users.getUser(params.userId);
 
     if (!user) {
         notFound();
     }
 
+    async function getUserPlans(): Promise<any> {
+        const userPlans = await prisma.trainingPlan.findMany({
+            where: { userId: params.userId },
+        });
+        return userPlans;
+    }
+
+    const userPlans = await getUserPlans();
+
     return (
         <main className="w-full h-[calc(100vh-90px)] bg-slate-800 py-6 rounded-md flex flex-col gap-4 shadow-md px-2 sm:px-10 text-white/90">
             <header className="flex justify-between font-bold pb-2 border-b-2 border-b-indigo-600 items-center">
-                <h1 className="text-3xl">{`${user.firstName} ${user.lastName}'s  Plans`}</h1>
+                <h1 className="text-3xl">{`${user.firstName} ${user.lastName}'s Plans`}</h1>
                 <section className="flex gap-4">
                     <Link
                         className="flex justify-center items-center gap-2 bg-green-600 hover:bg-green-700 rounded-lg text-white p-2"
@@ -41,6 +51,11 @@ export default async function Plans({ params }: Props) {
             </header>
 
             {/* User Plans Here */}
+            <section>
+                {userPlans.map((plan: any) => (
+                    <div>{plan.name}</div>
+                ))}
+            </section>
         </main>
     );
 }
