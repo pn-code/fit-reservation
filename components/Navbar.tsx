@@ -94,7 +94,7 @@ const Navbar = () => {
                         {user != undefined && (
                             <Link
                                 className={`group relative ${
-                                    pathname.includes("/profile")
+                                    pathname.includes("/plans")
                                         ? currentPathStyles
                                         : ""
                                 }`}
@@ -102,7 +102,7 @@ const Navbar = () => {
                                 href={`/plans/${user?.id}`}
                             >
                                 <Rocket className="text-white/90 hover:text-white" />
-                                <span className="bg-indigo-700 py-0.5 px-2 rounded-lg hidden group-hover:flex text-sm font-semibold absolute -left-2 top-8">
+                                <span className="bg-indigo-700 py-0.5 px-2 rounded-lg hidden group-hover:flex text-sm font-semibold absolute -left-3 top-8">
                                     Plans
                                 </span>
                             </Link>
