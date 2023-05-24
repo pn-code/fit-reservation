@@ -24,9 +24,9 @@ export async function POST(req: Request) {
 
             return NextResponse.json(trainingPlan);
         } else {
-            return NextResponse.error()
+            return NextResponse.error();
         }
     } catch (error) {
-        return NextResponse.error()
+        return NextResponse.error();
     }
 }
