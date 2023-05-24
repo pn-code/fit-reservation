@@ -1,4 +1,5 @@
 "use client";
+import axios from "axios";
 import { useState } from "react";
 
 export default function BuildPlanForm() {
@@ -21,10 +22,18 @@ export default function BuildPlanForm() {
         });
 
         setExercise("");
-        setType("");
+        setType("resistance");
         setSets(0);
         setReps(0);
         setDuration(0);
+    };
+
+    const handleSubmitPlan = async () => {
+        const planObj = { name: planName, description, exercises };
+        console.log(planObj)
+        const res = await axios.post("/api/plans", planObj);
+
+        console.log(res)
     };
 
     return (
@@ -147,6 +156,11 @@ export default function BuildPlanForm() {
                                 </th>
                                 <th>
                                     <div className="font-semibold text-left">
+                                        Type
+                                    </div>
+                                </th>
+                                <th>
+                                    <div className="font-semibold text-left">
                                         Reps
                                     </div>
                                 </th>
@@ -157,12 +171,15 @@ export default function BuildPlanForm() {
                                 </th>
                             </tr>
                         </thead>
-                        
+
                         <tbody className="text-sm divide-y divide-gray-100 w-full">
                             {exercises.map((exercise) => (
                                 <tr className="w-full text-xs sm:text-[14px] bg-blue-900/20 hover:bg-indigo-600 cursor-pointer hover:text-white">
                                     <td className="py-2 whitespace-nowrap">
                                         {exercise.name}
+                                    </td>
+                                    <td className="py-2 whitespace-nowrap">
+                                        {exercise.type}
                                     </td>
                                     <td className="py-2 whitespace-nowrap">{`${exercise.sets} x ${exercise.reps}`}</td>
                                     <td className="py-2 whitespace-nowrap">
@@ -175,7 +192,7 @@ export default function BuildPlanForm() {
                 </section>
 
                 <button
-                    onClick={() => console.log("hello")}
+                    onClick={handleSubmitPlan}
                     type="button"
                     className="w-full sm:w-72 bg-indigo-600 hover:bg-indigo-700 rounded-lg mt-4 text-white px-4 py-2 hover:underline"
                 >
