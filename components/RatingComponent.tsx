@@ -15,7 +15,7 @@ export default function RatingComponent({ reviews }: Props) {
         if (averageRating <= 5 && averageRating >= 4.5)
             return (
                 <section className="flex flex-col">
-                    <span className="flex gap-1">
+                    <span className="flex">
                         <Star fill="#ffdf00" stroke="#f5c71a" size={16} />
                         <Star fill="#ffdf00" stroke="#f5c71a" size={16} />
                         <Star fill="#ffdf00" stroke="#f5c71a" size={16} />
