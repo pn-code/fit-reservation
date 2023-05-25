@@ -3,6 +3,7 @@ import { GlobeIcon, HammerIcon } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { prisma } from "../../../lib/client";
+import TrainingPlanCard from "../../../components/TrainingPlanCard";
 
 export const metadata = {
     title: "Plans | FitHeroes",
@@ -22,6 +23,7 @@ export default async function Plans({ params }: Props) {
     async function getUserPlans(): Promise<any> {
         const userPlans = await prisma.trainingPlan.findMany({
             where: { userId: params.userId },
+            include: { reviews: true },
         });
         return userPlans;
     }
@@ -53,7 +55,7 @@ export default async function Plans({ params }: Props) {
             {/* User Plans Here */}
             <section>
                 {userPlans.map((plan: any) => (
-                    <Link key={plan.id} href={`/plans/details/${plan.id}`}>{plan.name}</Link>
+                    <TrainingPlanCard plan={plan} />
                 ))}
             </section>
         </main>
