@@ -1,9 +1,10 @@
 import { clerkClient, currentUser } from "@clerk/nextjs/app-beta";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import React from "react";
 import { prisma } from "../../../../lib/client";
 import BackNavigationButton from "../../../../components/BackNavigationButton";
+import ReviewCard from "../../../../components/ReviewCard";
+import RatingComponent from "../../../../components/RatingComponent";
 
 interface Props {
     params: { planId: number };
@@ -15,7 +16,7 @@ export default async function PlanDetails({ params }: Props) {
     const fetchTrainingPlan = async (): Promise<any> => {
         const plan = await prisma.trainingPlan.findFirst({
             where: { id: Number(params.planId) },
-            include: { exercises: true },
+            include: { exercises: true, reviews: true },
         });
         return plan;
     };
@@ -96,6 +97,23 @@ export default async function PlanDetails({ params }: Props) {
                     ))}
                 </tbody>
             </table>
+
+            {/* Reviews */}
+            <section className="flex flex-col gap-2">
+                <header className="flex justify-between items-center">
+                    <h3 className="text-lg font-semibold">Reviews</h3>
+                    {/* Average Rating */}
+                    <RatingComponent reviews={plan.reviews} />
+                </header>
+
+                {plan.reviews.length === 0 ? (
+                    <p className="text-sm">Be the first to leave a review!</p>
+                ) : (
+                    plan.reviews.map((review: any) => (
+                        <ReviewCard review={review} />
+                    ))
+                )}
+            </section>
         </main>
     );
 }
