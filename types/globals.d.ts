@@ -52,3 +52,14 @@ type Exercise = {
     reps: number;
     duration: number;
 };
+
+type TrainingPlan = {
+    id: number;
+    userId: string;
+    createdAt: string;
+    modifiedAt: string;
+    name: string;
+    description: string;
+    reviews?: any[];
+    exercise?: any[];
+};
