@@ -115,8 +115,8 @@ export default async function PlanDetails({ params }: Props) {
                             Be the first to leave a review!
                         </p>
                     ) : (
-                        plan.reviews.map((review: any) => (
-                            <ReviewCard review={review} />
+                        plan.reviews.map((review: any, idx: number) => (
+                            <ReviewCard review={review} key={idx}/>
                         ))
                     )}
                 </section>

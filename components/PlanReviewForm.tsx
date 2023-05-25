@@ -1,5 +1,4 @@
 "use client";
-
 import axios from "axios";
 import { Star } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -7,7 +6,7 @@ import { useState } from "react";
 import { toast } from "react-hot-toast";
 
 interface Props {
-    planId: Number;
+    planId: number;
 }
 
 export default function PlanReviewForm({ planId }: Props) {
