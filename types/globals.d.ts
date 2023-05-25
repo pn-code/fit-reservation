@@ -56,8 +56,8 @@ type Exercise = {
 type TrainingPlan = {
     id: number;
     userId: string;
-    createdAt: string;
-    modifiedAt: string;
+    createdAt: Date;
+    modifiedAt: Date;
     name: string;
     description: string;
     reviews?: any[];
