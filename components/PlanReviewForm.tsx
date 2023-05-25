@@ -1,11 +1,26 @@
 "use client";
 
+import axios from "axios";
 import { Star } from "lucide-react";
 import { useState } from "react";
 
-export default function PlanReviewForm() {
+interface Props {
+    planId: Number;
+}
+
+export default function PlanReviewForm({ planId }: Props) {
     const [rating, setRating] = useState(5);
     const [comment, setComment] = useState("");
+
+    const handleSubmitReview = async () => {
+        const res = await axios.post("/api/plans/reviews", {
+            comment,
+            rating,
+            planId,
+        });
+        
+        console.log(res)
+    };
 
     return (
         <div>
@@ -57,7 +72,7 @@ export default function PlanReviewForm() {
                 </section>
 
                 <section className="flex justify-end">
-                    <button className="bg-blue-800 px-2 py-1 rounded-md hover:bg-blue-900">
+                    <button onClick={handleSubmitReview} type="button" className="bg-blue-800 px-2 py-1 rounded-md hover:bg-blue-900">
                         Submit
                     </button>
                 </section>

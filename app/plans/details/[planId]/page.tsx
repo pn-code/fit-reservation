@@ -114,7 +114,7 @@ export default async function PlanDetails({ params }: Props) {
                         <ReviewCard review={review} />
                     ))
                 )}
-                <PlanReviewForm />
+                <PlanReviewForm planId={plan.id}/>
             </section>
         </main>
     );
