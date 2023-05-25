@@ -100,21 +100,26 @@ export default async function PlanDetails({ params }: Props) {
             </table>
 
             {/* Reviews */}
-            <section className="flex flex-col gap-2">
+            <section className="flex flex-col gap-4">
                 <header className="flex justify-between items-center">
                     <h3 className="text-lg font-semibold">Reviews</h3>
                     {/* Average Rating */}
                     <RatingComponent reviews={plan.reviews} />
                 </header>
 
-                {plan.reviews.length === 0 ? (
-                    <p className="text-sm">Be the first to leave a review!</p>
-                ) : (
-                    plan.reviews.map((review: any) => (
-                        <ReviewCard review={review} />
-                    ))
-                )}
-                <PlanReviewForm planId={plan.id}/>
+                <section className="flex-col gap-4">
+                    {plan.reviews.length === 0 ? (
+                        <p className="text-sm">
+                            Be the first to leave a review!
+                        </p>
+                    ) : (
+                        plan.reviews.map((review: any) => (
+                            <ReviewCard review={review} />
+                        ))
+                    )}
+                </section>
+
+                <PlanReviewForm planId={plan.id} />
             </section>
         </main>
     );
