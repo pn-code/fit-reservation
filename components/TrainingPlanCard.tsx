@@ -7,7 +7,7 @@ interface Props {
 
 export default function TrainingPlanCard({ plan }: Props) {
     return (
-        <Link href={`/plans/details/${plan.id}`}>
+        <Link key={plan.id} href={`/plans/details/${plan.id}`}>
             <article className="flex flex-col gap-4 bg-blue-900/70 w-full py-4 px-1 rounded-md hover:bg-blue-900 cursor-pointer">
                 <header className="flex justify-between items-center">
                     <h3 className="inline">{plan.name}</h3>
