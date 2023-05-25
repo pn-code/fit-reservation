@@ -4,6 +4,7 @@ import {
     ClipboardSignature,
     LayoutDashboard,
     Menu,
+    Rocket,
     Shield,
     User,
     X,
@@ -93,6 +94,22 @@ const Navbar = () => {
                         {user != undefined && (
                             <Link
                                 className={`group relative ${
+                                    pathname.includes("/plans")
+                                        ? currentPathStyles
+                                        : ""
+                                }`}
+                                passHref={true}
+                                href={`/plans/${user?.id}`}
+                            >
+                                <Rocket className="text-white/90 hover:text-white" />
+                                <span className="bg-indigo-700 py-0.5 px-2 rounded-lg hidden group-hover:flex text-sm font-semibold absolute -left-3 top-8">
+                                    Plans
+                                </span>
+                            </Link>
+                        )}
+                        {user != undefined && (
+                            <Link
+                                className={`group relative ${
                                     pathname.includes("/profile")
                                         ? currentPathStyles
                                         : ""
@@ -155,6 +172,20 @@ const Navbar = () => {
                             />
                             <span className="border-b-4 border-b-transparent group-hover:border-b-indigo-500">
                                 Track Progress
+                            </span>
+                        </Link>
+                        <Link
+                            onClick={() => setOpenMobileNavbar(false)}
+                            className="flex gap-4 items-center hover:text-white text-white/90 group"
+                            href={`/plans/${user?.id}`}
+                            passHref={true}
+                        >
+                            <Rocket
+                                className="text-white/90 group-hover:text-indigo-500"
+                                size={45}
+                            />
+                            <span className="border-b-4 border-b-transparent group-hover:border-b-indigo-500">
+                                View Plans
                             </span>
                         </Link>
                         <Link
