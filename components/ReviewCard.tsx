@@ -1,7 +1,6 @@
 "use client"
 import RatingComponent from "./RatingComponent";
 import { getTimeAgo } from "../helpers/getTimeAgo";
-import { clerkClient } from "@clerk/nextjs/app-beta";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -22,7 +21,7 @@ export default function ReviewCard({ review }: Props) {
     }, [])
 
     return (
-        <article className="flex flex-col gap-2 border-b-2 border-b-white pb-4">
+        <article className="flex flex-col gap-2 border-b-2 border-b-white py-2">
             <header className="flex justify-between">
                 <section className="flex gap-2 items-center">
                     <h4 className="text-amber-300">{reviewer}</h4>
