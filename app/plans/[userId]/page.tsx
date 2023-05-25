@@ -60,7 +60,7 @@ export default async function Plans({ params }: Props) {
             {/* User Plans Here */}
             <section>
                 {userPlans.map((plan: any) => (
-                    <TrainingPlanCard plan={plan} />
+                    <TrainingPlanCard plan={plan} key={plan.id}/>
                 ))}
             </section>
         </main>

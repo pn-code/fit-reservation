@@ -34,7 +34,7 @@ export default async function ExplorePlans() {
             {/* Plans Here */}
             <section>
                 {plans.map((plan) => (
-                    <TrainingPlanCard plan={plan} />
+                    <TrainingPlanCard plan={plan} key={plan.id}/>
                 ))}
             </section>
         </main>
