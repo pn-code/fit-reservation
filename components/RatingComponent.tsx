@@ -14,13 +14,13 @@ export default function RatingComponent({ reviews }: Props) {
         if (!averageRating) return <p className="text-xs">Not Yet Rated</p>;
         if (averageRating <= 5 && averageRating >= 4.5)
             return (
-                <section className="flex flex-col gap-2">
+                <section className="flex flex-col">
                     <span className="flex gap-1">
-                        <Star fill="yellow" size={16} />
-                        <Star fill="yellow" size={16} />
-                        <Star fill="yellow" size={16} />
-                        <Star fill="yellow" size={16} />
-                        <Star fill="yellow" size={16} />
+                        <Star fill="#ffdf00" stroke="#f5c71a" size={16} />
+                        <Star fill="#ffdf00" stroke="#f5c71a" size={16} />
+                        <Star fill="#ffdf00" stroke="#f5c71a" size={16} />
+                        <Star fill="#ffdf00" stroke="#f5c71a" size={16} />
+                        <Star fill="#ffdf00" stroke="#f5c71a" size={16} />
                     </span>
                     <h4 className="text-xs text-right">
                         Rated {averageRating}/5
