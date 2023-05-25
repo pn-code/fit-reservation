@@ -9,7 +9,15 @@ export const metadata = {
 
 export default async function ExplorePlans() {
     const user = await currentUser();
-    const plans = await prisma.trainingPlan.findMany();
+
+    const fetchPlans = async (): Promise<TrainingPlan[]> => {
+        const plans = await prisma.trainingPlan.findMany({
+            include: { reviews: true },
+        });
+        return plans;
+    };
+
+    const plans = await fetchPlans();
 
     return (
         <main className="w-full h-[calc(100vh-90px)] bg-slate-800 py-6 rounded-md flex flex-col gap-4 shadow-md px-2 sm:px-10 text-white/90">
@@ -26,7 +34,7 @@ export default async function ExplorePlans() {
             {/* Plans Here */}
             <section>
                 {plans.map((plan) => (
-                    <TrainingPlanCard plan={plan}/>
+                    <TrainingPlanCard plan={plan} />
                 ))}
             </section>
         </main>
