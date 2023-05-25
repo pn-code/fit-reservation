@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { currentUser } from "@clerk/nextjs/app-beta";
+import { prisma } from "../../../lib/client";
+import TrainingPlanCard from "../../../components/TrainingPlanCard";
 
 export const metadata = {
     title: "Explore Plans | FitHeroes",
@@ -7,6 +9,7 @@ export const metadata = {
 
 export default async function ExplorePlans() {
     const user = await currentUser();
+    const plans = await prisma.trainingPlan.findMany();
 
     return (
         <main className="w-full h-[calc(100vh-90px)] bg-slate-800 py-6 rounded-md flex flex-col gap-4 shadow-md px-2 sm:px-10 text-white/90">
@@ -21,6 +24,11 @@ export default async function ExplorePlans() {
             </header>
 
             {/* Plans Here */}
+            <section>
+                {plans.map((plan) => (
+                    <TrainingPlanCard plan={plan}/>
+                ))}
+            </section>
         </main>
     );
 }
