@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import React from "react";
 import { prisma } from "../../../../lib/client";
+import BackNavigationButton from "../../../../components/BackNavigationButton";
 
 interface Props {
     params: { planId: number };
@@ -33,18 +34,7 @@ export default async function PlanDetails({ params }: Props) {
             <header className="flex justify-between font-bold pb-2 border-b-2 border-b-indigo-600 items-center">
                 <h1 className="text-3xl">{plan.name}</h1>
                 <section className="flex gap-4">
-                    <Link
-                        className="flex justify-center items-center gap-2 bg-green-600 hover:bg-green-700 rounded-lg text-white p-2"
-                        href={`/plans/${user.id}`}
-                    >
-                        My Plans
-                    </Link>
-                    <Link
-                        className="flex justify-center items-center gap-2 bg-indigo-600 hover:bg-indigo-700 rounded-lg text-white p-2"
-                        href="/plans/explore"
-                    >
-                        Explore
-                    </Link>
+                    <BackNavigationButton />
                 </section>
             </header>
 
