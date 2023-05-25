@@ -5,6 +5,7 @@ import { prisma } from "../../../../lib/client";
 import BackNavigationButton from "../../../../components/BackNavigationButton";
 import ReviewCard from "../../../../components/ReviewCard";
 import RatingComponent from "../../../../components/RatingComponent";
+import PlanReviewForm from "../../../../components/PlanReviewForm";
 
 interface Props {
     params: { planId: number };
@@ -113,6 +114,7 @@ export default async function PlanDetails({ params }: Props) {
                         <ReviewCard review={review} />
                     ))
                 )}
+                <PlanReviewForm />
             </section>
         </main>
     );
