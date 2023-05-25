@@ -7,6 +7,8 @@ import ReviewCard from "../../../../components/ReviewCard";
 import RatingComponent from "../../../../components/RatingComponent";
 import PlanReviewForm from "../../../../components/PlanReviewForm";
 
+export const revalidate = 60;
+
 interface Props {
     params: { planId: number };
 }
@@ -32,7 +34,7 @@ export default async function PlanDetails({ params }: Props) {
     const planAuthor = await clerkClient.users.getUser(plan.userId);
 
     return (
-        <main className="w-full h-[calc(100vh-90px)] bg-slate-800 py-6 rounded-md flex flex-col gap-4 shadow-md px-2 sm:px-10 text-white/90">
+        <main className="w-full min-h-[calc(100vh-90px)] bg-slate-800 py-6 rounded-md flex flex-col gap-4 shadow-md px-2 sm:px-10 text-white/90">
             <header className="flex justify-between font-bold pb-2 border-b-2 border-b-indigo-600 items-center">
                 <h1 className="text-3xl">{plan.name}</h1>
                 <section className="flex gap-4">
@@ -41,13 +43,15 @@ export default async function PlanDetails({ params }: Props) {
             </header>
 
             {/* Plan Author */}
-            <section>
+            <section className="flex justify-between">
                 <p>
                     Created by{" "}
                     <span className="text-amber-300">
                         {`${planAuthor.firstName} ${planAuthor.lastName}`}
                     </span>
                 </p>
+                {/* Average Rating */}
+                <RatingComponent reviews={plan.reviews} />
             </section>
 
             {/* Description */}
@@ -100,11 +104,9 @@ export default async function PlanDetails({ params }: Props) {
             </table>
 
             {/* Reviews */}
-            <section className="flex flex-col gap-4">
+            <section className="flex flex-col gap-2">
                 <header className="flex justify-between items-center">
                     <h3 className="text-lg font-semibold">Reviews</h3>
-                    {/* Average Rating */}
-                    <RatingComponent reviews={plan.reviews} />
                 </header>
 
                 <section className="flex-col gap-4">
