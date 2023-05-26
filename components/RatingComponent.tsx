@@ -23,7 +23,7 @@ export default function RatingComponent({ reviews }: Props) {
                         <Star fill="#ffdf00" stroke="#f5c71a" size={16} />
                     </span>
                     <h4 className="text-xs text-right">
-                        Rated {averageRating}/5
+                        Rated {averageRating.toFixed(1)}/5.0
                     </h4>
                 </section>
             );
@@ -38,7 +38,7 @@ export default function RatingComponent({ reviews }: Props) {
                         <Star fill="transparent" stroke="#f5c71a" size={16} />
                     </span>
                     <h4 className="text-xs text-right">
-                        Rated {averageRating}/5
+                        Rated {averageRating.toFixed(1)}/5.0
                     </h4>
                 </section>
             );
@@ -53,7 +53,7 @@ export default function RatingComponent({ reviews }: Props) {
                         <Star fill="transparent" stroke="#f5c71a" size={16} />
                     </span>
                     <h4 className="text-xs text-right">
-                        Rated {averageRating}/5
+                        Rated {averageRating.toFixed(1)}/5.0
                     </h4>
                 </section>
             );
@@ -68,7 +68,7 @@ export default function RatingComponent({ reviews }: Props) {
                         <Star fill="transparent" stroke="#f5c71a" size={16} />
                     </span>
                     <h4 className="text-xs text-right">
-                        Rated {averageRating}/5
+                        Rated {averageRating.toFixed(1)}/5.0
                     </h4>
                 </section>
             );
@@ -83,7 +83,7 @@ export default function RatingComponent({ reviews }: Props) {
                         <Star fill="transparent" stroke="#f5c71a" size={16} />
                     </span>
                     <h4 className="text-xs text-right">
-                        Rated {averageRating}/5
+                        Rated {averageRating.toFixed(1)}/5.0
                     </h4>
                 </section>
             );
