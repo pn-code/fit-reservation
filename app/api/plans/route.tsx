@@ -1,12 +1,15 @@
 import { NextResponse } from "next/server";
 import { prisma } from "../../../lib/client";
 import { currentUser } from "@clerk/nextjs/app-beta";
+import { planSchema } from "../../../validations/planValidator";
 
 export async function POST(req: Request) {
     const data = await req.json();
     const user = await currentUser();
 
     try {
+        planSchema.parse(data);
+        
         if (user && data) {
             const trainingPlan = await prisma.trainingPlan.create({
                 data: {
