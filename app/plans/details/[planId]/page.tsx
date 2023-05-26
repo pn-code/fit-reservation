@@ -33,6 +33,11 @@ export default async function PlanDetails({ params }: Props) {
     // Get author name
     const planAuthor = await clerkClient.users.getUser(plan.userId);
 
+    // Look to see if user has submitted a review already.
+    const userAlreadySubmittedReview = () => {
+        return plan.reviews.some((review: any) => review.userId === user.id);
+    };
+
     return (
         <main className="w-full min-h-[calc(100vh-90px)] bg-slate-800 py-6 rounded-md flex flex-col gap-4 shadow-md px-2 sm:px-10 text-white/90">
             <header className="flex justify-between font-bold pb-2 border-b-2 border-b-indigo-600 items-center">
@@ -116,12 +121,15 @@ export default async function PlanDetails({ params }: Props) {
                         </p>
                     ) : (
                         plan.reviews.map((review: any, idx: number) => (
-                            <ReviewCard review={review} key={idx}/>
+                            <ReviewCard review={review} key={idx} />
                         ))
                     )}
                 </section>
 
-                <PlanReviewForm planId={plan.id} />
+                {/* Hide Review Form if user has already submitted a review */}
+                {!userAlreadySubmittedReview && (
+                    <PlanReviewForm planId={plan.id} />
+                )}
             </section>
         </main>
     );
