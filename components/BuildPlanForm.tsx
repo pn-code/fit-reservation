@@ -19,8 +19,10 @@ export default function BuildPlanForm() {
 
     const [exercises, setExercises] = useState<Exercise[]>([]);
 
+    const [loading, setLoading] = useState(false);
+
     const user = useUser();
-    const router = useRouter()
+    const router = useRouter();
 
     const validateExercise = (exercise: any) => {
         try {
@@ -51,22 +53,23 @@ export default function BuildPlanForm() {
 
     const handleSubmitPlan = async () => {
         const planObj = { name: planName, description, exercises };
-
+        setLoading(true);
         try {
-            planSchema.parse(planObj)
+            planSchema.parse(planObj);
 
             const res = await axios.post("/api/plans", planObj);
 
             if (res.status === 200) {
-                toast.success("Successfully built your new plan!")
+                toast.success("Successfully built your new plan!");
             }
 
-            router.push(`/plans/${user?.user?.id}`)
+            router.push(`/plans/${user?.user?.id}`);
         } catch (error) {
-            console.error(error)
-            toast.error("Something went wrong!")
+            console.error(error);
+            toast.error("Something went wrong!");
+        } finally {
+            setLoading(false);
         }
-
     };
 
     return (
@@ -80,6 +83,7 @@ export default function BuildPlanForm() {
                         <section className="flex flex-col gap-2">
                             <label htmlFor="name">Plan Name</label>
                             <input
+                                disabled={loading}
                                 id="name"
                                 className="w-full sm:w-72"
                                 type="text"
@@ -94,6 +98,7 @@ export default function BuildPlanForm() {
                                 Plan Description
                             </label>
                             <textarea
+                                disabled={loading}
                                 id="description"
                                 className="w-full sm:w-72 p-2 rounded-sm text-black"
                                 value={description}
@@ -109,6 +114,7 @@ export default function BuildPlanForm() {
                         <section className="flex flex-col gap-2">
                             <label htmlFor="exercise">Exercise</label>
                             <input
+                                disabled={loading}
                                 id="exercise"
                                 className="w-full sm:w-72"
                                 type="text"
@@ -122,6 +128,7 @@ export default function BuildPlanForm() {
                         <section className="flex flex-col gap-2">
                             <label htmlFor="type">Type</label>
                             <select
+                                disabled={loading}
                                 className="w-full sm:w-72"
                                 name="type"
                                 id="type"
@@ -136,6 +143,7 @@ export default function BuildPlanForm() {
                         <section className="flex flex-col gap-2">
                             <label htmlFor="sets">Sets</label>
                             <input
+                                disabled={loading}
                                 id="sets"
                                 className="w-full sm:w-72"
                                 type="text"
@@ -150,6 +158,7 @@ export default function BuildPlanForm() {
                         <section className="flex flex-col gap-2">
                             <label htmlFor="reps">Reps</label>
                             <input
+                                disabled={loading}
                                 id="reps"
                                 className="w-full sm:w-72"
                                 type="text"
@@ -164,6 +173,7 @@ export default function BuildPlanForm() {
                         <section className="flex flex-col gap-2">
                             <label htmlFor="duration">Duration (min)</label>
                             <input
+                                disabled={loading}
                                 id="duration"
                                 className="w-full sm:w-72"
                                 type="text"
@@ -176,9 +186,10 @@ export default function BuildPlanForm() {
                         </section>
 
                         <button
+                            disabled={loading}
                             onClick={addExerciseToList}
                             type="button"
-                            className="w-full sm:w-72 bg-green-600 hover:bg-green-700 rounded-lg mt-4 text-white px-4 py-2 hover:underline"
+                            className="w-full sm:w-72 bg-green-600 hover:bg-green-700 rounded-lg mt-4 text-white px-4 py-2 hover:underline disabled:bg-gray-300"
                         >
                             Add Exercise
                         </button>
@@ -236,9 +247,10 @@ export default function BuildPlanForm() {
                     </table>
                     <section className="flex justify-end">
                         <button
+                            disabled={loading}
                             onClick={handleSubmitPlan}
                             type="button"
-                            className="w-full sm:w-40 bg-indigo-600 hover:bg-indigo-700 rounded-lg mt-4 text-white px-4 py-2 hover:underline"
+                            className="w-full sm:w-40 bg-indigo-600 hover:bg-indigo-700 rounded-lg mt-4 text-white px-4 py-2 hover:underline disabled:bg-gray-300"
                         >
                             Submit
                         </button>
