@@ -3,6 +3,9 @@ import axios from "axios";
 import { useState } from "react";
 import { exerciseSchema } from "../validations/exerciseValidator";
 import { toast } from "react-hot-toast";
+import { planSchema } from "../validations/planValidator";
+import { useRouter } from "next/navigation";
+import { useUser } from "@clerk/nextjs";
 
 export default function BuildPlanForm() {
     const [planName, setPlanName] = useState<string>("");
@@ -15,6 +18,9 @@ export default function BuildPlanForm() {
     const [duration, setDuration] = useState<number>(0);
 
     const [exercises, setExercises] = useState<Exercise[]>([]);
+
+    const user = useUser();
+    const router = useRouter()
 
     const validateExercise = (exercise: any) => {
         try {
@@ -45,7 +51,22 @@ export default function BuildPlanForm() {
 
     const handleSubmitPlan = async () => {
         const planObj = { name: planName, description, exercises };
-        const res = await axios.post("/api/plans", planObj);
+
+        try {
+            planSchema.parse(planObj)
+
+            const res = await axios.post("/api/plans", planObj);
+
+            if (res.status === 200) {
+                toast.success("Successfully built your new plan!")
+            }
+
+            router.push(`/plans/${user?.user?.id}`)
+        } catch (error) {
+            console.error(error)
+            toast.error("Something went wrong!")
+        }
+
     };
 
     return (
