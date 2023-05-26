@@ -127,7 +127,7 @@ export default async function PlanDetails({ params }: Props) {
                 </section>
 
                 {/* Hide Review Form if user has already submitted a review */}
-                {!userAlreadySubmittedReview && (
+                {!userAlreadySubmittedReview() && (
                     <PlanReviewForm planId={plan.id} />
                 )}
             </section>
