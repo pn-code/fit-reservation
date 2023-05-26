@@ -1,6 +1,8 @@
 "use client";
 import axios from "axios";
 import { useState } from "react";
+import { exerciseSchema } from "../validations/exerciseValidator";
+import { toast } from "react-hot-toast";
 
 export default function BuildPlanForm() {
     const [planName, setPlanName] = useState<string>("");
@@ -14,8 +16,21 @@ export default function BuildPlanForm() {
 
     const [exercises, setExercises] = useState<Exercise[]>([]);
 
+    const validateExercise = (exercise: any) => {
+        try {
+            if (exerciseSchema.parse(exercise)) {
+                return true;
+            }
+        } catch (error) {
+            toast.error("Something went wrong during validation!");
+            return false;
+        }
+    };
+
     const addExerciseToList = () => {
         const exerciseObj = { name: exercise, type, sets, reps, duration };
+
+        if (!validateExercise(exerciseObj)) return;
 
         setExercises((prev) => {
             return [...prev, exerciseObj];
