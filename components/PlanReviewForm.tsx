@@ -4,6 +4,7 @@ import { Star } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
+import { reviewSchema } from "../validations/reviewValidator";
 
 interface Props {
     planId: number;
@@ -16,24 +17,36 @@ export default function PlanReviewForm({ planId }: Props) {
 
     const router = useRouter();
 
-    const handleSubmitReview = async () => {
-        try {
-            setLoading(true);
-            const res = await axios.post("/api/plans/reviews", {
-                comment,
-                rating,
-                planId,
-            });
+    const validateInputs = () => {
+        if (reviewSchema.parse({ rating, comment, planId })) {
+            return true;
+        } else {
+            return false;
+        }
+    };
 
-            if (res.status === 200) {
-                toast.success("Successfully posted review!");
-                router.refresh();
+    const handleSubmitReview = async () => {
+        if (validateInputs()) {
+            try {
+                setLoading(true);
+                const res = await axios.post("/api/plans/reviews", {
+                    comment,
+                    rating,
+                    planId,
+                });
+
+                if (res.status === 200) {
+                    toast.success("Successfully posted review!");
+                    router.refresh();
+                }
+            } catch (error) {
+                console.error(error);
+                toast.error("Something went wrong!");
+            } finally {
+                setLoading(false);
             }
-        } catch (error) {
-            console.error(error);
-            toast.error("Something went wrong!");
-        } finally {
-            setLoading(false);
+        } else {
+            toast.error("Something went wrong during validation!")
         }
     };
 

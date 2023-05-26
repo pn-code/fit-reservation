@@ -1,10 +1,15 @@
 import { NextResponse } from "next/server";
 import { prisma } from "../../../../lib/client";
 import { currentUser } from "@clerk/nextjs/app-beta";
+import { reviewSchema } from "../../../../validations/reviewValidator";
 
 export async function POST(req: Request) {
     const data = await req.json();
     const user = await currentUser();
+
+    if (!reviewSchema.parse(data)) {
+        return NextResponse.error();
+    }
 
     try {
         if (user && data) {
@@ -13,8 +18,8 @@ export async function POST(req: Request) {
                     userId: user.id,
                     rating: data.rating,
                     comment: data.comment,
-                    trainingPlanId: data.planId
-                }
+                    trainingPlanId: data.planId,
+                },
             });
 
             return NextResponse.json(review);
