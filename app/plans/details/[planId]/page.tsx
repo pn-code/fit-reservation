@@ -1,8 +1,13 @@
 import { clerkClient, currentUser } from "@clerk/nextjs/app-beta";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import React from "react";
 import { prisma } from "../../../../lib/client";
+import BackNavigationButton from "../../../../components/BackNavigationButton";
+import ReviewCard from "../../../../components/ReviewCard";
+import RatingComponent from "../../../../components/RatingComponent";
+import PlanReviewForm from "../../../../components/PlanReviewForm";
+
+export const revalidate = 60;
 
 interface Props {
     params: { planId: number };
@@ -14,7 +19,7 @@ export default async function PlanDetails({ params }: Props) {
     const fetchTrainingPlan = async (): Promise<any> => {
         const plan = await prisma.trainingPlan.findFirst({
             where: { id: Number(params.planId) },
-            include: { exercises: true },
+            include: { exercises: true, reviews: true },
         });
         return plan;
     };
@@ -28,34 +33,30 @@ export default async function PlanDetails({ params }: Props) {
     // Get author name
     const planAuthor = await clerkClient.users.getUser(plan.userId);
 
+    // Look to see if user has submitted a review already.
+    const userAlreadySubmittedReview = () => {
+        return plan.reviews.some((review: any) => review.userId === user.id);
+    };
+
     return (
-        <main className="w-full h-[calc(100vh-90px)] bg-slate-800 py-6 rounded-md flex flex-col gap-4 shadow-md px-2 sm:px-10 text-white/90">
+        <main className="w-full min-h-[calc(100vh-90px)] bg-slate-800 py-6 rounded-md flex flex-col gap-4 shadow-md px-2 sm:px-10 text-white/90">
             <header className="flex justify-between font-bold pb-2 border-b-2 border-b-indigo-600 items-center">
                 <h1 className="text-3xl">{plan.name}</h1>
                 <section className="flex gap-4">
-                    <Link
-                        className="flex justify-center items-center gap-2 bg-green-600 hover:bg-green-700 rounded-lg text-white p-2"
-                        href={`/plans/${user.id}`}
-                    >
-                        My Plans
-                    </Link>
-                    <Link
-                        className="flex justify-center items-center gap-2 bg-indigo-600 hover:bg-indigo-700 rounded-lg text-white p-2"
-                        href="/plans/explore"
-                    >
-                        Explore
-                    </Link>
+                    <BackNavigationButton />
                 </section>
             </header>
 
             {/* Plan Author */}
-            <section>
+            <section className="flex justify-between">
                 <p>
                     Created by{" "}
                     <span className="text-amber-300">
                         {`${planAuthor.firstName} ${planAuthor.lastName}`}
                     </span>
                 </p>
+                {/* Average Rating */}
+                <RatingComponent reviews={plan.reviews} />
             </section>
 
             {/* Description */}
@@ -106,6 +107,30 @@ export default async function PlanDetails({ params }: Props) {
                     ))}
                 </tbody>
             </table>
+
+            {/* Reviews */}
+            <section className="flex flex-col gap-2">
+                <header className="flex justify-between items-center">
+                    <h3 className="text-lg font-semibold">Reviews</h3>
+                </header>
+
+                <section className="flex-col gap-4">
+                    {plan.reviews.length === 0 ? (
+                        <p className="text-sm">
+                            Be the first to leave a review!
+                        </p>
+                    ) : (
+                        plan.reviews.map((review: any, idx: number) => (
+                            <ReviewCard review={review} key={idx} />
+                        ))
+                    )}
+                </section>
+
+                {/* Hide Review Form if user has already submitted a review */}
+                {!userAlreadySubmittedReview() && (
+                    <PlanReviewForm planId={plan.id} />
+                )}
+            </section>
         </main>
     );
 }
