@@ -6,6 +6,7 @@ import BackNavigationButton from "../../../../components/BackNavigationButton";
 import ReviewCard from "../../../../components/ReviewCard";
 import RatingComponent from "../../../../components/RatingComponent";
 import PlanReviewForm from "../../../../components/PlanReviewForm";
+import PlanActions from "../../../../components/PlanActions";
 
 export const revalidate = 60;
 
@@ -41,7 +42,10 @@ export default async function PlanDetails({ params }: Props) {
     return (
         <main className="w-full min-h-[calc(100vh-90px)] bg-slate-800 py-6 rounded-md flex flex-col gap-4 shadow-md px-2 sm:px-10 text-white/90">
             <header className="flex justify-between font-bold pb-2 border-b-2 border-b-indigo-600 items-center">
-                <h1 className="text-3xl">{plan.name}</h1>
+                <section className="flex gap-2 items-center">
+                    <h1 className="text-3xl">{plan.name}</h1>
+                </section>
+
                 <section className="flex gap-4">
                     <BackNavigationButton />
                 </section>
@@ -64,6 +68,9 @@ export default async function PlanDetails({ params }: Props) {
                 <h3 className="text-lg font-semibold">Description:</h3>
                 <p className="text-sm">{plan.description}</p>
             </section>
+
+            {/* Actions */}
+            {user.id === plan.userId && <PlanActions plan={plan} userId={user.id}/>}
 
             <table className="table-auto w-full">
                 <thead className="h-8 text-xs sm:text-[16px] font-semibold uppercase text-yellow-50 bg-blue-900/60">
