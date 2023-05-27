@@ -53,7 +53,7 @@ export default async function Plans({ params }: Props) {
             </header>
 
             {/* User Plans Here */}
-            <section>
+            <section className="flex flex-col gap-2">
                 {userPlans.map((plan: any) => (
                     <TrainingPlanCard plan={plan} key={plan.id} />
                 ))}

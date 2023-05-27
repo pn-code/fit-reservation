@@ -32,7 +32,7 @@ export default async function ExplorePlans() {
             </header>
 
             {/* Plans Here */}
-            <section>
+            <section className="flex flex-col gap-2">
                 {plans.map((plan) => (
                     <TrainingPlanCard plan={plan} key={plan.id}/>
                 ))}
