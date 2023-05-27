@@ -76,7 +76,7 @@ model Exercise {
   sets           Int
   reps           Int
   duration       Int
-  TrainingPlan   TrainingPlan? @relation(fields: [trainingPlanId], references: [id])
+  TrainingPlan   TrainingPlan? @relation(fields: [trainingPlanId], references: [id], onDelete: Cascade)
   trainingPlanId Int
 
   @@index([trainingPlanId])
@@ -89,7 +89,7 @@ model Review {
   comment        String
   createdAt      DateTime      @default(now())
   modifiedAt     DateTime      @default(now())
-  TrainingPlan   TrainingPlan? @relation(fields: [trainingPlanId], references: [id])
+  TrainingPlan   TrainingPlan? @relation(fields: [trainingPlanId], references: [id], onDelete: Cascade)
   trainingPlanId Int?
 
   @@index([trainingPlanId])

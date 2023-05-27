@@ -1,25 +1,25 @@
 import { currentUser } from "@clerk/nextjs/app-beta";
-import { prisma } from "../../../../../lib/client";
+import { prisma } from "../../../../lib/client";
 import { NextResponse } from "next/server";
 
 interface Props {
-    params: { reviewId: string };
+    params: { planId: string };
 }
 
 export async function DELETE(req: Request, { params }: Props) {
     try {
         const user = await currentUser();
+
         if (user) {
             const { id: userId } = user;
 
-            const reviewToDelete = await prisma.review.deleteMany({
+            const planToDelete = await prisma.trainingPlan.deleteMany({
                 where: {
-                    id: Number(params.reviewId),
+                    id: Number(params.planId),
                     userId: userId,
                 },
             });
-
-            return NextResponse.json(reviewToDelete);
+            return NextResponse.json(planToDelete);
         }
     } catch (error) {
         console.log(error);
