@@ -21,5 +21,8 @@ export async function DELETE(req: Request, { params }: Props) {
 
             return NextResponse.json(reviewToDelete);
         }
-    } catch (error) {}
+    } catch (error) {
+        console.log(error);
+        return NextResponse.error();
+    }
 }
