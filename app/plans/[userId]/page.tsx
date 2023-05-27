@@ -32,11 +32,6 @@ export default async function Plans({ params }: Props) {
 
     return (
         <main className="w-full h-[calc(100vh-90px)] bg-slate-800 py-6 rounded-md flex flex-col gap-4 shadow-md px-2 sm:px-10 text-white/90">
-            <span className="text-red-300 bg-black">
-                Plans are currently a work in progress and unstable feature.
-                This is a showcase of our upcoming new feature.
-            </span>
-
             <header className="flex justify-between font-bold pb-2 border-b-2 border-b-indigo-600 items-center">
                 <h1 className="text-3xl">{`${user.firstName} ${user.lastName}'s Plans`}</h1>
                 <section className="flex gap-4">
@@ -60,8 +55,14 @@ export default async function Plans({ params }: Props) {
             {/* User Plans Here */}
             <section>
                 {userPlans.map((plan: any) => (
-                    <TrainingPlanCard plan={plan} key={plan.id}/>
+                    <TrainingPlanCard plan={plan} key={plan.id} />
                 ))}
+                {userPlans.length === 0 && (
+                    <p className="text-sm">
+                        Nothing to see here. Create your first plan to see it
+                        here.
+                    </p>
+                )}
             </section>
         </main>
     );
