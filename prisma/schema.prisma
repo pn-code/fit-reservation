@@ -67,6 +67,15 @@ model TrainingPlan {
   description String
   reviews     Review[]
   exercises   Exercise[]
+  savedBy     User[]
+}
+
+model User {
+  id             String        @id
+  TrainingPlan   TrainingPlan? @relation(fields: [trainingPlanId], references: [id])
+  trainingPlanId Int?
+
+  @@index([trainingPlanId])
 }
 
 model Exercise {
