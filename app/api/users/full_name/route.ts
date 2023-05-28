@@ -1,7 +1,22 @@
 import { clerkClient, currentUser } from "@clerk/nextjs/app-beta";
 import { NextResponse } from "next/server";
-
 import { nameSchema } from "../../../../validations/nameValidator";
+
+export async function GET(req: Request) {
+    const user = await currentUser();
+
+    if (user) {
+        const allUsers = await clerkClient.users.getUserList();
+
+        // Only return id and name
+        const modifiedUsers = allUsers.map((user: any) => ({
+            id: user.id,
+            fullName: `${user.firstName} ${user.lastName}`,
+        }));
+        
+        return NextResponse.json(modifiedUsers);
+    }
+}
 
 export async function PUT(req: Request) {
     const user = await currentUser();
