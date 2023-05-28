@@ -1,21 +1,40 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TrainingPlanCard from "./TrainingPlanCard";
 import SearchBar from "./SearchBar";
+import axios from "axios";
 
-export default function DisplayPlans({ currentPlans }) {
+interface Props {
+    currentPlans: any[];
+}
+
+export default function DisplayPlans({ currentPlans }: Props) {
     const [searchTerm, setSearchTerm] = useState("");
+    const [allUsers, setAllUsers] = useState<UserWithFullName[]>([]);
 
-    const filteredPlans = currentPlans.filter((plan: any) =>
-        plan.name.toLowerCase().includes(searchTerm.toLowerCase())
+    useEffect(() => {
+        async function getAllUsers() {
+            const res = await axios.get("/api/users/full_name");
+            setAllUsers(res.data);
+        }
+        getAllUsers();
+    }, []);
+
+    const usersBySearchTerm = allUsers.filter((user) =>
+        user.fullName.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
-    console.log(filteredPlans, "plans when filtered");
-    console.log(searchTerm, "search terms");
+    const filteredPlans = currentPlans.filter(
+        (plan: any) =>
+            plan.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            plan.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            usersBySearchTerm.some((user) => user.id === plan.userId)
+    );
+
     return (
         <div className="flex flex-col gap-4">
             <SearchBar setSearchTerm={setSearchTerm} />
-            {/* Plans Here */}
+
             <section className="flex flex-col gap-2">
                 {filteredPlans.map((plan: any) => (
                     <TrainingPlanCard plan={plan} key={plan.id} />
