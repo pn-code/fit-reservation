@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { currentUser } from "@clerk/nextjs/app-beta";
 import { prisma } from "../../../lib/client";
-import TrainingPlanCard from "../../../components/TrainingPlanCard";
+import DisplayPlans from "../../../components/DisplayPlans";
 
 export const metadata = {
     title: "Explore Plans | FitHeroes",
@@ -31,12 +31,7 @@ export default async function ExplorePlans() {
                 </Link>
             </header>
 
-            {/* Plans Here */}
-            <section className="flex flex-col gap-2">
-                {plans.map((plan) => (
-                    <TrainingPlanCard plan={plan} key={plan.id}/>
-                ))}
-            </section>
+            <DisplayPlans currentPlans={plans} />
         </main>
     );
 }
