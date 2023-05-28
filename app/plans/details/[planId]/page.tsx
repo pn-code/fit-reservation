@@ -7,6 +7,7 @@ import ReviewCard from "../../../../components/ReviewCard";
 import RatingComponent from "../../../../components/RatingComponent";
 import PlanReviewForm from "../../../../components/PlanReviewForm";
 import PlanActions from "../../../../components/PlanActions";
+import SavePlanButton from "../../../../components/SavePlanButton";
 
 export const revalidate = 60;
 
@@ -20,7 +21,7 @@ export default async function PlanDetails({ params }: Props) {
     const fetchTrainingPlan = async (): Promise<any> => {
         const plan = await prisma.trainingPlan.findFirst({
             where: { id: Number(params.planId) },
-            include: { exercises: true, reviews: true },
+            include: { exercises: true, reviews: true, savedByUsers: true },
         });
         return plan;
     };
@@ -43,10 +44,22 @@ export default async function PlanDetails({ params }: Props) {
         <main className="w-full min-h-[calc(100vh-90px)] bg-slate-800 py-6 rounded-md flex flex-col gap-4 shadow-md px-2 sm:px-10 text-white/90">
             <header className="flex justify-between font-bold pb-2 border-b-2 border-b-indigo-600 items-center">
                 <section className="flex gap-2 items-center">
-                    <h1 className="text-3xl">{plan.name}</h1>
+                    <h1 className="text-3xl font-bold">{plan.name}</h1>
+                    <span className="hidden text-sm sm:flex font-normal">
+                        Saved by{" "}
+                        {plan.savedByUsers.length === 1
+                            ? "1 user"
+                            : `${plan.savedByUsers.length} users`}
+                    </span>
                 </section>
 
                 <section className="flex gap-4">
+                    <SavePlanButton
+                        planId={plan.id}
+                        isSaved={plan.savedByUsers.some(
+                            (savedUser: any) => savedUser.userId === user.id
+                        )}
+                    />
                     <BackNavigationButton />
                 </section>
             </header>
@@ -70,7 +83,9 @@ export default async function PlanDetails({ params }: Props) {
             </section>
 
             {/* Actions */}
-            {user.id === plan.userId && <PlanActions plan={plan} userId={user.id}/>}
+            {user.id === plan.userId && (
+                <PlanActions plan={plan} userId={user.id} />
+            )}
 
             <table className="table-auto w-full">
                 <thead className="h-8 text-xs sm:text-[16px] font-semibold uppercase text-yellow-50 bg-blue-900/60">
