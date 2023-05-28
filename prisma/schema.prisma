@@ -59,14 +59,24 @@ model Subscription {
 }
 
 model TrainingPlan {
-  id          Int        @id @default(autoincrement())
-  userId      String
-  createdAt   DateTime   @default(now())
-  modifiedAt  DateTime   @default(now())
-  name        String
-  description String
-  reviews     Review[]
-  exercises   Exercise[]
+  id           Int           @id @default(autoincrement())
+  userId       String
+  createdAt    DateTime      @default(now())
+  modifiedAt   DateTime      @default(now())
+  name         String
+  description  String
+  reviews      Review[]
+  exercises    Exercise[]
+  savedByUsers SavedByUser[]
+}
+
+model SavedByUser {
+  id             Int           @id @default(autoincrement())
+  userId         String
+  TrainingPlan   TrainingPlan? @relation(fields: [trainingPlanId], references: [id])
+  trainingPlanId Int?
+
+  @@index([trainingPlanId])
 }
 
 model Exercise {

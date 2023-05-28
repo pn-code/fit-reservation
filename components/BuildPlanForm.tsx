@@ -62,7 +62,7 @@ export default function BuildPlanForm() {
             if (res.status === 200) {
                 toast.success("Successfully built your new plan!");
             }
-
+            router.refresh()
             router.push(`/plans/${user?.user?.id}`);
         } catch (error) {
             console.error(error);

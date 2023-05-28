@@ -22,7 +22,6 @@ export default function OverviewNutritionSection() {
     useEffect(() => {
         async function fetchFoodEntries() {
             const res = await axios.get("/api/food_entries");
-            console.log(res);
             setFoodEntries(res.data);
         }
 
