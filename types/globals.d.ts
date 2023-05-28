@@ -63,3 +63,8 @@ type TrainingPlan = {
     reviews?: any[];
     exercise?: any[];
 };
+
+type UserWithFullName = {
+    fullName: string;
+    id: string;
+};
