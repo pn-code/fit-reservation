@@ -46,8 +46,6 @@ export default async function Plans({ params }: Props) {
     const userPlans = await getUserPlans();
     const savedPlans = await getSavedPlans();
 
-    console.log(savedPlans);
-
     return (
         <main className="w-full min-h-[calc(100vh-90px)] bg-slate-800 py-6 rounded-md flex flex-col gap-4 shadow-md px-2 sm:px-10 text-white/90">
             <header className="flex justify-between font-bold pb-2 border-b-2 border-b-indigo-600 items-center">

@@ -27,7 +27,6 @@ export default function OverviewPhysicalActivitySection() {
     useEffect(() => {
         async function fetchExerciseEntries() {
             const res = await axios.get("/api/exercise_entries");
-            console.log(res);
             setExerciseEntries(res.data);
         }
         try {
