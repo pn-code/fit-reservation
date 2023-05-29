@@ -2,6 +2,8 @@
 
 <a href="https://fitheroes.philipnguyen.dev" target="_blank" rel="noopener noreferrer">Check out the live project here!</a>
 
+<img src="./gh-design.png" alt="fit heroes"/>
+
 FitHeroes is a powerful fitness app that helps you track your progress, plan your workouts, and achieve your fitness goals. It provides a variety of features including a detailed calorie calculator, weight and body fat tracker, nutrition and exercise journals, and the ability to build, view, and save workout plans.
 
 ## Technologies Used
