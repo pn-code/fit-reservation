@@ -16,11 +16,6 @@ export default function ExerciseJournal({
 }: Props) {
     return (
         <section className="flex flex-col items-center gap-4 py-5 w-full">
-            <LineDivider />
-            <h2 className="text-2xl font-semibold text-amber-400">
-                Exercise Journal
-            </h2>
-
             {/* When loading exercises */}
             {loadingExercises && <Spinner />}
 

@@ -5,7 +5,7 @@ import { toast } from "react-hot-toast";
 import axios from "axios";
 import ExerciseJournal from "./ExerciseJournal";
 
-export default function ExerciseEntryClientComponent() {
+export default function ExerciseForm() {
     const [exercise, setExercise] = useState("");
     const [type, setType] = useState("resistance");
     const [weight, setWeight] = useState(0);
@@ -109,11 +109,7 @@ export default function ExerciseEntryClientComponent() {
     };
 
     return (
-        <>
-            <h2 className="lg:text-center text-2xl font-semibold text-amber-400">
-                Add Exercise
-            </h2>
-
+        <section className="flex flex-col gap-4">
             <form className="w-full flex flex-col gap-8 lg:flex-row py-2 lg:items-center lg:justify-center">
                 <section className="flex flex-col gap-2">
                     <label htmlFor="exercise">Exercise: </label>
@@ -144,9 +140,7 @@ export default function ExerciseEntryClientComponent() {
                 {type === "cardio" && (
                     <section className="flex flex-col gap-4 sm:flex-row sm:justify-between">
                         <section className="flex flex-col gap-2">
-                            <label htmlFor="duration">
-                                Duration (min):
-                            </label>
+                            <label htmlFor="duration">Duration (min):</label>
                             <input
                                 className="w-16"
                                 type="number"
@@ -234,6 +228,6 @@ export default function ExerciseEntryClientComponent() {
                 deleteExerciseEntry={deleteExerciseEntry}
                 loadingExercises={loadingExercises}
             />
-        </>
+        </section>
     );
 }
