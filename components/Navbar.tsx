@@ -77,24 +77,22 @@ const Navbar = () => {
                         </Link>
                         <Link
                             className={`group relative ${
-                                pathname === "/tracker/overview" ||
-                                pathname === "/tracker/exercise" ||
-                                pathname === "/tracker/nutrition"
+                                pathname?.includes("/journal")
                                     ? currentPathStyles
                                     : ""
                             }`}
                             passHref={true}
-                            href="/tracker/overview"
+                            href="/journal"
                         >
                             <ClipboardSignature className="text-white/90 hover:text-white" />
                             <span className="bg-indigo-700 py-0.5 px-2 rounded-lg hidden group-hover:flex text-sm font-semibold absolute -left-4 top-8">
-                                Tracker
+                                Journal
                             </span>
                         </Link>
                         {user != undefined && (
                             <Link
                                 className={`group relative ${
-                                    pathname.includes("/plans")
+                                    pathname?.includes("/plans")
                                         ? currentPathStyles
                                         : ""
                                 }`}
@@ -110,7 +108,7 @@ const Navbar = () => {
                         {user != undefined && (
                             <Link
                                 className={`group relative ${
-                                    pathname.includes("/profile")
+                                    pathname?.includes("/profile")
                                         ? currentPathStyles
                                         : ""
                                 }`}
@@ -163,7 +161,7 @@ const Navbar = () => {
                         <Link
                             onClick={() => setOpenMobileNavbar(false)}
                             className="flex gap-4 items-center hover:text-white text-white/90 group"
-                            href="/tracker/overview"
+                            href="/journal"
                             passHref={true}
                         >
                             <ClipboardSignature
@@ -171,7 +169,7 @@ const Navbar = () => {
                                 size={45}
                             />
                             <span className="border-b-4 border-b-transparent group-hover:border-b-indigo-500">
-                                Track Progress
+                                Journal
                             </span>
                         </Link>
                         <Link

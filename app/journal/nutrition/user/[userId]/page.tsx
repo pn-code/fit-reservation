@@ -57,7 +57,7 @@ export default async function UserNutritionJournals() {
                 <Link
                     className="bg-indigo-600 hover:bg-indigo-700 rounded-lg text-white px-4 py-3"
                     passHref={true}
-                    href="/tracker/nutrition"
+                    href="/journal"
                 >
                     Back
                 </Link>
