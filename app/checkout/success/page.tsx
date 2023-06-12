@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 
 export default function CheckoutSuccessPage() {
     const searchParams = useSearchParams();
-    const sessionId = searchParams.get("session_id");
+    const sessionId = searchParams?.get("session_id");
 
     const [subscription, setSubscription] = useState({
         expirationDate: "",
