@@ -1,8 +1,6 @@
 import CalculatorForm from "../../components/CalculatorForm";
 import MacroBuilder from "../../components/MacroBuilder";
 import getCalorieGoal from "../../helpers/getCalorieGoal";
-import getCurrentBF from "../../helpers/getCurrentBF";
-import getCurrentWeight from "../../helpers/getCurrentWeight";
 
 export const metadata = {
     title: "Calculator | FitHeroes",
@@ -10,23 +8,6 @@ export const metadata = {
 
 const CalculatorPage = async () => {
     const currentCalorieGoal = await getCalorieGoal();
-    const currentWeight = await getCurrentWeight();
-    const currentBF = await getCurrentBF();
-
-    const calculateRecommendedProteinIntake = (
-        bodyfat: number | undefined,
-        weight: number | undefined
-    ) => {
-        // Return lean body mass * .8
-        if (!bodyfat || !weight) return null;
-        const leanBodyMass = (1 - bodyfat * 0.01) * weight;
-        return Math.round(leanBodyMass * 0.8);
-    };
-
-    const recommendedProteinIntake = calculateRecommendedProteinIntake(
-        currentBF,
-        currentWeight
-    );
 
     return (
         <main className="w-full min-h-[calc(100vh-100px)] mb-20 bg-slate-800 py-6 rounded-md flex flex-col gap-4 shadow-md px-2 sm:px-10 text-white/90">
