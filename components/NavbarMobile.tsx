@@ -45,18 +45,16 @@ export default function NavbarMobile() {
                 <Link
                     className="flex flex-col items-center gap-1"
                     passHref={true}
-                    href="/tracker/overview"
+                    href="/journal"
                 >
                     <ClipboardSignature
                         className={`group relative text-white/90 hover:text-white border-t-2 ${
-                            pathname === "/tracker/overview" ||
-                            pathname === "/tracker/exercise" ||
-                            pathname === "/tracker/nutrition"
+                            pathname === "/journal"
                                 ? currentPathStyles
                                 : "border-t-transparent"
                         }`}
                     />
-                    <span className="text-xs text-white">Tracker</span>
+                    <span className="text-xs text-white">Journal</span>
                 </Link>
                 {user != undefined && (
                     <Link
