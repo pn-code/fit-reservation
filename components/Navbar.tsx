@@ -3,19 +3,16 @@ import {
     Calculator,
     ClipboardSignature,
     LayoutDashboard,
-    Menu,
     Rocket,
     Shield,
     User,
-    X,
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
 import { useUser } from "@clerk/nextjs";
+import NavbarMobile from "./NavbarMobile";
 
 const Navbar = () => {
-    const [openMobileNavbar, setOpenMobileNavbar] = useState(false);
     const user = useUser().user;
 
     const pathname = usePathname();
@@ -33,16 +30,6 @@ const Navbar = () => {
                         <h1 className="text-3xl font-bold">FitHeroes</h1>
                     </Link>
                 </header>
-
-                {user && (
-                    <button
-                        onClick={() => setOpenMobileNavbar((prev) => !prev)}
-                        type="button"
-                        className="sm:hidden p-2 hover:bg-blue-900 rounded-lg"
-                    >
-                        {openMobileNavbar ? <X /> : <Menu />}
-                    </button>
-                )}
 
                 {/* Navbar on medium to larger devices */}
                 {user && (
@@ -128,83 +115,7 @@ const Navbar = () => {
             </nav>
 
             {/* Mobile Navbar */}
-            {openMobileNavbar && user != undefined && (
-                <section className="absolute h-[300%] w-full z-10 bg-black flex items-center pt-[25%] flex-col sm:pb-32 text-white font-semibold text-3xl">
-                    <section className="flex flex-col gap-8">
-                        <Link
-                            onClick={() => setOpenMobileNavbar(false)}
-                            className="flex gap-4 items-center hover:text-white text-white/90 group"
-                            href="/dashboard"
-                            passHref={true}
-                        >
-                            <LayoutDashboard
-                                className="text-white/90 group-hover:text-indigo-500"
-                                size={45}
-                            />
-                            <span className="border-b-4 border-b-transparent group-hover:border-b-indigo-500">
-                                Dashboard
-                            </span>
-                        </Link>
-                        <Link
-                            onClick={() => setOpenMobileNavbar(false)}
-                            className="flex gap-4 items-center hover:text-white text-white/90 group"
-                            href="/calculator"
-                            passHref={true}
-                        >
-                            <Calculator
-                                onClick={() => setOpenMobileNavbar(false)}
-                                className="text-white/90 group-hover:text-indigo-500"
-                                size={45}
-                            />
-                            <span className="border-b-4 border-b-transparent group-hover:border-b-indigo-500">
-                                Calculator
-                            </span>
-                        </Link>
-                        <Link
-                            onClick={() => setOpenMobileNavbar(false)}
-                            className="flex gap-4 items-center hover:text-white text-white/90 group"
-                            href="/tracker/overview"
-                            passHref={true}
-                        >
-                            <ClipboardSignature
-                                className="text-white/90 group-hover:text-indigo-500"
-                                size={45}
-                            />
-                            <span className="border-b-4 border-b-transparent group-hover:border-b-indigo-500">
-                                Track Progress
-                            </span>
-                        </Link>
-                        <Link
-                            onClick={() => setOpenMobileNavbar(false)}
-                            className="flex gap-4 items-center hover:text-white text-white/90 group"
-                            href={`/plans/${user?.id}`}
-                            passHref={true}
-                        >
-                            <Rocket
-                                className="text-white/90 group-hover:text-indigo-500"
-                                size={45}
-                            />
-                            <span className="border-b-4 border-b-transparent group-hover:border-b-indigo-500">
-                                View Plans
-                            </span>
-                        </Link>
-                        <Link
-                            onClick={() => setOpenMobileNavbar(false)}
-                            className="flex gap-4 items-center hover:text-white text-white/90 group"
-                            href={`/profile/${user?.id}`}
-                            passHref={true}
-                        >
-                            <User
-                                className="text-white/90 group-hover:text-indigo-500"
-                                size={45}
-                            />
-                            <span className="border-b-4 border-b-transparent group-hover:border-b-indigo-500">
-                                My Profile
-                            </span>
-                        </Link>
-                    </section>
-                </section>
-            )}
+            <NavbarMobile />
         </>
     );
 };
