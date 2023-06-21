@@ -38,6 +38,7 @@ export default function BodyFatForm({ setBodyFats }: Props) {
         <form className="text-sm flex gap-4 justify-center items-center bg-gray-800 px-4 py-2 rounded-md">
             <label htmlFor="bf">Current Body Fat (%):</label>
             <input
+                className="w-16"
                 onChange={(e) => setBodyFat(Number(e.target.value))}
                 value={bodyFat}
                 type="number"
