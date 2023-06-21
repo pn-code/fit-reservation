@@ -6,7 +6,7 @@ import axios from "axios";
 import { toast } from "react-hot-toast";
 import { useEffect, useState } from "react";
 
-export default function FoodEntryClientComponent() {
+export default function NutritionForm() {
     const [name, setName] = useState("");
     const [calories, setCalories] = useState(0);
     const [carbs, setCarbs] = useState(0);
@@ -95,13 +95,9 @@ export default function FoodEntryClientComponent() {
         }
     };
     return (
-        <>
-            <h2 className="lg:text-center text-2xl font-semibold text-amber-400">
-                Add Nutrition Item
-            </h2>
-
+        <section className="flex flex-col gap-4">
             <form className="w-full flex flex-col gap-8 lg:flex-row py-2 lg:items-center lg:justify-center">
-                <section className="flex flex-col gap-4 sm:flex-row">
+                <section className="flex flex-col gap-4 sm:flex-row justify-center">
                     <section className="flex flex-col gap-2">
                         <label htmlFor="name">Name:</label>
                         <input
@@ -199,6 +195,6 @@ export default function FoodEntryClientComponent() {
                 deleteFoodEntry={deleteFoodEntry}
                 loadingNutrition={loadingNutrition}
             />
-        </>
+        </section>
     );
 }

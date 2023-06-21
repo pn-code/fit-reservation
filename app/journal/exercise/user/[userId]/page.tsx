@@ -57,7 +57,7 @@ export default async function UserExerciseJournals() {
                 <Link
                     className="bg-indigo-600 hover:bg-indigo-700 rounded-lg text-white px-4 py-3"
                     passHref={true}
-                    href="/tracker/exercise"
+                    href="/journal"
                 >
                     Back
                 </Link>
