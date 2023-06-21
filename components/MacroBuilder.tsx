@@ -48,9 +48,9 @@ export default function MacroBuilder({ currentCalorieGoal }: Props) {
     }, [dietPlan])
 
     return (
-        <section className="bg-slate-900 py-4 px-6 rounded-md flex-1">
+        <section className="py-4 sm:px-6 rounded-md flex-1">
             <header>
-                <h2 className="text-xl font-bold border-b-indigo-600 border-b-2">
+                <h2 className="text-xl">
                     Macronutrients
                 </h2>
                 <p className="text-amber-400 text-sm font-semibold">

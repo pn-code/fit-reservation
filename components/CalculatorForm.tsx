@@ -91,9 +91,9 @@ function CalculatorForm() {
         }
     };
     return (
-        <form className="bg-slate-900 py-4 px-6 rounded-md flex-1">
+        <form className="py-4 rounded-md flex-1">
             <header className="mb-2">
-                <h2 className="text-xl font-bold border-b-indigo-600 border-b-2">
+                <h2 className="text-xl">
                     Calculate Calorie Goal
                 </h2>
                 <p className="text-amber-400 text-sm font-semibold">
