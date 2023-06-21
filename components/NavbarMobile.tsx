@@ -17,7 +17,7 @@ export default function NavbarMobile() {
     const currentPathStyles = "border-amber-300";
     return (
         <nav className="sm:hidden fixed bottom-0 w-full bg-gray-900">
-            <ul className="flex justify-between py-3 px-6">
+            {user && <ul className="flex justify-between py-3 px-6">
                 <Link
                     className="flex flex-col items-center gap-1"
                     passHref={true}
@@ -88,7 +88,7 @@ export default function NavbarMobile() {
                         <span className="text-xs text-white">Profile</span>
                     </Link>
                 )}
-            </ul>
+            </ul>}
         </nav>
     );
 }
