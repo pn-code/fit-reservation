@@ -39,7 +39,7 @@ export default function NutritionJournal({
 
             {/* When entries exist and are found */}
             {foodEntries.length > 0 && !loadingNutrition ? (
-                <div className="p-3 w-full sm:w-[75%]">
+                <div className="w-full sm:w-[75%]">
                     <div className="overflow-x-auto w-full">
                         <table className="table-auto w-full">
                             <thead className="h-8 text-xs sm:text-[16px] font-semibold uppercase text-yellow-50 bg-blue-900/60">

@@ -1,6 +1,5 @@
 "use client";
 import ExerciseEntryCard from "./ExerciseEntryCard";
-import LineDivider from "./LineDivider";
 import Spinner from "./Spinner";
 
 interface Props {
@@ -28,7 +27,7 @@ export default function ExerciseJournal({
 
             {/* Successfully loaded exercises  */}
             {exercises.length > 0 && !loadingExercises && (
-                <div className="p-3 w-full sm:w-[75%]">
+                <div className="w-full sm:w-[75%]">
                     <div className="overflow-x-auto w-full">
                         <table className="table-auto w-full">
                             <thead className="h-8 text-xs sm:text-[16px] font-semibold uppercase text-yellow-50 bg-blue-900/60">
