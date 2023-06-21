@@ -38,6 +38,7 @@ export default function BodyWeightForm({ setWeights }: Props) {
         <form className="text-sm flex gap-4 justify-center items-center bg-gray-800 px-4 py-2 rounded-md">
             <label htmlFor="weight">Current Weight (lbs):</label>
             <input
+                className="w-16"
                 onChange={(e) => setWeight(Number(e.target.value))}
                 value={weight}
                 type="number"

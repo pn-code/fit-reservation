@@ -7,7 +7,7 @@ export const metadata = {
 
 export default function LoginPage() {
     return (
-        <main className="w-full h-[calc(100vh-90px)] bg-slate-800 py-6 rounded-md flex flex-col sm:flex-row gap-4 shadow-md px-2 sm:px-10 text-white/90 justify-center items-center">
+        <main className="w-full min-h-[calc(100vh-90px)] bg-slate-800 py-6 rounded-md flex flex-col sm:flex-row gap-4 shadow-md px-2 sm:px-10 text-white/90 justify-center items-center">
             <SignIn signUpUrl="/register" />
             <section className="flex flex-col gap-1 bg-white rounded-md p-6 text-black">
                 <h1 className="text-lg font-bold">Guest Account Credentials</h1>

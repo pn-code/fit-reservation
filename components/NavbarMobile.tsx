@@ -2,7 +2,7 @@ import { useUser } from "@clerk/nextjs";
 import {
     Calculator,
     ClipboardSignature,
-    LayoutDashboard,
+    HomeIcon,
     Rocket,
     User,
 } from "lucide-react";
@@ -16,22 +16,22 @@ export default function NavbarMobile() {
     const pathname = usePathname();
     const currentPathStyles = "border-amber-300";
     return (
-        <nav className="sm:hidden fixed bottom-0 w-full bg-gray-900">
-            {user && <ul className="flex justify-between py-3 px-6">
+        <nav className="sm:hidden fixed bottom-0 w-full bg-gray-900 z-[999]">
+            {user && <ul className="flex justify-between py-3">
                 <Link
-                    className="flex flex-col items-center gap-1"
+                    className="flex flex-col items-center gap-1 flex-1"
                     passHref={true}
                     href="/dashboard"
                 >
-                    <LayoutDashboard
+                    <HomeIcon
                         className={`group relative text-white/90 hover:text-white border-t-2 ${
                             pathname === "/dashboard" ? currentPathStyles : "border-t-transparent"
                         }`}
                     />
-                    <span className="text-xs text-white">Dashboard</span>
+                    <span className="text-xs text-white">Home</span>
                 </Link>
                 <Link
-                    className="flex flex-col items-center gap-1"
+                    className="flex flex-col items-center gap-1 flex-1"
                     passHref={true}
                     href="/calculator"
                 >
@@ -40,10 +40,10 @@ export default function NavbarMobile() {
                             pathname === "/calculator" ? currentPathStyles : "border-t-transparent"
                         }`}
                     />
-                    <span className="text-xs text-white">Calculator</span>
+                    <span className="text-xs text-white">Calculate</span>
                 </Link>
                 <Link
-                    className="flex flex-col items-center gap-1"
+                    className="flex flex-col items-center gap-1 flex-1"
                     passHref={true}
                     href="/journal"
                 >
@@ -58,7 +58,7 @@ export default function NavbarMobile() {
                 </Link>
                 {user != undefined && (
                     <Link
-                        className="flex flex-col items-center gap-1"
+                        className="flex flex-col items-center gap-1 flex-1"
                         passHref={true}
                         href={`/plans/${user?.id}`}
                     >
@@ -74,7 +74,7 @@ export default function NavbarMobile() {
                 )}
                 {user != undefined && (
                     <Link
-                        className="flex flex-col items-center gap-1"
+                        className="flex flex-col items-center gap-1 flex-1"
                         passHref={true}
                         href={`/profile/${user?.id}`}
                     >
