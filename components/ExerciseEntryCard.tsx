@@ -26,7 +26,7 @@ function ExerciseEntryCard({
 }: ExerciseEntryCardProps) {
     return (
         <>
-            <tr className="text-[14px] bg-blue-900/20 hover:bg-indigo-600 cursor-pointer hover:text-white">
+            <tr className="text-xs sm:text-sm bg-blue-900/20 hover:bg-indigo-600 cursor-pointer hover:text-white">
                 <td className="py-2 whitespace-nowrap">
                     {name.length > 30 ? name.substring(0, 30) + "..." : name}
                 </td>

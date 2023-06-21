@@ -138,20 +138,7 @@ export default function ExerciseForm() {
                 </section>
 
                 {type === "cardio" && (
-                    <section className="flex flex-col gap-4 sm:flex-row sm:justify-between">
-                        <section className="flex flex-col gap-2">
-                            <label htmlFor="duration">Duration (min):</label>
-                            <input
-                                className="w-16"
-                                type="number"
-                                id="duration"
-                                onChange={(e) =>
-                                    setDuration(Number(e.target.value))
-                                }
-                                value={duration}
-                                min={0}
-                            />
-                        </section>
+                    <section className="flex gap-4 justify-between sm:justify-start">
                         <section className="flex flex-col gap-2">
                             <label htmlFor="calories">Calories:</label>
                             <input
@@ -164,15 +151,28 @@ export default function ExerciseForm() {
                                 value={calories}
                             />
                         </section>
+                        <section className="flex flex-col gap-2">
+                            <label htmlFor="duration">Duration (min):</label>
+                            <input
+                                className="w-24"
+                                type="number"
+                                id="duration"
+                                onChange={(e) =>
+                                    setDuration(Number(e.target.value))
+                                }
+                                value={duration}
+                                min={0}
+                            />
+                        </section>
                     </section>
                 )}
 
                 {type === "resistance" && (
-                    <section className="flex flex-col gap-4 sm:flex-row sm:justify-between">
+                    <section className="flex gap-4 justify-between sm:justify-start">
                         <section className="flex flex-col gap-2">
                             <label htmlFor="weight">Weight (lbs):</label>
                             <input
-                                className="w-24"
+                                className="w-20"
                                 type="number"
                                 id="weight"
                                 onChange={(e) =>
