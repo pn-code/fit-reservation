@@ -93,7 +93,7 @@ function CalculatorForm() {
     return (
         <form className="py-4 rounded-md flex-1">
             <header className="mb-2">
-                <h2 className="text-xl">
+                <h2 className="text-2xl font-semibold">
                     Calculate Calorie Goal
                 </h2>
                 <p className="text-amber-400 text-sm font-semibold">
