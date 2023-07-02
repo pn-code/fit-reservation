@@ -16,11 +16,11 @@ const Navbar = () => {
     const user = useUser().user;
 
     const pathname = usePathname();
-    const currentPathStyles = "border-b-2 border-amber-300";
+    const currentPathStyles = "border-b-2 border-indigo-600";
 
     return (
         <>
-            <nav className="relative h-[82px] bg-[#172554] text-white py-6 px-2 sm:px-6 flex justify-between items-center w-full top-0 left-0 z-[999]">
+            <nav className="relative h-16 bg-[#172554] text-white py-6 px-2 sm:px-6 flex justify-between items-center w-full top-0 left-0 z-[999]">
                 <header>
                     <Link
                         className="hover:underline font-medium flex gap-2 items-center"
@@ -33,7 +33,7 @@ const Navbar = () => {
 
                 {/* Navbar on medium to larger devices */}
                 {user && (
-                    <ul className="hidden sm:flex sm:gap-4">
+                    <ul className="hidden sm:flex sm:gap-4 text-[16px]">
                         <Link
                             className={`group relative ${
                                 pathname === "/dashboard"
@@ -43,10 +43,7 @@ const Navbar = () => {
                             passHref={true}
                             href="/dashboard"
                         >
-                            <LayoutDashboard className="text-white/90 hover:text-white" />
-                            <span className="bg-indigo-700 py-0.5 px-2 rounded-lg hidden group-hover:flex text-sm font-semibold absolute -left-8 top-8">
-                                Dashboard
-                            </span>
+                            Dashboard
                         </Link>
                         <Link
                             className={`group relative ${
@@ -57,10 +54,7 @@ const Navbar = () => {
                             passHref={true}
                             href="/calculator"
                         >
-                            <Calculator className="text-white/90 hover:text-white" />
-                            <span className="bg-indigo-700 py-0.5 px-2 rounded-lg hidden group-hover:flex text-sm font-semibold absolute -left-7 top-8">
-                                Calculator
-                            </span>
+                            Calculator
                         </Link>
                         <Link
                             className={`group relative ${
@@ -71,10 +65,7 @@ const Navbar = () => {
                             passHref={true}
                             href="/journal"
                         >
-                            <ClipboardSignature className="text-white/90 hover:text-white" />
-                            <span className="bg-indigo-700 py-0.5 px-2 rounded-lg hidden group-hover:flex text-sm font-semibold absolute -left-4 top-8">
-                                Journal
-                            </span>
+                            Journal
                         </Link>
                         {user != undefined && (
                             <Link
@@ -86,10 +77,7 @@ const Navbar = () => {
                                 passHref={true}
                                 href={`/plans/${user?.id}`}
                             >
-                                <Rocket className="text-white/90 hover:text-white" />
-                                <span className="bg-indigo-700 py-0.5 px-2 rounded-lg hidden group-hover:flex text-sm font-semibold absolute -left-3 top-8">
-                                    Plans
-                                </span>
+                                Plans
                             </Link>
                         )}
                         {user != undefined && (
@@ -102,10 +90,7 @@ const Navbar = () => {
                                 passHref={true}
                                 href={`/profile/${user?.id}`}
                             >
-                                <User className="text-white/90 hover:text-white" />
-                                <span className="bg-indigo-700 py-0.5 px-2 rounded-lg hidden group-hover:flex text-sm font-semibold absolute -left-4 top-8">
-                                    Profile
-                                </span>
+                                Profile
                             </Link>
                         )}
                     </ul>
