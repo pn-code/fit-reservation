@@ -26,3 +26,30 @@ export async function DELETE(req: Request, { params }: Props) {
         return NextResponse.error();
     }
 }
+
+export async function PUT(req: Request, { params }: Props) {
+    try {
+        const user = await currentUser();
+        const data = await req.json();
+        if (user) {
+            const { id: userId } = user;
+
+            const reviewToDelete = await prisma.review.updateMany({
+                where: {
+                    id: Number(params.reviewId),
+                    userId: userId,
+                },
+                data: {
+                    comment: data.comment,
+                    rating: data.rating,
+                    modifiedAt: new Date(),
+                },
+            });
+
+            return NextResponse.json(reviewToDelete);
+        }
+    } catch (error) {
+        console.log(error);
+        return NextResponse.error();
+    }
+}
