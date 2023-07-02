@@ -17,7 +17,7 @@ export default function ReviewCard({ review }: Props) {
     const [comment, setComment] = useState(review.comment);
     const [rating, setRating] = useState(review.rating);
     const [isEditing, setIsEditing] = useState(false);
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(false);
 
     const user = useUser();
     const router = useRouter();
@@ -35,7 +35,7 @@ export default function ReviewCard({ review }: Props) {
 
     const deleteReview = async () => {
         try {
-            setLoading(true)
+            setLoading(true);
             const res = await axios.delete(`/api/plans/reviews/${review.id}`);
             if (res.status === 200) {
                 toast.success("Successfully deleted review");
@@ -52,16 +52,32 @@ export default function ReviewCard({ review }: Props) {
     const updateReview = async () => {
         try {
             setLoading(true);
+            // Check to see if the inputs are the same as the current review
+            const sameComment = review.comment.trim() === comment.trim();
+            const sameRating = review.rating === rating;
+
+            if (sameComment && sameRating) {
+                throw new Error(
+                    "Cannot update review without providing new information."
+                );
+            }
+
+            // API call to get information
             const res = await axios.put(`/api/plans/reviews/${review.id}`, {
                 comment,
                 rating,
             });
+
+            console.log(res);
             if (res.status === 200) {
                 toast.success("Successfully updated review");
             }
         } catch (error) {
-            console.error("Ran into an error");
-            toast.error("Something went wrong!");
+            if (error instanceof Error) {
+                toast.error(error.message);
+            } else {
+                toast.error("An error occurred");
+            }
         } finally {
             router.refresh();
             setLoading(false);
