@@ -46,6 +46,23 @@ export default function ReviewCard({ review }: Props) {
         }
     };
 
+    const updateReview = async () => {
+        try {
+            const res = await axios.put(`/api/plans/reviews/${review.id}`, {
+                comment,
+                rating,
+            });
+            if (res.status === 200) {
+                toast.success("Successfully updated review");
+            }
+        } catch (error) {
+            console.error("Ran into an error");
+            toast.error("Something went wrong!");
+        } finally {
+            router.refresh();
+        }
+    };
+
     return (
         <article className="flex flex-col gap-2 border-b-2 border-b-white py-2">
             <header className="flex justify-between">
@@ -118,16 +135,20 @@ export default function ReviewCard({ review }: Props) {
                 <form className="flex flex-col gap-2">
                     <section className="flex flex-col gap-1">
                         <label htmlFor="comment">Edited Comment:</label>
-                        <input
+                        <textarea
                             id="comment"
-                            className="text-sm bg-gray-900 text-white"
+                            className="text-sm bg-gray-900 text-white p-2 sm:w-[600px]"
                             onChange={(e) => setComment(e.target.value)}
                             value={comment}
                             placeholder={review.comment}
                         />
                     </section>
 
-                    <button className="bg-green-600 text-white py-1 rounded-md sm:w-52">
+                    <button
+                        type="button"
+                        onClick={updateReview}
+                        className="bg-green-600 text-white py-1 rounded-md sm:w-52"
+                    >
                         Update Review
                     </button>
                 </form>
