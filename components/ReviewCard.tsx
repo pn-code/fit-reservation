@@ -13,8 +13,11 @@ interface Props {
 }
 
 export default function ReviewCard({ review }: Props) {
-    const user = useUser();
     const [reviewer, setReviewer] = useState("Loading...");
+    const [comment, setComment] = useState(review.comment);
+    const [isEditing, setIsEditing] = useState(false);
+
+    const user = useUser();
     const router = useRouter();
 
     useEffect(() => {
@@ -51,6 +54,7 @@ export default function ReviewCard({ review }: Props) {
                         <section className="flex gap-1">
                             <button
                                 type="button"
+                                onClick={() => setIsEditing((bool) => !bool)}
                                 className="hover:bg-blue-800 cursor-pointer p-1 rounded-md"
                             >
                                 <Edit color="#71eb81" />
@@ -69,7 +73,31 @@ export default function ReviewCard({ review }: Props) {
                 <RatingComponent reviews={[review]} />
             </header>
 
-            {!review.comment ? "" : <p className="text-sm">{review.comment}</p>}
+            {/* Comment */}
+
+            {/* Show Comment as paragraph when not editing */}
+            {!isEditing ? (
+                <p className="text-sm">{review.comment}</p>
+            ) : (
+                <form className="flex flex-col gap-2">
+                    <section className="flex flex-col gap-1">
+                        <label htmlFor="comment">Edited Comment:</label>
+                        <input
+                            id="comment"
+                            className="text-sm bg-gray-900 text-white"
+                            onChange={(e) => setComment(e.target.value)}
+                            value={comment}
+                            placeholder={review.comment}
+                        />
+                    </section>
+
+                    <button className="bg-green-600 text-white py-1 rounded-md sm:w-52">
+                        Update Review
+                    </button>
+                </form>
+            )}
+
+            {/* Show comment as an input when editing */}
 
             <span className="hidden sm:flex text-xs">
                 {getTimeAgo(review.createdAt)}
