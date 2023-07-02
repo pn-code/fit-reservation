@@ -3,7 +3,7 @@ import RatingComponent from "./RatingComponent";
 import { getTimeAgo } from "../helpers/getTimeAgo";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Delete, Edit } from "lucide-react";
+import { Delete, Edit, Star } from "lucide-react";
 import { useUser } from "@clerk/nextjs";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
@@ -15,6 +15,7 @@ interface Props {
 export default function ReviewCard({ review }: Props) {
     const [reviewer, setReviewer] = useState("Loading...");
     const [comment, setComment] = useState(review.comment);
+    const [rating, setRating] = useState(review.rating);
     const [isEditing, setIsEditing] = useState(false);
 
     const user = useUser();
@@ -70,7 +71,42 @@ export default function ReviewCard({ review }: Props) {
                     )}
                 </section>
 
-                <RatingComponent reviews={[review]} />
+                {!isEditing ? (
+                    <RatingComponent reviews={[review]} />
+                ) : (
+                    <section className="flex hover:cursor-pointer">
+                        <Star
+                            size={16}
+                            stroke="#f5c71a"
+                            fill={"#ffdf00"}
+                            onClick={() => setRating(1)}
+                        />
+                        <Star
+                            size={16}
+                            stroke="#f5c71a"
+                            fill={rating >= 2 ? "#ffdf00" : "transparent"}
+                            onClick={() => setRating(2)}
+                        />
+                        <Star
+                            size={16}
+                            stroke="#f5c71a"
+                            fill={rating >= 3 ? "#ffdf00" : "transparent"}
+                            onClick={() => setRating(3)}
+                        />
+                        <Star
+                            size={16}
+                            stroke="#f5c71a"
+                            fill={rating >= 4 ? "#ffdf00" : "transparent"}
+                            onClick={() => setRating(4)}
+                        />
+                        <Star
+                            size={16}
+                            stroke="#f5c71a"
+                            fill={rating == 5 ? "#ffdf00" : "transparent"}
+                            onClick={() => setRating(5)}
+                        />
+                    </section>
+                )}
             </header>
 
             {/* Comment */}
