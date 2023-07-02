@@ -16,7 +16,7 @@ export default function NavbarMobile() {
     const pathname = usePathname();
     const currentPathStyles = "border-amber-300";
     return (
-        <nav className="sm:hidden fixed bottom-0 w-full bg-gray-900 z-[999]">
+        <nav className="sm:hidden fixed bottom-0 w-full bg-gray-900 z-[999] h-16">
             {user && <ul className="flex justify-between py-3">
                 <Link
                     className="flex flex-col items-center gap-1 flex-1"
