@@ -17,6 +17,7 @@ export default function ReviewCard({ review }: Props) {
     const [comment, setComment] = useState(review.comment);
     const [rating, setRating] = useState(review.rating);
     const [isEditing, setIsEditing] = useState(false);
+    const [loading, setLoading] = useState(false)
 
     const user = useUser();
     const router = useRouter();
@@ -34,6 +35,7 @@ export default function ReviewCard({ review }: Props) {
 
     const deleteReview = async () => {
         try {
+            setLoading(true)
             const res = await axios.delete(`/api/plans/reviews/${review.id}`);
             if (res.status === 200) {
                 toast.success("Successfully deleted review");
@@ -43,11 +45,13 @@ export default function ReviewCard({ review }: Props) {
             toast.error("Something went wrong!");
         } finally {
             router.refresh();
+            setLoading(false);
         }
     };
 
     const updateReview = async () => {
         try {
+            setLoading(true);
             const res = await axios.put(`/api/plans/reviews/${review.id}`, {
                 comment,
                 rating,
@@ -60,6 +64,8 @@ export default function ReviewCard({ review }: Props) {
             toast.error("Something went wrong!");
         } finally {
             router.refresh();
+            setLoading(false);
+            setIsEditing(false);
         }
     };
 
@@ -73,14 +79,16 @@ export default function ReviewCard({ review }: Props) {
                             <button
                                 type="button"
                                 onClick={() => setIsEditing((bool) => !bool)}
-                                className="hover:bg-blue-800 cursor-pointer p-1 rounded-md"
+                                disabled={loading}
+                                className="hover:bg-blue-800 cursor-pointer p-1 rounded-md disabled:bg-gray-400"
                             >
                                 <Edit color="#71eb81" />
                             </button>
                             <button
                                 type="button"
                                 onClick={deleteReview}
-                                className="hover:bg-blue-800 cursor-pointer p-1 rounded-md"
+                                disabled={loading}
+                                className="hover:bg-blue-800 cursor-pointer p-1 rounded-md disabled:bg-gray-400"
                             >
                                 <Delete color="#ed426d" />
                             </button>
