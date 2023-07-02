@@ -155,10 +155,15 @@ export default function ReviewCard({ review }: Props) {
             )}
 
             {/* Show comment as an input when editing */}
-
-            <span className="hidden sm:flex text-xs">
-                {getTimeAgo(review.createdAt)}
-            </span>
+            {review.createdAt.getTime() !== review.modifiedAt.getTime() ? (
+                <span className="hidden sm:flex text-xs">
+                    Last modified {getTimeAgo(review.modifiedAt)}
+                </span>
+            ) : (
+                <span className="hidden sm:flex text-xs">
+                    Posted {getTimeAgo(review.createdAt)}
+                </span>
+            )}
         </article>
     );
 }
