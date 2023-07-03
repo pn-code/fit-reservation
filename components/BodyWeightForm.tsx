@@ -8,22 +8,32 @@ interface Props {
 }
 
 export default function BodyWeightForm({ setWeights }: Props) {
+    const today = new Date().toISOString().split("T")[0];
+
     const [weight, setWeight] = useState<number>(160);
+    const [date, setDate] = useState(today);
 
     const submitCurrentWeight = async () => {
         try {
             const validateWeight = weightSchema.parse(weight);
-
             if (validateWeight) {
+                const formattedDate = new Date(date).toISOString();
                 const res = await axios.post("/api/weight_measurements", {
                     weight,
+                    createdAt: formattedDate,
                 });
 
                 if (res.status === 200) {
                     toast.success(
-                        `Current weight has been updated to ${weight} lbs.`
+                        `Successfully added new weight to user data.`
                     );
-                    setWeights((prev: unknown[]) => [...prev, res.data]);
+                    setWeights((prev: unknown[]) =>
+                        [...prev, res.data].sort(
+                            (a, b) =>
+                                new Date(a.createdAt).getTime() -
+                                new Date(b.createdAt).getTime()
+                        )
+                    );
                 } else {
                     throw Error;
                 }
@@ -35,16 +45,28 @@ export default function BodyWeightForm({ setWeights }: Props) {
     };
 
     return (
-        <form className="text-sm flex gap-4 justify-center items-center bg-gray-800 px-4 py-2 rounded-md">
-            <label htmlFor="weight">Current Weight (lbs):</label>
-            <input
-                className="w-16"
-                onChange={(e) => setWeight(Number(e.target.value))}
-                value={weight}
-                type="number"
-                id="weight"
-                placeholder="weight"
-            />
+        <form className="text-sm flex flex-col gap-4 justify-center items-center bg-gray-800 px-4 py-2 rounded-md">
+            <section className="flex gap-2 items-center">
+                <label htmlFor="weight">Date: </label>
+                <input
+                    className="w-32"
+                    onChange={(e) => setDate(e.target.value)}
+                    value={date}
+                    type="date"
+                    id="date"
+                />
+            </section>
+            <section className="flex gap-2 items-center">
+                <label htmlFor="weight">Current Weight (lbs):</label>
+                <input
+                    className="w-16"
+                    onChange={(e) => setWeight(Number(e.target.value))}
+                    value={weight}
+                    type="number"
+                    id="weight"
+                    placeholder="weight"
+                />
+            </section>
             <button
                 onClick={submitCurrentWeight}
                 type="button"
