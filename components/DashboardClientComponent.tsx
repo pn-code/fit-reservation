@@ -130,14 +130,14 @@ export default function DashboardClientComponent() {
                         />
                         <BodyWeightForm setWeights={setWeights} />
                         <table>
-                            <thead className="text-left">
+                            <thead className="text-center sm:text-left">
                                 <tr>
                                     <th>Date</th>
                                     <th>Weight</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody className="text-center sm:text-left">
                                 {reversedWeights.map((weightObj) => (
                                     <tr className="hover:bg-gray-900">
                                         <td>
@@ -177,14 +177,14 @@ export default function DashboardClientComponent() {
                         />
                         <BodyFatForm setBodyFats={setBodyFats} />
                         <table>
-                            <thead className="text-left">
+                            <thead className="text-center sm:text-left">
                                 <tr>
                                     <th>Date</th>
                                     <th>Body Fat</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody className="text-center sm:text-left">
                                 {bodyFats.map((bodyFatObj) => (
                                     <tr className="hover:bg-gray-900">
                                         <td>
