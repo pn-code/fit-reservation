@@ -6,11 +6,13 @@ import LineChart from "./LineChart";
 import moment from "moment";
 import BodyWeightForm from "./BodyWeightForm";
 import BodyFatForm from "./BodyFatForm";
+import { toast } from "react-hot-toast";
 
 export default function DashboardClientComponent() {
     const [weights, setWeights] = useState<WeightMeasurement[]>([]);
     const [bodyFats, setBodyFats] = useState<BodyFatMeasurement[]>([]);
     const [calorieGoal, setCalorieGoal] = useState<number | null>(null);
+    const [loading, setLoading] = useState(false);
 
     // Format weights and body fat for charts
     const formattedWeights =
@@ -64,43 +66,98 @@ export default function DashboardClientComponent() {
             setCurrentBF(bodyFats[bodyFats.length - 1].bodyfat);
         }
     }, [weights, bodyFats]);
-    return (
-            <section className="flex flex-col gap-4 lg:flex-row lg:justify-between">
-                {/* Statistics */}
-                <StatisticsSection
-                    currentBF={currentBF}
-                    currentWeight={currentWeight}
-                    calorieGoal={calorieGoal}
-                />
-                {/* Charts */}
 
-                <section className="flex flex-col gap-4 flex-1">
-                    <h2 className="text-2xl font-semibold">
-                        Your Measurements
-                    </h2>
-                    <section className="flex flex-col gap-4 2xl:flex-row">
-                        <section className="w-full bg-blue-900/40 p-2 rounded-md flex flex-col gap-2">
-                            <LineChart
-                                title="Your Body Weight"
-                                label="Weight (lbs)"
-                                userData={formattedWeights}
-                                pointColor="rgb(163, 245, 157)"
-                                borderColor="rgb(87, 224, 76)"
-                            />
-                            <BodyWeightForm setWeights={setWeights} />
-                        </section>
-                        <section className="w-full bg-blue-900/40 p-2 rounded-md flex flex-col gap-2">
-                            <LineChart
-                                title="Your Body Fat"
-                                label="Body Fat (%)"
-                                userData={formattedBodyFats}
-                                pointColor="rgb(222, 155, 129)"
-                                borderColor="rgb(232, 151, 70)"
-                            />
-                            <BodyFatForm setBodyFats={setBodyFats} />
-                        </section>
+    const deleteWeight = async (id: number) => {
+        try {
+            setLoading(true);
+            const res = await axios.delete(`/api/weight_measurements/${id}`);
+
+            if (res.status == 200) {
+                setWeights((prev) =>
+                    [...prev].filter((weight) => weight.id !== id)
+                );
+                toast.success("Successfully deleted weight!");
+            }
+        } catch (error) {
+            console.error(error);
+            toast.error("An error has occurred during deletion.");
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    return (
+        <section className="flex flex-col gap-4 lg:flex-row lg:justify-between">
+            {/* Statistics */}
+            <StatisticsSection
+                currentBF={currentBF}
+                currentWeight={currentWeight}
+                calorieGoal={calorieGoal}
+            />
+
+            {/* Charts */}
+            <section className="flex flex-col gap-4 flex-1">
+                <h2 className="text-2xl font-semibold">Your Measurements</h2>
+                <section className="flex flex-col gap-4 2xl:flex-row">
+                    <section className="w-full bg-blue-900/40 p-2 rounded-md flex flex-col gap-2">
+                        <LineChart
+                            title="Your Body Weight"
+                            label="Weight (lbs)"
+                            userData={formattedWeights}
+                            pointColor="rgb(163, 245, 157)"
+                            borderColor="rgb(87, 224, 76)"
+                        />
+                        <BodyWeightForm setWeights={setWeights} />
+                        <table>
+                            <thead className="text-left">
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Weight</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {weights.reverse().map((weightObj) => (
+                                    <tr>
+                                        <td>
+                                            {new Date(
+                                                weightObj.createdAt
+                                            ).toLocaleDateString("en-US", {
+                                                year: "numeric",
+                                                month: "short",
+                                                day: "numeric",
+                                            })}
+                                        </td>
+                                        <td>{weightObj.weight}</td>
+                                        <td>
+                                            <button
+                                                disabled={loading}
+                                                type="button"
+                                                onClick={() =>
+                                                    deleteWeight(weightObj.id)
+                                                }
+                                                className="disabled:bg-gray-700 bg-red-500 rounded-full w-12 text-center"
+                                            >
+                                                X
+                                            </button>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </section>
+                    <section className="w-full bg-blue-900/40 p-2 rounded-md flex flex-col gap-2">
+                        <LineChart
+                            title="Your Body Fat"
+                            label="Body Fat (%)"
+                            userData={formattedBodyFats}
+                            pointColor="rgb(222, 155, 129)"
+                            borderColor="rgb(232, 151, 70)"
+                        />
+                        <BodyFatForm setBodyFats={setBodyFats} />
                     </section>
                 </section>
             </section>
+        </section>
     );
 }
