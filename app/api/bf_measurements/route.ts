@@ -18,6 +18,9 @@ export async function GET() {
                 where: {
                     userId: user.id,
                 },
+                orderBy: {
+                    createdAt: "desc", // Sort by the 'createdAt' field in ascending order
+                },
             });
 
             return NextResponse.json(allBF);

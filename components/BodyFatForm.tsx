@@ -29,7 +29,13 @@ export default function BodyFatForm({ setBodyFats }: Props) {
                     toast.success(
                         `Current body fat has been updated to ${bodyFat} %.`
                     );
-                    setBodyFats((prev: unknown[]) => [...prev, res.data]);
+                    setBodyFats((prev: unknown[]) =>
+                        [...prev, res.data].sort(
+                            (a, b) =>
+                                new Date(a.createdAt).getTime() -
+                                new Date(b.createdAt).getTime()
+                        )
+                    );
                 } else {
                     throw Error;
                 }
