@@ -54,6 +54,7 @@ export default function BodyWeightForm({ setWeights }: Props) {
                     value={date}
                     type="date"
                     id="date"
+                    max={today}
                 />
             </section>
             <section className="flex gap-2 items-center">
