@@ -14,6 +14,8 @@ export default function DashboardClientComponent() {
     const [calorieGoal, setCalorieGoal] = useState<number | null>(null);
     const [loading, setLoading] = useState(false);
 
+    const reversedWeights = [...weights].reverse();
+
     // Format weights and body fat for charts
     const formattedWeights =
         weights.length > 0
@@ -118,7 +120,7 @@ export default function DashboardClientComponent() {
             <section className="flex flex-col gap-4 flex-1">
                 <h2 className="text-2xl font-semibold">Your Measurements</h2>
                 <section className="flex flex-col gap-4 2xl:flex-row">
-                    <section className="w-full bg-blue-900/40 p-2 rounded-md flex flex-col gap-2">
+                    <section className="h-fit w-full bg-blue-900/40 p-2 rounded-md flex flex-col gap-2">
                         <LineChart
                             title="Your Body Weight"
                             label="Weight (lbs)"
@@ -136,7 +138,7 @@ export default function DashboardClientComponent() {
                                 </tr>
                             </thead>
                             <tbody>
-                                {weights.reverse().map((weightObj) => (
+                                {reversedWeights.map((weightObj) => (
                                     <tr className="hover:bg-gray-900">
                                         <td>
                                             {new Date(
@@ -165,7 +167,7 @@ export default function DashboardClientComponent() {
                             </tbody>
                         </table>
                     </section>
-                    <section className="w-full bg-blue-900/40 p-2 rounded-md flex flex-col gap-2">
+                    <section className="h-fit w-full bg-blue-900/40 p-2 rounded-md flex flex-col gap-2">
                         <LineChart
                             title="Your Body Fat"
                             label="Body Fat (%)"
@@ -183,7 +185,7 @@ export default function DashboardClientComponent() {
                                 </tr>
                             </thead>
                             <tbody>
-                                {bodyFats.reverse().map((bodyFatObj) => (
+                                {bodyFats.map((bodyFatObj) => (
                                     <tr className="hover:bg-gray-900">
                                         <td>
                                             {new Date(
