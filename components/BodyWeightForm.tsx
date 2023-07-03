@@ -45,11 +45,12 @@ export default function BodyWeightForm({ setWeights }: Props) {
     };
 
     return (
-        <form className="text-sm flex flex-col gap-4 justify-center items-center bg-gray-800 px-4 py-2 rounded-md">
-            <section className="flex gap-2 items-center">
-                <label htmlFor="weight">Date: </label>
+        <form className="w-full text-sm flex flex-col gap-4 justify-center items-center bg-gray-800 px-4 py-2 rounded-md">
+            <section className="w-full flex flex-col gap-4 sm:flex-row sm:justify-between">
+            <section className="w-full flex flex-col sm:flex-row gap-2 items-center">
+                <label className="font-bold" htmlFor="weight">Date: </label>
                 <input
-                    className="w-32"
+                    className="w-full sm:w-32"
                     onChange={(e) => setDate(e.target.value)}
                     value={date}
                     type="date"
@@ -57,10 +58,10 @@ export default function BodyWeightForm({ setWeights }: Props) {
                     max={today}
                 />
             </section>
-            <section className="flex gap-2 items-center">
-                <label htmlFor="weight">Current Weight (lbs):</label>
+            <section className="w-full flex flex-col sm:flex-row gap-2 items-center">
+                <label className="font-bold" htmlFor="weight">Weight (lbs):</label>
                 <input
-                    className="w-16"
+                    className="w-full sm:w-16"
                     onChange={(e) => setWeight(Number(e.target.value))}
                     value={weight}
                     type="number"
@@ -68,10 +69,11 @@ export default function BodyWeightForm({ setWeights }: Props) {
                     placeholder="weight"
                 />
             </section>
+            </section>
             <button
                 onClick={submitCurrentWeight}
                 type="button"
-                className="bg-indigo-600 hover:bg-indigo-700 rounded-lg text-white px-4 py-2 hover:underline"
+                className="w-full py-4 bg-indigo-600 hover:bg-indigo-700 rounded-lg text-white px-4 sm:py-2 hover:underline"
             >
                 Submit
             </button>
