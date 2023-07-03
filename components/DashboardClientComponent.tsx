@@ -86,6 +86,25 @@ export default function DashboardClientComponent() {
         }
     };
 
+    const deleteBodyFat = async (id: number) => {
+        try {
+            setLoading(true);
+            const res = await axios.delete(`/api/bf_measurements/${id}`);
+
+            if (res.status == 200) {
+                setBodyFats((prev) =>
+                    [...prev].filter((bodyFats) => bodyFats.id !== id)
+                );
+                toast.success("Successfully deleted bodyfat!");
+            }
+        } catch (error) {
+            console.error(error);
+            toast.error("An error has occurred during deletion.");
+        } finally {
+            setLoading(false);
+        }
+    };
+
     return (
         <section className="flex flex-col gap-4 lg:flex-row lg:justify-between">
             {/* Statistics */}
@@ -118,7 +137,7 @@ export default function DashboardClientComponent() {
                             </thead>
                             <tbody>
                                 {weights.reverse().map((weightObj) => (
-                                    <tr>
+                                    <tr className="hover:bg-gray-900">
                                         <td>
                                             {new Date(
                                                 weightObj.createdAt
@@ -128,7 +147,7 @@ export default function DashboardClientComponent() {
                                                 day: "numeric",
                                             })}
                                         </td>
-                                        <td>{weightObj.weight}</td>
+                                        <td>{weightObj.weight.toFixed(1)}</td>
                                         <td>
                                             <button
                                                 disabled={loading}
@@ -136,7 +155,7 @@ export default function DashboardClientComponent() {
                                                 onClick={() =>
                                                     deleteWeight(weightObj.id)
                                                 }
-                                                className="disabled:bg-gray-700 bg-red-500 rounded-full w-12 text-center"
+                                                className="disabled:bg-gray-700 bg-red-500 hover:bg-red-700 rounded-full w-12 text-center"
                                             >
                                                 X
                                             </button>
@@ -155,6 +174,43 @@ export default function DashboardClientComponent() {
                             borderColor="rgb(232, 151, 70)"
                         />
                         <BodyFatForm setBodyFats={setBodyFats} />
+                        <table>
+                            <thead className="text-left">
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Body Fat</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {bodyFats.reverse().map((bodyFatObj) => (
+                                    <tr className="hover:bg-gray-900">
+                                        <td>
+                                            {new Date(
+                                                bodyFatObj.createdAt
+                                            ).toLocaleDateString("en-US", {
+                                                year: "numeric",
+                                                month: "short",
+                                                day: "numeric",
+                                            })}
+                                        </td>
+                                        <td>{bodyFatObj.bodyfat.toFixed(1)}</td>
+                                        <td>
+                                            <button
+                                                disabled={loading}
+                                                type="button"
+                                                onClick={() =>
+                                                    deleteBodyFat(bodyFatObj.id)
+                                                }
+                                                className="disabled:bg-gray-700 bg-red-500 hover:bg-red-700 rounded-full w-12 text-center"
+                                            >
+                                                X
+                                            </button>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
                     </section>
                 </section>
             </section>
