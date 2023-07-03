@@ -58,7 +58,7 @@ export default function BodyWeightForm({ setWeights }: Props) {
                     max={today}
                 />
             </section>
-            <section className="w-full flex flex-col sm:flex-row gap-2 items-center">
+            <section className="w-full flex flex-col sm:flex-row gap-2 items-center sm:justify-end">
                 <label className="font-bold" htmlFor="weight">Weight (lbs):</label>
                 <input
                     className="w-full sm:w-16"

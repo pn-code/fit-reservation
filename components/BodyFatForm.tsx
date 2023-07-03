@@ -62,7 +62,7 @@ export default function BodyFatForm({ setBodyFats }: Props) {
                         max={today}
                     />
                 </section>
-                <section className="w-full flex flex-col sm:flex-row gap-2 items-center">
+                <section className="w-full flex flex-col sm:flex-row gap-2 items-center sm:justify-end">
                     <label className="font-bold" htmlFor="bf">
                         Body Fat (%):
                     </label>
