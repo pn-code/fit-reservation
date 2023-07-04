@@ -14,8 +14,6 @@ export default function DashboardClientComponent() {
     const [calorieGoal, setCalorieGoal] = useState<number | null>(null);
     const [loading, setLoading] = useState(false);
 
-    const reversedWeights = [...weights].reverse();
-
     // Format weights and body fat for charts
     const formattedWeights =
         weights.length > 0
@@ -35,6 +33,8 @@ export default function DashboardClientComponent() {
 
     const [currentWeight, setCurrentWeight] = useState<number | null>(null);
     const [currentBF, setCurrentBF] = useState<number | null>(null);
+    console.log("weight", weights);
+    console.log("body fat", bodyFats);
 
     useEffect(() => {
         const getWeightData = async () => {
@@ -61,11 +61,11 @@ export default function DashboardClientComponent() {
 
     useEffect(() => {
         if (weights.length > 0) {
-            setCurrentWeight(weights[weights.length - 1].weight);
+            setCurrentWeight(weights[0].weight);
         }
 
         if (bodyFats.length > 0) {
-            setCurrentBF(bodyFats[bodyFats.length - 1].bodyfat);
+            setCurrentBF(bodyFats[0].bodyfat);
         }
     }, [weights, bodyFats]);
 
@@ -107,6 +107,19 @@ export default function DashboardClientComponent() {
         }
     };
 
+    const formatDateString = (dateString: string) => {
+        const date = new Date(dateString);
+        const options: Intl.DateTimeFormatOptions = {
+            month: "short",
+            day: "2-digit",
+            year: "numeric" as "2-digit" | "numeric",
+            timeZone: "UTC",
+        };
+        const formattedDate: string = date.toLocaleDateString("en-US", options);
+
+        return formattedDate;
+    };
+
     return (
         <section className="flex flex-col gap-4 lg:flex-row lg:justify-between">
             {/* Statistics */}
@@ -138,16 +151,15 @@ export default function DashboardClientComponent() {
                                 </tr>
                             </thead>
                             <tbody className="text-center sm:text-left">
-                                {reversedWeights.map((weightObj) => (
-                                    <tr key={weightObj.id} className="hover:bg-gray-900">
+                                {weights.map((weightObj) => (
+                                    <tr
+                                        key={weightObj.id}
+                                        className="hover:bg-gray-900"
+                                    >
                                         <td>
-                                            {new Date(
+                                            {formatDateString(
                                                 weightObj.createdAt
-                                            ).toLocaleDateString("en-US", {
-                                                year: "numeric",
-                                                month: "short",
-                                                day: "numeric",
-                                            })}
+                                            )}
                                         </td>
                                         <td>{weightObj.weight.toFixed(1)}</td>
                                         <td>
@@ -186,15 +198,14 @@ export default function DashboardClientComponent() {
                             </thead>
                             <tbody className="text-center sm:text-left">
                                 {bodyFats.map((bodyFatObj) => (
-                                    <tr key={bodyFatObj.id} className="hover:bg-gray-900">
+                                    <tr
+                                        key={bodyFatObj.id}
+                                        className="hover:bg-gray-900"
+                                    >
                                         <td>
-                                            {new Date(
+                                            {formatDateString(
                                                 bodyFatObj.createdAt
-                                            ).toLocaleDateString("en-US", {
-                                                year: "numeric",
-                                                month: "short",
-                                                day: "numeric",
-                                            })}
+                                            )}
                                         </td>
                                         <td>{bodyFatObj.bodyfat.toFixed(1)}</td>
                                         <td>
