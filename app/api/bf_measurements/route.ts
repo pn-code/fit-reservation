@@ -2,9 +2,11 @@ import { NextResponse } from "next/server";
 import { prisma } from "../../../lib/client";
 import { currentUser } from "@clerk/nextjs/app-beta";
 import { bodyFatSchema } from "../../../validations/bodyFatValidator";
+import { dateStringSchema } from "../../../validations/dateStringValidator";
 
 interface BodyFatMeasurementData {
     bodyfat: number;
+    createdAt: string;
 }
 
 export async function GET() {
@@ -15,6 +17,9 @@ export async function GET() {
             const allBF = await prisma.bodyFatMeasurement.findMany({
                 where: {
                     userId: user.id,
+                },
+                orderBy: {
+                    createdAt: "desc", // Sort by the 'createdAt' field in ascending order
                 },
             });
 
@@ -33,11 +38,13 @@ export async function POST(req: Request) {
             const res: BodyFatMeasurementData = await req.json();
 
             const validateBF = bodyFatSchema.parse(res.bodyfat);
+            const validateDateString = dateStringSchema.parse(res.createdAt);
 
-            if (validateBF) {
+            if (validateBF && validateDateString) {
                 const newBodyFatMeasurement =
                     await prisma.bodyFatMeasurement.create({
                         data: {
+                            createdAt: res.createdAt,
                             bodyfat: Number(res.bodyfat),
                             userId: user.id,
                         },

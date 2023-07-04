@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { prisma } from "../../../lib/client";
 import { currentUser } from "@clerk/nextjs/app-beta";
 import { weightSchema } from "../../../validations/weightValidator";
+import { dateStringSchema } from "../../../validations/dateStringValidator";
 
 export async function GET() {
     try {
@@ -11,6 +12,9 @@ export async function GET() {
             const allWeights = await prisma.weightMeasurement.findMany({
                 where: {
                     userId: user.id,
+                },
+                orderBy: {
+                    createdAt: "desc", // Sort by the 'createdAt' field in ascending order
                 },
             });
 
@@ -29,13 +33,15 @@ export async function POST(req: Request) {
             const res = await req.json();
 
             const validateWeight = weightSchema.parse(res.weight);
+            const validateDateString = dateStringSchema.parse(res.createdAt);
 
-            if (validateWeight) {
+            if (validateWeight && validateDateString) {
                 const newWeightMeasurement =
                     await prisma.weightMeasurement.create({
                         data: {
                             weight: res.weight,
                             userId: user.id,
+                            createdAt: res.createdAt,
                         },
                     });
 

@@ -20,7 +20,7 @@ export default function TrainingPlanCard({ plan }: Props) {
         }
 
         getUserNameById();
-    }, []);
+    }, [plan.userId]);
 
     return (
         <Link href={`/plans/details/${plan.id}`}>

@@ -1,14 +1,14 @@
 interface WeightMeasurement {
     id: number;
     weight: number;
-    createdAt: Date;
+    createdAt: string;
     userId: string;
 }
 
 interface BodyFatMeasurement {
     id: number;
     bodyfat: number;
-    createdAt: Date;
+    createdAt: sate;
     userId: string;
 }
 
