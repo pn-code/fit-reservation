@@ -12,9 +12,11 @@ export default function BodyFatForm({ setBodyFats }: Props) {
 
     const [bodyFat, setBodyFat] = useState<number>(15);
     const [date, setDate] = useState(today);
+    const [loading, setLoading] = useState(false);
 
     const submitCurrentBodyFat = async () => {
         try {
+            setLoading(true);
             const validateBodyFat = bodyFatSchema.parse(bodyFat);
 
             if (validateBodyFat) {
@@ -43,6 +45,8 @@ export default function BodyFatForm({ setBodyFats }: Props) {
         } catch (error) {
             console.error(error);
             toast.error("We ran into an error...");
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -78,9 +82,10 @@ export default function BodyFatForm({ setBodyFats }: Props) {
             </section>
 
             <button
+                disabled={loading}
                 onClick={submitCurrentBodyFat}
                 type="button"
-                className="w-full py-4 bg-indigo-600 hover:bg-indigo-700 rounded-lg text-white px-4 sm:py-2 hover:underline"
+                className="disabled:bg-gray-500 w-full py-4 bg-indigo-600 hover:bg-indigo-700 rounded-lg text-white px-4 sm:py-2 hover:underline"
             >
                 Submit
             </button>
