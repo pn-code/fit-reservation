@@ -12,9 +12,11 @@ export default function BodyWeightForm({ setWeights }: Props) {
 
     const [weight, setWeight] = useState<number>(160);
     const [date, setDate] = useState(today);
+    const [loading, setLoading] = useState(false);
 
     const submitCurrentWeight = async () => {
         try {
+            setLoading(true);
             const validateWeight = weightSchema.parse(weight);
             if (validateWeight) {
                 const formattedDate = new Date(date).toISOString();
@@ -41,6 +43,8 @@ export default function BodyWeightForm({ setWeights }: Props) {
         } catch (error) {
             console.error(error);
             toast.error("We ran into an error...");
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -77,7 +81,8 @@ export default function BodyWeightForm({ setWeights }: Props) {
             <button
                 onClick={submitCurrentWeight}
                 type="button"
-                className="w-full py-4 bg-indigo-600 hover:bg-indigo-700 rounded-lg text-white px-4 sm:py-2 hover:underline"
+                disabled={loading}
+                className="disabled:bg-gray-500 w-full py-4 bg-indigo-600 hover:bg-indigo-700 rounded-lg text-white px-4 sm:py-2 hover:underline"
             >
                 Submit
             </button>
