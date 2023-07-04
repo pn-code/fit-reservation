@@ -139,7 +139,7 @@ export default function DashboardClientComponent() {
                             </thead>
                             <tbody className="text-center sm:text-left">
                                 {reversedWeights.map((weightObj) => (
-                                    <tr className="hover:bg-gray-900">
+                                    <tr key={weightObj.id} className="hover:bg-gray-900">
                                         <td>
                                             {new Date(
                                                 weightObj.createdAt
@@ -186,7 +186,7 @@ export default function DashboardClientComponent() {
                             </thead>
                             <tbody className="text-center sm:text-left">
                                 {bodyFats.map((bodyFatObj) => (
-                                    <tr className="hover:bg-gray-900">
+                                    <tr key={bodyFatObj.id} className="hover:bg-gray-900">
                                         <td>
                                             {new Date(
                                                 bodyFatObj.createdAt
