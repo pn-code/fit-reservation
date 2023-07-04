@@ -30,8 +30,8 @@ export default function BodyWeightForm({ setWeights }: Props) {
                     setWeights((prev: unknown[]) =>
                         [...prev, res.data].sort(
                             (a, b) =>
-                                new Date(a.createdAt).getTime() -
-                                new Date(b.createdAt).getTime()
+                                new Date(b.createdAt).getTime() -
+                                new Date(a.createdAt).getTime()
                         )
                     );
                 } else {
@@ -47,28 +47,32 @@ export default function BodyWeightForm({ setWeights }: Props) {
     return (
         <form className="w-full text-sm flex flex-col gap-4 justify-center items-center bg-gray-800 px-4 py-2 rounded-md">
             <section className="w-full flex flex-col gap-4 sm:flex-row sm:justify-between">
-            <section className="w-full flex flex-col sm:flex-row gap-2 items-center">
-                <label className="font-bold" htmlFor="weight">Date: </label>
-                <input
-                    className="w-full sm:w-32"
-                    onChange={(e) => setDate(e.target.value)}
-                    value={date}
-                    type="date"
-                    id="date"
-                    max={today}
-                />
-            </section>
-            <section className="w-full flex flex-col sm:flex-row gap-2 items-center sm:justify-end">
-                <label className="font-bold" htmlFor="weight">Weight (lbs):</label>
-                <input
-                    className="w-full sm:w-16"
-                    onChange={(e) => setWeight(Number(e.target.value))}
-                    value={weight}
-                    type="number"
-                    id="weight"
-                    placeholder="weight"
-                />
-            </section>
+                <section className="w-full flex flex-col sm:flex-row gap-2 items-center">
+                    <label className="font-bold" htmlFor="weight">
+                        Date:{" "}
+                    </label>
+                    <input
+                        className="w-full sm:w-32"
+                        onChange={(e) => setDate(e.target.value)}
+                        value={date}
+                        type="date"
+                        id="date"
+                        max={today}
+                    />
+                </section>
+                <section className="w-full flex flex-col sm:flex-row gap-2 items-center sm:justify-end">
+                    <label className="font-bold" htmlFor="weight">
+                        Weight (lbs):
+                    </label>
+                    <input
+                        className="w-full sm:w-16"
+                        onChange={(e) => setWeight(Number(e.target.value))}
+                        value={weight}
+                        type="number"
+                        id="weight"
+                        placeholder="weight"
+                    />
+                </section>
             </section>
             <button
                 onClick={submitCurrentWeight}
