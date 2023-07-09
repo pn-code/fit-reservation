@@ -11,7 +11,7 @@ interface ExerciseEntryCardProps {
     sets: number;
     reps: number;
     calories: number;
-    deleteExerciseEntry: (id: number) => void;
+    deleteExerciseEntry: any;
     updateExerciseEntry: any;
 }
 
@@ -27,6 +27,7 @@ function ExerciseEntryCard({
     updateExerciseEntry,
 }: ExerciseEntryCardProps) {
     const [isEditing, setIsEditing] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     const [currentSets, setCurrentSets] = useState(sets);
     const [currentReps, setCurrentReps] = useState(
@@ -35,18 +36,36 @@ function ExerciseEntryCard({
     const [currentWeight, setCurrentWeight] = useState(weight);
 
     const handleEditExerciseEntry = async () => {
-        updateExerciseEntry(
-            id,
-            type,
-            {
-                updatedSets: currentSets,
-                updatedReps: currentReps,
-                updatedWeight: currentWeight,
-            },
-            () => setIsEditing((edit) => !edit)
-        );
-        setIsEditing((edit) => !edit);
+        try {
+            setLoading(true);
+            await updateExerciseEntry(
+                id,
+                type,
+                {
+                    updatedSets: currentSets,
+                    updatedReps: currentReps,
+                    updatedWeight: currentWeight,
+                },
+                () => setIsEditing((edit) => !edit)
+            );
+            setIsEditing((edit) => !edit);
+        } catch (error) {
+            console.error(error);
+        } finally {
+            setLoading(false);
+        }
     };
+
+    const handleDeleteExerciseEntry = async () => {
+        try {
+            setLoading(true);
+            await deleteExerciseEntry(id);
+        } catch (error) {
+            console.log(error)
+        } finally {
+            setLoading(false);
+        }
+    }
 
     return (
         <tr className="text-xs sm:text-sm bg-blue-900/20 hover:bg-indigo-600 cursor-pointer hover:text-white">
@@ -104,14 +123,14 @@ function ExerciseEntryCard({
             <td className="py-2 whitespace-nowrap flex">
                 <section className="flex items-center gap-2">
                     {!isEditing && (
-                        <button onClick={() => deleteExerciseEntry(id)}>
+                        <button className="disabled:bg-slate-600" disabled={loading} onClick={handleDeleteExerciseEntry}>
                             <X
                                 className="hover:bg-slate-300 rounded-full p-1 text-red-500"
                                 size={30}
                             />
                         </button>
                     )}
-                    <button onClick={() => setIsEditing((edit) => !edit)}>
+                    <button className="disabled:bg-slate-600" disabled={loading} onClick={() => setIsEditing((edit) => !edit)}>
                         {!isEditing ? (
                             <Edit
                                 className="hover:bg-slate-300 rounded-full text-green-500 p-1"
@@ -125,7 +144,7 @@ function ExerciseEntryCard({
                         )}
                     </button>
                     {isEditing && (
-                        <button onClick={handleEditExerciseEntry} type="button">
+                        <button className="disabled:bg-slate-600 rounded-md" disabled={loading} onClick={handleEditExerciseEntry} type="button">
                             <Check
                                 className="hover:bg-slate-300 rounded-full p-1 text-green-500"
                                 size={30}
