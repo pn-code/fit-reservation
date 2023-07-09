@@ -16,8 +16,9 @@ export default function ExerciseForm() {
 
     const [exercises, setExercises] = useState<ExerciseEntry[]>([]);
     const [plans, setPlans] = useState([]);
+    const [selectPlanIndex, setSelectPlanIndex] = useState(-1);
     const [loadingExercises, setLoadingExercises] = useState<boolean>(true);
-
+    console.log(plans);
     useEffect(() => {
         try {
             const getExerciseData = async () => {
@@ -230,6 +231,24 @@ export default function ExerciseForm() {
                 >
                     Add Item
                 </button>
+
+                <span>OR SELECT PLAN</span>
+
+                <form>
+                    <select
+                        onChange={(e) => setSelectPlanIndex(e.target.value)}
+                        name="select_plan"
+                        id="select_plan"
+                        value={selectPlanIndex}
+                    >
+                        <option value={-1}>NONE</option>
+                        {plans.map((plan, idx) => (
+                            <option key={plan.id} value={idx}>
+                                {plan.name}
+                            </option>
+                        ))}
+                    </select>
+                </form>
             </form>
 
             <ExerciseJournal
