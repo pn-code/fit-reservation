@@ -121,6 +121,46 @@ export default function ExerciseForm() {
         }
     };
 
+    const updateExerciseEntry = async (
+        exerciseId: number,
+        exerciseType: string,
+        { updatedSets = 1, updatedReps = 1, updatedWeight = 0 },
+    ) => {
+        try {
+            const updatedExerciseEntry =
+                exerciseType == "resistance"
+                    ? {
+                          sets: updatedSets,
+                          reps: updatedReps,
+                          weight: updatedWeight,
+                          duration: 0,
+                      }
+                    : {
+                          sets: updatedSets,
+                          duration: updatedReps,
+                          weight: updatedWeight,
+                          reps: 0,
+                      };
+
+            const res = await axios.put(
+                `/api/exercise_entries/${exerciseId}`,
+                updatedExerciseEntry
+            );
+
+            if (res.status == 200) {
+                toast.success("Successfully updated exercises.");
+                exercises.map((exercise) =>
+                    exercise.id === exerciseId
+                        ? { ...exercise, ...updatedExerciseEntry }
+                        : exercise
+                );
+            }
+        } catch (error) {
+            console.error(error);
+            toast.error("Ran into an error!");
+        }
+    };
+
     const addPlanToJournal = async () => {
         const exercisesFromPlans = plans[selectPlanIndex].exercises;
 
@@ -135,7 +175,7 @@ export default function ExerciseForm() {
                     sets: planFromExercise.sets,
                     reps: planFromExercise.reps,
                 });
-                console.log(res.data)
+                console.log(res.data);
                 setExercises((prev: ExerciseEntry[]) => [...prev, res.data]);
             } catch (error) {
                 console.error(error);
@@ -289,13 +329,16 @@ export default function ExerciseForm() {
                             ))}
                         </select>
                     </section>
-                    <button type="button" onClick={addPlanToJournal}>Add Plan</button>
+                    <button type="button" onClick={addPlanToJournal}>
+                        Add Plan
+                    </button>
                 </form>
             )}
 
             <ExerciseJournal
                 exercises={exercises}
                 deleteExerciseEntry={deleteExerciseEntry}
+                updateExerciseEntry={updateExerciseEntry}
                 loadingExercises={loadingExercises}
             />
         </section>

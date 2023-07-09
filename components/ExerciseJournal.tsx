@@ -4,12 +4,14 @@ import Spinner from "./Spinner";
 
 interface Props {
     exercises: ExerciseEntry[];
+    updateExerciseEntry: any;
     deleteExerciseEntry: any;
     loadingExercises: boolean;
 }
 
 export default function ExerciseJournal({
     exercises,
+    updateExerciseEntry,
     deleteExerciseEntry,
     loadingExercises,
 }: Props) {
@@ -57,11 +59,6 @@ export default function ExerciseJournal({
                                             Weight
                                         </div>
                                     </th>
-                                    <th className="hidden sm:table-cell">
-                                        <div className="font-semibold text-left">
-                                            Calories
-                                        </div>
-                                    </th>
                                     <th>
                                         <div className="font-semibold text-left">
                                             Action
@@ -84,6 +81,9 @@ export default function ExerciseJournal({
                                         key={entry.id}
                                         deleteExerciseEntry={
                                             deleteExerciseEntry
+                                        }
+                                        updateExerciseEntry={
+                                            updateExerciseEntry
                                         }
                                     />
                                 ))}

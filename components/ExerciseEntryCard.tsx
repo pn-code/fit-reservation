@@ -12,6 +12,7 @@ interface ExerciseEntryCardProps {
     reps: number;
     calories: number;
     deleteExerciseEntry: (id: number) => void;
+    updateExerciseEntry: any;
 }
 
 function ExerciseEntryCard({
@@ -22,10 +23,30 @@ function ExerciseEntryCard({
     weight,
     sets,
     reps,
-    calories,
     deleteExerciseEntry,
+    updateExerciseEntry,
 }: ExerciseEntryCardProps) {
     const [isEditing, setIsEditing] = useState(false);
+
+    const [currentSets, setCurrentSets] = useState(sets);
+    const [currentReps, setCurrentReps] = useState(
+        type === "resistance" ? reps : duration
+    );
+    const [currentWeight, setCurrentWeight] = useState(weight);
+
+    const handleEditExerciseEntry = async () => {
+        updateExerciseEntry(
+            id,
+            type,
+            {
+                updatedSets: currentSets,
+                updatedReps: currentReps,
+                updatedWeight: currentWeight,
+            },
+            () => setIsEditing((edit) => !edit)
+        );
+        setIsEditing((edit) => !edit);
+    };
 
     return (
         <tr className="text-xs sm:text-sm bg-blue-900/20 hover:bg-indigo-600 cursor-pointer hover:text-white">
@@ -39,7 +60,13 @@ function ExerciseEntryCard({
             </td>
             <td className="py-2 whitespace-nowrap">
                 {isEditing ? (
-                    <input className="w-9" aria-label="Exercise Sets" />
+                    <input
+                        type="number"
+                        onChange={(e) => setCurrentSets(Number(e.target.value))}
+                        value={currentSets}
+                        className="w-9"
+                        aria-label="Exercise Sets"
+                    />
                 ) : (
                     <div>{sets}</div>
                 )}
@@ -47,6 +74,9 @@ function ExerciseEntryCard({
             <td className="py-2 whitespace-nowrap">
                 {isEditing ? (
                     <input
+                        type="number"
+                        onChange={(e) => setCurrentReps(Number(e.target.value))}
+                        value={currentReps}
                         className="w-9"
                         aria-label="Exercise repetitions or duration"
                     />
@@ -58,19 +88,17 @@ function ExerciseEntryCard({
             </td>
             <td className="py-2 whitespace-nowrap">
                 {isEditing ? (
-                    <input className="w-12" aria-label="Exercise weight" />
-                ) : (
-                    <div>{weight} lbs</div>
-                )}
-            </td>
-            <td className="py-2 whitespace-nowrap hidden sm:table-cell">
-                {isEditing ? (
                     <input
+                        type="number"
+                        onChange={(e) =>
+                            setCurrentWeight(Number(e.target.value))
+                        }
+                        value={currentWeight}
                         className="w-12"
-                        aria-label="Calories burnt during exercise"
+                        aria-label="Exercise weight"
                     />
                 ) : (
-                    <div>{calories}</div>
+                    <div>{weight} lbs</div>
                 )}
             </td>
             <td className="py-2 whitespace-nowrap flex">
@@ -83,7 +111,7 @@ function ExerciseEntryCard({
                             />
                         </button>
                     )}
-                    <button onClick={() => setIsEditing((editing) => !editing)}>
+                    <button onClick={() => setIsEditing((edit) => !edit)}>
                         {!isEditing ? (
                             <Edit
                                 className="hover:bg-slate-300 rounded-full text-green-500 p-1"
@@ -97,7 +125,7 @@ function ExerciseEntryCard({
                         )}
                     </button>
                     {isEditing && (
-                        <button>
+                        <button onClick={handleEditExerciseEntry} type="button">
                             <Check
                                 className="hover:bg-slate-300 rounded-full p-1 text-green-500"
                                 size={30}
