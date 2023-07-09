@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import StatisticsSection from "./StatisticsSection";
 import axios from "axios";
 import LineChart from "./LineChart";
-import moment from "moment";
 import BodyWeightForm from "./BodyWeightForm";
 import BodyFatForm from "./BodyFatForm";
 import { toast } from "react-hot-toast";
@@ -14,11 +13,24 @@ export default function DashboardClientComponent() {
     const [calorieGoal, setCalorieGoal] = useState<number | null>(null);
     const [loading, setLoading] = useState(false);
 
+    const formatDateString = (dateString: string) => {
+        const date = new Date(dateString);
+        const options: Intl.DateTimeFormatOptions = {
+            month: "short",
+            day: "2-digit",
+            year: "numeric" as "2-digit" | "numeric",
+            timeZone: "UTC",
+        };
+        const formattedDate: string = date.toLocaleDateString("en-US", options);
+
+        return formattedDate;
+    };
+
     // Format weights and body fat for charts
     const formattedWeights =
         weights.length > 0
             ? weights?.map((data) => ({
-                  x: moment(data.createdAt),
+                  x: formatDateString(data.createdAt),
                   y: data.weight,
               }))
             : [];
@@ -26,15 +38,13 @@ export default function DashboardClientComponent() {
     const formattedBodyFats =
         bodyFats.length > 0
             ? bodyFats.map((data) => ({
-                  x: moment(data.createdAt),
+                  x: formatDateString(data.createdAt),
                   y: data.bodyfat,
               }))
             : [];
 
     const [currentWeight, setCurrentWeight] = useState<number | null>(null);
     const [currentBF, setCurrentBF] = useState<number | null>(null);
-    console.log("weight", weights);
-    console.log("body fat", bodyFats);
 
     useEffect(() => {
         const getWeightData = async () => {
@@ -107,18 +117,7 @@ export default function DashboardClientComponent() {
         }
     };
 
-    const formatDateString = (dateString: string) => {
-        const date = new Date(dateString);
-        const options: Intl.DateTimeFormatOptions = {
-            month: "short",
-            day: "2-digit",
-            year: "numeric" as "2-digit" | "numeric",
-            timeZone: "UTC",
-        };
-        const formattedDate: string = date.toLocaleDateString("en-US", options);
-
-        return formattedDate;
-    };
+    
 
     return (
         <section className="flex flex-col gap-4 lg:flex-row lg:justify-between">
