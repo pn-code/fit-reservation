@@ -15,6 +15,7 @@ export default function ExerciseForm() {
     const [reps, setReps] = useState(0);
 
     const [exercises, setExercises] = useState<ExerciseEntry[]>([]);
+    const [plans, setPlans] = useState([]);
     const [loadingExercises, setLoadingExercises] = useState<boolean>(true);
 
     useEffect(() => {
@@ -25,7 +26,15 @@ export default function ExerciseForm() {
                     setExercises(res.data);
                 }
             };
+
+            const getPlanData = async () => {
+                const res = await axios.get("/api/plans");
+                if (res.status === 200) {
+                    setPlans(res.data);
+                }
+            };
             getExerciseData();
+            getPlanData();
         } catch (error) {
             console.error(error);
         } finally {
