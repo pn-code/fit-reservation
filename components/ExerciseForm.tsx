@@ -124,7 +124,7 @@ export default function ExerciseForm() {
     const updateExerciseEntry = async (
         exerciseId: number,
         exerciseType: string,
-        { updatedSets = 1, updatedReps = 1, updatedWeight = 0 },
+        { updatedSets = 1, updatedReps = 1, updatedWeight = 0 }
     ) => {
         try {
             const updatedExerciseEntry =
@@ -146,13 +146,16 @@ export default function ExerciseForm() {
                 `/api/exercise_entries/${exerciseId}`,
                 updatedExerciseEntry
             );
+            console.log(res);
 
             if (res.status == 200) {
                 toast.success("Successfully updated exercises.");
-                exercises.map((exercise) =>
-                    exercise.id === exerciseId
-                        ? { ...exercise, ...updatedExerciseEntry }
-                        : exercise
+                setExercises((exercises) =>
+                    exercises.map((exercise) =>
+                        exercise.id === exerciseId
+                            ? { ...exercise, ...updatedExerciseEntry }
+                            : exercise
+                    )
                 );
             }
         } catch (error) {
