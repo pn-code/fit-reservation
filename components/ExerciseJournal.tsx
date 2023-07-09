@@ -44,6 +44,11 @@ export default function ExerciseJournal({
                                     </th>
                                     <th>
                                         <div className="font-semibold text-left">
+                                            Sets
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div className="font-semibold text-left">
                                             Reps
                                         </div>
                                     </th>
