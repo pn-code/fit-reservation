@@ -21,10 +21,13 @@ export async function GET(req: NextRequest, res: NextResponse) {
                         },
                     ],
                 },
+                include: {
+                    exercises: true,
+                },
             });
 
             // return as json to user
-            return NextResponse.json({relatedPlans});
+            return NextResponse.json(relatedPlans);
         }
     } catch (error) {
         console.error(error);
