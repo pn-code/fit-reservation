@@ -338,7 +338,7 @@ export default function ExerciseForm() {
                         </select>
                     </section>
                     <button
-                        disabled={loading}
+                        disabled={loading || selectPlanIndex < 0}
                         className="lg:mt-7 bg-indigo-600 hover:bg-indigo-500 text-[#fafafa] px-4 py-2 rounded-md disabled:bg-slate-400 disabled:cursor-not-allowed"
                         type="button"
                         onClick={addPlanToJournal}
