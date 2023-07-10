@@ -190,12 +190,15 @@ export default function ExerciseForm() {
     return (
         <section className="flex flex-col gap-4">
             {/* Toggle Button */}
-            <button
-                type="button"
-                onClick={() => setExerciseForm((form) => !form)}
-            >
-                Show {showExerciseForm ? "Plan Form" : "Exercise Form"}
-            </button>
+            <div className="flex items-start">
+                <button
+                    className="bg-gray-600 hover:bg-gray-700 text-[#fafafa] px-4 py-2 rounded-md"
+                    type="button"
+                    onClick={() => setExerciseForm((form) => !form)}
+                >
+                    Show {showExerciseForm ? "Plan Form" : "Exercise Form"}
+                </button>
+            </div>
 
             {showExerciseForm ? (
                 <form className="w-full flex flex-col gap-8 lg:flex-row py-2 lg:items-center lg:justify-center">
@@ -319,7 +322,9 @@ export default function ExerciseForm() {
                     <section className="flex flex-col gap-2">
                         <label htmlFor="select_plan">Selected Plan: </label>
                         <select
-                            onChange={(e) => setSelectPlanIndex(Number(e.target.value))}
+                            onChange={(e) =>
+                                setSelectPlanIndex(Number(e.target.value))
+                            }
                             name="select_plan"
                             id="select_plan"
                             value={selectPlanIndex}
@@ -332,7 +337,12 @@ export default function ExerciseForm() {
                             ))}
                         </select>
                     </section>
-                    <button type="button" onClick={addPlanToJournal}>
+                    <button
+                        disabled={loading}
+                        className="lg:mt-7 bg-indigo-600 hover:bg-indigo-500 text-[#fafafa] px-4 py-2 rounded-md disabled:bg-slate-400 disabled:cursor-not-allowed"
+                        type="button"
+                        onClick={addPlanToJournal}
+                    >
                         Add Plan
                     </button>
                 </form>
