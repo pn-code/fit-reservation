@@ -9,11 +9,9 @@ interface Params {
 export async function DELETE(req: Request, { params }: Params) {
     try {
         const user = await currentUser();
-
         const entryId = params.entryId;
 
         if (isNaN(Number(entryId))) return NextResponse.error();
-
         if (!user) throw Error("This action is forbidden.");
 
         // Check to see if this entry is this user's
@@ -29,6 +27,35 @@ export async function DELETE(req: Request, { params }: Params) {
         const exerciseEntry = await prisma.exerciseEntry.delete({
             where: {
                 id: Number(entryId),
+            },
+        });
+
+        return NextResponse.json(exerciseEntry);
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+export async function PUT(req: Request, { params }: Params) {
+    try {
+        const user = await currentUser();
+        const entryId = params.entryId;
+        const data = await req.json();
+
+        if (isNaN(Number(entryId))) return NextResponse.error();
+        if (!user) throw Error("This action is forbidden.");
+
+        const exerciseEntry = await prisma.exerciseEntry.updateMany({
+            data: {
+                sets: data.sets,
+                reps: data.reps,
+                weight: data.weight,
+                calories: data.calories || 0,
+                duration: data.duration
+            },
+            where: {
+                id: Number(entryId),
+                userId: user.id
             },
         });
 

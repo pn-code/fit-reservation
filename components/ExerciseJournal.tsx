@@ -4,12 +4,14 @@ import Spinner from "./Spinner";
 
 interface Props {
     exercises: ExerciseEntry[];
+    updateExerciseEntry: any;
     deleteExerciseEntry: any;
     loadingExercises: boolean;
 }
 
 export default function ExerciseJournal({
     exercises,
+    updateExerciseEntry,
     deleteExerciseEntry,
     loadingExercises,
 }: Props) {
@@ -44,17 +46,17 @@ export default function ExerciseJournal({
                                     </th>
                                     <th>
                                         <div className="font-semibold text-left">
+                                            Sets
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div className="font-semibold text-left">
                                             Reps
                                         </div>
                                     </th>
                                     <th>
                                         <div className="font-semibold text-left">
                                             Weight
-                                        </div>
-                                    </th>
-                                    <th className="hidden sm:table-cell">
-                                        <div className="font-semibold text-left">
-                                            Calories
                                         </div>
                                     </th>
                                     <th>
@@ -79,6 +81,9 @@ export default function ExerciseJournal({
                                         key={entry.id}
                                         deleteExerciseEntry={
                                             deleteExerciseEntry
+                                        }
+                                        updateExerciseEntry={
+                                            updateExerciseEntry
                                         }
                                     />
                                 ))}

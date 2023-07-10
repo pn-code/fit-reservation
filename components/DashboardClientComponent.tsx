@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import StatisticsSection from "./StatisticsSection";
 import axios from "axios";
 import LineChart from "./LineChart";
-import moment from "moment";
 import BodyWeightForm from "./BodyWeightForm";
 import BodyFatForm from "./BodyFatForm";
 import { toast } from "react-hot-toast";
@@ -13,12 +12,27 @@ export default function DashboardClientComponent() {
     const [bodyFats, setBodyFats] = useState<BodyFatMeasurement[]>([]);
     const [calorieGoal, setCalorieGoal] = useState<number | null>(null);
     const [loading, setLoading] = useState(false);
+    const [showWeights, setShowWeights] = useState(false);
+    const [showBodyFats, setShowBodyFats] = useState(false);
+
+    const formatDateString = (dateString: string) => {
+        const date = new Date(dateString);
+        const options: Intl.DateTimeFormatOptions = {
+            month: "short",
+            day: "2-digit",
+            year: "numeric" as "2-digit" | "numeric",
+            timeZone: "UTC",
+        };
+        const formattedDate: string = date.toLocaleDateString("en-US", options);
+
+        return formattedDate;
+    };
 
     // Format weights and body fat for charts
     const formattedWeights =
         weights.length > 0
             ? weights?.map((data) => ({
-                  x: moment(data.createdAt),
+                  x: formatDateString(data.createdAt),
                   y: data.weight,
               }))
             : [];
@@ -26,15 +40,13 @@ export default function DashboardClientComponent() {
     const formattedBodyFats =
         bodyFats.length > 0
             ? bodyFats.map((data) => ({
-                  x: moment(data.createdAt),
+                  x: formatDateString(data.createdAt),
                   y: data.bodyfat,
               }))
             : [];
 
     const [currentWeight, setCurrentWeight] = useState<number | null>(null);
     const [currentBF, setCurrentBF] = useState<number | null>(null);
-    console.log("weight", weights);
-    console.log("body fat", bodyFats);
 
     useEffect(() => {
         const getWeightData = async () => {
@@ -107,19 +119,6 @@ export default function DashboardClientComponent() {
         }
     };
 
-    const formatDateString = (dateString: string) => {
-        const date = new Date(dateString);
-        const options: Intl.DateTimeFormatOptions = {
-            month: "short",
-            day: "2-digit",
-            year: "numeric" as "2-digit" | "numeric",
-            timeZone: "UTC",
-        };
-        const formattedDate: string = date.toLocaleDateString("en-US", options);
-
-        return formattedDate;
-    };
-
     return (
         <section className="flex flex-col gap-4 lg:flex-row lg:justify-between">
             {/* Statistics */}
@@ -142,42 +141,57 @@ export default function DashboardClientComponent() {
                             borderColor="rgb(87, 224, 76)"
                         />
                         <BodyWeightForm setWeights={setWeights} />
-                        <table>
-                            <thead className="text-center sm:text-left">
-                                <tr>
-                                    <th>Date</th>
-                                    <th>Weight</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody className="text-center sm:text-left">
-                                {weights.map((weightObj) => (
-                                    <tr
-                                        key={weightObj.id}
-                                        className="hover:bg-gray-900"
-                                    >
-                                        <td>
-                                            {formatDateString(
-                                                weightObj.createdAt
-                                            )}
-                                        </td>
-                                        <td>{weightObj.weight.toFixed(1)}</td>
-                                        <td>
-                                            <button
-                                                disabled={loading}
-                                                type="button"
-                                                onClick={() =>
-                                                    deleteWeight(weightObj.id)
-                                                }
-                                                className="disabled:bg-gray-700 bg-red-500 hover:bg-red-700 rounded-full w-12 text-center"
-                                            >
-                                                X
-                                            </button>
-                                        </td>
+                        <button
+                            type="button"
+                            className="rounded-md bg-gray-500 py-3 hover:bg-gray-600"
+                            onClick={() =>
+                                setShowWeights((weights) => !weights)
+                            }
+                        >
+                            View Weights
+                        </button>
+                        {showWeights && (
+                            <table>
+                                <thead className="text-center sm:text-left">
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Weight</th>
+                                        <th>Action</th>
                                     </tr>
-                                ))}
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody className="text-center sm:text-left">
+                                    {weights.map((weightObj) => (
+                                        <tr
+                                            key={weightObj.id}
+                                            className="hover:bg-gray-900"
+                                        >
+                                            <td>
+                                                {formatDateString(
+                                                    weightObj.createdAt
+                                                )}
+                                            </td>
+                                            <td>
+                                                {weightObj.weight.toFixed(1)}
+                                            </td>
+                                            <td>
+                                                <button
+                                                    disabled={loading}
+                                                    type="button"
+                                                    onClick={() =>
+                                                        deleteWeight(
+                                                            weightObj.id
+                                                        )
+                                                    }
+                                                    className="disabled:bg-gray-700 bg-red-500 hover:bg-red-700 rounded-full w-12 text-center"
+                                                >
+                                                    X
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        )}
                     </section>
                     <section className="h-fit w-full bg-blue-900/40 p-2 rounded-md flex flex-col gap-2">
                         <LineChart
@@ -188,42 +202,55 @@ export default function DashboardClientComponent() {
                             borderColor="rgb(232, 151, 70)"
                         />
                         <BodyFatForm setBodyFats={setBodyFats} />
-                        <table>
-                            <thead className="text-center sm:text-left">
-                                <tr>
-                                    <th>Date</th>
-                                    <th>Body Fat</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody className="text-center sm:text-left">
-                                {bodyFats.map((bodyFatObj) => (
-                                    <tr
-                                        key={bodyFatObj.id}
-                                        className="hover:bg-gray-900"
-                                    >
-                                        <td>
-                                            {formatDateString(
-                                                bodyFatObj.createdAt
-                                            )}
-                                        </td>
-                                        <td>{bodyFatObj.bodyfat.toFixed(1)}</td>
-                                        <td>
-                                            <button
-                                                disabled={loading}
-                                                type="button"
-                                                onClick={() =>
-                                                    deleteBodyFat(bodyFatObj.id)
-                                                }
-                                                className="disabled:bg-gray-700 bg-red-500 hover:bg-red-700 rounded-full w-12 text-center"
-                                            >
-                                                X
-                                            </button>
-                                        </td>
+                        <button
+                            type="button"
+                            className="rounded-md bg-gray-500 py-3 hover:bg-gray-600"
+                            onClick={() => setShowBodyFats((bf) => !bf)}
+                        >
+                            View Body Fats
+                        </button>
+                        {showBodyFats && (
+                            <table>
+                                <thead className="text-center sm:text-left">
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Body Fat</th>
+                                        <th>Action</th>
                                     </tr>
-                                ))}
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody className="text-center sm:text-left">
+                                    {bodyFats.map((bodyFatObj) => (
+                                        <tr
+                                            key={bodyFatObj.id}
+                                            className="hover:bg-gray-900"
+                                        >
+                                            <td>
+                                                {formatDateString(
+                                                    bodyFatObj.createdAt
+                                                )}
+                                            </td>
+                                            <td>
+                                                {bodyFatObj.bodyfat.toFixed(1)}
+                                            </td>
+                                            <td>
+                                                <button
+                                                    disabled={loading}
+                                                    type="button"
+                                                    onClick={() =>
+                                                        deleteBodyFat(
+                                                            bodyFatObj.id
+                                                        )
+                                                    }
+                                                    className="disabled:bg-gray-700 bg-red-500 hover:bg-red-700 rounded-full w-12 text-center"
+                                                >
+                                                    X
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        )}
                     </section>
                 </section>
             </section>
