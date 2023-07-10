@@ -15,8 +15,8 @@ export default function ExerciseForm() {
     const [reps, setReps] = useState(0);
 
     const [exercises, setExercises] = useState<ExerciseEntry[]>([]);
-    const [plans, setPlans] = useState([]);
-    const [selectPlanIndex, setSelectPlanIndex] = useState(-1);
+    const [plans, setPlans] = useState<TrainingPlan[]>([]);
+    const [selectPlanIndex, setSelectPlanIndex] = useState<number>(-1);
     const [loadingExercises, setLoadingExercises] = useState<boolean>(true);
 
     // Form Change Toggle
@@ -167,7 +167,7 @@ export default function ExerciseForm() {
     const addPlanToJournal = async () => {
         const exercisesFromPlans = plans[selectPlanIndex].exercises;
 
-        for (const planFromExercise of exercisesFromPlans) {
+        for (const planFromExercise of exercisesFromPlans!) {
             try {
                 const res = await axios.post("/api/exercise_entries", {
                     name: planFromExercise.name,
@@ -319,7 +319,7 @@ export default function ExerciseForm() {
                     <section className="flex flex-col gap-2">
                         <label htmlFor="select_plan">Selected Plan: </label>
                         <select
-                            onChange={(e) => setSelectPlanIndex(e.target.value)}
+                            onChange={(e) => setSelectPlanIndex(Number(e.target.value))}
                             name="select_plan"
                             id="select_plan"
                             value={selectPlanIndex}
