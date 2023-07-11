@@ -1,11 +1,6 @@
 "use client";
 import {
-    Calculator,
-    ClipboardSignature,
-    LayoutDashboard,
-    Rocket,
     Shield,
-    User,
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -35,7 +30,7 @@ const Navbar = () => {
                 {user && (
                     <ul className="hidden sm:flex sm:gap-4 text-[16px]">
                         <Link
-                            className={`group relative ${
+                            className={`group relative hover:text-gray-200 ${
                                 pathname === "/dashboard"
                                     ? currentPathStyles
                                     : ""
@@ -46,7 +41,7 @@ const Navbar = () => {
                             Dashboard
                         </Link>
                         <Link
-                            className={`group relative ${
+                            className={`group relative hover:text-gray-200 ${
                                 pathname === "/calculator"
                                     ? currentPathStyles
                                     : ""
@@ -57,7 +52,7 @@ const Navbar = () => {
                             Calculator
                         </Link>
                         <Link
-                            className={`group relative ${
+                            className={`group relative hover:text-gray-200 ${
                                 pathname?.includes("/journal")
                                     ? currentPathStyles
                                     : ""
@@ -69,7 +64,7 @@ const Navbar = () => {
                         </Link>
                         {user != undefined && (
                             <Link
-                                className={`group relative ${
+                                className={`group relative hover:text-gray-200 ${
                                     pathname?.includes("/plans")
                                         ? currentPathStyles
                                         : ""
@@ -82,7 +77,7 @@ const Navbar = () => {
                         )}
                         {user != undefined && (
                             <Link
-                                className={`group relative ${
+                                className={`group relative hover:text-gray-200 ${
                                     pathname?.includes("/profile")
                                         ? currentPathStyles
                                         : ""

@@ -4,6 +4,7 @@ import { exerciseEntrySchema } from "../validations/exerciseEntryValidator";
 import { toast } from "react-hot-toast";
 import axios from "axios";
 import ExerciseJournal from "./ExerciseJournal";
+import PlanTable from "./PlanTable";
 
 export default function ExerciseForm() {
     const [exercise, setExercise] = useState("");
@@ -18,6 +19,7 @@ export default function ExerciseForm() {
     const [plans, setPlans] = useState<TrainingPlan[]>([]);
     const [selectPlanIndex, setSelectPlanIndex] = useState<number>(-1);
     const [loadingExercises, setLoadingExercises] = useState<boolean>(true);
+    const selectedPlan = selectPlanIndex >= 0 ? plans[selectPlanIndex] : null;
 
     // Form Change Toggle
     const [showExerciseForm, setExerciseForm] = useState(true);
@@ -187,15 +189,20 @@ export default function ExerciseForm() {
         }
     };
 
+    console.log(selectedPlan);
+
     return (
         <section className="flex flex-col gap-4">
             {/* Toggle Button */}
-            <button
-                type="button"
-                onClick={() => setExerciseForm((form) => !form)}
-            >
-                Show {showExerciseForm ? "Plan Form" : "Exercise Form"}
-            </button>
+            <div className="flex items-start">
+                <button
+                    className="bg-gray-600 hover:bg-gray-700 text-[#fafafa] px-4 py-2 rounded-md"
+                    type="button"
+                    onClick={() => setExerciseForm((form) => !form)}
+                >
+                    Show {showExerciseForm ? "Plan Form" : "Exercise Form"}
+                </button>
+            </div>
 
             {showExerciseForm ? (
                 <form className="w-full flex flex-col gap-8 lg:flex-row py-2 lg:items-center lg:justify-center">
@@ -315,27 +322,37 @@ export default function ExerciseForm() {
                     </button>
                 </form>
             ) : (
-                <form className="w-full flex flex-col gap-8 lg:flex-row py-2 lg:items-center lg:justify-center">
-                    <section className="flex flex-col gap-2">
-                        <label htmlFor="select_plan">Selected Plan: </label>
-                        <select
-                            onChange={(e) => setSelectPlanIndex(Number(e.target.value))}
-                            name="select_plan"
-                            id="select_plan"
-                            value={selectPlanIndex}
+                <section className="w-full flex flex-col gap-4">
+                    <form className="w-full flex flex-col gap-8 lg:flex-row py-2 lg:items-center lg:justify-center">
+                        <section className="flex flex-col gap-2">
+                            <label htmlFor="select_plan">Selected Plan: </label>
+                            <select
+                                onChange={(e) =>
+                                    setSelectPlanIndex(Number(e.target.value))
+                                }
+                                name="select_plan"
+                                id="select_plan"
+                                value={selectPlanIndex}
+                            >
+                                <option value={-1}>NONE</option>
+                                {plans.map((plan, idx) => (
+                                    <option key={plan.id} value={idx}>
+                                        {plan.name}
+                                    </option>
+                                ))}
+                            </select>
+                        </section>
+                        <button
+                            disabled={loading || selectPlanIndex < 0}
+                            className="lg:mt-7 bg-indigo-600 hover:bg-indigo-500 text-[#fafafa] px-4 py-2 rounded-md disabled:bg-slate-400 disabled:cursor-not-allowed"
+                            type="button"
+                            onClick={addPlanToJournal}
                         >
-                            <option value={-1}>NONE</option>
-                            {plans.map((plan, idx) => (
-                                <option key={plan.id} value={idx}>
-                                    {plan.name}
-                                </option>
-                            ))}
-                        </select>
-                    </section>
-                    <button type="button" onClick={addPlanToJournal}>
-                        Add Plan
-                    </button>
-                </form>
+                            Add Plan
+                        </button>
+                    </form>
+                    {selectedPlan && <PlanTable plan={selectedPlan} />}
+                </section>
             )}
 
             <ExerciseJournal

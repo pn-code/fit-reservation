@@ -1,9 +1,8 @@
 "use client";
-
 import axios from "axios";
 import { Save } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { toast } from "react-hot-toast";
 
 interface Props {
