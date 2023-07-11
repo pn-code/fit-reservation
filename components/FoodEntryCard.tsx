@@ -1,5 +1,5 @@
 "use client";
-import { Edit, X } from "lucide-react";
+import { X } from "lucide-react";
 
 interface FoodEntryCardProps {
     id: number;

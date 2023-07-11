@@ -1,15 +1,16 @@
 import { clerkClient, currentUser } from "@clerk/nextjs/app-beta";
 import { NextResponse } from "next/server";
 import { nameSchema } from "../../../../validations/nameValidator";
+import { User } from "@clerk/nextjs/dist/api";
 
-export async function GET(req: Request) {
+export async function GET() {
     const user = await currentUser();
 
     if (user) {
         const allUsers = await clerkClient.users.getUserList();
 
         // Only return id and name
-        const modifiedUsers = allUsers.map((user: any) => ({
+        const modifiedUsers = allUsers.map((user: User) => ({
             id: user.id,
             fullName: `${user.firstName} ${user.lastName}`,
         }));

@@ -1,6 +1,5 @@
 "use client";
 import FoodEntryCard from "./FoodEntryCard";
-import LineDivider from "./LineDivider";
 import Spinner from "./Spinner";
 
 interface Props {

@@ -4,12 +4,11 @@ import { currentUser } from "@clerk/nextjs/app-beta";
 import { planSchema } from "../../../validations/planValidator";
 
 // Allow users to grab plans related to them
-export async function GET(req: NextRequest, res: NextResponse) {
+export async function GET() {
     try {
         const user = await currentUser();
 
         if (user) {
-            // grab data from db
             const relatedPlans = await prisma.trainingPlan.findMany({
                 where: {
                     OR: [

@@ -31,7 +31,7 @@ export default function ReviewCard({ review }: Props) {
         }
 
         getUserNameById();
-    }, []);
+    }, [review.userId]);
 
     const deleteReview = async () => {
         try {
