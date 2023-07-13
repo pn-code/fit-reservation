@@ -124,7 +124,7 @@ export default function DashboardClientComponent() {
             {/* Charts */}
             <section className="flex flex-col gap-4 flex-1">
                 <h2 className="text-2xl font-semibold">Your Measurements</h2>
-                <section className="flex flex-col gap-6 sm:w-[70%]">
+                <section className="flex flex-col gap-6 xl:flex-row">
                     <section className="h-fit w-full bg-blue-900/40 rounded-md flex flex-col gap-2">
                         <h3 className="text-lg">Body Weight Measurements</h3>
                         <h4 className="text-amber-300">
@@ -142,7 +142,7 @@ export default function DashboardClientComponent() {
                         <BodyWeightForm setWeights={setWeights} />
                         <button
                             type="button"
-                            className="rounded-md bg-gray-500 py-3 hover:bg-gray-600"
+                            className="rounded-md bg-gray-500 mx-4 py-2 hover:bg-gray-600 text-sm"
                             onClick={() =>
                                 setShowWeights((weights) => !weights)
                             }
@@ -207,7 +207,7 @@ export default function DashboardClientComponent() {
                         <BodyFatForm setBodyFats={setBodyFats} />
                         <button
                             type="button"
-                            className="rounded-md bg-gray-500 py-3 hover:bg-gray-600"
+                            className="rounded-md bg-gray-500 mx-4 py-2 hover:bg-gray-600 text-sm"
                             onClick={() => setShowBodyFats((bf) => !bf)}
                         >
                             {showBodyFats ? "Hide " : "Show "} Body Fats
