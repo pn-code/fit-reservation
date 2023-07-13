@@ -99,7 +99,7 @@ export default function NutritionForm() {
             <form className="w-full flex flex-col gap-8 lg:flex-row py-2 lg:items-center lg:justify-center">
                 <section className="flex flex-col gap-4 sm:flex-row justify-center">
                     <section className="flex flex-col gap-2">
-                        <label htmlFor="name">Name:</label>
+                        <label htmlFor="name">Nutrition Item:</label>
                         <input
                             className="w-54"
                             onChange={(e) => setName(e.target.value)}
@@ -108,6 +108,7 @@ export default function NutritionForm() {
                             value={name}
                             required
                             disabled={loading}
+                            placeholder="Nutrition Item Name"
                         />
                     </section>
                     <section className="flex justify-between w-full sm:justify-start sm:gap-4">

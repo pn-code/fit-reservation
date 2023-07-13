@@ -21,11 +21,11 @@ export async function GET() {
 			});
 
 			return NextResponse.json(foodEntries);
-		} else {
-			return NextResponse.error();
-		}
+		} 
+			return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
 	} catch (error) {
-		return NextResponse.error();
+		console.error(error);
+		return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 })
 	}
 }
 
@@ -51,7 +51,7 @@ export async function POST(req: Request) {
 
 				return NextResponse.json(newFoodEntry);
 			}
-			return NextResponse.error();
+			return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
 		}
 	} catch (error) {
 		return console.error(error);
@@ -84,5 +84,6 @@ export async function DELETE(req: Request) {
 		return NextResponse.json(foodEntry);
 	} catch (error) {
 		console.error(error);
+		return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 })
 	}
 }

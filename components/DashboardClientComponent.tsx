@@ -121,18 +121,16 @@ export default function DashboardClientComponent() {
 
     return (
         <section className="flex flex-col gap-4 lg:flex-row lg:justify-between">
-            {/* Statistics */}
-            <StatisticsSection
-                currentBF={currentBF}
-                currentWeight={currentWeight}
-                calorieGoal={calorieGoal}
-            />
-
             {/* Charts */}
             <section className="flex flex-col gap-4 flex-1">
                 <h2 className="text-2xl font-semibold">Your Measurements</h2>
-                <section className="flex flex-col gap-4 2xl:flex-row">
-                    <section className="h-fit w-full bg-blue-900/40 p-2 rounded-md flex flex-col gap-2">
+                <section className="flex flex-col gap-6 xl:flex-row">
+                    <section className="h-fit w-full bg-blue-900/40 rounded-md flex flex-col gap-2">
+                        <h3 className="text-lg">Body Weight Measurements</h3>
+                        <h4 className="text-amber-300">
+                            Last Recorded Body Weight: {currentWeight} lbs
+                        </h4>
+
                         <LineChart
                             title="Your Body Weight"
                             label="Weight (lbs)"
@@ -140,15 +138,16 @@ export default function DashboardClientComponent() {
                             pointColor="rgb(163, 245, 157)"
                             borderColor="rgb(87, 224, 76)"
                         />
+
                         <BodyWeightForm setWeights={setWeights} />
                         <button
                             type="button"
-                            className="rounded-md bg-gray-500 py-3 hover:bg-gray-600"
+                            className="rounded-md bg-gray-500 mx-4 py-2 hover:bg-gray-600 text-sm"
                             onClick={() =>
                                 setShowWeights((weights) => !weights)
                             }
                         >
-                            View Weights
+                            {showWeights ? "Hide " : "Show "} Weights
                         </button>
                         {showWeights && (
                             <table>
@@ -193,7 +192,11 @@ export default function DashboardClientComponent() {
                             </table>
                         )}
                     </section>
-                    <section className="h-fit w-full bg-blue-900/40 p-2 rounded-md flex flex-col gap-2">
+                    <section className="h-fit w-full bg-blue-900/40 rounded-md flex flex-col gap-2">
+                        <h3 className="text-lg">Body Fat Measurements</h3>
+                        <h4 className="text-amber-300">
+                            Last Recorded Body Fat Percentage: {currentBF}%
+                        </h4>
                         <LineChart
                             title="Your Body Fat"
                             label="Body Fat (%)"
@@ -204,10 +207,10 @@ export default function DashboardClientComponent() {
                         <BodyFatForm setBodyFats={setBodyFats} />
                         <button
                             type="button"
-                            className="rounded-md bg-gray-500 py-3 hover:bg-gray-600"
+                            className="rounded-md bg-gray-500 mx-4 py-2 hover:bg-gray-600 text-sm"
                             onClick={() => setShowBodyFats((bf) => !bf)}
                         >
-                            View Body Fats
+                            {showBodyFats ? "Hide " : "Show "} Body Fats
                         </button>
                         {showBodyFats && (
                             <table>

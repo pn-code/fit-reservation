@@ -1,6 +1,6 @@
 import { currentUser } from "@clerk/nextjs/app-beta";
 import { prisma } from "../../../../lib/client";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 interface Params {
     params: { entryId: string };
@@ -33,10 +33,11 @@ export async function DELETE(req: Request, { params }: Params) {
         return NextResponse.json(exerciseEntry);
     } catch (error) {
         console.error(error);
+        return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 })
     }
 }
 
-export async function PUT(req: Request, { params }: Params) {
+export async function PUT(req: NextRequest, { params }: Params) {
     try {
         const user = await currentUser();
         const entryId = params.entryId;
@@ -62,5 +63,6 @@ export async function PUT(req: Request, { params }: Params) {
         return NextResponse.json(exerciseEntry);
     } catch (error) {
         console.error(error);
+        return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 })
     }
 }

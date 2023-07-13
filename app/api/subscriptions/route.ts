@@ -64,6 +64,6 @@ export async function POST(req: Request) {
 		}
 	} else {
 		console.error("Error. Payment not received.");
-		return NextResponse.error();
+		return NextResponse.json({ error: 'Payment not received' }, { status: 403 })
 	}
 }

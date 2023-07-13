@@ -17,7 +17,8 @@ export async function GET() {
 			return NextResponse.json(calorieGoal);
 		}
 	} catch (error) {
-		return console.error(error);
+		console.error(error);
+		return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 })
 	}
 }
 
@@ -46,8 +47,9 @@ export async function PUT(req: Request) {
 
 			return NextResponse.json(updateCalorieGoal);
 		}
-		return NextResponse.error()
+		return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
 	} catch (error) {
 		console.error(error);
+		return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 })
 	}
 }

@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { prisma } from "../../../lib/client";
 import { currentUser } from "@clerk/nextjs/app-beta";
 import { planSchema } from "../../../validations/planValidator";
@@ -30,7 +30,10 @@ export async function GET() {
         }
     } catch (error) {
         console.error(error);
-        return NextResponse.error();
+        return NextResponse.json(
+            { error: "Internal Server Error" },
+            { status: 500 }
+        );
     }
 }
 
@@ -57,10 +60,12 @@ export async function POST(req: Request) {
             });
 
             return NextResponse.json(trainingPlan);
-        } else {
-            return NextResponse.error();
         }
+        return NextResponse.json(
+            { error: "Forbidden" },
+            { status: 403 }
+        );
     } catch (error) {
-        return NextResponse.error();
+        return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 })
     }
 }

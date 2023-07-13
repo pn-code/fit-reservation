@@ -55,9 +55,10 @@ export async function POST(req: Request) {
 				return NextResponse.json(newExerciseEntry);
 			}
 
-			return NextResponse.error()
+			return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
 		}
 	} catch (error) {
-		return console.error(error);
+		console.error(error);
+		return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 })
 	}
 }
