@@ -20,8 +20,10 @@ export async function GET() {
 
             return NextResponse.json(allWeights);
         }
+        return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
     } catch (error) {
-        return console.error(error);
+        console.error(error);
+        return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 })
     }
 }
 
@@ -47,8 +49,10 @@ export async function POST(req: Request) {
 
                 return NextResponse.json(newWeightMeasurement);
             }
+            return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
         }
     } catch (error) {
-        return console.error(error);
+        console.error(error);
+        return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 })
     }
 }

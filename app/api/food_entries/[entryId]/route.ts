@@ -34,5 +34,6 @@ export async function DELETE(req: Request, { params }: Params) {
         return NextResponse.json(foodEntry);
     } catch (error) {
         console.error(error);
+        return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 })
     }
 }

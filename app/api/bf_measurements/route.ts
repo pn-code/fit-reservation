@@ -26,7 +26,11 @@ export async function GET() {
             return NextResponse.json(allBF);
         }
     } catch (error) {
-        return console.error(error);
+        console.error(error);
+        return NextResponse.json(
+            { error: "Internal Server Error" },
+            { status: 500 }
+        );
     }
 }
 
@@ -53,6 +57,7 @@ export async function POST(req: Request) {
             }
         }
     } catch (error) {
-        return console.error(error);
+        console.error(error);
+        return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 })
     }
 }

@@ -8,7 +8,7 @@ export async function POST(req: Request) {
     const user = await currentUser();
 
     if (!reviewSchema.parse(data)) {
-        return NextResponse.error();
+        return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     }
 
     try {
@@ -24,9 +24,13 @@ export async function POST(req: Request) {
 
             return NextResponse.json(review);
         } else {
-            return NextResponse.error();
+            return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
         }
     } catch (error) {
-        return NextResponse.error();
+        console.error(error);
+        return NextResponse.json(
+            { error: "Internal Server Error" },
+            { status: 500 }
+        );
     }
 }

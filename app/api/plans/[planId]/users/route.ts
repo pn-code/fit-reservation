@@ -24,7 +24,7 @@ export async function POST(req: Request, { params }: Props) {
         }
     } catch (error) {
         console.log(error);
-        return NextResponse.error();
+        return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 })
     }
 }
 
@@ -46,6 +46,6 @@ export async function DELETE(req: Request, { params }: Props) {
         }
     } catch (error) {
         console.log(error);
-        return NextResponse.error();
+        return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 })
     }
 }
