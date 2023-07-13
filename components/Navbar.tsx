@@ -1,7 +1,5 @@
 "use client";
-import {
-    Shield,
-} from "lucide-react";
+import { Shield } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useUser } from "@clerk/nextjs";
@@ -29,64 +27,74 @@ const Navbar = () => {
                 {/* Navbar on medium to larger devices */}
                 {user && (
                     <ul className="hidden sm:flex sm:gap-4 text-[16px]">
-                        <Link
-                            className={`group relative hover:text-gray-200 ${
-                                pathname === "/dashboard"
-                                    ? currentPathStyles
-                                    : ""
-                            }`}
-                            passHref={true}
-                            href="/dashboard"
-                        >
-                            Dashboard
-                        </Link>
-                        <Link
-                            className={`group relative hover:text-gray-200 ${
-                                pathname === "/calculator"
-                                    ? currentPathStyles
-                                    : ""
-                            }`}
-                            passHref={true}
-                            href="/calculator"
-                        >
-                            Calculator
-                        </Link>
-                        <Link
-                            className={`group relative hover:text-gray-200 ${
-                                pathname?.includes("/journal")
-                                    ? currentPathStyles
-                                    : ""
-                            }`}
-                            passHref={true}
-                            href="/journal"
-                        >
-                            Journal
-                        </Link>
-                        {user != undefined && (
+                        <li>
                             <Link
                                 className={`group relative hover:text-gray-200 ${
-                                    pathname?.includes("/plans")
+                                    pathname === "/dashboard"
                                         ? currentPathStyles
                                         : ""
                                 }`}
                                 passHref={true}
-                                href={`/plans/${user?.id}`}
+                                href="/dashboard"
                             >
-                                Plans
+                                Dashboard
                             </Link>
+                        </li>
+                        <li>
+                            <Link
+                                className={`group relative hover:text-gray-200 ${
+                                    pathname === "/calculator"
+                                        ? currentPathStyles
+                                        : ""
+                                }`}
+                                passHref={true}
+                                href="/calculator"
+                            >
+                                Calculator
+                            </Link>
+                        </li>
+                        <li>
+                            <Link
+                                className={`group relative hover:text-gray-200 ${
+                                    pathname?.includes("/journal")
+                                        ? currentPathStyles
+                                        : ""
+                                }`}
+                                passHref={true}
+                                href="/journal"
+                            >
+                                Journal
+                            </Link>
+                        </li>
+                        {user != undefined && (
+                            <li>
+                                <Link
+                                    className={`group relative hover:text-gray-200 ${
+                                        pathname?.includes("/plans")
+                                            ? currentPathStyles
+                                            : ""
+                                    }`}
+                                    passHref={true}
+                                    href={`/plans/${user?.id}`}
+                                >
+                                    Plans
+                                </Link>
+                            </li>
                         )}
                         {user != undefined && (
-                            <Link
-                                className={`group relative hover:text-gray-200 ${
-                                    pathname?.includes("/profile")
-                                        ? currentPathStyles
-                                        : ""
-                                }`}
-                                passHref={true}
-                                href={`/profile/${user?.id}`}
-                            >
-                                Profile
-                            </Link>
+                            <li>
+                                <Link
+                                    className={`group relative hover:text-gray-200 ${
+                                        pathname?.includes("/profile")
+                                            ? currentPathStyles
+                                            : ""
+                                    }`}
+                                    passHref={true}
+                                    href={`/profile/${user?.id}`}
+                                >
+                                    Profile
+                                </Link>
+                            </li>
                         )}
                     </ul>
                 )}
