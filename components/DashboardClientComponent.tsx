@@ -148,7 +148,7 @@ export default function DashboardClientComponent() {
                                 setShowWeights((weights) => !weights)
                             }
                         >
-                            View Weights
+                            {showWeights ? "Hide " : "Show "} Weights
                         </button>
                         {showWeights && (
                             <table>
@@ -207,7 +207,7 @@ export default function DashboardClientComponent() {
                             className="rounded-md bg-gray-500 py-3 hover:bg-gray-600"
                             onClick={() => setShowBodyFats((bf) => !bf)}
                         >
-                            View Body Fats
+                            {showBodyFats ? "Hide " : "Show "} Body Fats
                         </button>
                         {showBodyFats && (
                             <table>
