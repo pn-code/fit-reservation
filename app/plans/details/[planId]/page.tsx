@@ -21,7 +21,13 @@ export default async function PlanDetails({ params }: Props) {
     const fetchTrainingPlan = async (): Promise<any> => {
         const plan = await prisma.trainingPlan.findFirst({
             where: { id: Number(params.planId) },
-            include: { exercises: true, reviews: true, savedByUsers: true },
+            include: {
+                exercises: true,
+                reviews: {
+                    orderBy: { modifiedAt: "desc" },
+                },
+                savedByUsers: true,
+            },
         });
         return plan;
     };
