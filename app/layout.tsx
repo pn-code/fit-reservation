@@ -24,7 +24,7 @@ export default function RootLayout({
         <html lang="en">
             <ClerkProvider>
                 <body
-                    className={`${roboto.className} bg-[#172554] h-full`}
+                    className={`${roboto.className} bg-gray-900 h-full`}
                 >
                     <Navbar />
                     <ToastProvider />
