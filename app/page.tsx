@@ -4,11 +4,11 @@ import Link from "next/link";
 
 export default function Home() {
     return (
-        <main className="w-full min-h-[calc(100vh-64px)] py-20 px-40 gap-6 sm:h-[calc(100vh-82px)] flex text-white items-center justify-center flex-col md:flex-row bg-slate-900">
+        <main className="w-full min-h-[calc(100vh-64px)] py-20 px-4 sm:px-40 gap-6 sm:h-[calc(100vh-82px)] flex text-white items-center justify-center flex-col md:flex-row bg-slate-900">
             {/* LEFT SIDE: HERO TEXT */}
-            <section className="h-full max-w-[680px] flex flex-col bg-slate-900 sm:pt-6 md:pt-10 xl:pt-28 flex-1 sm:gap-16">
-                <header className="sm:mt-20 w-full flex flex-col sm:gap-8">
-                    <h1 className="text-6xl sm:text-7xl font-semibold">
+            <section className="h-full flex flex-col justify-center bg-slate-900 flex-1 gap-10">
+                <header className="w-full flex flex-col gap-10">
+                    <h1 className="text-5xl sm:text-7xl font-semibold">
                         Achieve new heights
                     </h1>
                     <p className="text-gray-200/90 text-lg tracking-tight sm:text-xl sm:tracking-tight">
@@ -24,13 +24,13 @@ export default function Home() {
                     <Link
                         passHref={true}
                         href="/register"
-                        className="min-w-[120px] w-[50%] min-h-[70px] flex justify-center items-center hover:text-white px-8 bg-indigo-600 hover:bg-indigo-700 rounded-sm"
+                        className="min-w-[120px] w-[40%] min-h-[70px] flex justify-center items-center hover:text-white px-8 bg-indigo-600 hover:bg-indigo-700 rounded-sm"
                     >
                         Get Started
                     </Link>
                     <Link
                         passHref={true}
-                        className="min-w-[120px] w-[50%] min-h-[70px] flex justify-center items-center hover:text-white px-8 bg-transparent hover:bg-gray-800 rounded-sm"
+                        className="min-w-[120px] w-[40%] min-h-[70px] flex justify-center items-center hover:text-white px-8 bg-transparent hover:bg-gray-800 rounded-sm"
                         href={"/login"}
                     >
                         How it works
@@ -59,7 +59,7 @@ export default function Home() {
             </section>
 
             {/* RIGHT SIDE: HERO IMAGE */}
-            <section className="flex flex-1 justify-center items-center w-full bg-gray-900 rounded-md mt-8 sm:mt-0">
+            <section className="hidden lg:flex flex-1 justify-center items-center w-full bg-gray-900 rounded-md mt-8 sm:mt-0">
                 <Image
                     className="rounded-sm"
                     src={"/assets/HERO.png"}
