@@ -45,14 +45,28 @@ export default function Home() {
                         src={"/assets/company1.png"}
                         height={42}
                         width={42}
-                        alt=""
+                        alt="cronometer"
                     />
                     <Image
                         className="rounded-sm"
                         src={"/assets/company2.png"}
                         height={42}
                         width={42}
-                        alt=""
+                        alt="my fitness pal"
+                    />
+                    <Image
+                        className="rounded-sm"
+                        src={"/assets/company3.png"}
+                        height={42}
+                        width={42}
+                        alt="weight watchers"
+                    />
+                    <Image
+                        className="rounded-sm"
+                        src={"/assets/company4.png"}
+                        height={42}
+                        width={42}
+                        alt="noom"
                     />
                 </div>
             </section>
