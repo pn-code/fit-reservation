@@ -60,7 +60,7 @@ export default function Info() {
                             <p className="text-sm text-gray-400">
                                 Search through our comprehensive list of
                                 training plans and pick one that is suited for
-                                your standards. Review others' training plans
+                                your standards. Review others&apos; training plans
                                 and create your own!
                             </p>
                         </div>
