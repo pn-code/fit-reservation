@@ -36,38 +36,40 @@ export default function Home() {
                     </Link>
                 </section>
 
-                <div className="flex items-center gap-6">
+                <div className="flex flex-col xl:flex-row items-center gap-6">
                     <p className="text-gray-200/90 mr-2">
                         Going above and beyond the defined standards
                     </p>
-                    <Image
-                        className="rounded-sm"
-                        src={"/assets/company1.png"}
-                        height={42}
-                        width={42}
-                        alt="cronometer"
-                    />
-                    <Image
-                        className="rounded-sm"
-                        src={"/assets/company2.png"}
-                        height={42}
-                        width={42}
-                        alt="my fitness pal"
-                    />
-                    <Image
-                        className="rounded-sm"
-                        src={"/assets/company3.png"}
-                        height={42}
-                        width={42}
-                        alt="weight watchers"
-                    />
-                    <Image
-                        className="rounded-sm"
-                        src={"/assets/company4.png"}
-                        height={42}
-                        width={42}
-                        alt="noom"
-                    />
+                    <div className="flex gap-6 flex-wrap">
+                        <Image
+                            className="rounded-sm"
+                            src={"/assets/company1.png"}
+                            height={42}
+                            width={42}
+                            alt="cronometer"
+                        />
+                        <Image
+                            className="rounded-sm"
+                            src={"/assets/company2.png"}
+                            height={42}
+                            width={42}
+                            alt="my fitness pal"
+                        />
+                        <Image
+                            className="rounded-sm"
+                            src={"/assets/company3.png"}
+                            height={42}
+                            width={42}
+                            alt="weight watchers"
+                        />
+                        <Image
+                            className="rounded-sm"
+                            src={"/assets/company4.png"}
+                            height={42}
+                            width={42}
+                            alt="noom"
+                        />
+                    </div>
                 </div>
             </section>
 
@@ -84,5 +86,3 @@ export default function Home() {
         </main>
     );
 }
-
-
