@@ -50,6 +50,8 @@ const Navbar = () => {
                     </Link>}
                 </header>
 
+                {!user && (<Link className="text-white bg-indigo-600 px-4 py-2 rounded-sm hover:bg-indigo-700" href={"/login"}>Login</Link>)}
+
                 {/* Navbar on medium to larger devices */}
                 {user && (
                     <ul className="hidden sm:flex sm:gap-4 text-[16px]">
