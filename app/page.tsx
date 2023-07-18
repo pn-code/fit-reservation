@@ -28,13 +28,13 @@ export default function Home() {
                     >
                         Get Started
                     </Link>
-                    <Link
+                    {/* <Link
                         passHref={true}
                         className="min-w-[120px] w-[40%] min-h-[70px] flex justify-center items-center hover:text-white px-8 bg-transparent hover:bg-gray-800 rounded-sm"
                         href={"/login"}
                     >
                         How it works
-                    </Link>
+                    </Link> */}
                 </section>
 
                 <div className="flex items-center gap-6">
