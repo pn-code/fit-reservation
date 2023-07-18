@@ -1,4 +1,3 @@
-import { Calculator, Dumbbell, FileBarChart } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -24,37 +23,53 @@ export default function Home() {
                     <Link
                         passHref={true}
                         href="/register"
-                        className="min-w-[120px] w-[40%] min-h-[70px] flex justify-center items-center hover:text-white px-8 bg-indigo-600 hover:bg-indigo-700 rounded-sm"
+                        className="min-w-[120px] w-[50%] min-h-[70px] flex justify-center items-center hover:text-white px-8 bg-indigo-600 hover:bg-indigo-700 rounded-sm"
                     >
                         Get Started
                     </Link>
-                    {/* <Link
+                    <Link
                         passHref={true}
-                        className="min-w-[120px] w-[40%] min-h-[70px] flex justify-center items-center hover:text-white px-8 bg-transparent hover:bg-gray-800 rounded-sm"
-                        href={"/login"}
+                        className="min-w-[120px] w-[50%] min-h-[70px] flex justify-center items-center hover:text-white px-8 bg-transparent hover:bg-gray-800 rounded-sm"
+                        href={"/info"}
                     >
                         How it works
-                    </Link> */}
+                    </Link>
                 </section>
 
-                <div className="flex items-center gap-6">
+                <div className="flex flex-col xl:flex-row items-center gap-6">
                     <p className="text-gray-200/90 mr-2">
                         Going above and beyond the defined standards
                     </p>
-                    <Image
-                        className="rounded-sm"
-                        src={"/assets/company1.png"}
-                        height={42}
-                        width={42}
-                        alt=""
-                    />
-                    <Image
-                        className="rounded-sm"
-                        src={"/assets/company2.png"}
-                        height={42}
-                        width={42}
-                        alt=""
-                    />
+                    <div className="flex gap-6 flex-wrap">
+                        <Image
+                            className="rounded-sm"
+                            src={"/assets/company1.png"}
+                            height={42}
+                            width={42}
+                            alt="cronometer"
+                        />
+                        <Image
+                            className="rounded-sm"
+                            src={"/assets/company2.png"}
+                            height={42}
+                            width={42}
+                            alt="my fitness pal"
+                        />
+                        <Image
+                            className="rounded-sm"
+                            src={"/assets/company3.png"}
+                            height={42}
+                            width={42}
+                            alt="weight watchers"
+                        />
+                        <Image
+                            className="rounded-sm"
+                            src={"/assets/company4.png"}
+                            height={42}
+                            width={42}
+                            alt="noom"
+                        />
+                    </div>
                 </div>
             </section>
 
@@ -71,54 +86,3 @@ export default function Home() {
         </main>
     );
 }
-
-// <section className="flex flex-col gap-8">
-// <h1 className="font-black text-xl sm:text-3xl">
-// USE OUR TOOLS TO:
-// </h1>
-// {/* CALCULATE */}
-// <div className="flex gap-8 sm:gap-16 hover:scale-105 duration-200 ease-linear lg:w-[575px]">
-// <div className="flex justify-center items-center p-2 bg-indigo-600 w-[70px] h-[70px] sm:h-20 sm:w-20 rounded-xl">
-//     <Calculator size={50} />
-// </div>
-// <div>
-//     <h2 className="text-xl font-bold sm:text-2xl mb-2">
-//         CALCULATE
-//     </h2>
-//     <span className="text-sm sm:text-xl">
-//         Find your starting point.
-//     </span>
-// </div>
-// </div>
-
-// {/* PLAN */}
-// <div className="flex gap-8 sm:gap-16 hover:scale-105 duration-200 ease-linear">
-// <div className="flex justify-center items-center p-2 bg-indigo-600 w-[70px] h-[70px] sm:h-20 sm:w-20 rounded-xl">
-//     <Dumbbell size={50} />
-// </div>
-// <div>
-//     <h2 className="text-xl font-bold sm:text-2xl mb-2">
-//         PLAN
-//     </h2>
-//     <span className="text-sm sm:text-xl">
-//         Take control of your workouts.
-//     </span>
-// </div>
-// </div>
-
-// {/* TRACK */}
-// <div className="flex gap-8 sm:gap-16 hover:scale-105 duration-200 ease-linear">
-// <div className="flex justify-center items-center p-2 bg-indigo-600 w-[70px] h-[70px] sm:h-20 sm:w-20 rounded-xl">
-//     <FileBarChart size={50} />
-// </div>
-
-// <div>
-//     <h2 className="text-xl font-bold sm:text-2xl mb-2">
-//         TRACK
-//     </h2>
-//     <span className="text-sm sm:text-xl">
-//         Add success to your to do list.
-//     </span>
-// </div>
-// </div>
-// </section>

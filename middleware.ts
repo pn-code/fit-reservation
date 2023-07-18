@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 // Setting up public paths
-const publicPaths = ["/", "/register*", "/login*"];
+const publicPaths = ["/", "/register*", "/login*", "/info"];
 
 // Function to determine if current url matches our public paths...
 const isPublic = (path: string) => {
