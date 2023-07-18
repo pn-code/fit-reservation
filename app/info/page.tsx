@@ -1,7 +1,6 @@
 import React from "react";
 import {
     Calculator,
-    Check,
     CheckCircle,
     Dumbbell,
     FileBarChart,
