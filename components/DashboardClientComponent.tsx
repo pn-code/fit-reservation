@@ -6,6 +6,7 @@ import LineChart from "./LineChart";
 import BodyWeightForm from "./BodyWeightForm";
 import BodyFatForm from "./BodyFatForm";
 import { toast } from "react-hot-toast";
+import { getPrevMonthDateISOString } from "../helpers/getPrevMonthDateISOString";
 
 export default function DashboardClientComponent() {
     const [weights, setWeights] = useState<WeightMeasurement[]>([]);
@@ -119,14 +120,57 @@ export default function DashboardClientComponent() {
         }
     };
 
+    const getDataOnlyFromLastMonth = (data: any[]) => {
+        const prevMonthDate = getPrevMonthDateISOString();
+
+        const newData = data.filter(
+            (dataObj) => dataObj.createdAt > prevMonthDate
+        );
+        return newData;
+    };
+
+    const calculateDataTrend = (
+        lastValue: number,
+        firstValue: number
+    ): number => {
+        return Number((firstValue - lastValue).toFixed(1));
+    };
+
+    const userWeightForLastMonth = getDataOnlyFromLastMonth(weights);
+    const userWeightTrendLastMonth = calculateDataTrend(
+        userWeightForLastMonth[userWeightForLastMonth.length - 1]?.weight,
+        userWeightForLastMonth[0]?.weight
+    );
+
+    const userBodyFatForLastMonth = getDataOnlyFromLastMonth(bodyFats);
+    const userBodyFatTrendLastMonth = calculateDataTrend(
+        userBodyFatForLastMonth[userBodyFatForLastMonth.length - 1]?.bodyfat,
+        userBodyFatForLastMonth[0]?.bodyfat
+    );
+
     return (
         <section className="flex flex-col gap-4 lg:flex-row lg:justify-between">
             {/* Charts */}
             <section className="flex flex-col gap-4 flex-1">
                 <h2 className="text-2xl font-semibold">Your Measurements</h2>
                 <section className="flex flex-col gap-6 xl:flex-row">
-                    <section className="h-fit w-full bg-blue-900/40 rounded-md flex flex-col gap-2">
-                        <h3 className="text-lg">Body Weight Measurements</h3>
+                    <section className="h-fit w-full rounded-md flex flex-col gap-2">
+                        <header className="flex justify-between">
+                            <h3 className="text-lg">
+                                Body Weight Measurements
+                            </h3>
+                            <span
+                                className={`text-xs sm:text-[16px] ${
+                                    userWeightTrendLastMonth < 0
+                                        ? "text-green-500"
+                                        : "text-red-500"
+                                }`}
+                            >
+                                {userWeightTrendLastMonth} lbs this month
+                            </span>
+                        </header>
+
+
                         <h4 className="text-amber-300">
                             Last Recorded Body Weight: {currentWeight} lbs
                         </h4>
@@ -192,8 +236,20 @@ export default function DashboardClientComponent() {
                             </table>
                         )}
                     </section>
-                    <section className="h-fit w-full bg-blue-900/40 rounded-md flex flex-col gap-2">
-                        <h3 className="text-lg">Body Fat Measurements</h3>
+                    <section className="h-fit w-full rounded-md flex flex-col gap-2">
+                    <header className="flex justify-between">
+                    <h3 className="text-lg">Body Fat Measurements</h3>
+                            <span
+                                className={`text-xs sm:text-[16px] ${
+                                    userBodyFatTrendLastMonth < 0
+                                        ? "text-green-500"
+                                        : "text-red-500"
+                                }`}
+                            >
+                                {userBodyFatTrendLastMonth} % this month
+                            </span>
+                        </header>
+                        
                         <h4 className="text-amber-300">
                             Last Recorded Body Fat Percentage: {currentBF}%
                         </h4>
