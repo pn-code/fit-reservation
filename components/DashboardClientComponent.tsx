@@ -6,6 +6,7 @@ import LineChart from "./LineChart";
 import BodyWeightForm from "./BodyWeightForm";
 import BodyFatForm from "./BodyFatForm";
 import { toast } from "react-hot-toast";
+import { getPrevMonthDateISOString } from "../helpers/getPrevMonthDateISOString";
 
 export default function DashboardClientComponent() {
     const [weights, setWeights] = useState<WeightMeasurement[]>([]);
@@ -118,6 +119,17 @@ export default function DashboardClientComponent() {
             setLoading(false);
         }
     };
+
+    const getDataOnlyFromLastMonth = (data: any[]) => {
+        const prevMonthDate = getPrevMonthDateISOString()
+
+        const newData = data.filter(dataObj => dataObj.createdAt > prevMonthDate);
+        return newData;
+    };
+
+    const calculateDataTrend = (firstValue: number, lastValue: number) => {
+        return firstValue - lastValue;
+    }
 
     return (
         <section className="flex flex-col gap-4 lg:flex-row lg:justify-between">
