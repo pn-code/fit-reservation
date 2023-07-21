@@ -125,7 +125,7 @@ export default function DashboardClientComponent() {
             <section className="flex flex-col gap-4 flex-1">
                 <h2 className="text-2xl font-semibold">Your Measurements</h2>
                 <section className="flex flex-col gap-6 xl:flex-row">
-                    <section className="h-fit w-full bg-blue-900/40 rounded-md flex flex-col gap-2">
+                    <section className="h-fit w-full rounded-md flex flex-col gap-2">
                         <h3 className="text-lg">Body Weight Measurements</h3>
                         <h4 className="text-amber-300">
                             Last Recorded Body Weight: {currentWeight} lbs
@@ -192,7 +192,7 @@ export default function DashboardClientComponent() {
                             </table>
                         )}
                     </section>
-                    <section className="h-fit w-full bg-blue-900/40 rounded-md flex flex-col gap-2">
+                    <section className="h-fit w-full rounded-md flex flex-col gap-2">
                         <h3 className="text-lg">Body Fat Measurements</h3>
                         <h4 className="text-amber-300">
                             Last Recorded Body Fat Percentage: {currentBF}%
