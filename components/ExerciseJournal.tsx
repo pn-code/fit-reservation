@@ -29,7 +29,7 @@ export default function ExerciseJournal({
 
             {/* Successfully loaded exercises  */}
             {exercises.length > 0 && !loadingExercises && (
-                <div className="w-full sm:w-[75%]">
+                <div className="w-full">
                     <div className="overflow-x-auto w-full">
                         <table className="table-auto w-full">
                             <thead className="h-8 text-xs sm:text-[16px] font-semibold uppercase text-yellow-50 bg-blue-900/60">
