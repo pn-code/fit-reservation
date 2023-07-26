@@ -189,141 +189,140 @@ export default function ExerciseForm() {
         }
     };
 
-    console.log(selectedPlan);
-
     return (
         <section className="flex flex-col gap-4">
-            {/* Toggle Button */}
-            <div className="flex items-start">
-                <button
-                    className="bg-gray-600 hover:bg-gray-700 text-[#fafafa] px-4 py-2 rounded-md"
-                    type="button"
-                    onClick={() => setExerciseForm((form) => !form)}
-                >
-                    Show {showExerciseForm ? "Plan Form" : "Exercise Form"}
-                </button>
-            </div>
-
             {showExerciseForm ? (
-                <form className="w-full flex flex-col gap-8 lg:flex-row py-2 lg:items-center lg:justify-center">
-                    <section className="flex flex-col gap-2">
-                        <label htmlFor="exercise">Exercise: </label>
-                        <input
-                            type="text"
-                            id="exercise"
-                            onChange={(e) => setExercise(e.target.value)}
-                            value={exercise}
-                            placeholder="exercise name"
-                            required
-                        />
+                <form className="w-full flex flex-col gap-4 lg:flex-row py-2 lg:items-center lg:justify-between">
+                    <section className="flex gap-4 items-center">
+                        <section className="flex flex-col gap-2">
+                            <label htmlFor="exercise">Exercise: </label>
+                            <input
+                                type="text"
+                                id="exercise"
+                                onChange={(e) => setExercise(e.target.value)}
+                                value={exercise}
+                                placeholder="exercise name"
+                                required
+                            />
+                        </section>
+
+                        <section className="flex flex-col gap-2">
+                            <label htmlFor="type">Type: </label>
+                            <select
+                                name="type"
+                                id="type"
+                                onChange={(e) => setType(e.target.value)}
+                                value={type}
+                                required
+                            >
+                                <option value="resistance">Resistance</option>
+                                <option value="cardio">Cardio</option>
+                            </select>
+                        </section>
+                        {type === "resistance" && (
+                            <>
+                                <section className="flex flex-col gap-2">
+                                    <label htmlFor="weight">Weight (lb):</label>
+                                    <input
+                                        className="w-20"
+                                        type="number"
+                                        id="weight"
+                                        onChange={(e) =>
+                                            setWeight(
+                                                Number.parseFloat(
+                                                    e.target.value
+                                                )
+                                            )
+                                        }
+                                        value={weight}
+                                        min={0}
+                                    />
+                                </section>
+
+                                <section className="flex flex-col gap-2">
+                                    <label htmlFor="sets">Sets:</label>
+                                    <input
+                                        className="w-16"
+                                        type="text"
+                                        id="sets"
+                                        onChange={(e) =>
+                                            setSets(Number(e.target.value))
+                                        }
+                                        value={sets}
+                                        min={0}
+                                    />
+                                </section>
+
+                                <section className="flex flex-col gap-2">
+                                    <label htmlFor="reps">Reps:</label>
+                                    <input
+                                        className="w-16"
+                                        type="text"
+                                        id="reps"
+                                        onChange={(e) =>
+                                            setReps(Number(e.target.value))
+                                        }
+                                        value={reps}
+                                        min={0}
+                                    />
+                                </section>
+                            </>
+                        )}
+                        {type === "cardio" && (
+                            <>
+                                <section className="flex flex-col gap-2">
+                                    <label htmlFor="calories">Calories:</label>
+                                    <input
+                                        className="w-16"
+                                        type="text"
+                                        id="calories"
+                                        onChange={(e) =>
+                                            setCalories(Number(e.target.value))
+                                        }
+                                        value={calories}
+                                    />
+                                </section>
+                                <section className="flex flex-col gap-2">
+                                    <label htmlFor="duration">
+                                        Duration (min):
+                                    </label>
+                                    <input
+                                        className="w-24"
+                                        type="number"
+                                        id="duration"
+                                        onChange={(e) =>
+                                            setDuration(Number(e.target.value))
+                                        }
+                                        value={duration}
+                                        min={0}
+                                    />
+                                </section>
+                            </>
+                        )}
                     </section>
 
-                    <section className="flex flex-col gap-2">
-                        <label htmlFor="type">Type: </label>
-                        <select
-                            name="type"
-                            id="type"
-                            onChange={(e) => setType(e.target.value)}
-                            value={type}
-                            required
+                    <section className="flex gap-2">
+                        {/* Toggle Button */}
+                        <button
+                            className="w-24 lg:mt-7 bg-gray-600 hover:bg-gray-500 text-[#fafafa] px-4 py-2 rounded-md"
+                            type="button"
+                            onClick={() => setExerciseForm((form) => !form)}
                         >
-                            <option value="resistance">Resistance</option>
-                            <option value="cardio">Cardio</option>
-                        </select>
+                            {showExerciseForm ? " Plans" : " Exercises"}
+                        </button>
+                        <button
+                            disabled={loading || exercise.trim().length == 0}
+                            onClick={createExerciseEntry}
+                            type="button"
+                            className="bg-indigo-600 hover:bg-indigo-500 text-[#fafafa] px-4 h-10 lg:mt-7 rounded-md disabled:bg-indigo-600/60 disabled:cursor-not-allowed"
+                        >
+                            Submit
+                        </button>
                     </section>
-
-                    {type === "cardio" && (
-                        <section className="flex gap-4 justify-between sm:justify-start">
-                            <section className="flex flex-col gap-2">
-                                <label htmlFor="calories">Calories:</label>
-                                <input
-                                    className="w-16"
-                                    type="text"
-                                    id="calories"
-                                    onChange={(e) =>
-                                        setCalories(Number(e.target.value))
-                                    }
-                                    value={calories}
-                                />
-                            </section>
-                            <section className="flex flex-col gap-2">
-                                <label htmlFor="duration">
-                                    Duration (min):
-                                </label>
-                                <input
-                                    className="w-24"
-                                    type="number"
-                                    id="duration"
-                                    onChange={(e) =>
-                                        setDuration(Number(e.target.value))
-                                    }
-                                    value={duration}
-                                    min={0}
-                                />
-                            </section>
-                        </section>
-                    )}
-
-                    {type === "resistance" && (
-                        <section className="flex gap-4 justify-between sm:justify-start">
-                            <section className="flex flex-col gap-2">
-                                <label htmlFor="weight">Weight (lbs):</label>
-                                <input
-                                    className="w-20"
-                                    type="number"
-                                    id="weight"
-                                    onChange={(e) =>
-                                        setWeight(
-                                            Number.parseFloat(e.target.value)
-                                        )
-                                    }
-                                    value={weight}
-                                    min={0}
-                                />
-                            </section>
-
-                            <section className="flex flex-col gap-2">
-                                <label htmlFor="sets">Sets:</label>
-                                <input
-                                    className="w-16"
-                                    type="text"
-                                    id="sets"
-                                    onChange={(e) =>
-                                        setSets(Number(e.target.value))
-                                    }
-                                    value={sets}
-                                    min={0}
-                                />
-                            </section>
-
-                            <section className="flex flex-col gap-2">
-                                <label htmlFor="reps">Reps:</label>
-                                <input
-                                    className="w-16"
-                                    type="text"
-                                    id="reps"
-                                    onChange={(e) =>
-                                        setReps(Number(e.target.value))
-                                    }
-                                    value={reps}
-                                    min={0}
-                                />
-                            </section>
-                        </section>
-                    )}
-
-                    <button
-                        disabled={loading}
-                        onClick={createExerciseEntry}
-                        type="button"
-                        className="lg:mt-7 bg-indigo-600 hover:bg-indigo-500 text-[#fafafa] px-4 py-2 rounded-md disabled:bg-slate-400 disabled:cursor-not-allowed"
-                    >
-                        Add Item
-                    </button>
                 </form>
             ) : (
                 <section className="w-full flex flex-col gap-4">
-                    <form className="w-full flex flex-col gap-8 lg:flex-row py-2 lg:items-center lg:justify-center">
+                    <form className="w-full flex flex-col gap-8 lg:flex-row py-2 lg:items-center lg:justify-between">
                         <section className="flex flex-col gap-2">
                             <label htmlFor="select_plan">Selected Plan: </label>
                             <select
@@ -342,14 +341,25 @@ export default function ExerciseForm() {
                                 ))}
                             </select>
                         </section>
-                        <button
-                            disabled={loading || selectPlanIndex < 0}
-                            className="lg:mt-7 bg-indigo-600 hover:bg-indigo-500 text-[#fafafa] px-4 py-2 rounded-md disabled:bg-slate-400 disabled:cursor-not-allowed"
-                            type="button"
-                            onClick={addPlanToJournal}
-                        >
-                            Add Plan
-                        </button>
+                        <section className="flex gap-2">
+                             {/* Toggle Button */}
+                             <button
+                                className="w-24 lg:mt-7 bg-gray-600 hover:bg-gray-500 text-[#fafafa] px-4 py-2 rounded-md"
+                                type="button"
+                                onClick={() => setExerciseForm((form) => !form)}
+                            >
+                                {showExerciseForm ? " Plans" : " Exercises"}
+                            </button>
+                            <button
+                                disabled={loading || selectPlanIndex < 0}
+                                className="lg:mt-7 bg-indigo-600 hover:bg-indigo-500 text-[#fafafa] px-4 py-2 rounded-md disabled:bg-indigo-600/60 disabled:cursor-not-allowed"
+                                type="button"
+                                onClick={addPlanToJournal}
+                            >
+                                Submit
+                            </button>
+                           
+                        </section>
                     </form>
                     {selectedPlan && <PlanTable plan={selectedPlan} />}
                 </section>

@@ -12,7 +12,7 @@ export const metadata = {
 const JournalPage = async () => {
     const user = await currentUser();
     return (
-        <main className="w-full min-h-[calc(100vh-100px)] pb-20 overflow-y-auto bg-slate-800 py-6 rounded-md flex flex-col gap-4 shadow-md px-2 sm:px-10 text-white/90">
+        <main className="w-full min-h-[calc(100vh-100px)] pb-20 overflow-y-auto bg-gray-900 py-6 rounded-md flex flex-col gap-4 shadow-md px-2 sm:px-10 text-white/90">
             <header className="w-full flex justify-between lg:border-b-2 lg:border-b-indigo-600">
                 <section className="flex justify-between font-bold pb-2 items-center">
                     <h1 className="text-3xl">Journal</h1>
@@ -24,8 +24,8 @@ const JournalPage = async () => {
                 </section>
             </header>
 
-            <section className="flex flex-col gap-4">
-                <article className="flex flex-col gap-4">
+            <section className="flex flex-col gap-8 2xl:flex-row lg:justify-between">
+                <article className="flex flex-col gap-2 flex-1">
                     <header className="flex justify-between">
                         <h2 className="text-2xl font-semibold text-amber-400 text-center">
                             Nutrition Journal
@@ -34,11 +34,10 @@ const JournalPage = async () => {
                             See more
                         </Link>
                     </header>
-
                     <NutritionForm />
                 </article>
 
-                <article className="flex flex-col gap-4">
+                <article className="flex flex-col gap-2 flex-1">
                     <header className="flex justify-between">
                         <h2 className="text-2xl font-semibold text-amber-400 text-center">
                             Exercise Journal
