@@ -24,8 +24,8 @@ const JournalPage = async () => {
                 </section>
             </header>
 
-            <section className="flex flex-col gap-4">
-                <article className="flex flex-col gap-4">
+            <section className="flex flex-col gap-8 2xl:flex-row lg:justify-between">
+                <article className="flex flex-col gap-2 flex-1">
                     <header className="flex justify-between">
                         <h2 className="text-2xl font-semibold text-amber-400 text-center">
                             Nutrition Journal
@@ -34,11 +34,10 @@ const JournalPage = async () => {
                             See more
                         </Link>
                     </header>
-
                     <NutritionForm />
                 </article>
 
-                <article className="flex flex-col gap-4">
+                <article className="flex flex-col gap-2 flex-1">
                     <header className="flex justify-between">
                         <h2 className="text-2xl font-semibold text-amber-400 text-center">
                             Exercise Journal
