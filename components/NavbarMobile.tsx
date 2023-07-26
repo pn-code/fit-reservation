@@ -12,9 +12,9 @@ import React from "react";
 
 export default function NavbarMobile() {
     const user = useUser().user;
-
     const pathname = usePathname();
     const currentPathStyles = "border-amber-300";
+    
     return (
         <nav className="sm:hidden fixed bottom-0 w-full bg-gray-900 z-[999] h-16">
             {user && <ul className="flex justify-between py-3">
@@ -64,7 +64,7 @@ export default function NavbarMobile() {
                     >
                         <Rocket
                             className={`group relative text-white/90 hover:text-white border-t-2 ${
-                                pathname.includes("/plans")
+                                pathname?.includes("/plans")
                                     ? currentPathStyles
                                     : "border-t-transparent"
                             }`}
@@ -80,7 +80,7 @@ export default function NavbarMobile() {
                     >
                         <User
                             className={`group relative text-white/90 hover:text-white border-t-2 ${
-                                pathname.includes("/profile")
+                                pathname?.includes("/profile")
                                     ? currentPathStyles
                                     : "border-t-transparent"
                             }`}
