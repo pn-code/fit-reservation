@@ -44,29 +44,29 @@ export default function Home() {
                         <Image
                             className="rounded-sm"
                             src={"/assets/company1.png"}
-                            height={42}
-                            width={42}
+                            height={32}
+                            width={32}
                             alt="cronometer"
                         />
                         <Image
                             className="rounded-sm"
                             src={"/assets/company2.png"}
-                            height={42}
-                            width={42}
+                            height={32}
+                            width={32}
                             alt="my fitness pal"
                         />
                         <Image
                             className="rounded-sm"
                             src={"/assets/company3.png"}
-                            height={42}
-                            width={42}
+                            height={32}
+                            width={32}
                             alt="weight watchers"
                         />
                         <Image
                             className="rounded-sm"
                             src={"/assets/company4.png"}
-                            height={42}
-                            width={42}
+                            height={32}
+                            width={32}
                             alt="noom"
                         />
                     </div>
