@@ -310,7 +310,7 @@ export default function ExerciseForm() {
 
                         {/* Toggle Button */}
                         <button
-                            className="w-24 bg-gray-600 hover:bg-gray-500 text-[#fafafa] px-4 h-10 lg:mt-7 rounded-md"
+                            className=" lg:mt-7 bg-gray-600 hover:bg-gray-500 text-[#fafafa] px-4 py-2 rounded-md"
                             type="button"
                             onClick={() => setExerciseForm((form) => !form)}
                         >
