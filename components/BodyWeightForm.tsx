@@ -50,7 +50,7 @@ export default function BodyWeightForm({ setWeights }: Props) {
 
     return (
         <form className="w-full text-sm flex flex-col gap-4 justify-center items-center bg-gray-800 px-4 py-2 rounded-md">
-            <section className="w-full flex gap-4 sm:flex-row sm:justify-between">
+            <section className="w-full flex gap-4 sm:flex-row sm:justify-between items-center">
                 <section className="w-full flex flex-col sm:flex-row gap-2 items-center">
                     <label className="font-bold" htmlFor="weight">
                         Date:{" "}
