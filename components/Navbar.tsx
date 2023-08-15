@@ -43,7 +43,7 @@ const Navbar = () => {
                         <h1 className="text-2xl lg:3xl font-bold">FitHeroes</h1>
                     </Link>
                     {user && <Link href="/calculator" className="group flex flex-col gap-2 hover:underline">
-                        <span className="flex gap-1 items-center text-sm">
+                        <span className="flex gap-1 items-center text-xs sm:text-sm">
                             <Target color="orange" size={20}/>
                             Calorie Goal - {calorieGoal} kCal
                         </span>
