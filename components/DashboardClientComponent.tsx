@@ -155,7 +155,7 @@ export default function DashboardClientComponent() {
                 <h2 className="text-2xl font-semibold">Your Measurements</h2>
                 <section className="flex flex-col gap-6 xl:flex-row">
                     <section className="h-fit w-full rounded-md flex flex-col gap-2">
-                        <header className="flex justify-between">
+                        <header className="flex justify-between sm:items-center sm:flex-row flex-col">
                             <h3 className="text-lg">
                                 Body Weight Measurements
                             </h3>
@@ -169,7 +169,6 @@ export default function DashboardClientComponent() {
                                 {userWeightTrendLastMonth} lbs this month
                             </span>
                         </header>
-
 
                         <h4 className="text-amber-300">
                             Last Recorded Body Weight: {currentWeight} lbs
@@ -237,8 +236,8 @@ export default function DashboardClientComponent() {
                         )}
                     </section>
                     <section className="h-fit w-full rounded-md flex flex-col gap-2">
-                    <header className="flex justify-between">
-                    <h3 className="text-lg">Body Fat Measurements</h3>
+                        <header className="flex justify-between sm:items-center sm:flex-row flex-col">
+                            <h3 className="text-lg">Body Fat Measurements</h3>
                             <span
                                 className={`text-xs sm:text-[16px] ${
                                     userBodyFatTrendLastMonth < 0
@@ -249,7 +248,7 @@ export default function DashboardClientComponent() {
                                 {userBodyFatTrendLastMonth} % this month
                             </span>
                         </header>
-                        
+
                         <h4 className="text-amber-300">
                             Last Recorded Body Fat Percentage: {currentBF}%
                         </h4>
