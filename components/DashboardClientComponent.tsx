@@ -1,6 +1,5 @@
 "use client";
 import { useEffect, useState } from "react";
-import StatisticsSection from "./StatisticsSection";
 import axios from "axios";
 import LineChart from "./LineChart";
 import BodyWeightForm from "./BodyWeightForm";
@@ -11,7 +10,6 @@ import { getPrevMonthDateISOString } from "../helpers/getPrevMonthDateISOString"
 export default function DashboardClientComponent() {
     const [weights, setWeights] = useState<WeightMeasurement[]>([]);
     const [bodyFats, setBodyFats] = useState<BodyFatMeasurement[]>([]);
-    const [calorieGoal, setCalorieGoal] = useState<number | null>(null);
     const [loading, setLoading] = useState(false);
     const [showWeights, setShowWeights] = useState(false);
     const [showBodyFats, setShowBodyFats] = useState(false);
@@ -60,14 +58,6 @@ export default function DashboardClientComponent() {
             setBodyFats(res.data);
         };
 
-        const getCalorieGoalData = async () => {
-            const res = await axios.get("/api/calorie_goal");
-            if (res.data?.goal) {
-                setCalorieGoal(res.data.goal);
-            }
-        };
-
-        getCalorieGoalData();
         getWeightData();
         getBFData();
     }, []);
