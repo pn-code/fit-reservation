@@ -140,6 +140,8 @@ export default function DashboardClientComponent() {
       <section className="flex flex-col gap-4 flex-1">
         <h2 className="text-2xl font-semibold">Your Measurements</h2>
         <section className="flex flex-col gap-6 xl:flex-row">
+
+          {/* Body Weight Charts */}
           <section className="h-fit w-full rounded-md flex flex-col gap-2">
             <header className="flex justify-between sm:items-center sm:flex-row flex-col">
               <h3 className="text-lg">Body Weight Measurements</h3>
@@ -168,23 +170,25 @@ export default function DashboardClientComponent() {
             />
 
             <BodyWeightForm setWeights={setWeights} />
+
             <button
               type="button"
-              className="rounded-md bg-gray-500 mx-4 py-2 hover:bg-gray-600 text-sm"
+              className="rounded-sm bg-gray-500 mx-4 py-2 hover:bg-gray-600 text-sm"
               onClick={() => setShowWeights((weights) => !weights)}
             >
               {showWeights ? "Hide " : "Show "} Weights
             </button>
+
             {showWeights && (
               <table>
-                <thead className="text-center sm:text-left">
+                <thead className="text-center">
                   <tr>
                     <th>Date</th>
                     <th>Weight</th>
                     <th>Action</th>
                   </tr>
                 </thead>
-                <tbody className="text-center sm:text-left">
+                <tbody className="text-center">
                   {weights.map((weightObj) => (
                     <tr key={weightObj.id} className="hover:bg-gray-900">
                       <td>{formatDateString(weightObj.createdAt)}</td>
@@ -205,6 +209,10 @@ export default function DashboardClientComponent() {
               </table>
             )}
           </section>
+
+
+
+          {/* Body Fat Charts*/}
           <section className="h-fit w-full rounded-md flex flex-col gap-2">
             <header className="flex justify-between sm:items-center sm:flex-row flex-col">
               <h3 className="text-lg">Body Fat Measurements</h3>
@@ -225,6 +233,7 @@ export default function DashboardClientComponent() {
               Last Recorded Body Fat Percentage:{" "}
               {currentBF ? `${currentBF}%` : "No Records"}
             </h4>
+
             <LineChart
               title="Your Body Fat"
               label="Body Fat (%)"
@@ -232,24 +241,27 @@ export default function DashboardClientComponent() {
               pointColor="rgb(222, 155, 129)"
               borderColor="rgb(232, 151, 70)"
             />
+
             <BodyFatForm setBodyFats={setBodyFats} />
+
             <button
               type="button"
-              className="rounded-md bg-gray-500 mx-4 py-2 hover:bg-gray-600 text-sm"
+              className="rounded-sm bg-gray-500 mx-4 py-2 hover:bg-gray-600 text-sm"
               onClick={() => setShowBodyFats((bf) => !bf)}
             >
               {showBodyFats ? "Hide " : "Show "} Body Fats
             </button>
+            
             {showBodyFats && (
               <table>
-                <thead className="text-center sm:text-left">
+                <thead className="text-center">
                   <tr>
                     <th>Date</th>
                     <th>Body Fat</th>
                     <th>Action</th>
                   </tr>
                 </thead>
-                <tbody className="text-center sm:text-left">
+                <tbody className="text-center">
                   {bodyFats.map((bodyFatObj) => (
                     <tr key={bodyFatObj.id} className="hover:bg-gray-900">
                       <td>{formatDateString(bodyFatObj.createdAt)}</td>

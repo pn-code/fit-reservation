@@ -51,7 +51,7 @@ export default function BodyFatForm({ setBodyFats }: Props) {
     };
 
     return (
-        <form className="w-full text-[16px] sm:text-sm flex gap-4 flex-col justify-center items-center bg-gray-800 px-4 py-2 rounded-md">
+        <form className="w-full text-[16px] sm:text-sm flex gap-4 flex-col justify-center items-center px-4 py-2 rounded-md">
             <section className="w-full flex gap-4 justify-between items-center">
                 <section className="w-full flex flex-col sm:flex-row gap-2 items-center">
                     <label className="font-bold" htmlFor="weight">
@@ -85,7 +85,7 @@ export default function BodyFatForm({ setBodyFats }: Props) {
                 disabled={loading}
                 onClick={submitCurrentBodyFat}
                 type="button"
-                className="disabled:bg-gray-500 w-full py-4 bg-indigo-600 hover:bg-indigo-700 rounded-lg text-white px-4 sm:py-2 hover:underline"
+                className="disabled:bg-gray-500 w-full bg-indigo-600 hover:bg-indigo-700 rounded-sm text-white px-4 py-2 hover:underline"
             >
                 Submit
             </button>
