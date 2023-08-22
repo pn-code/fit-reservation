@@ -93,7 +93,7 @@ export default async function PlanDetails({ params }: Props) {
                 <PlanActions plan={plan} userId={user.id} />
             )}
 
-            <table className="table-auto w-full">
+            <table className="table-auto w-full lg:w-[56%]">
                 <thead className="h-8 text-xs sm:text-[16px] font-semibold uppercase text-yellow-50 bg-blue-900/60">
                     <tr className="p-2 whitespace-nowrap">
                         <th>
@@ -115,7 +115,7 @@ export default async function PlanDetails({ params }: Props) {
                     </tr>
                 </thead>
 
-                <tbody className="text-sm divide-y divide-gray-100 w-full">
+                <tbody className="text-sm divide-y divide-gray-100 w-full bg-gray-800">
                     {plan.exercises.map((exercise: any, idx: number) => (
                         <tr
                             key={idx}
