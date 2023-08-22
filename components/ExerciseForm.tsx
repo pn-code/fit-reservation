@@ -144,7 +144,6 @@ export default function ExerciseForm() {
         `/api/exercise_entries/${exerciseId}`,
         updatedExerciseEntry
       );
-      console.log(res);
 
       if (res.status == 200) {
         toast.success("Successfully updated exercises.");
