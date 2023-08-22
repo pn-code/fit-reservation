@@ -36,12 +36,11 @@ export default function TrainingPlanCard({ plan }: Props) {
                     </section>
                 </header>
 
-                <section>
-                    <h3>Description:</h3>
-                    <p className="text-sm">
-                        {plan.description.substring(0, 30)}...
-                    </p>
-                </section>
+                <p className="text-xs text-gray-300 font-thin">
+                    {plan.description.length < 100
+                        ? plan.description
+                        : `${plan.description.substring(0, 100)}...`}
+                </p>
             </article>
         </Link>
     );
