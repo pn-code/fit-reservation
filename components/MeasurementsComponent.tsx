@@ -109,18 +109,6 @@ export default function MeasurementsComponent() {
         return Number((firstValue - lastValue).toFixed(1));
     };
 
-    const userWeightsLastMonth = getDataOnlyFromLastMonth(weights);
-    const userWeightTrendLastMonth = calculateDataTrend(
-        userWeightsLastMonth[userWeightsLastMonth.length - 1]?.weight,
-        userWeightsLastMonth[0]?.weight
-    );
-
-    const userBodyFatForLastMonth = getDataOnlyFromLastMonth(bodyFats);
-    const userBodyFatTrendLastMonth = calculateDataTrend(
-        userBodyFatForLastMonth[userBodyFatForLastMonth.length - 1]?.bodyfat,
-        userBodyFatForLastMonth[0]?.bodyfat
-    );
-
     const formatWeights = (weights: WeightMeasurement[]) => {
         return weights.length > 0
             ? weights.map((data) => ({
@@ -139,13 +127,33 @@ export default function MeasurementsComponent() {
             : [];
     };
 
-    console.log(bodyFats);
-
     const formattedWeightsLastMonth = formatWeights(weightsLastMonth);
     const formattedBodyFatsLastMonth = formatBodyFats(bodyFatsLastMonth);
 
     const [weightsToDisplay, setWeightsToDisplay] = useState("month");
     const [bodyFatsToDisplay, setBodyFatsToDisplay] = useState("month");
+
+    const userWeightTrend =
+        weightsToDisplay == "month"
+            ? calculateDataTrend(
+                  weightsLastMonth[weightsLastMonth.length - 1]?.weight,
+                  weightsLastMonth[0]?.weight
+              )
+            : calculateDataTrend(
+                  weights[weights.length - 1]?.weight,
+                  weights[0]?.weight
+              );
+
+    const userBodyFatTrend =
+        bodyFatsToDisplay == "month"
+            ? calculateDataTrend(
+                  bodyFatsLastMonth[bodyFatsLastMonth.length - 1]?.bodyfat,
+                  bodyFatsLastMonth[0]?.bodyfat
+              )
+            : calculateDataTrend(
+                  bodyFats[bodyFats.length - 1]?.bodyfat,
+                  bodyFats[0]?.bodyfat
+              );
 
     useEffect(() => {
         const getWeightData = async () => {
@@ -227,13 +235,17 @@ export default function MeasurementsComponent() {
 
                         <span
                             className={`text-xs sm:text-[16px] ${
-                                userWeightTrendLastMonth < 0
+                                userWeightTrend < 0
                                     ? "text-red-400"
                                     : "text-blue-400"
                             }`}
                         >
-                            {userWeightTrendLastMonth
-                                ? `${userWeightTrendLastMonth} lbs this month`
+                            {userWeightTrend
+                                ? `${userWeightTrend} lbs ${
+                                      weightsToDisplay === "month"
+                                          ? "this month"
+                                          : "all time"
+                                  }`
                                 : "Loading..."}
                         </span>
 
@@ -364,13 +376,17 @@ export default function MeasurementsComponent() {
 
                         <span
                             className={`text-xs sm:text-[16px] ${
-                                userBodyFatTrendLastMonth < 0
+                                userBodyFatTrend < 0
                                     ? "text-red-400"
                                     : "text-blue-400"
                             }`}
                         >
-                            {userBodyFatTrendLastMonth
-                                ? `${userBodyFatTrendLastMonth} lbs this month`
+                            {userBodyFatTrend
+                                ? `${userBodyFatTrend} % ${
+                                      bodyFatsToDisplay == "month"
+                                          ? "this month"
+                                          : "all time"
+                                  }`
                                 : "Loading..."}
                         </span>
 
