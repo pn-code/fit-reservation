@@ -1,5 +1,13 @@
 "use client";
-import { Shield, Target } from "lucide-react";
+import {
+    Dumbbell,
+    Gauge,
+    PenLine,
+    Shield,
+    SigmaSquare,
+    Target,
+    User,
+} from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useUser } from "@clerk/nextjs";
@@ -34,7 +42,7 @@ const Navbar = () => {
     return (
         <>
             <nav className="relative h-16 bg-[#172554] text-white py-6 px-2 sm:px-6 flex justify-between items-center w-full top-0 left-0 z-[999]">
-                <header className="w-full flex gap-5 items-center justify-between sm:justify-start">
+                <header className="w-full flex gap-5 items-center justify-between lg:justify-start">
                     <Link
                         className="hover:underline font-medium flex gap-2 items-center"
                         href="/"
@@ -42,22 +50,34 @@ const Navbar = () => {
                         <Shield size={32} />
                         <h1 className="text-2xl lg:3xl font-bold">FitHeroes</h1>
                     </Link>
-                    {user && <Link href="/calculator" className="group flex flex-col gap-2 hover:underline">
-                        <span className="flex gap-1 items-center text-xs sm:text-sm">
-                            <Target color="orange" size={20}/>
-                            Calorie Goal - {calorieGoal} kCal
-                        </span>
-                    </Link>}
+                    {user && (
+                        <Link
+                            href="/calculator"
+                            className="group flex flex-col gap-2 hover:underline"
+                        >
+                            <span className="flex gap-1 items-center text-sm">
+                                <Target color="orange" size={20} />
+                                Calorie Goal - {calorieGoal} kCal
+                            </span>
+                        </Link>
+                    )}
                 </header>
 
-                {!user && (<Link className="text-white bg-indigo-600 px-4 py-2 rounded-sm hover:bg-indigo-700" href={"/login"}>Login</Link>)}
+                {!user && (
+                    <Link
+                        className="text-white bg-indigo-600 px-4 py-2 rounded-sm hover:bg-indigo-700"
+                        href={"/login"}
+                    >
+                        Login
+                    </Link>
+                )}
 
                 {/* Navbar on medium to larger devices */}
                 {user && (
-                    <ul className="hidden sm:flex sm:gap-4 text-[16px]">
+                    <ul className="hidden lg:flex lg:gap-5 text-[16px]">
                         <li>
                             <Link
-                                className={`group relative hover:text-gray-200 ${
+                                className={`flex gap-1 group relative hover:text-gray-200 items-center ${
                                     pathname === "/dashboard"
                                         ? currentPathStyles
                                         : ""
@@ -65,12 +85,12 @@ const Navbar = () => {
                                 passHref={true}
                                 href="/dashboard"
                             >
-                                Dashboard
+                                <Gauge size={18} /> Dashboard
                             </Link>
                         </li>
                         <li>
                             <Link
-                                className={`group relative hover:text-gray-200 ${
+                                className={`flex gap-1 group relative hover:text-gray-200 items-center ${
                                     pathname === "/calculator"
                                         ? currentPathStyles
                                         : ""
@@ -78,12 +98,12 @@ const Navbar = () => {
                                 passHref={true}
                                 href="/calculator"
                             >
-                                Calculator
+                                <SigmaSquare size={18} /> Calculator
                             </Link>
                         </li>
                         <li>
                             <Link
-                                className={`group relative hover:text-gray-200 ${
+                                className={`flex gap-1 group relative hover:text-gray-200 items-center ${
                                     pathname?.includes("/journal")
                                         ? currentPathStyles
                                         : ""
@@ -91,13 +111,13 @@ const Navbar = () => {
                                 passHref={true}
                                 href="/journal"
                             >
-                                Journal
+                                <PenLine size={18} /> Journal
                             </Link>
                         </li>
                         {user != undefined && (
                             <li>
                                 <Link
-                                    className={`group relative hover:text-gray-200 ${
+                                    className={`flex gap-1 group relative hover:text-gray-200 items-center ${
                                         pathname?.includes("/plans")
                                             ? currentPathStyles
                                             : ""
@@ -105,6 +125,7 @@ const Navbar = () => {
                                     passHref={true}
                                     href={`/plans/${user?.id}`}
                                 >
+                                    <Dumbbell size={18} />
                                     Plans
                                 </Link>
                             </li>
@@ -112,7 +133,7 @@ const Navbar = () => {
                         {user != undefined && (
                             <li>
                                 <Link
-                                    className={`group relative hover:text-gray-200 ${
+                                    className={`flex gap-1 items-center group relative hover:text-gray-200 ${
                                         pathname?.includes("/profile")
                                             ? currentPathStyles
                                             : ""
@@ -120,7 +141,7 @@ const Navbar = () => {
                                     passHref={true}
                                     href={`/profile/${user?.id}`}
                                 >
-                                    Profile
+                                    <User size={18}/> Profile
                                 </Link>
                             </li>
                         )}
