@@ -8,282 +8,386 @@ import { toast } from "react-hot-toast";
 import { getPrevMonthDateISOString } from "../helpers/getPrevMonthDateISOString";
 
 export default function MeasurementsComponent() {
-  const [weights, setWeights] = useState<WeightMeasurement[]>([]);
-  const [bodyFats, setBodyFats] = useState<BodyFatMeasurement[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [showWeights, setShowWeights] = useState(false);
-  const [showBodyFats, setShowBodyFats] = useState(false);
+    const [weights, setWeights] = useState<WeightMeasurement[]>([]);
+    const [weightsLastMonth, setWeightsLastMonth] = useState<
+        WeightMeasurement[]
+    >([]);
 
-  const formatDateString = (dateString: string) => {
-    const date = new Date(dateString);
-    const options: Intl.DateTimeFormatOptions = {
-      month: "short",
-      day: "2-digit",
-      year: "numeric" as "2-digit" | "numeric",
-      timeZone: "UTC",
-    };
-    const formattedDate: string = date.toLocaleDateString("en-US", options);
+    const [bodyFats, setBodyFats] = useState<BodyFatMeasurement[]>([]);
 
-    return formattedDate;
-  };
 
-  // Format weights and body fat for charts
-  const formattedWeights =
-    weights.length > 0
-      ? weights?.map((data) => ({
-          x: formatDateString(data.createdAt),
-          y: data.weight,
-        }))
-      : [];
+    const [loading, setLoading] = useState(false);
+    const [showWeights, setShowWeights] = useState(false);
+    const [showBodyFats, setShowBodyFats] = useState(false);
 
-  const formattedBodyFats =
-    bodyFats.length > 0
-      ? bodyFats.map((data) => ({
-          x: formatDateString(data.createdAt),
-          y: data.bodyfat,
-        }))
-      : [];
+    const formatDateString = (dateString: string) => {
+        const date = new Date(dateString);
+        const options: Intl.DateTimeFormatOptions = {
+            month: "short",
+            day: "2-digit",
+            year: "numeric" as "2-digit" | "numeric",
+            timeZone: "UTC",
+        };
+        const formattedDate: string = date.toLocaleDateString("en-US", options);
 
-  const [currentWeight, setCurrentWeight] = useState<number | null>(null);
-  const [currentBF, setCurrentBF] = useState<number | null>(null);
-
-  useEffect(() => {
-    const getWeightData = async () => {
-      const res = await axios.get("/api/weight_measurements");
-      setWeights(res.data);
+        return formattedDate;
     };
 
-    const getBFData = async () => {
-      const res = await axios.get("/api/bf_measurements");
-      setBodyFats(res.data);
+    // Format weights and body fat for charts
+    const formattedWeights =
+        weights.length > 0
+            ? weights?.map((data) => ({
+                  x: formatDateString(data.createdAt),
+                  y: data.weight,
+              }))
+            : [];
+
+    const formattedBodyFats =
+        bodyFats.length > 0
+            ? bodyFats.map((data) => ({
+                  x: formatDateString(data.createdAt),
+                  y: data.bodyfat,
+              }))
+            : [];
+
+    const [currentWeight, setCurrentWeight] = useState<number | null>(null);
+    const [currentBF, setCurrentBF] = useState<number | null>(null);
+
+    const deleteWeight = async (id: number) => {
+        try {
+            setLoading(true);
+            const res = await axios.delete(`/api/weight_measurements/${id}`);
+
+            if (res.status == 200) {
+                setWeights((prev) =>
+                    [...prev].filter((weight) => weight.id !== id)
+                );
+                toast.success("Successfully deleted weight!");
+            }
+        } catch (error) {
+            console.error(error);
+            toast.error("An error has occurred during deletion.");
+        } finally {
+            setLoading(false);
+        }
     };
 
-    getWeightData();
-    getBFData();
-  }, []);
+    const deleteBodyFat = async (id: number) => {
+        try {
+            setLoading(true);
+            const res = await axios.delete(`/api/bf_measurements/${id}`);
 
-  useEffect(() => {
-    if (weights.length > 0) {
-      setCurrentWeight(weights[0].weight);
-    }
+            if (res.status == 200) {
+                setBodyFats((prev) =>
+                    [...prev].filter((bodyFats) => bodyFats.id !== id)
+                );
+                toast.success("Successfully deleted bodyfat!");
+            }
+        } catch (error) {
+            console.error(error);
+            toast.error("An error has occurred during deletion.");
+        } finally {
+            setLoading(false);
+        }
+    };
 
-    if (bodyFats.length > 0) {
-      setCurrentBF(bodyFats[0].bodyfat);
-    }
-  }, [weights, bodyFats]);
+    const getDataOnlyFromLastMonth = (data: any[]) => {
+        const prevMonthDate = getPrevMonthDateISOString();
 
-  const deleteWeight = async (id: number) => {
-    try {
-      setLoading(true);
-      const res = await axios.delete(`/api/weight_measurements/${id}`);
-
-      if (res.status == 200) {
-        setWeights((prev) => [...prev].filter((weight) => weight.id !== id));
-        toast.success("Successfully deleted weight!");
-      }
-    } catch (error) {
-      console.error(error);
-      toast.error("An error has occurred during deletion.");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const deleteBodyFat = async (id: number) => {
-    try {
-      setLoading(true);
-      const res = await axios.delete(`/api/bf_measurements/${id}`);
-
-      if (res.status == 200) {
-        setBodyFats((prev) =>
-          [...prev].filter((bodyFats) => bodyFats.id !== id)
+        const newData = data.filter(
+            (dataObj) => dataObj.createdAt > prevMonthDate
         );
-        toast.success("Successfully deleted bodyfat!");
-      }
-    } catch (error) {
-      console.error(error);
-      toast.error("An error has occurred during deletion.");
-    } finally {
-      setLoading(false);
-    }
-  };
+        return newData;
+    };
 
-  const getDataOnlyFromLastMonth = (data: any[]) => {
-    const prevMonthDate = getPrevMonthDateISOString();
+    const calculateDataTrend = (
+        lastValue: number,
+        firstValue: number
+    ): number => {
+        return Number((firstValue - lastValue).toFixed(1));
+    };
 
-    const newData = data.filter((dataObj) => dataObj.createdAt > prevMonthDate);
-    return newData;
-  };
+    const userWeightsLastMonth = getDataOnlyFromLastMonth(weights);
+    const userWeightTrendLastMonth = calculateDataTrend(
+        userWeightsLastMonth[userWeightsLastMonth.length - 1]?.weight,
+        userWeightsLastMonth[0]?.weight
+    );
 
-  const calculateDataTrend = (
-    lastValue: number,
-    firstValue: number
-  ): number => {
-    return Number((firstValue - lastValue).toFixed(1));
-  };
+    const userBodyFatForLastMonth = getDataOnlyFromLastMonth(bodyFats);
+    const userBodyFatTrendLastMonth = calculateDataTrend(
+        userBodyFatForLastMonth[userBodyFatForLastMonth.length - 1]?.bodyfat,
+        userBodyFatForLastMonth[0]?.bodyfat
+    );
 
-  const userWeightForLastMonth = getDataOnlyFromLastMonth(weights);
-  const userWeightTrendLastMonth = calculateDataTrend(
-    userWeightForLastMonth[userWeightForLastMonth.length - 1]?.weight,
-    userWeightForLastMonth[0]?.weight
-  );
+    const formatWeights = (weights: WeightMeasurement[]) => {
+        return weights.length > 0
+            ? weights.map((data) => ({
+                  x: formatDateString(data.createdAt),
+                  y: data.weight,
+              }))
+            : [];
+    };
 
-  const userBodyFatForLastMonth = getDataOnlyFromLastMonth(bodyFats);
-  const userBodyFatTrendLastMonth = calculateDataTrend(
-    userBodyFatForLastMonth[userBodyFatForLastMonth.length - 1]?.bodyfat,
-    userBodyFatForLastMonth[0]?.bodyfat
-  );
+    const formattedWeightsLastMonth = formatWeights(weightsLastMonth);
 
-  return (
-    <section className="flex flex-col gap-4 lg:flex-row lg:justify-between">
-      {/* Charts */}
-      <section className="flex flex-col gap-4 flex-1">
-        <h2 className="text-2xl font-semibold">Your Measurements</h2>
-        <section className="flex flex-col gap-6 xl:flex-row">
+    const [weightsToDisplay, setWeightsToDisplay] = useState<
+        { x: string; y: number }[]
+    >([]);
 
-          {/* Body Weight Charts */}
-          <section className="h-fit w-full rounded-md flex flex-col gap-2">
-            <header className="flex justify-between sm:items-center sm:flex-row flex-col">
-              <h3 className="text-lg">Body Weight Measurements</h3>
-              <span
-                className={`text-xs sm:text-[16px] ${
-                  userWeightTrendLastMonth < 0
-                    ? "text-green-500"
-                    : "text-red-500"
-                }`}
-              >
-                {userWeightTrendLastMonth ? `${userWeightTrendLastMonth} lbs this month` : "Loading..."}
-              </span>
-            </header>
+    useEffect(() => {
+        const getWeightData = async () => {
+            const res = await axios.get("/api/weight_measurements");
+            const dataFromLastMonthOnly = getDataOnlyFromLastMonth(res.data);
 
-            <h4 className="text-amber-300">
-              Last Recorded Body Weight:{" "}
-              {currentWeight ? `${currentWeight} lbs` : "No Records"}
-            </h4>
+            setWeights(res.data);
+            setWeightsToDisplay(formatWeights(dataFromLastMonthOnly));
+        };
 
-            <LineChart
-              title="Your Body Weight"
-              label="Weight (lbs)"
-              userData={formattedWeights}
-              pointColor="rgb(163, 245, 157)"
-              borderColor="rgb(87, 224, 76)"
-            />
+        const getBFData = async () => {
+            const res = await axios.get("/api/bf_measurements");
+            setBodyFats(res.data);
+        };
 
-            <BodyWeightForm setWeights={setWeights} />
+        getWeightData();
+        getBFData();
+    }, []);
 
-            <button
-              type="button"
-              className="rounded-sm bg-gray-500 mx-4 py-2 hover:bg-gray-600 text-sm"
-              onClick={() => setShowWeights((weights) => !weights)}
-            >
-              {showWeights ? "Hide " : "Show "} Weights
-            </button>
+    useEffect(() => {
+        if (weights.length > 0) {
+            setCurrentWeight(weights[0].weight);
+        }
 
-            {showWeights && (
-              <table>
-                <thead className="text-center">
-                  <tr>
-                    <th>Date</th>
-                    <th>Weight</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody className="text-center">
-                  {weights.map((weightObj) => (
-                    <tr key={weightObj.id} className="hover:bg-gray-900">
-                      <td>{formatDateString(weightObj.createdAt)}</td>
-                      <td>{weightObj.weight.toFixed(1)}</td>
-                      <td>
-                        <button
-                          disabled={loading}
-                          type="button"
-                          onClick={() => deleteWeight(weightObj.id)}
-                          className="disabled:bg-gray-700 bg-red-500 hover:bg-red-700 rounded-full w-12 text-center"
+        if (bodyFats.length > 0) {
+            setCurrentBF(bodyFats[0].bodyfat);
+        }
+    }, [weights, bodyFats]);
+
+    useEffect(() => {
+        setWeightsLastMonth(getDataOnlyFromLastMonth(weights));
+    }, [weights]);
+
+    return (
+        <section className="flex flex-col gap-4 lg:flex-row lg:justify-between">
+            {/* Charts */}
+            <section className="flex flex-col gap-4 flex-1">
+                <h2 className="text-2xl font-semibold">Your Measurements</h2>
+                <section className="flex flex-col gap-6 xl:flex-row">
+                    {/* Body Weight Charts */}
+                    <section className="h-fit w-full rounded-md flex flex-col gap-2">
+                        <header className="flex justify-between sm:items-center sm:flex-row flex-col">
+                            <h3 className="text-lg">
+                                Body Weight Measurements
+                            </h3>
+                            <div className="hidden sm:flex gap-2 rounded-md px-4 py-2 bg-gray-800/80 justify-between">
+                                <button
+                                    onClick={() =>
+                                        setWeightsToDisplay(
+                                            formattedWeightsLastMonth
+                                        )
+                                    }
+                                    className="w-full px-4 py-1 bg-gray-800 text-white rounded-md border border-gray-400 hover:bg-gray-700 ease-linear duration-200"
+                                >
+                                    30D
+                                </button>
+                                <button
+                                    onClick={() =>
+                                        setWeightsToDisplay(formattedWeights)
+                                    }
+                                    className="w-full px-4 py-1 bg-gray-800 text-white rounded-md border border-gray-400 hover:bg-gray-700 ease-linear duration-200"
+                                >
+                                    ALL
+                                </button>
+                            </div>
+                        </header>
+
+                        <h4 className="text-amber-300">
+                            Last Recorded Body Weight:{" "}
+                            {currentWeight
+                                ? `${currentWeight} lbs`
+                                : "No Records"}
+                        </h4>
+
+                        <span
+                            className={`text-xs sm:text-[16px] ${
+                                userWeightTrendLastMonth < 0
+                                    ? "text-red-400"
+                                    : "text-blue-400"
+                            }`}
                         >
-                          X
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            )}
-          </section>
+                            {userWeightTrendLastMonth
+                                ? `${userWeightTrendLastMonth} lbs this month`
+                                : "Loading..."}
+                        </span>
 
+                        <div className="flex sm:hidden gap-2 rounded-md px-4 py-2 bg-gray-800/80 justify-between">
+                            <button
+                                onClick={() =>
+                                    setWeightsToDisplay(
+                                        formattedWeightsLastMonth
+                                    )
+                                }
+                                className="w-full px-4 py-1 bg-gray-800 text-white rounded-md border border-gray-400 hover:bg-gray-700 ease-linear duration-200"
+                            >
+                                30D
+                            </button>
+                            <button
+                                onClick={() =>
+                                    setWeightsToDisplay(formattedWeights)
+                                }
+                                className="w-full px-4 py-1 bg-gray-800 text-white rounded-md border border-gray-400 hover:bg-gray-700 ease-linear duration-200"
+                            >
+                                ALL
+                            </button>
+                        </div>
+                        <LineChart
+                            title="Your Body Weight"
+                            label="Weight (lbs)"
+                            userData={weightsToDisplay}
+                            pointColor="rgb(163, 245, 157)"
+                            borderColor="rgb(87, 224, 76)"
+                        />
 
+                        <BodyWeightForm setWeights={setWeights} />
 
-          {/* Body Fat Charts*/}
-          <section className="h-fit w-full rounded-md flex flex-col gap-2">
-            <header className="flex justify-between sm:items-center sm:flex-row flex-col">
-              <h3 className="text-lg">Body Fat Measurements</h3>
-              <span
-                className={`text-xs sm:text-[16px] ${
-                  userBodyFatTrendLastMonth < 0
-                    ? "text-green-500"
-                    : "text-red-500"
-                }`}
-              >
-                {userBodyFatTrendLastMonth
-                  ? `${userBodyFatTrendLastMonth}% this month`
-                  : "Loading..."}
-              </span>
-            </header>
-
-            <h4 className="text-amber-300">
-              Last Recorded Body Fat Percentage:{" "}
-              {currentBF ? `${currentBF}%` : "No Records"}
-            </h4>
-
-            <LineChart
-              title="Your Body Fat"
-              label="Body Fat (%)"
-              userData={formattedBodyFats}
-              pointColor="rgb(222, 155, 129)"
-              borderColor="rgb(232, 151, 70)"
-            />
-
-            <BodyFatForm setBodyFats={setBodyFats} />
-
-            <button
-              type="button"
-              className="rounded-sm bg-gray-500 mx-4 py-2 hover:bg-gray-600 text-sm"
-              onClick={() => setShowBodyFats((bf) => !bf)}
-            >
-              {showBodyFats ? "Hide " : "Show "} Body Fats
-            </button>
-            
-            {showBodyFats && (
-              <table>
-                <thead className="text-center">
-                  <tr>
-                    <th>Date</th>
-                    <th>Body Fat</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody className="text-center">
-                  {bodyFats.map((bodyFatObj) => (
-                    <tr key={bodyFatObj.id} className="hover:bg-gray-900">
-                      <td>{formatDateString(bodyFatObj.createdAt)}</td>
-                      <td>{bodyFatObj.bodyfat.toFixed(1)}</td>
-                      <td>
                         <button
-                          disabled={loading}
-                          type="button"
-                          onClick={() => deleteBodyFat(bodyFatObj.id)}
-                          className="disabled:bg-gray-700 bg-red-500 hover:bg-red-700 rounded-full w-12 text-center"
+                            type="button"
+                            className="rounded-sm bg-gray-500 mx-4 py-2 hover:bg-gray-600 text-sm"
+                            onClick={() =>
+                                setShowWeights((weights) => !weights)
+                            }
                         >
-                          X
+                            {showWeights ? "Hide " : "Show "} Weights
                         </button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            )}
-          </section>
+
+                        {showWeights && (
+                            <table>
+                                <thead className="text-center">
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Weight</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody className="text-center">
+                                    {weights.map((weightObj) => (
+                                        <tr
+                                            key={weightObj.id}
+                                            className="hover:bg-gray-900"
+                                        >
+                                            <td>
+                                                {formatDateString(
+                                                    weightObj.createdAt
+                                                )}
+                                            </td>
+                                            <td>
+                                                {weightObj.weight.toFixed(1)}
+                                            </td>
+                                            <td>
+                                                <button
+                                                    disabled={loading}
+                                                    type="button"
+                                                    onClick={() =>
+                                                        deleteWeight(
+                                                            weightObj.id
+                                                        )
+                                                    }
+                                                    className="disabled:bg-gray-700 bg-red-500 hover:bg-red-700 rounded-full w-12 text-center"
+                                                >
+                                                    X
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        )}
+                    </section>
+
+                    {/* Body Fat Charts*/}
+                    <section className="h-fit w-full rounded-md flex flex-col gap-2">
+                        <header className="flex justify-between sm:items-center sm:flex-row flex-col">
+                            <h3 className="text-lg">Body Fat Measurements</h3>
+                            <span
+                                className={`text-xs sm:text-[16px] ${
+                                    userBodyFatTrendLastMonth < 0
+                                        ? "text-green-500"
+                                        : "text-red-500"
+                                }`}
+                            >
+                                {userBodyFatTrendLastMonth
+                                    ? `${userBodyFatTrendLastMonth}% this month`
+                                    : "Loading..."}
+                            </span>
+                        </header>
+
+                        <h4 className="text-amber-300">
+                            Last Recorded Body Fat Percentage:{" "}
+                            {currentBF ? `${currentBF}%` : "No Records"}
+                        </h4>
+
+                        <LineChart
+                            title="Your Body Fat"
+                            label="Body Fat (%)"
+                            userData={formattedBodyFats}
+                            pointColor="rgb(222, 155, 129)"
+                            borderColor="rgb(232, 151, 70)"
+                        />
+
+                        <BodyFatForm setBodyFats={setBodyFats} />
+
+                        <button
+                            type="button"
+                            className="rounded-sm bg-gray-500 mx-4 py-2 hover:bg-gray-600 text-sm"
+                            onClick={() => setShowBodyFats((bf) => !bf)}
+                        >
+                            {showBodyFats ? "Hide " : "Show "} Body Fats
+                        </button>
+
+                        {showBodyFats && (
+                            <table>
+                                <thead className="text-center">
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Body Fat</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody className="text-center">
+                                    {bodyFats.map((bodyFatObj) => (
+                                        <tr
+                                            key={bodyFatObj.id}
+                                            className="hover:bg-gray-900"
+                                        >
+                                            <td>
+                                                {formatDateString(
+                                                    bodyFatObj.createdAt
+                                                )}
+                                            </td>
+                                            <td>
+                                                {bodyFatObj.bodyfat.toFixed(1)}
+                                            </td>
+                                            <td>
+                                                <button
+                                                    disabled={loading}
+                                                    type="button"
+                                                    onClick={() =>
+                                                        deleteBodyFat(
+                                                            bodyFatObj.id
+                                                        )
+                                                    }
+                                                    className="disabled:bg-gray-700 bg-red-500 hover:bg-red-700 rounded-full w-12 text-center"
+                                                >
+                                                    X
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        )}
+                    </section>
+                </section>
+            </section>
         </section>
-      </section>
-    </section>
-  );
+    );
 }
