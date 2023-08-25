@@ -29,7 +29,7 @@ export default function Home() {
                     </Link>
                     <Link
                         passHref={true}
-                        className="min-w-[120px] w-[50%] min-h-[70px] flex justify-center items-center hover:text-white px-8 bg-transparent hover:bg-gray-800 rounded-sm"
+                        className="min-w-[120px] w-[50%] min-h-[70px] flex justify-center items-center hover:text-white px-8 bg-transparent hover:bg-gray-800 rounded-sm border-2 border-gray-700"
                         href={"/info"}
                     >
                         How it works
