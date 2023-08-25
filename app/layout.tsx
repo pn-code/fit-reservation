@@ -1,13 +1,13 @@
 import { ClerkProvider } from "@clerk/nextjs/app-beta";
-import { Roboto } from "next/font/google";
+import { Karla } from "next/font/google";
 import Navbar from "../components/Navbar";
 import "./globals.css";
 import ToastProvider from "../components/ToastProvider";
 
-const roboto = Roboto({
+const karla = Karla({
     weight: ["400", "500", "700"],
     subsets: ["latin"],
-    variable: "--font-roboto",
+    variable: "--font-karla",
 });
 
 export const metadata = {
@@ -24,7 +24,7 @@ export default function RootLayout({
         <html lang="en">
             <ClerkProvider>
                 <body
-                    className={`${roboto.className} bg-gray-900 h-full`}
+                    className={`${karla.className} bg-gray-900 h-full`}
                 >
                     <Navbar />
                     <ToastProvider />

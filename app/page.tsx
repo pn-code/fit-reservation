@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function Home() {
     return (
-        <main className="w-full min-h-[calc(100vh-64px)] py-20 px-4 sm:px-40 gap-6 sm:h-[calc(100vh-82px)] flex text-white items-center justify-center flex-col md:flex-row bg-slate-900">
+        <main className="w-full min-h-[calc(100vh-64px)] py-20 px-4 sm:px-40 gap-6 sm:h-[calc(100vh-82px)] flex text-white items-center justify-center flex-col md:flex-row bg-slate-900 md:gap-24">
             {/* LEFT SIDE: HERO TEXT */}
             <section className="h-full flex flex-col justify-center bg-slate-900 flex-1 gap-10">
                 <header className="w-full flex flex-col gap-10">
@@ -29,7 +29,7 @@ export default function Home() {
                     </Link>
                     <Link
                         passHref={true}
-                        className="min-w-[120px] w-[50%] min-h-[70px] flex justify-center items-center hover:text-white px-8 bg-transparent hover:bg-gray-800 rounded-sm"
+                        className="min-w-[120px] w-[50%] min-h-[70px] flex justify-center items-center hover:text-white px-8 bg-transparent hover:bg-gray-800 rounded-sm border-2 border-gray-700"
                         href={"/info"}
                     >
                         How it works
