@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import { XCircle } from "lucide-react";
+import Link from "next/link";
 
 export default function Info() {
     return (
@@ -15,6 +16,10 @@ export default function Info() {
             <header className="w-full flex justify-between lg:border-b-2 lg:border-b-indigo-600">
                 <section className="flex justify-between font-bold pb-2 items-center">
                     <h1 className="text-3xl">How It Works</h1>
+                </section>
+                <section className="flex gap-4 items-center">
+                    <Link className="rounded-sm bg-blue-400/90 text-white px-4 py-1 text-lg hover:bg-blue-500" href="/">Back</Link>
+                    <Link className="rounded-sm bg-indigo-600 text-white px-4 py-1 text-lg hover:bg-indigo-700" href="/register">Get Started</Link>
                 </section>
             </header>
 
@@ -60,8 +65,8 @@ export default function Info() {
                             <p className="text-sm text-gray-400">
                                 Search through our comprehensive list of
                                 training plans and pick one that is suited for
-                                your standards. Review others&apos; training plans
-                                and create your own!
+                                your standards. Review others&apos; training
+                                plans and create your own!
                             </p>
                         </div>
                     </div>
@@ -320,10 +325,7 @@ export default function Info() {
                             <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                 <td className="px-6 py-4">
                                     <div className="flex items-center gap-2">
-                                        <Shield
-                                            size={32}
-                                            color="white"
-                                        />
+                                        <Shield size={32} color="white" />
                                         <span>FitHeroes</span>
                                     </div>
                                 </td>
