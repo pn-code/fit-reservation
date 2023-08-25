@@ -197,13 +197,21 @@ export default function MeasurementsComponent() {
                             <div className="hidden sm:flex gap-2 rounded-md px-4 py-2 bg-gray-800/80 justify-between">
                                 <button
                                     onClick={() => setWeightsToDisplay("month")}
-                                    className="w-full px-4 py-1 bg-gray-800 text-white rounded-md border border-gray-400 hover:bg-gray-700 ease-linear duration-200"
+                                    className={
+                                        weightsToDisplay === "month"
+                                            ? "w-full px-4 py-1 text-white rounded-md border border-gray-400 hover:bg-indigo-800 ease-linear duration-200 bg-indigo-700 font-semibold"
+                                            : "w-full px-4 py-1 bg-gray-800 text-white rounded-md border border-gray-400 hover:bg-gray-700 ease-linear duration-200"
+                                    }
                                 >
                                     30D
                                 </button>
                                 <button
                                     onClick={() => setWeightsToDisplay("all")}
-                                    className="w-full px-4 py-1 bg-gray-800 text-white rounded-md border border-gray-400 hover:bg-gray-700 ease-linear duration-200"
+                                    className={
+                                        weightsToDisplay === "all"
+                                            ? "w-full px-4 py-1 text-white rounded-md border border-gray-400 hover:bg-indigo-800 ease-linear duration-200 bg-indigo-700 font-semibold"
+                                            : "w-full px-4 py-1 bg-gray-800 text-white rounded-md border border-gray-400 hover:bg-gray-700 ease-linear duration-200"
+                                    }
                                 >
                                     ALL
                                 </button>
@@ -232,13 +240,21 @@ export default function MeasurementsComponent() {
                         <div className="flex sm:hidden gap-2 rounded-md px-4 py-2 bg-gray-800/80 justify-between">
                             <button
                                 onClick={() => setWeightsToDisplay("month")}
-                                className="w-full px-4 py-1 bg-gray-800 text-white rounded-md border border-gray-400 hover:bg-gray-700 ease-linear duration-200"
+                                className={
+                                    weightsToDisplay === "month"
+                                        ? "w-full px-4 py-1 text-white rounded-md border border-gray-400 hover:bg-indigo-800 ease-linear duration-200 bg-indigo-700 font-semibold"
+                                        : "w-full px-4 py-1 bg-gray-800 text-white rounded-md border border-gray-400 hover:bg-gray-700 ease-linear duration-200"
+                                }
                             >
                                 30D
                             </button>
                             <button
                                 onClick={() => setWeightsToDisplay("all")}
-                                className="w-full px-4 py-1 bg-gray-800 text-white rounded-md border border-gray-400 hover:bg-gray-700 ease-linear duration-200"
+                                className={
+                                    weightsToDisplay === "all"
+                                        ? "w-full px-4 py-1 text-white rounded-md border border-gray-400 hover:bg-indigo-800 ease-linear duration-200 bg-indigo-700 font-semibold"
+                                        : "w-full px-4 py-1 bg-gray-800 text-white rounded-md border border-gray-400 hover:bg-gray-700 ease-linear duration-200"
+                                }
                             >
                                 ALL
                             </button>
@@ -320,13 +336,21 @@ export default function MeasurementsComponent() {
                                     onClick={() =>
                                         setBodyFatsToDisplay("month")
                                     }
-                                    className="w-full px-4 py-1 bg-gray-800 text-white rounded-md border border-gray-400 hover:bg-gray-700 ease-linear duration-200"
+                                    className={
+                                        bodyFatsToDisplay === "month"
+                                            ? "w-full px-4 py-1 text-white rounded-md border border-gray-400 hover:bg-indigo-800 ease-linear duration-200 bg-indigo-700 font-semibold"
+                                            : "w-full px-4 py-1 bg-gray-800 text-white rounded-md border border-gray-400 hover:bg-gray-700 ease-linear duration-200"
+                                    }
                                 >
                                     30D
                                 </button>
                                 <button
                                     onClick={() => setBodyFatsToDisplay("all")}
-                                    className="w-full px-4 py-1 bg-gray-800 text-white rounded-md border border-gray-400 hover:bg-gray-700 ease-linear duration-200"
+                                    className={
+                                        bodyFatsToDisplay === "all"
+                                            ? "w-full px-4 py-1 text-white rounded-md border border-gray-400 hover:bg-indigo-800 ease-linear duration-200 bg-indigo-700 font-semibold"
+                                            : "w-full px-4 py-1 bg-gray-800 text-white rounded-md border border-gray-400 hover:bg-gray-700 ease-linear duration-200"
+                                    }
                                 >
                                     ALL
                                 </button>
@@ -353,13 +377,21 @@ export default function MeasurementsComponent() {
                         <div className="flex sm:hidden gap-2 rounded-md px-4 py-2 bg-gray-800/80 justify-between">
                             <button
                                 onClick={() => setBodyFatsToDisplay("month")}
-                                className="w-full px-4 py-1 bg-gray-800 text-white rounded-md border border-gray-400 hover:bg-gray-700 ease-linear duration-200"
+                                className={
+                                    bodyFatsToDisplay === "month"
+                                        ? "w-full px-4 py-1 text-white rounded-md border border-gray-400 hover:bg-indigo-800 ease-linear duration-200 bg-indigo-700 font-semibold"
+                                        : "w-full px-4 py-1 bg-gray-800 text-white rounded-md border border-gray-400 hover:bg-gray-700 ease-linear duration-200"
+                                }
                             >
                                 30D
                             </button>
                             <button
                                 onClick={() => setBodyFatsToDisplay("all")}
-                                className="w-full px-4 py-1 bg-gray-800 text-white rounded-md border border-gray-400 hover:bg-gray-700 ease-linear duration-200"
+                                className={
+                                    bodyFatsToDisplay === "all"
+                                        ? "w-full px-4 py-1 text-white rounded-md border border-gray-400 hover:bg-indigo-800 ease-linear duration-200 bg-indigo-700 font-semibold"
+                                        : "w-full px-4 py-1 bg-gray-800 text-white rounded-md border border-gray-400 hover:bg-gray-700 ease-linear duration-200"
+                                }
                             >
                                 ALL
                             </button>
