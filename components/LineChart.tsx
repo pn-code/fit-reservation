@@ -24,7 +24,7 @@ Chart.register(
 );
 
 interface Props {
-    userData: unknown[];
+    userData: { x: string; y: number }[] | undefined;
     label: string;
     title: string;
     borderColor?: string;
