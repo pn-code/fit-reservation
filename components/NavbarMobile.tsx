@@ -1,11 +1,5 @@
 import { useUser } from "@clerk/nextjs";
-import {
-    Dumbbell,
-    Gauge,
-    PenLine,
-    SigmaSquare,
-    User,
-} from "lucide-react";
+import { Dumbbell, Gauge, PenLine, SigmaSquare, User } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
@@ -13,82 +7,90 @@ import React from "react";
 export default function NavbarMobile() {
     const user = useUser().user;
     const pathname = usePathname();
-    const currentPathStyles = "border-amber-300";
-    
+    const currentPathStyles = "bg-blue-600";
+
     return (
-        <nav className="lg:hidden fixed bottom-0 w-full bg-gray-900 z-[999] h-16 border-t-2 border-indigo-300">
-            {user && <ul className="flex justify-between py-3">
-                <Link
-                    className="flex flex-col items-center gap-1 flex-1"
-                    passHref={true}
-                    href="/dashboard"
-                >
-                    <Gauge
-                        className={`group relative text-white/90 hover:text-white border-t-2 ${
-                            pathname === "/dashboard" ? currentPathStyles : "border-t-transparent"
-                        }`}
-                    />
-                    <span className="text-xs text-white">Dashboard</span>
-                </Link>
-                <Link
-                    className="flex flex-col items-center gap-1 flex-1"
-                    passHref={true}
-                    href="/calculator"
-                >
-                    <SigmaSquare
-                        className={`group relative text-white/90 hover:text-white border-t-2 ${
-                            pathname === "/calculator" ? currentPathStyles : "border-t-transparent"
-                        }`}
-                    />
-                    <span className="text-xs text-white">Calculate</span>
-                </Link>
-                <Link
-                    className="flex flex-col items-center gap-1 flex-1"
-                    passHref={true}
-                    href="/journal"
-                >
-                    <PenLine
-                        className={`group relative text-white/90 hover:text-white border-t-2 ${
-                            pathname === "/journal"
-                                ? currentPathStyles
+        <nav className="lg:hidden fixed bottom-0 w-full bg-gray-900 z-[999] h-18 border-t-2 border-indigo-300">
+            {user && (
+                <ul className="flex justify-between py-1.5 px-2 items-center">
+                    <Link
+                        className={`flex flex-col items-center gap-1 flex-1 rounded-md py-1 ${
+                            pathname === "/dashboard"
+                                ? "bg-blue-600"
                                 : "border-t-transparent"
                         }`}
-                    />
-                    <span className="text-xs text-white">Journal</span>
-                </Link>
-                {user != undefined && (
-                    <Link
-                        className="flex flex-col items-center gap-1 flex-1"
                         passHref={true}
-                        href={`/plans/${user?.id}`}
+                        href="/dashboard"
                     >
-                        <Dumbbell
-                            className={`group relative text-white/90 hover:text-white border-t-2 ${
+                        <Gauge
+                            className={
+                                "group relative text-white/90 hover:text-white"
+                            }
+                        />
+                        <span className="text-xs text-white">Dashboard</span>
+                    </Link>
+                    <Link
+                        className={`flex flex-col items-center gap-1 flex-1 rounded-md py-1 ${
+                            pathname === "/calculator"
+                                ? "bg-blue-600"
+                                : "border-t-transparent"
+                        }`}
+                        passHref={true}
+                        href="/calculator"
+                    >
+                        <SigmaSquare
+                            className={`group relative text-white/90 hover:text-white`}
+                        />
+                        <span className="text-xs text-white">Calculate</span>
+                    </Link>
+                    <Link
+                        className={`flex flex-col items-center gap-1 flex-1 rounded-md py-1 ${
+                            pathname === "/journal"
+                                ? "bg-blue-600"
+                                : "border-t-transparent"
+                        }`}
+                        passHref={true}
+                        href="/journal"
+                    >
+                        <PenLine
+                            className={`group relative text-white/90 hover:text-white`}
+                        />
+                        <span className="text-xs text-white">Journal</span>
+                    </Link>
+                    {user != undefined && (
+                        <Link
+                            className={`flex flex-col items-center gap-1 flex-1 rounded-md py-1 ${
                                 pathname?.includes("/plans")
-                                    ? currentPathStyles
+                                    ? "bg-blue-600"
                                     : "border-t-transparent"
                             }`}
-                        />
-                        <span className="text-xs text-white">Plans</span>
-                    </Link>
-                )}
-                {user != undefined && (
-                    <Link
-                        className="flex flex-col items-center gap-1 flex-1"
-                        passHref={true}
-                        href={`/profile/${user?.id}`}
-                    >
-                        <User
-                            className={`group relative text-white/90 hover:text-white border-t-2 ${
+                            passHref={true}
+                            href={`/plans/${user?.id}`}
+                        >
+                            <Dumbbell
+                                className={`group relative text-white/90 hover:text-white`}
+                            />
+                            <span className="text-xs text-white">Plans</span>
+                        </Link>
+                    )}
+                    {user != undefined && (
+                        <Link
+                            className={`flex flex-col items-center gap-1 flex-1 rounded-md py-1 ${
                                 pathname?.includes("/profile")
-                                    ? currentPathStyles
+                                    ? "bg-blue-600"
                                     : "border-t-transparent"
                             }`}
-                        />
-                        <span className="text-xs text-white">Profile</span>
-                    </Link>
-                )}
-            </ul>}
+                            passHref={true}
+                            href={`/profile/${user?.id}`}
+                        >
+                            <User
+                                className={`group relative text-white/90 hover:text-white`}
+                            />
+                            <span className="text-xs text-white">Profile</span>
+                        </Link>
+                    )}
+                </ul>
+            )}
         </nav>
     );
 }
