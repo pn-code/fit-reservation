@@ -7,7 +7,7 @@ import BodyFatForm from "./BodyFatForm";
 import { toast } from "react-hot-toast";
 import { getPrevMonthDateISOString } from "../helpers/getPrevMonthDateISOString";
 
-export default function DashboardClientComponent() {
+export default function MeasurementsComponent() {
   const [weights, setWeights] = useState<WeightMeasurement[]>([]);
   const [bodyFats, setBodyFats] = useState<BodyFatMeasurement[]>([]);
   const [loading, setLoading] = useState(false);
