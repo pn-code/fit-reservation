@@ -144,28 +144,20 @@ export default function MeasurementsComponent() {
     const formattedWeightsLastMonth = formatWeights(weightsLastMonth);
     const formattedBodyFatsLastMonth = formatBodyFats(bodyFatsLastMonth);
 
-    const [weightsToDisplay, setWeightsToDisplay] = useState<
-        { x: string; y: number }[]
-    >([]);
-    const [bodyFatsToDisplay, setBodyFatsToDisplay] = useState<
-        { x: string; y: number }[]
-    >([]);
+    const [weightsToDisplay, setWeightsToDisplay] = useState("month");
+    const [bodyFatsToDisplay, setBodyFatsToDisplay] = useState("month");
 
     useEffect(() => {
         const getWeightData = async () => {
             const res = await axios.get("/api/weight_measurements");
-            const dataFromLastMonthOnly = getDataOnlyFromLastMonth(res.data);
 
             setWeights(res.data);
-            setWeightsToDisplay(formatWeights(dataFromLastMonthOnly));
         };
 
         const getBFData = async () => {
             const res = await axios.get("/api/bf_measurements");
-            const dataFromLastMonthOnly = getDataOnlyFromLastMonth(res.data);
 
             setBodyFats(res.data);
-            setBodyFatsToDisplay(formatBodyFats(dataFromLastMonthOnly));
         };
 
         getWeightData();
@@ -204,19 +196,13 @@ export default function MeasurementsComponent() {
                             </h3>
                             <div className="hidden sm:flex gap-2 rounded-md px-4 py-2 bg-gray-800/80 justify-between">
                                 <button
-                                    onClick={() =>
-                                        setWeightsToDisplay(
-                                            formattedWeightsLastMonth
-                                        )
-                                    }
+                                    onClick={() => setWeightsToDisplay("month")}
                                     className="w-full px-4 py-1 bg-gray-800 text-white rounded-md border border-gray-400 hover:bg-gray-700 ease-linear duration-200"
                                 >
                                     30D
                                 </button>
                                 <button
-                                    onClick={() =>
-                                        setWeightsToDisplay(formattedWeights)
-                                    }
+                                    onClick={() => setWeightsToDisplay("all")}
                                     className="w-full px-4 py-1 bg-gray-800 text-white rounded-md border border-gray-400 hover:bg-gray-700 ease-linear duration-200"
                                 >
                                     ALL
@@ -245,19 +231,13 @@ export default function MeasurementsComponent() {
 
                         <div className="flex sm:hidden gap-2 rounded-md px-4 py-2 bg-gray-800/80 justify-between">
                             <button
-                                onClick={() =>
-                                    setWeightsToDisplay(
-                                        formattedWeightsLastMonth
-                                    )
-                                }
+                                onClick={() => setWeightsToDisplay("month")}
                                 className="w-full px-4 py-1 bg-gray-800 text-white rounded-md border border-gray-400 hover:bg-gray-700 ease-linear duration-200"
                             >
                                 30D
                             </button>
                             <button
-                                onClick={() =>
-                                    setWeightsToDisplay(formattedWeights)
-                                }
+                                onClick={() => setWeightsToDisplay("all")}
                                 className="w-full px-4 py-1 bg-gray-800 text-white rounded-md border border-gray-400 hover:bg-gray-700 ease-linear duration-200"
                             >
                                 ALL
@@ -266,7 +246,11 @@ export default function MeasurementsComponent() {
                         <LineChart
                             title="Your Body Weight"
                             label="Weight (lbs)"
-                            userData={weightsToDisplay}
+                            userData={
+                                weightsToDisplay != "month"
+                                    ? formattedWeights
+                                    : formattedWeightsLastMonth
+                            }
                             pointColor="rgb(163, 245, 157)"
                             borderColor="rgb(87, 224, 76)"
                         />
@@ -334,18 +318,14 @@ export default function MeasurementsComponent() {
                             <div className="hidden sm:flex gap-2 rounded-md px-4 py-2 bg-gray-800/80 justify-between">
                                 <button
                                     onClick={() =>
-                                        setBodyFatsToDisplay(
-                                            formattedBodyFatsLastMonth
-                                        )
+                                        setBodyFatsToDisplay("month")
                                     }
                                     className="w-full px-4 py-1 bg-gray-800 text-white rounded-md border border-gray-400 hover:bg-gray-700 ease-linear duration-200"
                                 >
                                     30D
                                 </button>
                                 <button
-                                    onClick={() =>
-                                        setBodyFatsToDisplay(formattedBodyFats)
-                                    }
+                                    onClick={() => setBodyFatsToDisplay("all")}
                                     className="w-full px-4 py-1 bg-gray-800 text-white rounded-md border border-gray-400 hover:bg-gray-700 ease-linear duration-200"
                                 >
                                     ALL
@@ -372,19 +352,13 @@ export default function MeasurementsComponent() {
 
                         <div className="flex sm:hidden gap-2 rounded-md px-4 py-2 bg-gray-800/80 justify-between">
                             <button
-                                onClick={() =>
-                                    setBodyFatsToDisplay(
-                                        formattedBodyFatsLastMonth
-                                    )
-                                }
+                                onClick={() => setBodyFatsToDisplay("month")}
                                 className="w-full px-4 py-1 bg-gray-800 text-white rounded-md border border-gray-400 hover:bg-gray-700 ease-linear duration-200"
                             >
                                 30D
                             </button>
                             <button
-                                onClick={() =>
-                                    setBodyFatsToDisplay(formattedBodyFats)
-                                }
+                                onClick={() => setBodyFatsToDisplay("all")}
                                 className="w-full px-4 py-1 bg-gray-800 text-white rounded-md border border-gray-400 hover:bg-gray-700 ease-linear duration-200"
                             >
                                 ALL
@@ -393,7 +367,11 @@ export default function MeasurementsComponent() {
                         <LineChart
                             title="Your Body Fat"
                             label="Body Fat (%)"
-                            userData={bodyFatsToDisplay}
+                            userData={
+                                bodyFatsToDisplay != "month"
+                                    ? formattedBodyFats
+                                    : formattedBodyFatsLastMonth
+                            }
                             pointColor="rgb(222, 155, 129)"
                             borderColor="rgb(232, 151, 70)"
                         />
