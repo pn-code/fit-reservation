@@ -24,7 +24,7 @@ Chart.register(
 );
 
 interface Props {
-    userData: unknown[];
+    userData: { x: string; y: number }[] | undefined;
     label: string;
     title: string;
     borderColor?: string;
@@ -90,7 +90,7 @@ export default function LineChart({
     };
 
     return (
-        <section className="w-full h-full">
+        <section className="w-full h-full max-w-[890px]">
             {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
             {/* @ts-ignore */}
             <Line data={data} options={options} />

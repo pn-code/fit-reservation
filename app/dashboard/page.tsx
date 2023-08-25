@@ -1,4 +1,4 @@
-import DashboardClientComponent from "../../components/DashboardClientComponent";
+import MeasurementsComponent from "../../components/MeasurementsComponent";
 
 export const metadata = {
     title: "Dashboard | FitHeroes",
@@ -11,7 +11,7 @@ async function DashboardPage() {
 				<h1 className="text-3xl">Dashboard</h1>
 			</header>
 
-			<DashboardClientComponent />
+			<MeasurementsComponent />
 		</main>
 	);
 }
