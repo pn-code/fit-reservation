@@ -189,7 +189,7 @@ export default function MeasurementsComponent() {
                 <h2 className="text-2xl font-semibold">Your Measurements</h2>
                 <section className="flex flex-col gap-6 xl:flex-row">
                     {/* Body Weight Charts */}
-                    <section className="h-fit w-full rounded-md flex flex-col gap-2">
+                    <section className="h-fit w-full rounded-md flex flex-col gap-2 flex-1">
                         <header className="flex justify-between sm:items-center sm:flex-row flex-col">
                             <h3 className="text-lg">
                                 Body Weight Measurements
@@ -328,7 +328,7 @@ export default function MeasurementsComponent() {
                     </section>
 
                     {/* Body Fat Charts*/}
-                    <section className="h-fit w-full rounded-md flex flex-col gap-2">
+                    <section className="h-fit w-full rounded-md flex flex-col gap-2 flex-1">
                         <header className="flex justify-between sm:items-center sm:flex-row flex-col">
                             <h3 className="text-lg">Body Fat Measurements</h3>
                             <div className="hidden sm:flex gap-2 rounded-md px-4 py-2 bg-gray-800/80 justify-between">
