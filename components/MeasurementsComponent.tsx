@@ -14,7 +14,9 @@ export default function MeasurementsComponent() {
     >([]);
 
     const [bodyFats, setBodyFats] = useState<BodyFatMeasurement[]>([]);
-
+    const [bodyFatsLastMonth, setBodyFatsLastMonth] = useState<
+        BodyFatMeasurement[]
+    >([]);
 
     const [loading, setLoading] = useState(false);
     const [showWeights, setShowWeights] = useState(false);
@@ -128,9 +130,24 @@ export default function MeasurementsComponent() {
             : [];
     };
 
+    const formatBodyFats = (bodyFat: BodyFatMeasurement[]) => {
+        return bodyFat.length > 0
+            ? bodyFat.map((data) => ({
+                  x: formatDateString(data.createdAt),
+                  y: data.bodyfat,
+              }))
+            : [];
+    };
+
+    console.log(bodyFats);
+
     const formattedWeightsLastMonth = formatWeights(weightsLastMonth);
+    const formattedBodyFatsLastMonth = formatBodyFats(bodyFatsLastMonth);
 
     const [weightsToDisplay, setWeightsToDisplay] = useState<
+        { x: string; y: number }[]
+    >([]);
+    const [bodyFatsToDisplay, setBodyFatsToDisplay] = useState<
         { x: string; y: number }[]
     >([]);
 
@@ -145,7 +162,10 @@ export default function MeasurementsComponent() {
 
         const getBFData = async () => {
             const res = await axios.get("/api/bf_measurements");
+            const dataFromLastMonthOnly = getDataOnlyFromLastMonth(res.data);
+
             setBodyFats(res.data);
+            setBodyFatsToDisplay(formatBodyFats(dataFromLastMonthOnly));
         };
 
         getWeightData();
@@ -165,6 +185,10 @@ export default function MeasurementsComponent() {
     useEffect(() => {
         setWeightsLastMonth(getDataOnlyFromLastMonth(weights));
     }, [weights]);
+
+    useEffect(() => {
+        setBodyFatsLastMonth(getDataOnlyFromLastMonth(bodyFats));
+    }, [bodyFats]);
 
     return (
         <section className="flex flex-col gap-4 lg:flex-row lg:justify-between">
@@ -307,17 +331,26 @@ export default function MeasurementsComponent() {
                     <section className="h-fit w-full rounded-md flex flex-col gap-2">
                         <header className="flex justify-between sm:items-center sm:flex-row flex-col">
                             <h3 className="text-lg">Body Fat Measurements</h3>
-                            <span
-                                className={`text-xs sm:text-[16px] ${
-                                    userBodyFatTrendLastMonth < 0
-                                        ? "text-green-500"
-                                        : "text-red-500"
-                                }`}
-                            >
-                                {userBodyFatTrendLastMonth
-                                    ? `${userBodyFatTrendLastMonth}% this month`
-                                    : "Loading..."}
-                            </span>
+                            <div className="hidden sm:flex gap-2 rounded-md px-4 py-2 bg-gray-800/80 justify-between">
+                                <button
+                                    onClick={() =>
+                                        setBodyFatsToDisplay(
+                                            formattedBodyFatsLastMonth
+                                        )
+                                    }
+                                    className="w-full px-4 py-1 bg-gray-800 text-white rounded-md border border-gray-400 hover:bg-gray-700 ease-linear duration-200"
+                                >
+                                    30D
+                                </button>
+                                <button
+                                    onClick={() =>
+                                        setBodyFatsToDisplay(formattedBodyFats)
+                                    }
+                                    className="w-full px-4 py-1 bg-gray-800 text-white rounded-md border border-gray-400 hover:bg-gray-700 ease-linear duration-200"
+                                >
+                                    ALL
+                                </button>
+                            </div>
                         </header>
 
                         <h4 className="text-amber-300">
@@ -325,10 +358,42 @@ export default function MeasurementsComponent() {
                             {currentBF ? `${currentBF}%` : "No Records"}
                         </h4>
 
+                        <span
+                            className={`text-xs sm:text-[16px] ${
+                                userBodyFatTrendLastMonth < 0
+                                    ? "text-red-400"
+                                    : "text-blue-400"
+                            }`}
+                        >
+                            {userBodyFatTrendLastMonth
+                                ? `${userBodyFatTrendLastMonth} lbs this month`
+                                : "Loading..."}
+                        </span>
+
+                        <div className="flex sm:hidden gap-2 rounded-md px-4 py-2 bg-gray-800/80 justify-between">
+                            <button
+                                onClick={() =>
+                                    setBodyFatsToDisplay(
+                                        formattedBodyFatsLastMonth
+                                    )
+                                }
+                                className="w-full px-4 py-1 bg-gray-800 text-white rounded-md border border-gray-400 hover:bg-gray-700 ease-linear duration-200"
+                            >
+                                30D
+                            </button>
+                            <button
+                                onClick={() =>
+                                    setBodyFatsToDisplay(formattedBodyFats)
+                                }
+                                className="w-full px-4 py-1 bg-gray-800 text-white rounded-md border border-gray-400 hover:bg-gray-700 ease-linear duration-200"
+                            >
+                                ALL
+                            </button>
+                        </div>
                         <LineChart
                             title="Your Body Fat"
                             label="Body Fat (%)"
-                            userData={formattedBodyFats}
+                            userData={bodyFatsToDisplay}
                             pointColor="rgb(222, 155, 129)"
                             borderColor="rgb(232, 151, 70)"
                         />
