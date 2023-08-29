@@ -90,195 +90,228 @@ function CalculatorForm() {
             );
         }
     };
+
+    console.log(gender);
     return (
-        <form className="py-4 rounded-md flex-1">
-            <header className="mb-2">
-                <h2 className="text-2xl font-semibold">
-                    Calculate Calorie Goal
-                </h2>
-                <p className="text-amber-400 text-sm font-semibold">
-                    Find your starting point.
-                </p>
-            </header>
+        <section className="flex flex-col gap-2 md:gap-8 justify-between lg:flex-row">
+            <form className="py-4 rounded-md flex-1 w-full">
+                <header className="mb-2">
+                    <h2 className="text-2xl font-semibold">
+                        Calculate Calorie Goal
+                    </h2>
+                    <p className="text-amber-400 text-sm font-semibold">
+                        Find your starting point.
+                    </p>
+                </header>
 
-            {/* Input Section */}
-            <section className="flex flex-col gap-4">
-                <div className="flex gap-2 flex-col">
-                    <label htmlFor="age">Age:</label>
-                    <input
-                        className="w-32"
-                        onChange={(e) => setAge(Number(e.target.value))}
-                        value={age}
-                        id="age"
-                        type="tel"
-                    />
-                </div>
-
-                <div className="flex gap-2 flex-col">
-                    <label>Gender:</label>
-                    <section className="flex gap-4">
-                        <section className="flex gap-2">
+                {/* Input Section */}
+                <section className="flex flex-col md:flex-row md:gap-8 gap-4">
+                    <div className="flex flex-col gap-4">
+                        <div className="flex gap-2 flex-col relative">
+                            <label htmlFor="age">Age:</label>
                             <input
-                                defaultChecked
-                                id="male"
-                                onClick={() => setGender("male")}
-                                name="gender"
-                                type="radio"
-                            />
-                            <label htmlFor="male">male</label>
-                        </section>
-                        <section className="flex gap-2 items-center">
-                            <input
-                                id="female"
-                                onClick={() => setGender("female")}
-                                value="female"
-                                name="gender"
-                                type="radio"
-                            />
-                            <label htmlFor="female">female</label>
-                        </section>
-                    </section>
-                </div>
-
-                <div className="flex flex-col gap-2">
-                    <label htmlFor="feet">Height:</label>
-                    <section className="flex gap-4">
-                        <section className="relative">
-                            <input
-                                className="w-16 pr-5"
-                                id="feet"
-                                onChange={(e) =>
-                                    setHeight((height) => ({
-                                        ...height,
-                                        feet: Number(e.target.value),
-                                    }))
-                                }
-                                value={height.feet}
+                                className="w-32"
+                                onChange={(e) => setAge(Number(e.target.value))}
+                                value={age}
+                                id="age"
                                 type="tel"
                             />
-                            <label
-                                className="absolute right-4 top-1 text-black"
-                                htmlFor="feet"
-                            >
-                                ft
-                            </label>
-                        </section>
-                        <section className="relative">
-                            <input
-                                className="w-16"
-                                id="inches"
+                            <span className="text-black absolute left-12 bottom-1">
+                                years old
+                            </span>
+                        </div>
+
+                        <div className="flex gap-2 flex-col w-full">
+                            <label>Gender:</label>
+                            <section className="flex gap-4">
+                                <section className="flex gap-2 items-center">
+                                    <input
+                                        className="w-5 h-5"
+                                        defaultChecked
+                                        id="male"
+                                        onClick={() => setGender("male")}
+                                        name="gender"
+                                        type="radio"
+                                    />
+                                    <label htmlFor="male">male</label>
+                                </section>
+                                <section className="flex gap-2 items-center">
+                                    <input
+                                        className="w-5 h-5"
+                                        id="female"
+                                        onClick={() => setGender("female")}
+                                        value="female"
+                                        name="gender"
+                                        type="radio"
+                                    />
+                                    <label htmlFor="female">female</label>
+                                </section>
+                            </section>
+                        </div>
+                    </div>
+
+                    <div className="flex flex-col gap-4">
+                        <div className="flex flex-col gap-2">
+                            <label htmlFor="feet">Height:</label>
+                            <section className="flex gap-2">
+                                <section className="relative">
+                                    <input
+                                        className="w-14 pr-5"
+                                        id="feet"
+                                        onChange={(e) =>
+                                            setHeight((height) => ({
+                                                ...height,
+                                                feet: Number(e.target.value),
+                                            }))
+                                        }
+                                        value={height.feet}
+                                        type="tel"
+                                    />
+                                    <label
+                                        className="absolute right-4 top-1 text-black"
+                                        htmlFor="feet"
+                                    >
+                                        ft
+                                    </label>
+                                </section>
+                                <section className="relative">
+                                    <input
+                                        className="w-16"
+                                        id="inches"
+                                        onChange={(e) =>
+                                            setHeight((height) => ({
+                                                ...height,
+                                                inches: Number(e.target.value),
+                                            }))
+                                        }
+                                        value={height.inches}
+                                        type="tel"
+                                    />
+                                    <label
+                                        className="absolute right-4 top-1 text-black"
+                                        htmlFor="inches"
+                                    >
+                                        in
+                                    </label>
+                                </section>
+                            </section>
+                        </div>
+
+                        <div className="flex flex-col gap-2">
+                            <label htmlFor="weight">Weight:</label>
+                            <section className="relative">
+                                <input
+                                    className="w-[130px] appearance-none"
+                                    onChange={(e) =>
+                                        setWeight(Number(e.target.value))
+                                    }
+                                    value={weight}
+                                    id="weight"
+                                    type="tel"
+                                />
+                                <span className="absolute left-24 top-1 text-black">
+                                    lb
+                                </span>
+                            </section>
+                        </div>
+                    </div>
+
+                    <div className="flex flex-col gap-4">
+                        <div className="flex gap-2 flex-col w-72">
+                            <label htmlFor="activity">Activity Level:</label>
+                            <select
+                                className="h-8"
                                 onChange={(e) =>
-                                    setHeight((height) => ({
-                                        ...height,
-                                        inches: Number(e.target.value),
-                                    }))
+                                    setActivity(Number(e.target.value))
                                 }
-                                value={height.inches}
-                                type="tel"
-                            />
-                            <label
-                                className="absolute right-4 top-1 text-black"
-                                htmlFor="inches"
+                                value={activity}
+                                name="activity"
+                                id="activity"
                             >
-                                in
-                            </label>
-                        </section>
-                    </section>
-                </div>
+                                <option value={1.2}>
+                                    little to no exercise
+                                </option>
+                                <option value={1.375}>
+                                    light exercise 1-3 days/wk
+                                </option>
+                                <option value={1.55}>
+                                    moderate exercise 3-5 days/wk
+                                </option>
+                                <option value={1.725}>
+                                    hard exercise 6-7 days/wk
+                                </option>
+                                <option value={1.9}>
+                                    2x hard exercise 6-7 days/wk
+                                </option>
+                            </select>
+                        </div>
 
-                <div className="flex flex-col">
-                    <label htmlFor="weight">Weight:</label>
-                    <section className="relative">
-                        <input
-                            className="w-24 appearance-none"
-                            onChange={(e) => setWeight(Number(e.target.value))}
-                            value={weight}
-                            id="weight"
-                            type="tel"
-                        />
-                        <span className="absolute left-16 top-1 text-black">
-                            lb
-                        </span>
-                    </section>
-                </div>
-
-                <div className="flex gap-2 flex-col">
-                    <label htmlFor="activity">Activity Level:</label>
-                    <select
-                        onChange={(e) => setActivity(Number(e.target.value))}
-                        value={activity}
-                        name="activity"
-                        id="activity"
-                    >
-                        <option value={1.2}>little to no exercise</option>
-                        <option value={1.375}>
-                            light exercise 1-3 days/wk
-                        </option>
-                        <option value={1.55}>
-                            moderate exercise 3-5 days/wk
-                        </option>
-                        <option value={1.725}>hard exercise 6-7 days/wk</option>
-                        <option value={1.9}>
-                            2x hard exercise 6-7 days/wk
-                        </option>
-                    </select>
-                </div>
-
-                <div className="flex gap-2 flex-col">
-                    <label htmlFor="plan">Diet Plan:</label>
-                    <select
-                        onChange={(e) => setPlan(Number(e.target.value))}
-                        value={plan}
-                        name="plan"
-                        id="plan"
-                    >
-                        <option value={0}>Maintain Weight</option>
-                        <option value={-500}>Lose 1 pound/week</option>
-                        <option value={-1000}>Lose 2 pounds/week</option>
-                        <option value={250}>Gain 0.5 pound/week</option>
-                        <option value={500}>Gain 1 pound/week</option>
-                        <option value={1000}>Gain 2 pounds/week</option>
-                    </select>
-                </div>
-            </section>
-
-            {/* Action Buttons Section */}
-            <section className="flex justify-between gap-4 mt-4 text-white font-semibold md:w-[370px]">
+                        <div className="flex gap-2 flex-col w-72">
+                            <label htmlFor="plan">Diet Plan:</label>
+                            <select
+                                className="h-8"
+                                onChange={(e) =>
+                                    setPlan(Number(e.target.value))
+                                }
+                                value={plan}
+                                name="plan"
+                                id="plan"
+                            >
+                                <option value={0}>Maintain Weight</option>
+                                <option value={-500}>Lose 1 pound/week</option>
+                                <option value={-1000}>
+                                    Lose 2 pounds/week
+                                </option>
+                                <option value={250}>Gain 0.5 pound/week</option>
+                                <option value={500}>Gain 1 pound/week</option>
+                                <option value={1000}>Gain 2 pounds/week</option>
+                            </select>
+                        </div>
+                    </div>
+                </section>
                 <button
                     onClick={handleCalculate}
-                    className="px-4 bg-indigo-600 hover:bg-indigo-700 rounded-md py-3 flex-1 w-full"
+                    className="px-4 bg-indigo-600 hover:bg-indigo-700 rounded-md py-3 flex-1 w-full mt-6"
                     type="button"
                 >
                     Calculate
                 </button>
-                <button
-                    onClick={submitCalorieGoal}
-                    type="button"
-                    className="px-4 bg-slate-600 hover:bg-slate-700 rounded-md py-3 flex-1 w-full"
-                >
-                    Apply to Profile
-                </button>
-            </section>
+            </form>
 
             {/* Display Calories Section */}
-            <section className="flex flex-col gap-2 my-4">
-                <section className="flex gap-4 items-center">
-                    <label className="text-xl">Daily Calories:</label>
-                    <input
-                        onChange={(e) => setCalories(Number(e.target.value))}
-                        type="text"
-                        value={calories}
-                        className="w-20"
-                    />
-                    <span>kcal</span>
+            <section className="flex flex-col gap-2 my-4 w-full flex-1 lg:mt-20 justify-between">
+                <section className="flex flex-col gap-2">
+                    <div className="flex gap-2 items-center">
+                        <label className="text-xl">Daily Calories:</label>
+                        <input
+                            onChange={(e) =>
+                                setCalories(Number(e.target.value))
+                            }
+                            type="text"
+                            value={calories}
+                            className="w-20"
+                        />
+                        <span>kcal</span>
+                    </div>
+
+                    <span className="text-sm text-red-400">
+                        * Calculate using our form or manually set by clicking
+                        calories.
+                    </span>
                 </section>
 
-                <span className="text-sm text-red-400">
-                    * Calculate using form above or manually set by clicking
-                    calories.
-                </span>
+                {/* Action Buttons Section */}
+                <section className="flex justify-between gap-4 text-white font-semibold w-full">
+                    <button
+                        onClick={submitCalorieGoal}
+                        type="button"
+                        className="px-4 bg-slate-600 hover:bg-slate-700 rounded-md py-3 flex-1 w-full"
+                    >
+                        Apply to Profile
+                    </button>
+                </section>
             </section>
-        </form>
+        </section>
     );
 }
 

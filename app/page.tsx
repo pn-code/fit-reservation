@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function Home() {
     return (
-        <main className="w-full min-h-[calc(100vh-64px)] py-20 px-4 sm:px-40 gap-6 sm:h-[calc(100vh-82px)] flex text-white items-center justify-center flex-col md:flex-row bg-slate-900 md:gap-24">
+        <main className="w-full min-h-[calc(100vh-64px)] py-20 px-4 gap-6 sm:h-[calc(100vh-82px)] flex text-white items-center justify-center flex-col md:flex-row bg-slate-900 md:gap-24 lg:px-[20%] text-center">
             {/* LEFT SIDE: HERO TEXT */}
             <section className="h-full flex flex-col justify-center bg-slate-900 flex-1 gap-10">
                 <header className="w-full flex flex-col gap-10">
@@ -74,7 +74,7 @@ export default function Home() {
             </section>
 
             {/* RIGHT SIDE: HERO IMAGE */}
-            <section className="hidden lg:flex flex-1 justify-center items-center w-full bg-gray-900 rounded-md mt-8 sm:mt-0">
+            {/* <section className="hidden lg:flex flex-1 justify-center items-center w-full bg-gray-900 rounded-md mt-8 sm:mt-0">
                 <Image
                     className="rounded-sm"
                     src={"/assets/HERO.png"}
@@ -82,7 +82,7 @@ export default function Home() {
                     width={720}
                     alt=""
                 />
-            </section>
+            </section> */}
         </main>
     );
 }
