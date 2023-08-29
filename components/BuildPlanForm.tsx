@@ -62,7 +62,7 @@ export default function BuildPlanForm() {
             if (res.status === 200) {
                 toast.success("Successfully built your new plan!");
             }
-            router.refresh()
+            router.refresh();
             router.push(`/plans/${user?.user?.id}`);
         } catch (error) {
             console.error(error);
@@ -87,7 +87,7 @@ export default function BuildPlanForm() {
                                 className="w-full sm:w-72"
                                 type="text"
                                 value={planName}
-                                placeholder="Add Plan Name"
+                                placeholder="Plan Name"
                                 onChange={(e) => setPlanName(e.target.value)}
                             />
                         </section>
@@ -101,7 +101,7 @@ export default function BuildPlanForm() {
                                 id="description"
                                 className="w-full sm:w-72 p-2 rounded-sm text-black"
                                 value={description}
-                                placeholder="Add Description"
+                                placeholder="Description"
                                 onChange={(e) => setDescription(e.target.value)}
                             />
                         </section>
@@ -111,14 +111,14 @@ export default function BuildPlanForm() {
                         <h2 className="text-lg font-bold">Add Exercises</h2>
                         {/* Exercise Name */}
                         <section className="flex flex-col gap-2">
-                            <label htmlFor="exercise">Exercise</label>
+                            <label htmlFor="exercise">Exercise Name</label>
                             <input
                                 disabled={loading}
                                 id="exercise"
                                 className="w-full sm:w-72"
                                 type="text"
                                 value={exercise}
-                                placeholder="Add exercise"
+                                placeholder="Exercise Name"
                                 onChange={(e) => setExercise(e.target.value)}
                             />
                         </section>
@@ -139,50 +139,56 @@ export default function BuildPlanForm() {
                             </select>
                         </section>
 
-                        <section className="flex flex-col gap-2">
-                            <label htmlFor="sets">Sets</label>
-                            <input
-                                disabled={loading}
-                                id="sets"
-                                className="w-full sm:w-72"
-                                type="text"
-                                value={sets}
-                                placeholder="Add sets"
-                                onChange={(e) =>
-                                    setSets(Number(e.target.value))
-                                }
-                            />
-                        </section>
+                        {type != "cardio" && (
+                            <section className="flex flex-col gap-2">
+                                <label htmlFor="sets">Sets</label>
+                                <input
+                                    disabled={loading}
+                                    id="sets"
+                                    className="w-full sm:w-72"
+                                    type="text"
+                                    value={sets}
+                                    placeholder="Sets"
+                                    onChange={(e) =>
+                                        setSets(Number(e.target.value))
+                                    }
+                                />
+                            </section>
+                        )}
 
-                        <section className="flex flex-col gap-2">
-                            <label htmlFor="reps">Reps</label>
-                            <input
-                                disabled={loading}
-                                id="reps"
-                                className="w-full sm:w-72"
-                                type="text"
-                                value={reps}
-                                placeholder="Add reps"
-                                onChange={(e) =>
-                                    setReps(Number(e.target.value))
-                                }
-                            />
-                        </section>
+                        {type != "cardio" && (
+                            <section className="flex flex-col gap-2">
+                                <label htmlFor="reps">Reps</label>
+                                <input
+                                    disabled={loading}
+                                    id="reps"
+                                    className="w-full sm:w-72"
+                                    type="text"
+                                    value={reps}
+                                    placeholder="Reps"
+                                    onChange={(e) =>
+                                        setReps(Number(e.target.value))
+                                    }
+                                />
+                            </section>
+                        )}
 
-                        <section className="flex flex-col gap-2">
-                            <label htmlFor="duration">Duration (min)</label>
-                            <input
-                                disabled={loading}
-                                id="duration"
-                                className="w-full sm:w-72"
-                                type="text"
-                                value={duration}
-                                placeholder="Add duration in minutes"
-                                onChange={(e) =>
-                                    setDuration(Number(e.target.value))
-                                }
-                            />
-                        </section>
+                        {type === "cardio" && (
+                            <section className="flex flex-col gap-2">
+                                <label htmlFor="duration">Duration (min)</label>
+                                <input
+                                    disabled={loading}
+                                    id="duration"
+                                    className="w-full sm:w-72"
+                                    type="text"
+                                    value={duration}
+                                    placeholder="Duration in minutes"
+                                    onChange={(e) =>
+                                        setDuration(Number(e.target.value))
+                                    }
+                                />
+                            </section>
+                        )}
 
                         <button
                             disabled={loading}
@@ -225,23 +231,31 @@ export default function BuildPlanForm() {
                         </thead>
 
                         <tbody className="text-sm divide-y divide-gray-100 w-full">
-                            {exercises.length > 0 ? exercises.map((exercise, idx) => (
-                                <tr
-                                    key={idx}
-                                    className="w-full text-xs sm:text-[14px] bg-blue-900/20 hover:bg-indigo-600 cursor-pointer hover:text-white"
-                                >
-                                    <td className="py-2 whitespace-nowrap px-2">
-                                        {exercise.name}
-                                    </td>
-                                    <td className="py-2 whitespace-nowrap px-2">
-                                        {exercise.type}
-                                    </td>
-                                    <td className="py-2 whitespace-nowrap px-2">{`${exercise.sets} x ${exercise.reps}`}</td>
-                                    <td className="py-2 whitespace-nowrap px-2">
-                                        {exercise.duration}m
+                            {exercises.length > 0 ? (
+                                exercises.map((exercise, idx) => (
+                                    <tr
+                                        key={idx}
+                                        className="w-full text-xs sm:text-[14px] bg-blue-900/20 hover:bg-indigo-600 cursor-pointer hover:text-white"
+                                    >
+                                        <td className="py-2 whitespace-nowrap px-2">
+                                            {exercise.name}
+                                        </td>
+                                        <td className="py-2 whitespace-nowrap px-2">
+                                            {exercise.type}
+                                        </td>
+                                        <td className="py-2 whitespace-nowrap px-2">{`${exercise.sets} x ${exercise.reps}`}</td>
+                                        <td className="py-2 whitespace-nowrap px-2">
+                                            {exercise.duration}m
+                                        </td>
+                                    </tr>
+                                ))
+                            ) : (
+                                <tr>
+                                    <td className="pt-2 px-2">
+                                        Add exercises to see them here...
                                     </td>
                                 </tr>
-                            )) : <tr><td className="pt-2 px-2">Add exercises to see them here...</td></tr>}
+                            )}
                         </tbody>
                     </table>
                     <section className="flex justify-end">
