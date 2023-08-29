@@ -28,11 +28,10 @@ const Navbar = () => {
             try {
                 const res = await axios.get("/api/calorie_goal");
                 if (res.status === 200) {
-                    console.log(calorieGoal);
                     setCalorieGoal(res.data.goal);
                 }
-            } catch (error) {
-                console.error();
+            } catch (error: any) {
+                console.error(error.message);
             }
         }
 
@@ -41,7 +40,7 @@ const Navbar = () => {
 
     return (
         <>
-            <nav className="relative h-16 bg-[#172554] text-white py-6 px-2 sm:px-6 flex justify-between items-center w-full top-0 left-0 z-[999]">
+            <nav className="relative h-16 bg-[#172554] text-white py-6 px-2 lg:px-[20%] flex justify-between items-center w-full top-0 left-0 z-[999]">
                 <header className="w-full flex gap-5 items-center justify-between lg:justify-start">
                     <Link
                         className="hover:underline font-medium flex gap-2 items-center"
@@ -74,7 +73,7 @@ const Navbar = () => {
 
                 {/* Navbar on medium to larger devices */}
                 {user && (
-                    <ul className="hidden lg:flex lg:gap-5 text-[16px]">
+                    <ul className="hidden lg:flex lg:gap-5 text-[14px] lg:text-[16px]">
                         <li>
                             <Link
                                 className={`flex gap-1 group relative hover:text-gray-200 items-center ${
@@ -141,7 +140,7 @@ const Navbar = () => {
                                     passHref={true}
                                     href={`/profile/${user?.id}`}
                                 >
-                                    <User size={18}/> Profile
+                                    <User size={18} /> Profile
                                 </Link>
                             </li>
                         )}
