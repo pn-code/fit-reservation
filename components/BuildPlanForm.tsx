@@ -74,9 +74,11 @@ export default function BuildPlanForm() {
 
     return (
         <section className="flex flex-col gap-4">
-            <form className="flex flex-col gap-4 justify-center py-2 rounded-md sm:flex-row">
+            <form className="flex flex-col gap-4 justify-center py-2 rounded-md md:flex-row">
                 {/* Form Section */}
+
                 <section className="flex flex-col w-full gap-4">
+                    <h2 className="text-lg font-bold">Plan Details</h2>
                     <section className="w-full flex flex-col gap-4">
                         {/* Plan Name */}
                         <section className="flex flex-col gap-2">
@@ -84,7 +86,7 @@ export default function BuildPlanForm() {
                             <input
                                 disabled={loading}
                                 id="name"
-                                className="w-full sm:w-72"
+                                className="w-full md:w-72"
                                 type="text"
                                 value={planName}
                                 placeholder="Plan Name"
@@ -99,23 +101,25 @@ export default function BuildPlanForm() {
                             <textarea
                                 disabled={loading}
                                 id="description"
-                                className="w-full sm:w-72 p-2 rounded-sm text-black"
+                                className="w-full md:w-72 p-2 rounded-sm text-black md:h-24"
                                 value={description}
                                 placeholder="Description"
                                 onChange={(e) => setDescription(e.target.value)}
                             />
                         </section>
                     </section>
+                </section>
 
-                    <section className="w-full flex flex-col gap-2">
-                        <h2 className="text-lg font-bold">Add Exercises</h2>
+                <section className="w-full flex flex-col gap-4">
+                    <h2 className="text-lg font-bold">Exercise List</h2>
+                    <section className="w-full flex flex-col md:flex-row gap-2 md:items-center">
                         {/* Exercise Name */}
                         <section className="flex flex-col gap-2">
                             <label htmlFor="exercise">Exercise Name</label>
                             <input
                                 disabled={loading}
                                 id="exercise"
-                                className="w-full sm:w-72"
+                                className="w-full md:w-36"
                                 type="text"
                                 value={exercise}
                                 placeholder="Exercise Name"
@@ -128,7 +132,7 @@ export default function BuildPlanForm() {
                             <label htmlFor="type">Type</label>
                             <select
                                 disabled={loading}
-                                className="w-full sm:w-72"
+                                className="w-full md:w-32 h-8"
                                 name="type"
                                 id="type"
                                 onChange={(e) => setType(e.target.value)}
@@ -145,7 +149,7 @@ export default function BuildPlanForm() {
                                 <input
                                     disabled={loading}
                                     id="sets"
-                                    className="w-full sm:w-72"
+                                    className="w-full md:w-10"
                                     type="text"
                                     value={sets}
                                     placeholder="Sets"
@@ -162,7 +166,7 @@ export default function BuildPlanForm() {
                                 <input
                                     disabled={loading}
                                     id="reps"
-                                    className="w-full sm:w-72"
+                                    className="w-full md:w-10"
                                     type="text"
                                     value={reps}
                                     placeholder="Reps"
@@ -174,12 +178,12 @@ export default function BuildPlanForm() {
                         )}
 
                         {type === "cardio" && (
-                            <section className="flex flex-col gap-2">
-                                <label htmlFor="duration">Duration (min)</label>
+                            <section className="flex flex-col gap-2 relative">
+                                <label htmlFor="duration">Duration</label>
                                 <input
                                     disabled={loading}
                                     id="duration"
-                                    className="w-full sm:w-72"
+                                    className="w-full md:w-[88px]"
                                     type="text"
                                     value={duration}
                                     placeholder="Duration in minutes"
@@ -187,6 +191,7 @@ export default function BuildPlanForm() {
                                         setDuration(Number(e.target.value))
                                     }
                                 />
+                                <span className="text-black absolute right-1.5 bottom-[5px] text-sm bg-white">mins</span>
                             </section>
                         )}
 
@@ -194,18 +199,14 @@ export default function BuildPlanForm() {
                             disabled={loading}
                             onClick={addExerciseToList}
                             type="button"
-                            className="w-full sm:w-72 bg-green-600 hover:bg-green-700 rounded-lg mt-4 text-white px-4 py-2 hover:underline disabled:bg-gray-300"
+                            className="w-full bg-green-600 hover:bg-green-700 rounded-sm text-white px-4 py-1 disabled:bg-gray-300 ease-linear duration-200 mt-8"
                         >
-                            Add Exercise
+                            Add
                         </button>
                     </section>
-                </section>
-
-                <section className="w-full flex flex-col gap-4">
-                    <h2 className="text-lg font-bold">Exercise List</h2>
                     {/* Exercise List */}
                     <table className="table-auto w-full">
-                        <thead className="h-8 text-xs sm:text-[16px] font-semibold uppercase text-yellow-50 bg-blue-900/60">
+                        <thead className="h-8 text-xs md:text-[16px] font-semibold uppercase text-yellow-50 bg-blue-900/60">
                             <tr className="p-2 whitespace-nowrap">
                                 <th>
                                     <div className="font-semibold text-left px-2">
@@ -235,7 +236,7 @@ export default function BuildPlanForm() {
                                 exercises.map((exercise, idx) => (
                                     <tr
                                         key={idx}
-                                        className="w-full text-xs sm:text-[14px] bg-blue-900/20 hover:bg-indigo-600 cursor-pointer hover:text-white"
+                                        className="w-full text-xs md:text-[14px] bg-blue-900/20 hover:bg-indigo-600 cursor-pointer hover:text-white"
                                     >
                                         <td className="py-2 whitespace-nowrap px-2">
                                             {exercise.name}
@@ -263,7 +264,7 @@ export default function BuildPlanForm() {
                             disabled={loading}
                             onClick={handleSubmitPlan}
                             type="button"
-                            className="w-full sm:w-40 bg-indigo-600 hover:bg-indigo-700 rounded-lg mt-4 text-white px-4 py-2 hover:underline disabled:bg-gray-300"
+                            className="w-full md:w-40 bg-indigo-600 hover:bg-indigo-700 rounded-lg mt-4 text-white px-4 py-2 hover:underline disabled:bg-gray-300"
                         >
                             Submit
                         </button>
