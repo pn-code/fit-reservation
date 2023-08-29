@@ -93,7 +93,7 @@ function CalculatorForm() {
 
     console.log(gender);
     return (
-        <section className="flex flex-col gap-8 justify-between lg:flex-row">
+        <section className="flex flex-col gap-2 md:gap-8 justify-between lg:flex-row">
             <form className="py-4 rounded-md flex-1 w-full">
                 <header className="mb-2">
                     <h2 className="text-2xl font-semibold">
@@ -105,7 +105,7 @@ function CalculatorForm() {
                 </header>
 
                 {/* Input Section */}
-                <section className="flex gap-8">
+                <section className="flex flex-col md:flex-row md:gap-8 gap-4">
                     <div className="flex flex-col gap-4">
                         <div className="flex gap-2 flex-col relative">
                             <label htmlFor="age">Age:</label>
