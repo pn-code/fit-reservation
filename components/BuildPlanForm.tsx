@@ -74,11 +74,10 @@ export default function BuildPlanForm() {
 
     return (
         <section className="flex flex-col gap-4">
-            <form className="flex flex-col gap-4 justify-center bg-gray-800 px-4 py-2 rounded-md sm:flex-row">
+            <form className="flex flex-col gap-4 justify-center py-2 rounded-md sm:flex-row">
                 {/* Form Section */}
                 <section className="flex flex-col w-full gap-4">
                     <section className="w-full flex flex-col gap-4">
-                        <h2 className="text-lg font-bold">Plan Details</h2>
                         {/* Plan Name */}
                         <section className="flex flex-col gap-2">
                             <label htmlFor="name">Plan Name</label>
@@ -203,22 +202,22 @@ export default function BuildPlanForm() {
                         <thead className="h-8 text-xs sm:text-[16px] font-semibold uppercase text-yellow-50 bg-blue-900/60">
                             <tr className="p-2 whitespace-nowrap">
                                 <th>
-                                    <div className="font-semibold text-left">
+                                    <div className="font-semibold text-left px-2">
                                         Exercise
                                     </div>
                                 </th>
                                 <th>
-                                    <div className="font-semibold text-left">
+                                    <div className="font-semibold text-left px-2">
                                         Type
                                     </div>
                                 </th>
                                 <th>
-                                    <div className="font-semibold text-left">
+                                    <div className="font-semibold text-left px-2">
                                         Reps
                                     </div>
                                 </th>
                                 <th>
-                                    <div className="font-semibold text-left">
+                                    <div className="font-semibold text-left px-2">
                                         Duration
                                     </div>
                                 </th>
@@ -226,23 +225,23 @@ export default function BuildPlanForm() {
                         </thead>
 
                         <tbody className="text-sm divide-y divide-gray-100 w-full">
-                            {exercises.map((exercise, idx) => (
+                            {exercises.length > 0 ? exercises.map((exercise, idx) => (
                                 <tr
                                     key={idx}
                                     className="w-full text-xs sm:text-[14px] bg-blue-900/20 hover:bg-indigo-600 cursor-pointer hover:text-white"
                                 >
-                                    <td className="py-2 whitespace-nowrap">
+                                    <td className="py-2 whitespace-nowrap px-2">
                                         {exercise.name}
                                     </td>
-                                    <td className="py-2 whitespace-nowrap">
+                                    <td className="py-2 whitespace-nowrap px-2">
                                         {exercise.type}
                                     </td>
-                                    <td className="py-2 whitespace-nowrap">{`${exercise.sets} x ${exercise.reps}`}</td>
-                                    <td className="py-2 whitespace-nowrap">
+                                    <td className="py-2 whitespace-nowrap px-2">{`${exercise.sets} x ${exercise.reps}`}</td>
+                                    <td className="py-2 whitespace-nowrap px-2">
                                         {exercise.duration}m
                                     </td>
                                 </tr>
-                            ))}
+                            )) : <tr><td className="pt-2 px-2">Add exercises to see them here...</td></tr>}
                         </tbody>
                     </table>
                     <section className="flex justify-end">
