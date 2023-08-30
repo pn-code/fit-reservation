@@ -5,7 +5,7 @@ import LineChart from "./LineChart";
 import BodyWeightForm from "./BodyWeightForm";
 import BodyFatForm from "./BodyFatForm";
 import { toast } from "react-hot-toast";
-import { getPrevMonthDateISOString } from "../helpers/getPrevMonthDateISOString";
+import { getPrevMonthDateISOString } from "../../helpers/getPrevMonthDateISOString";
 
 export default function MeasurementsComponent() {
     const [weights, setWeights] = useState<WeightMeasurement[]>([]);

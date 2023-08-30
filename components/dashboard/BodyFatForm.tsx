@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { bodyFatSchema } from "../validations/bodyFatValidator";
+import { useState } from "react";
+import { bodyFatSchema } from "../../validations/bodyFatValidator";
 import axios from "axios";
 import toast from "react-hot-toast";
 
