@@ -11,7 +11,7 @@ import {
 
 import "chartjs-adapter-moment";
 import { Line } from "react-chartjs-2";
-import LineDivider from "./LineDivider";
+import LineDivider from "../LineDivider";
 
 Chart.register(
     TimeScale,

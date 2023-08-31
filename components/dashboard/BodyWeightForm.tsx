@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { weightSchema } from "../validations/weightValidator";
+import { weightSchema } from "../../validations/weightValidator";
 import axios from "axios";
 import toast from "react-hot-toast";
 

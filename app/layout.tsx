@@ -1,6 +1,6 @@
 import { ClerkProvider } from "@clerk/nextjs/app-beta";
 import { Karla } from "next/font/google";
-import Navbar from "../components/Navbar";
+import Navbar from "../components/navigation/Navbar";
 import "./globals.css";
 import ToastProvider from "../components/ToastProvider";
 
