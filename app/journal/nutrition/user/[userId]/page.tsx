@@ -70,7 +70,7 @@ export default async function UserNutritionJournals() {
   const dates = Object.keys(sortedJournals);
 
   return (
-    <main className="w-full min-h-[calc(100vh-90px)] bg-gray-900 py-6 rounded-md flex flex-col gap-4 shadow-md px-2 lg:px-[20%] text-white/90">
+    <main className="w-full min-h-[calc(100vh-90px)] mb-20 sm:mb-0 bg-gray-900 py-6 rounded-md flex flex-col gap-4 shadow-md px-2 lg:px-[20%] text-white/90">
       <header className="flex justify-between font-bold pb-2 border-b-2 border-b-indigo-600 items-center">
         <h1 className="text-3xl">
           {`${user?.firstName || "User"}'s Nutrition Journals`}
@@ -120,7 +120,7 @@ export default async function UserNutritionJournals() {
                       </tr>
                     </thead>
                     <tbody>
-                      <tr className="text-[14px] bg-blue-900/20 hover:bg-indigo-600 cursor-pointer hover:text-white">
+                      <tr className="text-[14px] bg-blue-900/20  cursor-pointer hover:text-white">
                         <td className="py-2 whitespace-nowrap bg-gray-800">
                           TOTAL
                         </td>
@@ -130,20 +130,34 @@ export default async function UserNutritionJournals() {
                               .calories
                           }
                         </td>
-                        <td className="py-2 whitespace-nowrap bg-gray-800">
+                        <td className="hidden sm:table-cell py-2 whitespace-nowrap bg-gray-800">
                           {
                             findTotalsFromJournalDate(sortedJournals[date])
                               .carbs
-                          }{" "} g
+                          }{" "}
+                          g
                         </td>
-                        <td className="py-2 whitespace-nowrap bg-gray-800">
-                          {findTotalsFromJournalDate(sortedJournals[date]).fats}{" "} g
+                        <td className="hidden sm:table-cell py-2 whitespace-nowrap bg-gray-800">
+                          {findTotalsFromJournalDate(sortedJournals[date]).fats}{" "}
+                          g
                         </td>
-                        <td className="py-2 whitespace-nowrap bg-gray-800">
+                        <td className="hidden sm:table-cell py-2 whitespace-nowrap bg-gray-800">
                           {
                             findTotalsFromJournalDate(sortedJournals[date])
                               .protein
-                          }{" "} g
+                          }{" "}
+                          g
+                        </td>
+                        <td className="table-cell sm:hidden py-2 whitespace-nowrap bg-gray-800">
+                          {`${
+                            findTotalsFromJournalDate(sortedJournals[date])
+                              .carbs
+                          }/${
+                            findTotalsFromJournalDate(sortedJournals[date]).fats
+                          }/${
+                            findTotalsFromJournalDate(sortedJournals[date])
+                              .protein
+                          }`}
                         </td>
                       </tr>
                     </tbody>
@@ -152,7 +166,7 @@ export default async function UserNutritionJournals() {
                         className="text-sm divide-y divide-gray-100"
                         key={item.id}
                       >
-                        <tr className="text-[14px] bg-blue-900/20 hover:bg-indigo-600 cursor-pointer hover:text-white">
+                        <tr className="text-[14px] bg-blue-900/20 cursor-pointer hover:text-white">
                           <td className="py-2 whitespace-nowrap">
                             {item.name.length > 20
                               ? `${item.name.substring(0, 20)}...`
