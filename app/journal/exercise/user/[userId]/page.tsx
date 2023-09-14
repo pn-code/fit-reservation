@@ -66,7 +66,7 @@ export default async function UserExerciseJournals() {
             {journals.length === 0 && <span>No journals were found.</span>}
 
             {/* Render Journals */}
-            <section>
+            <section className="h-full mb-20">
                 <div className="flex flex-col gap-4">
                     {dates.map((date) => (
                         <div key={date}>
@@ -94,7 +94,7 @@ export default async function UserExerciseJournals() {
                                                     className="text-sm divide-y divide-gray-100"
                                                     key={item.id}
                                                 >
-                                                    <tr className="text-[14px] bg-blue-900/20 hover:bg-indigo-600 cursor-pointer hover:text-white">
+                                                    <tr className="text-[14px] bg-blue-900/20 cursor-pointer hover:text-white">
                                                         <td className="py-2 whitespace-nowrap">
                                                             {item.name}
                                                         </td>
