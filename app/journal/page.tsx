@@ -14,11 +14,11 @@ const JournalPage = async () => {
     return (
         <main className="w-full min-h-[calc(100vh-100px)] pb-20 overflow-y-auto bg-gray-900 py-6 rounded-md flex flex-col gap-4 shadow-md px-2 lg:px-[20%] text-white/90">
             <header className="w-full flex justify-between lg:border-b-2 lg:border-b-indigo-600">
-                <section className="flex justify-between font-bold pb-2 items-center">
-                    <h1 className="text-3xl">Journal</h1>
+                <section className="flex justify-between font-bold pb-2 items-center h-full">
+                    <h1 className="text-xl sm:text-3xl">Journal</h1>
                 </section>
-                <section className="flex w-full justify-end items-center">
-                    <h2 className="text-xl font-semibold text-center">
+                <section className="flex w-full justify-end sm:items-center">
+                    <h2 className="text-lg sm:text-xl font-semibold text-center">
                         {moment().format("MMMM D, YYYY")}
                     </h2>
                 </section>
@@ -27,7 +27,7 @@ const JournalPage = async () => {
             <section className="flex flex-col gap-8">
                 <article className="flex flex-col gap-2 flex-1">
                     <header className="flex justify-between">
-                        <h2 className="text-2xl font-semibold text-amber-400 text-center">
+                        <h2 className="text-lg sm:text-2xl font-semibold text-amber-400 text-center">
                             Nutrition Journal
                         </h2>
                         <Link href={`/journal/nutrition/user/${user?.id}`}>
@@ -39,7 +39,7 @@ const JournalPage = async () => {
 
                 <article className="flex flex-col gap-2 flex-1">
                     <header className="flex justify-between">
-                        <h2 className="text-2xl font-semibold text-amber-400 text-center">
+                        <h2 className="text-lg sm:text-2xl font-semibold text-amber-400 text-center">
                             Exercise Journal
                         </h2>
                         <Link href={`/journal/exercise/user/${user?.id}`}>

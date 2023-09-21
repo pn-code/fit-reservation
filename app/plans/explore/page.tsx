@@ -22,9 +22,9 @@ export default async function ExplorePlans() {
     return (
         <main className="w-full h-[calc(100vh-90px)] mb-12 overflow-y-auto bg-gray-900 py-6 rounded-md flex flex-col gap-4 shadow-md px-2 lg:px-[20%] text-white/90">
             <header className="flex justify-between font-bold pb-2 border-b-2 border-b-indigo-600 items-center">
-                <h1 className="text-3xl">Explore Plans</h1>
+                <h1 className="text-xl sm:text-3xl">Explore Plans</h1>
                 <Link
-                    className="bg-indigo-600 hover:bg-indigo-700 rounded-lg text-white px-4 py-3"
+                    className="bg-indigo-600 hover:bg-indigo-700 rounded-lg text-white sm:px-4 sm:py-3 px-2 py-1"
                     href={`/plans/${user?.id}`}
                 >
                     My Plans

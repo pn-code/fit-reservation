@@ -44,17 +44,17 @@ export default function UpdateUsernameComponent() {
         <section className="flex flex-col gap-4 w-full">
             <section className="flex flex-col gap-4 sm:flex-row sm:justify-between">
                 <section>
-                    <h2 className="text-2xl font-semibold text-amber-300">
+                    <h2 className="text-xl sm:text-2xl font-semibold text-amber-300">
                         Update Name
                     </h2>
-                    <p>In case your name does not look right.</p>
+                    <p className="text-sm">In case your name does not look right.</p>
                 </section>
                 <button
                     onClick={() => setIsUpdating((prev) => !prev)}
                     className="text-gray-100 group flex cursor-pointer items-center py-2 px-4 bg-indigo-600 hover:bg-indigo-700 rounded-md justify-center sm:w-42"
                 >
-                    <div className="flex gap-4 justify-center items-center sm:w-42">
-                        <Edit />
+                    <div className="flex gap-2 justify-center items-center sm:w-42 text-sm">
+                        <Edit size={18}/>
                         {!isUpdating ? <h3>Update Name</h3> : <h3>Cancel</h3>}
                     </div>
                 </button>

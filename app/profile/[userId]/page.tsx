@@ -33,12 +33,12 @@ async function ProfilePage({ params }: Props) {
   return (
     <main className="w-full min-h-[calc(100vh-90px)] bg-gray-900 py-6 rounded-md flex flex-col gap-4 shadow-md px-2 lg:px-[20%] text-white/90 mb-12">
       <header className="flex justify-between font-bold pb-2 border-b-2 border-b-indigo-600 items-center">
-        <h1 className="text-3xl">Profile</h1>
+        <h1 className="text-xl sm:text-3xl">Profile</h1>
         <SignOutButton />
       </header>
 
       {/* User Information */}
-      <section className="flex gap-4 items-center mb-5">
+      <section className="flex gap-4 items-center sm:mb-5">
         <h2 className="text-xl sm:text-3xl font-semibold text-amber-300 flex gap-4">
           {`${userOnProfile?.firstName} ${userOnProfile?.lastName}`}
         </h2>

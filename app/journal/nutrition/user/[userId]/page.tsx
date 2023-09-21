@@ -46,7 +46,6 @@ export default async function UserNutritionJournals() {
   const journals = await fetchUserNutritionJournals(user?.id as string);
 
   const sortedJournals = journals ? sortEntriesByDate(journals) : [];
-  console.log(sortedJournals);
 
   const findTotalsFromJournalDate = (journalEntry: any[]) => {
     return journalEntry.reduce(
@@ -72,11 +71,11 @@ export default async function UserNutritionJournals() {
   return (
     <main className="w-full min-h-[calc(100vh-90px)] mb-20 sm:mb-0 bg-gray-900 py-6 rounded-md flex flex-col gap-4 shadow-md px-2 lg:px-[20%] text-white/90">
       <header className="flex justify-between font-bold pb-2 border-b-2 border-b-indigo-600 items-center">
-        <h1 className="text-3xl">
+        <h1 className="text-xl sm:text-3xl">
           {`${user?.firstName || "User"}'s Nutrition Journals`}
         </h1>
         <Link
-          className="bg-indigo-600 hover:bg-indigo-700 rounded-lg text-white px-4 py-3"
+          className="bg-indigo-600 hover:bg-indigo-700 rounded-lg text-white px-2 py-1 sm:px-4 sm:py-3"
           passHref={true}
           href="/journal"
         >

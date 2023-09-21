@@ -194,12 +194,12 @@ export default function MeasurementsComponent() {
         <section className="flex flex-col gap-4">
             {/* Charts */}
             <section className="flex flex-col gap-4 flex-1">
-                <h2 className="text-2xl font-semibold">Your Measurements</h2>
+                <h2 className="text-lg sm:text-2xl font-semibold">Your Measurements</h2>
                 <section className="flex flex-col gap-6">
                     {/* Body Weight Charts */}
                     <section className="h-fit w-full rounded-md flex flex-col gap-2 flex-1">
                         <header className="flex justify-between sm:items-center sm:flex-row flex-col">
-                            <h3 className="text-lg">
+                            <h3 className="text-[16px] sm:text-lg">
                                 Body Weight Measurements
                             </h3>
                             <div className="hidden sm:flex gap-2 rounded-md px-4 py-2 bg-gray-800/80 justify-between">
@@ -287,7 +287,7 @@ export default function MeasurementsComponent() {
 
                         <button
                             type="button"
-                            className="rounded-sm bg-gray-500 mx-4 py-2 hover:bg-gray-600 text-sm"
+                            className="rounded-sm bg-gray-500 mx-4 py-2 hover:bg-gray-600"
                             onClick={() =>
                                 setShowWeights((weights) => !weights)
                             }
@@ -340,9 +340,9 @@ export default function MeasurementsComponent() {
                     </section>
 
                     {/* Body Fat Charts*/}
-                    <section className="h-fit w-full rounded-md flex flex-col gap-2 flex-1">
+                    <section className="h-fit w-full rounded-md flex flex-col gap-2 flex-1 mt-5">
                         <header className="flex justify-between sm:items-center sm:flex-row flex-col">
-                            <h3 className="text-lg">Body Fat Measurements</h3>
+                            <h3 className="text-[16px] sm:text-lg">Body Fat Measurements</h3>
                             <div className="hidden sm:flex gap-2 rounded-md px-4 py-2 bg-gray-800/80 justify-between">
                                 <button
                                     onClick={() =>
@@ -428,7 +428,7 @@ export default function MeasurementsComponent() {
 
                         <button
                             type="button"
-                            className="rounded-sm bg-gray-500 mx-4 py-2 hover:bg-gray-600 text-sm"
+                            className="rounded-sm bg-gray-500 mx-4 py-2 hover:bg-gray-600"
                             onClick={() => setShowBodyFats((bf) => !bf)}
                         >
                             {showBodyFats ? "Hide " : "Show "} Body Fats
