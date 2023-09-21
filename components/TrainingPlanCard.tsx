@@ -25,8 +25,8 @@ export default function TrainingPlanCard({ plan }: Props) {
     return (
         <Link href={`/plans/details/${plan.id}`}>
             <article className="flex flex-col gap-4 bg-blue-900/70 w-full py-4 px-4 rounded-md hover:bg-blue-900 cursor-pointer">
-                <header className="flex justify-between items-center">
-                    <h3 className="text-lg font-semibold">
+                <header className="flex justify-between">
+                    <h3 className="text-[14px] sm:text-lg font-semibold">
                         {plan.name} by{" "}
                         <span className="text-amber-300">{author}</span>
                     </h3>
@@ -36,7 +36,7 @@ export default function TrainingPlanCard({ plan }: Props) {
                     </section>
                 </header>
 
-                <p className="text-xs text-gray-300 font-thin">
+                <p className="hidden sm:flex sm:text-xs text-gray-300 font-thin">
                     {plan.description.length < 100
                         ? plan.description
                         : `${plan.description.substring(0, 100)}...`}
