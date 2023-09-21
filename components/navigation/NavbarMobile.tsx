@@ -1,5 +1,5 @@
 import { useUser } from "@clerk/nextjs";
-import { Dumbbell, Gauge, PenLine, SigmaSquare, User } from "lucide-react";
+import { Dumbbell, Gauge, PenLine, User } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
@@ -10,7 +10,7 @@ export default function NavbarMobile() {
     const currentPathStyles = "bg-blue-600";
 
     return (
-        <nav className="lg:hidden fixed bottom-0 w-full bg-gray-900 z-[999] h-18 border-t-2 border-indigo-300">
+        <nav className="lg:hidden fixed bottom-0 w-full bg-gray-900 z-[999] h-16 border-t-2 border-indigo-900">
             {user && (
                 <ul className="flex justify-between py-1.5 px-2 items-center">
                     <Link
@@ -28,20 +28,6 @@ export default function NavbarMobile() {
                             }
                         />
                         <span className="text-xs text-white">Dashboard</span>
-                    </Link>
-                    <Link
-                        className={`flex flex-col items-center gap-1 flex-1 rounded-md py-1 ${
-                            pathname === "/calculator"
-                                ? "bg-blue-600"
-                                : "border-t-transparent"
-                        }`}
-                        passHref={true}
-                        href="/calculator"
-                    >
-                        <SigmaSquare
-                            className={`group relative text-white/90 hover:text-white`}
-                        />
-                        <span className="text-xs text-white">Calculate</span>
                     </Link>
                     <Link
                         className={`flex flex-col items-center gap-1 flex-1 rounded-md py-1 ${
