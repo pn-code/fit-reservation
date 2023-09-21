@@ -1,7 +1,6 @@
 import { currentUser } from "@clerk/nextjs/app-beta";
 import { prisma } from "../../../../../lib/client";
 import Link from "next/link";
-import { getDateFromISO } from "../../../../../helpers/getDateFromIso";
 
 export const metadata = {
   title: "All Nutrition Journals | FitHeroes",
@@ -20,8 +19,11 @@ async function fetchUserNutritionJournals(userId: string) {
 function sortEntriesByDate(entriesArr: any[]) {
   const sortedEntries = entriesArr.reduce((acc, curr) => {
     const currentEntryDate = curr.date;
-    const convertDateToUserTimezone =
-      getDateFromISO(currentEntryDate).split(",")[0];
+    const convertDateToUserTimezone = new Date(currentEntryDate)
+      .toLocaleString()
+      .substring(0, 11)
+      .replace(",", "")
+      .split(" ")[0];
 
     // If converted time already exists in acc, then add it to the end of the array
     if (acc[convertDateToUserTimezone]) {
