@@ -91,7 +91,6 @@ export default function LineChart({
 
     return (
         <section className="w-full h-full">
-            {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
             {/* @ts-ignore */}
             <Line data={data} options={options} />
             <LineDivider />
