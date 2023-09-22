@@ -54,7 +54,7 @@ export default function Home() {
 
       {/* Tools */}
       <section id="info" className="flex flex-col gap-8 sm:gap-16 pt-20 justify-center items-center">
-        <h2 className="w-full text-2xl lg:text-3xl flex gap-2 flex-col font-bold lg:flex-row lg:items-end">
+        <h2 className="w-full text-2xl lg:text-3xl flex gap-2 flex-col font-bold lg:flex-row lg:items-end lg:justify-center">
           What's in FitHeroes?
           <span className="text-[16px] sm:text-xl text-gray-300 font-normal">
             All the tools you need to elevate your fitness.
@@ -154,13 +154,13 @@ export default function Home() {
 
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg hidden lg:flex">
         <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-          <caption className="p-5 text-lg font-semibold text-left text-gray-900 bg-white dark:text-white dark:bg-gray-800">
+          <caption className="p-5 text-lg font-semibold text-left text-gray-900 bg-white dark:text-white dark:bg-gray-900">
             Features Preview
             <p className="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400">
               How we compare
             </p>
           </caption>
-          <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+          <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-900 dark:text-gray-400">
             <tr>
               <th scope="col" className="px-6 py-3">
                 Company
@@ -181,7 +181,7 @@ export default function Home() {
           </thead>
           <tbody>
             {/* Cronometer */}
-            <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+            <tr className="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
               <td className="px-6 py-4">
                 <div className="flex items-center gap-2">
                   <Image
@@ -209,7 +209,7 @@ export default function Home() {
             </tr>
 
             {/* WW */}
-            <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+            <tr className="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
               <td className="px-6 py-4">
                 <div className="flex items-center gap-2">
                   <Image
@@ -237,7 +237,7 @@ export default function Home() {
             </tr>
 
             {/* Noom */}
-            <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+            <tr className="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
               <td className="px-6 py-4">
                 <div className="flex items-center gap-2">
                   <Image
@@ -265,7 +265,7 @@ export default function Home() {
             </tr>
 
             {/* Noom */}
-            <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+            <tr className="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
               <td className="px-6 py-4">
                 <div className="flex items-center gap-2">
                   <Image
@@ -293,7 +293,7 @@ export default function Home() {
             </tr>
 
             {/* MyFitnessPal */}
-            <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+            <tr className="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
               <td className="px-6 py-4">
                 <div className="flex items-center gap-2">
                   <Image
@@ -320,7 +320,7 @@ export default function Home() {
             </tr>
 
             {/* FitHeroes */}
-            <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+            <tr className="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
               <td className="px-6 py-4">
                 <div className="flex items-center gap-2">
                   <Shield size={32} color="white" />
