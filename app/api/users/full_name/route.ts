@@ -1,61 +1,67 @@
-import { clerkClient, currentUser } from "@clerk/nextjs/app-beta";
+import { clerkClient, currentUser } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
 import { nameSchema } from "../../../../validations/nameValidator";
-import { User } from "@clerk/nextjs/dist/api";
+import type { User } from "@clerk/nextjs/api";
 
 export async function GET() {
-    try {
+  try {
     const user = await currentUser();
-        if (user) {
-            const allUsers = await clerkClient.users.getUserList();
 
-            // Only return id and name
-            const modifiedUsers = allUsers.map((user: User) => ({
-                id: user.id,
-                fullName: `${user.firstName} ${user.lastName}`,
-            }));
+    if (user) {
+      const allUsers = await clerkClient.users.getUserList();
 
-            return NextResponse.json(modifiedUsers);
-        }
-        return NextResponse.json({ error: "Forbidden" }, { status: 403 });
-    } catch (error) {
-        console.error(error);
-        return NextResponse.json(
-            { error: "Internal Server Error" },
-            { status: 500 }
-        );
+      // Only return id and name
+      const modifiedUsers = allUsers.map((user: User) => ({
+        id: user.id,
+        fullName: `${user.firstName} ${user.lastName}`,
+      }));
+
+      return NextResponse.json(modifiedUsers);
     }
+
+    // If user could not be found
+    return NextResponse.json(
+      { error: "Unable to complete action" },
+      { status: 403 }
+    );
+  } catch (error: any) {
+    console.error(error.message);
+    return NextResponse.json(
+      { error: "Internal Server Error" },
+      { status: 500 }
+    );
+  }
 }
 
 export async function PUT(req: Request) {
-    try {
-        const user = await currentUser();
-        const data = await req.json();
+  try {
+    const user = await currentUser();
+    const data = await req.json();
 
-        const isFirstNameValid = nameSchema.parse(data.firstName);
-        const isLastNameValid = nameSchema.parse(data.lastName);
+    const isFirstNameValid = nameSchema.parse(data.firstName);
+    const isLastNameValid = nameSchema.parse(data.lastName);
 
-        if (isFirstNameValid && isLastNameValid) {
-            if (user) {
-                await clerkClient.users.updateUser(user?.id, {
-                    firstName: data.firstName,
-                    lastName: data.lastName,
-                });
-            }
+    if (isFirstNameValid && isLastNameValid) {
+      if (user) {
+        await clerkClient.users.updateUser(user?.id, {
+          firstName: data.firstName,
+          lastName: data.lastName,
+        });
+      }
 
-            return NextResponse.json({
-                firstName: data.firstName,
-                lastName: data.lastName,
-            });
-        } else {
-            console.error("User inputs for names failed validation.");
-            return NextResponse.json({ error: "Forbidden" }, { status: 403 });
-        }
-    } catch (error) {
-        console.error(error);
-        return NextResponse.json(
-            { error: "Internal Server Error" },
-            { status: 500 }
-        );
+      return NextResponse.json({
+        firstName: data.firstName,
+        lastName: data.lastName,
+      });
     }
+
+    return NextResponse.json({ error: "Unable to validate" }, { status: 403 });
+
+  } catch (error: any) {
+    console.error(error.message);
+    return NextResponse.json(
+      { error: "Internal Server Error" },
+      { status: 500 }
+    );
+  }
 }
