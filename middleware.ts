@@ -1,8 +1,15 @@
-import { authMiddleware } from "@clerk/nextjs";
+import { authMiddleware, redirectToSignIn } from "@clerk/nextjs";
 
 export default authMiddleware({
   // "/" will be accessible to all users
-  publicRoutes: ["/", "/info"],
+  publicRoutes: ["/", "/info", "/login", "/register"],
+
+  afterAuth(auth, req, evt) {
+    // handle users who aren't authenticated
+    if (!auth.userId && !auth.isPublicRoute) {
+      return redirectToSignIn({ returnBackUrl: "/login" });
+    }
+  },
 });
 
 export const config = {
