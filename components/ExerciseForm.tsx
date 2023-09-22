@@ -5,6 +5,7 @@ import { toast } from "react-hot-toast";
 import axios from "axios";
 import ExerciseJournal from "./ExerciseJournal";
 import PlanTable from "./PlanTable";
+import { getSingleDayEntries } from "@/helpers/getSingleDayEntries";
 
 export default function ExerciseForm() {
   const [exercise, setExercise] = useState("");
@@ -29,7 +30,7 @@ export default function ExerciseForm() {
       const getExerciseData = async () => {
         const res = await axios.get("/api/exercise_entries");
         if (res.status === 200) {
-          setExercises(res.data);
+          setExercises(getSingleDayEntries(new Date(), res.data));
         }
       };
 
