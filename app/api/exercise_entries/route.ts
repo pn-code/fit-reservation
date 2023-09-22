@@ -2,21 +2,15 @@ import { NextResponse } from "next/server";
 import { prisma } from "../../../lib/client";
 import { currentUser } from "@clerk/nextjs";
 import { exerciseEntrySchema } from "../../../validations/exerciseEntryValidator";
-import getLocalTimezones from "../../../helpers/getLocalTimezone";
 
 export async function GET() {
   try {
     const user = await currentUser();
-    const localTime = getLocalTimezones();
 
     if (user) {
       const exerciseEntries = await prisma.exerciseEntry.findMany({
         where: {
           userId: user.id,
-          date: {
-            gte: localTime.startOfDay,
-            lt: localTime.endOfDay,
-          },
         },
       });
 
