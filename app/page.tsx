@@ -55,7 +55,7 @@ export default function Home() {
       {/* Tools */}
       <section id="info" className="flex flex-col gap-8 sm:gap-16 pt-20 justify-center items-center">
         <h2 className="w-full text-2xl lg:text-3xl flex gap-2 flex-col font-bold lg:flex-row lg:items-end lg:justify-center">
-          What's in FitHeroes?
+          What&apos;s in FitHeroes?
           <span className="text-[16px] sm:text-xl text-gray-300 font-normal">
             All the tools you need to elevate your fitness.
           </span>
