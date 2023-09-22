@@ -9,6 +9,8 @@ export async function GET() {
     const user = await currentUser();
     const localTime = getLocalTimezones();
 
+    console.log(localTime)
+
     if (user) {
       // Look for food entries specifically using the UTC ISO string time of it because it is stored via ISO string
       const foodEntries = await prisma.foodEntry.findMany({
