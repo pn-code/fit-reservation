@@ -1,10 +1,8 @@
-const getLocalTimezones = () => {
-    const today = new Date();
-
+const getLocalTimezones = (date = new Date()) => {
     const localStartOfDay = new Date(
-        today.getFullYear(),
-        today.getMonth(),
-        today.getDate(),
+        date.getFullYear(),
+        date.getMonth(),
+        date.getDate(),
         0, // Set hours to 0 for start of day
         0, // Set minutes to 0
         0, // Set seconds to 0
@@ -12,9 +10,9 @@ const getLocalTimezones = () => {
     );
 
     const localEndOfDay = new Date(
-        today.getFullYear(),
-        today.getMonth(),
-        today.getDate(),
+        date.getFullYear(),
+        date.getMonth(),
+        date.getDate(),
         23, // Set hours to 23 for end of day
         59, // Set minutes to 59
         59, // Set seconds to 59

@@ -2,22 +2,15 @@ import { NextResponse } from "next/server";
 import { prisma } from "../../../lib/client";
 import { currentUser } from "@clerk/nextjs";
 import { foodEntrySchema } from "../../../validations/foodEntryValidator";
-import getLocalTimezones from "../../../helpers/getLocalTimezone";
 
 export async function GET() {
   try {
     const user = await currentUser();
-    const localTime = getLocalTimezones();
 
     if (user) {
-      // Look for food entries specifically using the UTC ISO string time of it because it is stored via ISO string
       const foodEntries = await prisma.foodEntry.findMany({
         where: {
           userId: user.id,
-          date: {
-            gte: localTime.startOfDay,
-            lt: localTime.endOfDay,
-          },
         },
       });
 
