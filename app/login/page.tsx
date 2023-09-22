@@ -16,7 +16,7 @@ export default function LoginPage() {
                 <span>Email: guest@fitheroes.com</span>
                 <span>Password: 9b7bc049dbd!</span>
             </section>
-            <SignIn signUpUrl="/register" />
+            <SignIn signUpUrl="/register" redirectUrl={"/dashboard"}/>
         </main>
     );
 }
