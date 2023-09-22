@@ -14,8 +14,8 @@ export async function GET() {
         where: {
           userId: user.id,
           date: {
-            gte: localTime.startOfDay.toISOString(),
-            lt: localTime.endOfDay.toISOString(),
+            gte: localTime.startOfDay,
+            lt: localTime.endOfDay,
           },
         },
       });
