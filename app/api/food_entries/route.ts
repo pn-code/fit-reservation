@@ -10,12 +10,13 @@ export async function GET() {
     const localTime = getLocalTimezones();
 
     if (user) {
+      // Look for food entries specifically using the UTC ISO string time of it because it is stored via ISO string
       const foodEntries = await prisma.foodEntry.findMany({
         where: {
           userId: user.id,
           date: {
-            gte: localTime.startOfDay,
-            lt: localTime.endOfDay,
+            gte: localTime.startOfDay.toISOString(),
+            lt: localTime.endOfDay.toISOString(),
           },
         },
       });
