@@ -1,4 +1,4 @@
-import { currentUser } from "@clerk/nextjs/app-beta";
+import { currentUser } from "@clerk/nextjs";
 import { prisma } from "../../../../lib/client";
 import { NextResponse } from "next/server";
 
