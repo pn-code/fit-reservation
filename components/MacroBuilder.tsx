@@ -52,7 +52,7 @@ export default function MacroBuilder({ currentCalorieGoal }: Props) {
     return (
         <section className="py-4 rounded-md flex-1">
             <header>
-                <h2 className="text-2xl font-semibold">Macronutrients</h2>
+                <h2 className="text-xl sm:text-2xl font-semibold">Macronutrients</h2>
                 <p className="text-amber-400 text-sm font-semibold">
                     Build your macros.
                 </p>

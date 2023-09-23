@@ -96,7 +96,7 @@ function CalculatorForm() {
         <section className="flex flex-col gap-2 md:gap-8 justify-between lg:flex-row">
             <form className="py-4 rounded-md flex-1 w-full">
                 <header className="mb-2">
-                    <h2 className="text-2xl font-semibold">
+                    <h2 className="text-xl sm:text-2xl font-semibold">
                         Calculate Calorie Goal
                     </h2>
                     <p className="text-amber-400 text-sm font-semibold">
