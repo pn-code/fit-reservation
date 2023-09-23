@@ -8,7 +8,8 @@ export default authMiddleware({
     afterAuth(auth, req, evt) {
         // handle users who aren't authenticated
         if (!auth.userId && !auth.isPublicRoute) {
-            return redirectToSignIn({ returnBackUrl: req.url });
+            const landing = new URL('/', req.url)
+            return NextResponse.redirect(landing)
         }
 
         // redirect logged in users to dashboard
