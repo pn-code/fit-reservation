@@ -13,7 +13,7 @@ export default function Home() {
   return (
     <main className="w-full h-fit mt-14 px-4 gap-6 flex text-white items-center flex-col sm:mt-40 mb-10 bg-slate-900 md:gap-24 lg:px-[20%] text-center">
       {/* HERO SECTION */}
-      <section className="h-screen flex flex-col justify-around bg-slate-900 flex-1 gap-10 lg:py-20">
+      <section className="flex flex-col justify-around bg-slate-900 flex-1 gap-10 lg:py-20">
         <header className="h-full w-full flex flex-col gap-10">
           <h1 className="text-3xl sm:text-6xl lg:text-8xl font-semibold">
             Achieve new heights
@@ -53,7 +53,7 @@ export default function Home() {
             </section> */}
 
       {/* Tools */}
-      <section id="info" className="flex flex-col gap-8 sm:gap-16 pt-20 justify-center items-center">
+      <section id="info" className="flex flex-col gap-8 sm:gap-16 pt-5 justify-center items-center">
         <h2 className="w-full text-2xl lg:text-3xl flex gap-2 flex-col font-bold lg:flex-row lg:items-end lg:justify-center">
           What&apos;s in FitHeroes?
           <span className="text-[16px] sm:text-xl text-gray-300 font-normal">
@@ -117,7 +117,7 @@ export default function Home() {
       </section>
 
       <div className="mt-12 w-full flex flex-col xl:flex-row items-center gap-6 xl:justify-center">
-        <p className="text-gray-200/90 sm:mr-2 text-[14px] sm:text-[18px] text-amber-300">
+        <p className="text-gray-200/90 sm:mr-2 text-[14px] sm:text-[18px] text-amber-300 font-semibold">
           Going above and beyond the defined standards
         </p>
         <div className="flex gap-6 flex-wrap">
