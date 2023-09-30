@@ -1,9 +1,9 @@
-import moment from "moment";
 import React from "react";
 import ExerciseForm from "../../components/ExerciseForm";
 import NutritionForm from "../../components/NutritionForm";
 import Link from "next/link";
 import { currentUser } from "@clerk/nextjs/app-beta";
+import DateSelector from "@/components/journals/DateSelector";
 
 export const metadata = {
     title: "Journal | FitHeroes",
@@ -17,11 +17,7 @@ const JournalPage = async () => {
                 <section className="flex justify-between font-bold pb-2 items-center h-full">
                     <h1 className="text-xl sm:text-3xl">Journal</h1>
                 </section>
-                <section className="flex w-full justify-end sm:items-center">
-                    <h2 className="text-lg sm:text-xl font-semibold text-center">
-                        {moment().format("MMMM D, YYYY")}
-                    </h2>
-                </section>
+                <DateSelector/>
             </header>
 
             <section className="flex flex-col gap-8">
