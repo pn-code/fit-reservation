@@ -47,6 +47,7 @@ export async function POST(req: Request) {
             weight: res.weight,
             calories: res.calories,
             userId: user.id,
+            date: res.date
           },
         });
 

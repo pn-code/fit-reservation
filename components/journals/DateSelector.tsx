@@ -1,5 +1,6 @@
 "use client";
 
+import { findFirstDate } from "@/helpers/findFirstDate";
 import { Calendar } from "lucide-react";
 import { ChangeEvent, useState } from "react";
 
@@ -18,8 +19,11 @@ export default function DateSelector({
 
     return (
         <section className="flex w-full justify-end sm:items-center">
-            <h2 className="text-lg sm:text-xl font-semibold text-center flex gap-2 items-center">
-                <button className="inline-block relative w-7 h-7 text-indigo-500 hover:text-indigo-600 cursor-pointer">
+            <h2 className="text-lg sm:text-xl font-semibold text-center flex gap-2 items-center bg-slate-800 py-1 rounded-md px-2">
+                <button
+                    type="button"
+                    className="inline-block relative w-7 h-7 text-indigo-500 hover:text-indigo-600 cursor-pointer"
+                >
                     <Calendar className="absolute left-0 top-0 w-full h-full" />
                     <input
                         onChange={(e) => handleDateChange(e)}
@@ -27,6 +31,8 @@ export default function DateSelector({
                         aria-label="journal date"
                         className="absolute left-0 top-0 h-full w-full opacity-0"
                         type="date"
+                        required
+                        aria-required
                     />
                 </button>
                 <div>{selectedDate}</div>

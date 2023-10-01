@@ -34,6 +34,8 @@ export default function ExerciseForm({ selectedDate }: ExerciseFormProps) {
     // Form Change Toggle
     const [showExerciseForm, setExerciseForm] = useState(true);
 
+    console.log(selectedDate.toISOString())
+
     // Fetch all exercise entries
     useEffect(() => {
         try {
@@ -97,8 +99,10 @@ export default function ExerciseForm({ selectedDate }: ExerciseFormProps) {
                     duration,
                     sets,
                     reps,
+                    date: selectedDate
                 });
 
+                console.log(res.data)
                 toast.success(`${exercise} has been added.`);
 
                 setAllExerciseEntries((prev: ExerciseEntry[]) => [

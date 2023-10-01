@@ -45,27 +45,3 @@ export default function JournalSelector() {
         </div>
     );
 }
-
-{
-    /* <section className="flex flex-col gap-8">
-    <article className="flex flex-col gap-2 flex-1">
-        <header className="flex justify-between">
-            <h2 className="text-lg sm:text-2xl font-semibold text-amber-400 text-center">
-                Nutrition Journal
-            </h2>
-            <Link href={`/journal/nutrition/user/${user?.id}`}>See more</Link>
-        </header>
-        <NutritionForm />
-    </article>
-
-    <article className="flex flex-col gap-2 flex-1">
-        <header className="flex justify-between">
-            <h2 className="text-lg sm:text-2xl font-semibold text-amber-400 text-center">
-                Exercise Journal
-            </h2>
-            <Link href={`/journal/exercise/user/${user?.id}`}>See more</Link>
-        </header>
-        <ExerciseForm />
-    </article>
-</section>; */
-}

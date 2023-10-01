@@ -23,6 +23,8 @@ export default function NutritionForm({ selectedDate }: NutritionFormProps) {
     const [foodEntries, setFoodEntries] = useState<FoodEntry[]>([]);
     const [loadingNutrition, setLoadingNutrition] = useState<boolean>(true);
 
+    console.log(selectedDate)
+
     // Upon initial load, fetch all food entries
     useEffect(() => {
         try {
@@ -77,15 +79,22 @@ export default function NutritionForm({ selectedDate }: NutritionFormProps) {
                     carbs,
                     fats,
                     protein,
+                    date: selectedDate,
                 });
 
-                toast.success(`${name} has been added.`);
-                setFoodEntries((prev: FoodEntry[]) => [...prev, res.data]);
-                setName("");
-                setCalories(0);
-                setCarbs(0);
-                setFats(0);
-                setProtein(0);
+                if (res.status == 200) {
+                    console.log(res.data)
+                    toast.success(`${name} has been added.`);
+                    setAllFoodEntries((prev: FoodEntry[]) => [
+                        ...prev,
+                        res.data,
+                    ]);
+                    setName("");
+                    setCalories(0);
+                    setCarbs(0);
+                    setFats(0);
+                    setProtein(0);
+                }
             }
         } catch (error) {
             toast.error("An error has occurred.");
@@ -97,19 +106,23 @@ export default function NutritionForm({ selectedDate }: NutritionFormProps) {
     const deleteFoodEntry = async (id: number) => {
         try {
             const res = await axios.delete(`/api/food_entries/${id}`);
-            toast.success(
-                `Successfully deleted: ${res.data.name.substring(0, 30)}!`
-            );
-            const updatedFoodEntries = foodEntries.filter(
-                (entry) => entry.id != id
-            );
-            setFoodEntries(updatedFoodEntries);
+
+            if (res.status == 200) {
+                toast.success(
+                    `Successfully deleted: ${res.data.name.substring(0, 30)}!`
+                );
+                const updatedFoodEntries = foodEntries.filter(
+                    (entry) => entry.id != id
+                );
+                setAllFoodEntries(updatedFoodEntries);
+            }
         } catch (error) {
             toast.error(
                 `An error has occurred while attempting to delete ${name}.`
             );
         }
     };
+
     return (
         <section className="flex flex-col gap-4">
             <form className="w-full flex flex-col gap-8 lg:flex-row py-2 lg:items-center lg:justify-between">
