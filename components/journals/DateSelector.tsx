@@ -3,25 +3,15 @@
 import { Calendar } from "lucide-react";
 import { ChangeEvent, useState } from "react";
 
-const findFirstDate = () => {
-    const today = new Date();
+interface DateSelectorProps {
+    selectedDate: string;
+    setSelectedDate: (dateString: string) => void;
+}
 
-    const year = today.getFullYear().toString();
-    const month =
-        (today.getMonth() + 1).toString().length === 2
-            ? `${today.getMonth() + 1}`
-            : `0${today.getMonth() + 1}`;
-    const day =
-        today.getDate().toString().length === 2
-            ? `${today.getDate()}`
-            : `0${today.getDate()}`;
-
-    return `${year}-${month}-${day}`;
-};
-
-export default function DateSelector() {
-    const [selectedDate, setSelectedDate] = useState<string>(findFirstDate());
-
+export default function DateSelector({
+    selectedDate,
+    setSelectedDate,
+}: DateSelectorProps) {
     const handleDateChange = (e: ChangeEvent<HTMLInputElement>) => {
         setSelectedDate(e.target.value);
     };

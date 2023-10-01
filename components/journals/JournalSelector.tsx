@@ -1,14 +1,17 @@
 "use client";
 
 import DateSelector from "@/components/journals/DateSelector";
-import { RotateCw } from "lucide-react";
 import { useState } from "react";
 import NutritionForm from "../NutritionForm";
-import NutritionJournal from "../NutritionJournal";
 import ExerciseForm from "../ExerciseForm";
+import { findFirstDate } from "@/helpers/findFirstDate";
+import { convertDateInputToDate } from "@/helpers/convertDateInputToDate";
 
 export default function JournalSelector() {
     const [currentJournal, setCurrentJournal] = useState<string>("nutrition");
+    const [selectedDate, setSelectedDate] = useState<string>(findFirstDate());
+
+    const convertedDate = convertDateInputToDate(selectedDate)
 
     const handleChangeJournal = () => {
         setCurrentJournal((prev) =>
@@ -22,19 +25,22 @@ export default function JournalSelector() {
                 <h2 className="text-lg font-semibold">
                     <button
                         onClick={handleChangeJournal}
-                        className="bg-indigo-700 px-2 rounded-md py-1 hover:bg-indigo-700/70"
+                        className="bg-indigo-700 px-4 rounded-md py-1 hover:bg-indigo-700/70"
                     >
                         {currentJournal.toUpperCase()}
                     </button>
                 </h2>
 
-                <DateSelector />
+                <DateSelector
+                    selectedDate={selectedDate}
+                    setSelectedDate={setSelectedDate}
+                />
             </header>
 
             {currentJournal === "nutrition" ? (
-                <NutritionForm />
+                <NutritionForm selectedDate={convertedDate}/>
             ) : (
-                <ExerciseForm />
+                <ExerciseForm selectedDate={convertedDate}/>
             )}
         </div>
     );
