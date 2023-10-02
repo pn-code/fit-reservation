@@ -48,6 +48,7 @@ export async function POST(req: Request) {
             fats: res.fats,
             protein: res.protein,
             userId: user.id,
+            date: res.date
           },
         });
 

@@ -16,7 +16,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 const Navbar = () => {
-  const [calorieGoal, setCalorieGoal] = useState(2000);
+  const [calorieGoal, setCalorieGoal] = useState<number | "loading">("loading");
 
   const user = useUser().user;
 
@@ -56,7 +56,7 @@ const Navbar = () => {
             >
               <span className="flex gap-1 items-center text-sm">
                 <Target color="orange" size={20} />
-                Goal - {calorieGoal} kCal
+                {calorieGoal === "loading" ? "loading..." : `Goal - ${calorieGoal} kCal`}
               </span>
             </Link>
           )}

@@ -6,9 +6,6 @@
 3. [] Users can view progress reports.  
 4. [X] Users can calculate their calories.  
 
-## Achievements and Rewards
-1. [] Users can receive achievements/rewards when they reach specific milestones.  
-
 ## Social features
 1. [] Users can view another user's profile.
 2. [] Users can connect with other users.  
@@ -16,11 +13,11 @@
 4. [] Users can participate in challenges.
 
 ## Customization
-1. [] Users can customize workouts.
+1. [X] Users can customize workouts.
 
 ## Progress tracking
-1. [] Users can track their weight or body measurements.
-2. [] Users can view graphs or charts that show their progress over time.  
+1. [X] Users can track their weight or body measurements.
+2. [X] Users can view graphs or charts that show their progress over time.  
 
 ## Personalized recommendations: 
 1. [] Users can receive recommendations for workout routines.
