@@ -52,18 +52,18 @@ export default async function Plans({ params }: Props) {
                 <h1 className="text-xl sm:text-3xl font-bold">{`${user.firstName} ${user.lastName}'s Plans`}</h1>
                 <section className="flex gap-4">
                     <Link
-                        className="flex justify-center items-center gap-2 bg-green-600 hover:bg-green-700 rounded-lg text-white p-2"
+                        className="flex justify-center items-center gap-2 bg-green-600 hover:bg-green-700 rounded-lg text-white px-2 py-1"
                         href="/plans/build"
                     >
-                        <HammerIcon size={24} />
-                        <span className="hidden sm:flex">Build</span>
+                        <HammerIcon size={16} />
+                        <span className="font-semibold">Build</span>
                     </Link>
                     <Link
-                        className="flex justify-center items-center gap-2 bg-indigo-600 hover:bg-indigo-700 rounded-lg text-white p-2"
+                        className="flex justify-center items-center gap-2 bg-indigo-600 hover:bg-indigo-700 rounded-lg text-white px-2 py-1"
                         href="/plans/explore"
                     >
-                        <GlobeIcon size={24} />
-                        <span className="hidden sm:flex">Explore</span>
+                        <GlobeIcon size={16} />
+                        <span className="font-semibold">Explore</span>
                     </Link>
                 </section>
             </header>
