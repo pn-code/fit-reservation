@@ -67,7 +67,7 @@ async function ProfilePage({ params }: Props) {
           <h2 className="text-xl sm:text-2xl font-semibold text-amber-300">
             Update Goals
           </h2>
-          <p className="text-sm">Get a cool verified check</p>
+          <p className="text-sm">Manage your goals</p>
         </section>
         <Link className="flex text-sm items-center justify-center gap-2 rounded-md px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white/90 hover:text-white sm:w-42" href="/calculator" passHref>
           <SigmaSquare size={18}/>
