@@ -4,8 +4,9 @@ import axios from "axios";
 import { Edit } from "lucide-react";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
-import Spinner from "@/components/Spinner";
 import { useRouter } from "next/navigation";
+
+import Spinner from "@/components/Spinner";
 
 export default function UpdateUsernameComponent() {
   const [isUpdating, setIsUpdating] = useState(false);

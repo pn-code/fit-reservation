@@ -1,6 +1,7 @@
-import { currentUser } from "@clerk/nextjs/app-beta";
-import { prisma } from "../../../../../lib/client";
 import Link from "next/link";
+
+import { currentUser } from "@clerk/nextjs/app-beta";
+import { prisma } from "@/lib/client";
 import AllNutritionEntries from "@/components/journals/nutrition/AllNutritionEntries";
 
 export const metadata = {
@@ -39,7 +40,7 @@ export default async function UserNutritionJournals() {
       {entries.length === 0 && <span>No journals were found.</span>}
 
       {/* Render Journals */}
-      <AllNutritionEntries entries={entries}/>
+      <AllNutritionEntries entries={entries} />
     </main>
   );
 }

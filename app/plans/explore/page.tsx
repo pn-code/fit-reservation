@@ -1,4 +1,5 @@
 import Link from "next/link";
+
 import { currentUser } from "@clerk/nextjs/app-beta";
 import { prisma } from "@/lib/client";
 import DisplayPlans from "@/components/plans/DisplayPlans";

@@ -1,4 +1,4 @@
-import MeasurementsComponent from "../../components/dashboard/MeasurementsComponent";
+import MeasurementsComponent from "@/components/dashboard/MeasurementsComponent";
 
 export const metadata = {
     title: "Dashboard | FitHeroes",
