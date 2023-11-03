@@ -1,19 +1,13 @@
 "use client";
-import {
-  Dumbbell,
-  Gauge,
-  PenLine,
-  Shield,
-  SigmaSquare,
-  Target,
-  User,
-} from "lucide-react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useUser } from "@clerk/nextjs";
-import NavbarMobile from "./NavbarMobile";
+
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { Dumbbell, Gauge, PenLine, Shield, Target, User } from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+
+import { useUser } from "@clerk/nextjs";
+import NavbarMobile from "@/components/navigation/NavbarMobile";
 
 const Navbar = () => {
   const [calorieGoal, setCalorieGoal] = useState<number | "loading">("loading");
@@ -56,7 +50,9 @@ const Navbar = () => {
             >
               <span className="flex gap-1 items-center text-sm">
                 <Target color="orange" size={20} />
-                {calorieGoal === "loading" ? "loading..." : `Goal - ${calorieGoal} kCal`}
+                {calorieGoal === "loading"
+                  ? "loading..."
+                  : `Goal - ${calorieGoal} kCal`}
               </span>
             </Link>
           )}

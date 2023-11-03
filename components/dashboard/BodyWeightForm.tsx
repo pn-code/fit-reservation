@@ -1,91 +1,90 @@
 import { useState } from "react";
-import { weightSchema } from "../../validations/weightValidator";
 import axios from "axios";
 import toast from "react-hot-toast";
 
+import { weightSchema } from "@/validations/weightValidator";
+
 interface Props {
-    setWeights: any;
+  setWeights: any;
 }
 
 export default function BodyWeightForm({ setWeights }: Props) {
-    const today = new Date().toISOString().split("T")[0];
+  const today = new Date().toISOString().split("T")[0];
 
-    const [weight, setWeight] = useState<number>(160);
-    const [date, setDate] = useState(today);
-    const [loading, setLoading] = useState(false);
+  const [weight, setWeight] = useState<number>(160);
+  const [date, setDate] = useState(today);
+  const [loading, setLoading] = useState(false);
 
-    const submitCurrentWeight = async () => {
-        try {
-            setLoading(true);
-            const validateWeight = weightSchema.parse(weight);
-            if (validateWeight) {
-                const formattedDate = new Date(date).toISOString();
-                const res = await axios.post("/api/weight_measurements", {
-                    weight,
-                    createdAt: formattedDate,
-                });
+  const submitCurrentWeight = async () => {
+    try {
+      setLoading(true);
+      const validateWeight = weightSchema.parse(weight);
+      if (validateWeight) {
+        const formattedDate = new Date(date).toISOString();
+        const res = await axios.post("/api/weight_measurements", {
+          weight,
+          createdAt: formattedDate,
+        });
 
-                if (res.status === 200) {
-                    toast.success(
-                        `Successfully added new weight to user data.`
-                    );
-                    setWeights((prev: unknown[]) =>
-                        [...prev, res.data].sort(
-                            (a, b) =>
-                                new Date(b.createdAt).getTime() -
-                                new Date(a.createdAt).getTime()
-                        )
-                    );
-                } else {
-                    throw Error;
-                }
-            }
-        } catch (error) {
-            console.error(error);
-            toast.error("We ran into an error...");
-        } finally {
-            setLoading(false);
+        if (res.status === 200) {
+          toast.success(`Successfully added new weight to user data.`);
+          setWeights((prev: unknown[]) =>
+            [...prev, res.data].sort(
+              (a, b) =>
+                new Date(b.createdAt).getTime() -
+                new Date(a.createdAt).getTime()
+            )
+          );
+        } else {
+          throw Error;
         }
-    };
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("We ran into an error...");
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    return (
-        <form className="w-full text-[16px] sm:text-sm flex flex-col gap-4 justify-center items-center px-4 py-2 rounded-md">
-            <section className="w-full flex gap-4 justify-between items-center">
-                <section className="w-full flex flex-col sm:flex-row gap-2 items-center">
-                    <label className="font-bold" htmlFor="weight">
-                        Date:{" "}
-                    </label>
-                    <input
-                        className="w-full sm:w-32"
-                        onChange={(e) => setDate(e.target.value)}
-                        value={date}
-                        type="date"
-                        id="date"
-                        max={today}
-                    />
-                </section>
-                <section className="w-full flex flex-col sm:flex-row gap-2 items-center sm:justify-end">
-                    <label className="font-bold" htmlFor="weight">
-                        Weight (lbs):
-                    </label>
-                    <input
-                        className="w-full sm:w-16"
-                        onChange={(e) => setWeight(Number(e.target.value))}
-                        value={weight}
-                        type="number"
-                        id="weight"
-                        placeholder="weight"
-                    />
-                </section>
-            </section>
-            <button
-                onClick={submitCurrentWeight}
-                type="button"
-                disabled={loading}
-                className="disabled:bg-gray-500 w-full bg-indigo-600 hover:bg-indigo-700 rounded-sm text-white px-4 py-2 hover:underline"
-            >
-                Submit
-            </button>
-        </form>
-    );
+  return (
+    <form className="w-full text-[16px] sm:text-sm flex flex-col gap-4 justify-center items-center px-4 py-2 rounded-md">
+      <section className="w-full flex gap-4 justify-between items-center">
+        <section className="w-full flex flex-col sm:flex-row gap-2 items-center">
+          <label className="font-bold" htmlFor="weight">
+            Date:{" "}
+          </label>
+          <input
+            className="w-full sm:w-32"
+            onChange={(e) => setDate(e.target.value)}
+            value={date}
+            type="date"
+            id="date"
+            max={today}
+          />
+        </section>
+        <section className="w-full flex flex-col sm:flex-row gap-2 items-center sm:justify-end">
+          <label className="font-bold" htmlFor="weight">
+            Weight (lbs):
+          </label>
+          <input
+            className="w-full sm:w-16"
+            onChange={(e) => setWeight(Number(e.target.value))}
+            value={weight}
+            type="number"
+            id="weight"
+            placeholder="weight"
+          />
+        </section>
+      </section>
+      <button
+        onClick={submitCurrentWeight}
+        type="button"
+        disabled={loading}
+        className="disabled:bg-gray-500 w-full bg-indigo-600 hover:bg-indigo-700 rounded-sm text-white px-4 py-2 hover:underline text-[16px]"
+      >
+        Submit
+      </button>
+    </form>
+  );
 }
