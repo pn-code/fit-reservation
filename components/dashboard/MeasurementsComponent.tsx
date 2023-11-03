@@ -1,4 +1,5 @@
 "use client";
+
 import { useEffect, useState } from "react";
 import axios from "axios";
 import LineChart from "./LineChart";
@@ -287,7 +288,7 @@ export default function MeasurementsComponent() {
 
                         <button
                             type="button"
-                            className="rounded-sm bg-gray-500 mx-4 py-2 hover:bg-gray-600"
+                            className="rounded-sm bg-gray-500 mx-4 py-2 hover:bg-gray-600 text-[16px]"
                             onClick={() =>
                                 setShowWeights((weights) => !weights)
                             }
@@ -428,7 +429,7 @@ export default function MeasurementsComponent() {
 
                         <button
                             type="button"
-                            className="rounded-sm bg-gray-500 mx-4 py-2 hover:bg-gray-600"
+                            className="rounded-sm bg-gray-500 mx-4 py-2 hover:bg-gray-600 text-[16px]"
                             onClick={() => setShowBodyFats((bf) => !bf)}
                         >
                             {showBodyFats ? "Hide " : "Show "} Body Fats

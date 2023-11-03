@@ -82,7 +82,7 @@ export default function BodyWeightForm({ setWeights }: Props) {
                 onClick={submitCurrentWeight}
                 type="button"
                 disabled={loading}
-                className="disabled:bg-gray-500 w-full bg-indigo-600 hover:bg-indigo-700 rounded-sm text-white px-4 py-2 hover:underline"
+                className="disabled:bg-gray-500 w-full bg-indigo-600 hover:bg-indigo-700 rounded-sm text-white px-4 py-2 hover:underline text-[16px]"
             >
                 Submit
             </button>
