@@ -1,6 +1,6 @@
-import CalculatorForm from "../../components/CalculatorForm";
-import MacroBuilder from "../../components/MacroBuilder";
-import getCalorieGoal from "../../helpers/getCalorieGoal";
+import CalculatorForm from "@/components/calculator/CalculatorForm";
+import MacroBuilder from "@/components/calculator/MacroBuilder";
+import getCalorieGoal from "@/helpers/getCalorieGoal";
 
 export const metadata = {
     title: "Calculator | FitHeroes",

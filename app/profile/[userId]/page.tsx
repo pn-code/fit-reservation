@@ -1,11 +1,12 @@
-import SignOutButton from "../../../components/SignOutButton";
-import { clerkClient, currentUser } from "@clerk/nextjs/app-beta";
-import StripeCheckOutButton from "../../../components/StripeCheckOutButton";
-import { prisma } from "../../../lib/client";
 import { Check } from "lucide-react";
-import UpdateUserComponent from "../../../components/UpdateUserComponent";
 import Link from "next/link";
 import { SigmaSquare } from "lucide-react";
+
+import SignOutButton from "@/components/profile/SignOutButton";
+import { clerkClient, currentUser } from "@clerk/nextjs/app-beta";
+import StripeCheckOutButton from "@/components/profile/StripeCheckOutButton";
+import UpdateUserComponent from "@/components/profile/UpdateUserComponent";
+import { prisma } from "@/lib/client";
 
 interface Props {
   params: {
@@ -69,8 +70,12 @@ async function ProfilePage({ params }: Props) {
           </h2>
           <p className="text-sm">Manage your goals</p>
         </section>
-        <Link className="flex text-sm items-center justify-center gap-2 rounded-md px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white/90 hover:text-white sm:w-42" href="/calculator" passHref>
-          <SigmaSquare size={18}/>
+        <Link
+          className="flex text-sm items-center justify-center gap-2 rounded-md px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white/90 hover:text-white sm:w-42"
+          href="/calculator"
+          passHref
+        >
+          <SigmaSquare size={18} />
           Calculator
         </Link>
       </section>
