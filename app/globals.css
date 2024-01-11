@@ -7,21 +7,34 @@ select {
     @apply text-black px-2 rounded-sm py-1 shadow-sm focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50;
 }
 
-body {
-    @apply bg-[#cacaca];
-}
-
 html,
 body {
     margin: 0;
     padding: 0;
     scroll-behavior: smooth;
+    background: #f1f5f9;
 }
 
 @layer base {
     input[type="number"]::-webkit-inner-spin-button,
     input[type="number"]::-webkit-outer-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
+        -webkit-appearance: none;
+        margin: 0;
     }
-  }
+}
+
+.bg-hero {
+    background-image: url("../public/assets/hero.png");
+}
+
+.btn {
+    @apply min-w-[200px] max-w-[300px] h-14 text-[14px] sm:text-[16px] flex justify-center items-center sm:px-8 rounded-sm;
+}
+
+.btn--primary {
+    @apply bg-black border border-white hover:bg-black/40 hover:text-white;
+}
+
+.btn--secondary {
+    @apply hover:text-white sm:px-8 hover:bg-gray-500/80  bg-gray-700/90;
+}

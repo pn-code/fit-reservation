@@ -24,7 +24,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <ClerkProvider>
-        <body className={`${karla.className} bg-gray-900 h-full`}>
+        <body className={`${karla.className}`}>
           <Navbar />
           <ToastProvider />
           {children}

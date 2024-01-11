@@ -34,7 +34,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="relative h-16 bg-[#172554] text-white py-6 px-2 lg:px-[20%] flex justify-between items-center w-full top-0 left-0 z-[999]">
+      <nav className="relative h-16 bg-slate-50 text-slate-900 py-6 px-2 md:px-[4%] flex justify-between items-center w-full top-0 left-0 z-[999]">
         <header className="w-full flex gap-5 items-center justify-between lg:justify-start">
           <Link
             className="hover:underline font-medium flex gap-2 items-center"
