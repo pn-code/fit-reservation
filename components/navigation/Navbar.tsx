@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Dumbbell, Gauge, PenLine, Shield, Target, User } from "lucide-react";
+import { Dumbbell, Gauge, PenLine, Target, User } from "lucide-react";
 import { useUser } from "@clerk/nextjs";
 
 import NavbarMobile from "@/components/navigation/NavbarMobile";
@@ -38,13 +38,15 @@ const Navbar = () => {
 
     return (
         <>
-            <nav className="relative h-16 bg-slate-50 text-slate-900 py-6 px-4 md:px-[4%] flex justify-between items-center w-full top-0 left-0 z-[999]">
+            <nav className="relative h-16 bg-white text-slate-900 py-6 px-4 md:px-[4%] flex justify-between items-center w-full top-0 left-0 z-[999]">
                 <header className="w-full flex gap-5 items-center justify-between lg:justify-start">
-                    <Link
-                        className="flex gap-2 items-center"
-                        href="/"
-                    >
-                        <Image width={180} height={20} src={LogoImg} alt="Fit Heroes Logo" />
+                    <Link className="flex gap-2 items-center" href="/">
+                        <Image
+                            width={200}
+                            height={20}
+                            src={LogoImg}
+                            alt="Fit Heroes Logo"
+                        />
                     </Link>
                     {user && (
                         <Link

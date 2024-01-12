@@ -1,7 +1,7 @@
 interface WeightMeasurement {
     id: number;
     weight: number;
-    createdAt: string;
+    createdAt: Date;
     userId: string;
 }
 
