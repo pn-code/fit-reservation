@@ -51,10 +51,10 @@ export default function SavePlanButton({ planId, isSaved }: Props) {
             disabled={loading}
             onClick={handleSave}
             type="button"
-            className="px-4 py-1 rounded-md flex gap-2 bg-gray-900/70 items-center hover:bg-gray-700 disabled:bg-gray-500"
+            className="btn btn--primary flex gap-2 items-center"
         >
-            <Save color={hasCurrentUserSaved ? "#ffdf00" : "#ffffff"} />
-            <p className={hasCurrentUserSaved ? "text-amber-300" : ""}>
+            <Save color="white" />
+            <p className="text-white">
                 {hasCurrentUserSaved ? "Saved" : "Save Plan"}
             </p>
         </button>

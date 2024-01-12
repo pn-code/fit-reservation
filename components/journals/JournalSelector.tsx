@@ -26,7 +26,7 @@ export default function JournalSelector() {
         <h2 className="text-lg font-semibold">
           <button
             onClick={handleChangeJournal}
-            className="bg-indigo-700 px-4 rounded-md py-1 hover:bg-indigo-700/70"
+            className="btn btn--secondary"
           >
             {currentJournal.toUpperCase()}
           </button>

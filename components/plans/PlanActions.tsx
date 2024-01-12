@@ -28,7 +28,7 @@ export default function PlanActions({ plan, userId }: Props) {
     return (
         <section>
             <h3 className="text-lg font-semibold">Actions:</h3>
-            <button onClick={deletePlan} className="px-3 py-1 bg-red-500 rounded-md text-sm hover:bg-red-700">
+            <button onClick={deletePlan} className="btn btn--danger">
                 Delete Plan
             </button>
         </section>

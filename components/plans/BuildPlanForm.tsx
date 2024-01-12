@@ -250,7 +250,7 @@ export default function BuildPlanForm() {
               disabled={loading}
               onClick={handleSubmitPlan}
               type="button"
-              className="w-full md:w-40 bg-indigo-600 hover:bg-indigo-700 rounded-sm mt-4 text-white px-4 py-2 hover:underline disabled:bg-gray-300"
+              className="btn btn--primary"
             >
               Submit
             </button>

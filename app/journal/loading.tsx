@@ -1,33 +1,24 @@
-import React from "react";
-import Link from "next/link";
-
 import Spinner from "@/components/Spinner";
 
 export default function Loading() {
     return (
-        <main className="w-full min-h-[calc(100vh-90px)] bg-gray-900 py-6 rounded-md flex flex-col gap-4 shadow-md px-2 lg:px-[20%] text-white/90">
-            <header className="w-full flex justify-between border-b-2 border-b-indigo-600">
+        <main className="w-full min-h-[calc(100vh-100px)] pb-20 overflow-y-auto py-6 rounded-md flex flex-col gap-4 shadow-md px-4 md:px-[4%]">
+            <header className="w-full flex justify-between border-b-2 border-b-primary">
                 <section className="w-full flex justify-between font-bold pb-2 items-center h-full">
-                    <h1 className="text-xl sm:text-3xl">Journal</h1>
-                    <div>
-                        <Link
-                            className="text-sm font-semibold p-2 underline hover:text-slate-300"
-                            href={`/journal/nutrition/user/`}
-                        >
+                    <h1>Journal</h1>
+                    <div className="flex gap-2 ">
+                        <button className="btn btn--primary">
                             All Nutrition
-                        </Link>
-                        <Link
-                            className="text-sm font-semibold p-2 underline hover:text-slate-300"
-                            href={`/journal/exercise/user/`}
-                        >
+                        </button>
+                        <button className="btn btn--primary">
                             All Exercises
-                        </Link>
+                        </button>
                     </div>
                 </section>
             </header>
 
             <section className="w-full h-full flex justify-center mt-40">
-                <Spinner size={16}/>
+                <Spinner size={16} />
             </section>
         </main>
     );

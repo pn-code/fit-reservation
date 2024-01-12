@@ -23,18 +23,26 @@ body {
     }
 }
 
+h1 {
+    @apply text-3xl tracking-tighter;
+}
+
 .bg-hero {
     background-image: url("../public/assets/hero.png");
 }
 
 .btn {
-    @apply min-w-[200px] max-w-[300px] h-14 text-[14px] sm:text-[16px] flex justify-center items-center sm:px-8 rounded-sm;
+    @apply flex justify-center items-center px-6 py-2 rounded-sm duration-150;
 }
 
 .btn--primary {
-    @apply bg-black border border-white hover:bg-black/40 hover:text-white;
+    @apply bg-black hover:bg-black/80 text-white;
 }
 
 .btn--secondary {
-    @apply hover:text-white sm:px-8 hover:bg-gray-500/80  bg-gray-700/90;
+    @apply hover:text-white hover:bg-gray-500/80  bg-gray-700/90 text-white;
+}
+
+.btn--danger {
+    @apply bg-red-500 hover:bg-red-700 text-white;
 }

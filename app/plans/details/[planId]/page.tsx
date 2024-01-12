@@ -48,10 +48,10 @@ export default async function PlanDetails({ params }: Props) {
   };
 
   return (
-    <main className="w-full min-h-[calc(100vh-90px)] overflow-y-auto mb-12 bg-gray-900 py-6 rounded-md flex flex-col gap-4 shadow-md px-2 lg:px-[20%] text-white/90">
-      <header className="flex justify-between font-bold pb-2 border-b-2 border-b-indigo-600 items-center">
+    <main className="w-full min-h-[calc(100vh-90px)] overflow-y-auto mb-12 py-6 rounded-md flex flex-col gap-4 shadow-md px-4 md:px-[4%]">
+      <header className="flex justify-between font-bold pb-2 border-b-2 border-primary items-center">
         <section className="flex gap-2 items-center">
-          <h1 className="text-xl sm:text-3xl font-bold">{plan.name}</h1>
+          <h1>{plan.name}</h1>
           <span className="hidden text-sm sm:flex font-normal">
             Saved by{" "}
             {plan.savedByUsers.length === 1
@@ -75,7 +75,7 @@ export default async function PlanDetails({ params }: Props) {
       <section className="flex justify-between">
         <p>
           Created by{" "}
-          <span className="text-amber-300">
+          <span className="text-accent">
             {`${planAuthor.firstName} ${planAuthor.lastName}`}
           </span>
         </p>
@@ -86,40 +86,40 @@ export default async function PlanDetails({ params }: Props) {
       {/* Description */}
       <section>
         <h3 className="text-lg font-semibold">Description:</h3>
-        <p className="text-sm">{plan.description}</p>
+        <p>{plan.description}</p>
       </section>
 
       {/* Actions */}
       {user.id === plan.userId && <PlanActions plan={plan} userId={user.id} />}
 
-      <table className="table-auto w-full lg:w-[56%]">
-        <thead className="h-8 text-xs sm:text-[16px] font-semibold uppercase text-yellow-50 bg-blue-900/60">
+      <table className="table-auto w-full md:w-[50%] xl:w-[40%]">
+        <thead className="h-8 text-xs sm:text-[16px] font-semibold uppercase bg-secondary text-white">
           <tr className="p-2 whitespace-nowrap">
             <th>
-              <div className="font-semibold text-left">Exercise</div>
+              <div className="font-semibold text-left p-2">Exercise</div>
             </th>
             <th>
-              <div className="font-semibold text-left">Type</div>
+              <div className="font-semibold text-left p-2">Type</div>
             </th>
             <th>
-              <div className="font-semibold text-left">Reps</div>
+              <div className="font-semibold text-left p-2">Reps</div>
             </th>
             <th>
-              <div className="font-semibold text-left">Duration</div>
+              <div className="font-semibold text-left p-2">Duration</div>
             </th>
           </tr>
         </thead>
 
-        <tbody className="text-sm divide-y divide-gray-100 w-full bg-gray-800">
+        <tbody className="text-sm divide-y divide-secondary w-full bg-white">
           {plan.exercises.map((exercise: any, idx: number) => (
             <tr
               key={idx}
-              className="w-full text-xs sm:text-[14px] bg-blue-900/20 hover:bg-indigo-600 cursor-pointer hover:text-white"
+              className="w-full text-xs sm:text-[14px] bg-white hover:bg-slate-200 cursor-pointer"
             >
-              <td className="py-2 whitespace-nowrap">{exercise.name}</td>
-              <td className="py-2 whitespace-nowrap">{exercise.type}</td>
-              <td className="py-2 whitespace-nowrap">{`${exercise.sets} x ${exercise.reps}`}</td>
-              <td className="py-2 whitespace-nowrap">{exercise.duration}m</td>
+              <td className="p-2 whitespace-nowrap">{exercise.name}</td>
+              <td className="p-2 whitespace-nowrap">{exercise.type}</td>
+              <td className="p-2 whitespace-nowrap">{`${exercise.sets} x ${exercise.reps}`}</td>
+              <td className="p-2 whitespace-nowrap">{exercise.duration}m</td>
             </tr>
           ))}
         </tbody>
@@ -131,7 +131,7 @@ export default async function PlanDetails({ params }: Props) {
           <h3 className="text-lg font-semibold">Reviews</h3>
         </header>
 
-        <section className="flex-col gap-4">
+        <section className="flex flex-col gap-2">
           {plan.reviews.length === 0 ? (
             <p className="text-sm">Be the first to leave a review!</p>
           ) : (

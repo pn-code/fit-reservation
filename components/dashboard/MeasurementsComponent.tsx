@@ -192,15 +192,15 @@ export default function MeasurementsComponent() {
     <section className="flex flex-col gap-4">
       {/* Charts */}
       <section className="flex flex-col gap-4 flex-1">
-        <h2 className="text-lg sm:text-2xl font-semibold">Your Measurements</h2>
+        <h2 className="text-xl font-semibold">Your Measurements</h2>
         <section className="flex flex-col gap-6">
           {/* Body Weight Charts */}
           <section className="h-fit w-full rounded-md flex flex-col gap-2 flex-1">
             <header className="flex justify-between sm:items-center sm:flex-row flex-col">
-              <h3 className="text-[16px] sm:text-lg">
-                Body Weight Measurements
+              <h3 className="text-xl">
+                Your Body Weight
               </h3>
-              <div className="hidden sm:flex gap-2 rounded-md px-4 py-2 bg-gray-800/80 justify-between">
+              <div className="hidden sm:flex gap-2 rounded-md px-4 py-2 justify-between">
                 <button
                   onClick={() => setWeightsToDisplay("month")}
                   className={
@@ -224,7 +224,7 @@ export default function MeasurementsComponent() {
               </div>
             </header>
 
-            <h4 className="text-amber-300">
+            <h4 className="text-accent">
               Last Recorded Body Weight:{" "}
               {currentWeight ? `${currentWeight} lbs` : "No Records"}
             </h4>
@@ -319,7 +319,7 @@ export default function MeasurementsComponent() {
           {/* Body Fat Charts*/}
           <section className="h-fit w-full rounded-md flex flex-col gap-2 flex-1 mt-5">
             <header className="flex justify-between sm:items-center sm:flex-row flex-col">
-              <h3 className="text-[16px] sm:text-lg">Body Fat Measurements</h3>
+              <h3 className="text-xl">Body Fat Measurements</h3>
               <div className="hidden sm:flex gap-2 rounded-md px-4 py-2 bg-gray-800/80 justify-between">
                 <button
                   onClick={() => setBodyFatsToDisplay("month")}
@@ -344,7 +344,7 @@ export default function MeasurementsComponent() {
               </div>
             </header>
 
-            <h4 className="text-amber-300">
+            <h4 className="text-accent">
               Last Recorded Body Fat Percentage:{" "}
               {currentBF ? `${currentBF}%` : "No Records"}
             </h4>
