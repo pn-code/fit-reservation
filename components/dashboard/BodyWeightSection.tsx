@@ -35,7 +35,7 @@ export default function BodyWeightSection({
             <header className="container flex justify-between sm:items-center">
                 <div className="flex flex-col">
                     <h3 className="text-lg font-bold tracking-tighter">
-                        Weight Measurements
+                        Weight
                     </h3>
                     <span className="text-secondary text-sm tracking-tighter">
                         Last Recorded Weight:{" "}

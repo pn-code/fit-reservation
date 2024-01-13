@@ -42,7 +42,7 @@ export default function BodyWeightTableModal({
     if (!isOpen) return null;
 
     return (
-        <div className="absolute bg-black/80 top-0 left-0 w-full h-[90vh] md:h-screen z-50 flex justify-center pt-5">
+        <div className="absolute bg-black/80 top-0 left-0 w-full h-full md:h-screen z-50 flex justify-center pt-5">
             <div className="bg-white h-[75vh] w-[340px] md:w-[500px] p-4 my-4 md:px-8 rounded border border-primary overflow-y-auto">
                 <header className="flex justify-between items-center mb-2">
                     <h2>View all weights</h2>

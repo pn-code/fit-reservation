@@ -24,7 +24,7 @@ body {
 }
 
 h1 {
-    @apply text-3xl tracking-tighter;
+    @apply text-3xl tracking-tighter font-bold;
 }
 
 h2 {

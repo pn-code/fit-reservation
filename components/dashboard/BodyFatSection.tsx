@@ -32,7 +32,7 @@ export default function BodyFatSection({ userBodyfats }: BodyFatSectionProps) {
             <header className="container flex justify-between sm:items-center">
                 <div className="flex flex-col">
                     <h3 className="text-lg font-bold tracking-tighter">
-                        Body Fat Measurements
+                        Body Fat
                     </h3>
                     <span className="text-secondary text-sm tracking-tighter">
                         Last Recorded Body Fat:{" "}
