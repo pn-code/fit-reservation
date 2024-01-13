@@ -32,11 +32,20 @@ export default function BodyWeightSection({
 
     return (
         <section className="h-fit w-full rounded-md flex flex-col gap-2 flex-1 mt-5">
-            <header className="flex justify-between sm:items-center sm:flex-row flex-col">
-                <div className="flex gap-2 items-center justify-between md:justify-start">
-                    <h3 className="text-lg font-bold">Weight Measurements</h3>
+            <header className="container flex justify-between sm:items-center">
+                <div className="flex flex-col">
+                    <h3 className="text-lg font-bold tracking-tighter">
+                        Weight Measurements
+                    </h3>
+                    <span className="text-secondary text-sm tracking-tighter">
+                        Last Recorded Weight:{" "}
+                        {currentWeight
+                            ? `${currentWeight.weight} lbs`
+                            : "No Records"}
+                    </span>
+                </div>
 
-                    <div className="flex gap-2 md:gap-4"></div>
+                <div className="flex gap-2">
                     <button
                         onClick={() => setIsWeightTableOpen(true)}
                         type="button"
@@ -52,13 +61,6 @@ export default function BodyWeightSection({
                         Add
                     </button>
                 </div>
-
-                <span className="text-secondary">
-                    Last Recorded Body Weight:{" "}
-                    {currentWeight
-                        ? `${currentWeight.weight} lbs`
-                        : "No Records"}
-                </span>
             </header>
 
             <LineChart

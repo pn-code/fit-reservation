@@ -1,44 +1,44 @@
-"use client";
-
 import { Dispatch, SetStateAction, useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 
-import { weightSchema } from "@/validations/weightValidator";
+import { bodyFatSchema } from "@/validations/bodyFatValidator";
 
-interface AddBodyWeightFormModalProps {
-    setWeights: any;
+interface BodyFatFormModalProps {
+    setBodyFats: any;
     isOpen: boolean;
     setIsOpen: Dispatch<SetStateAction<boolean>>;
 }
 
-export default function AddBodyWeightFormModal({
-    setWeights,
+export default function BodyFatFormModal({
+    setBodyFats,
     isOpen,
     setIsOpen,
-}: AddBodyWeightFormModalProps) {
+}: BodyFatFormModalProps) {
     const today = new Date().toISOString().split("T")[0];
 
-    const [weight, setWeight] = useState<number>(160);
+    const [bodyFat, setBodyFat] = useState<number>(15);
     const [date, setDate] = useState(today);
     const [loading, setLoading] = useState(false);
 
-    const submitCurrentWeight = async () => {
+    const submitCurrentBodyFat = async () => {
         try {
             setLoading(true);
-            const validateWeight = weightSchema.parse(weight);
-            if (validateWeight) {
+            const validateBodyFat = bodyFatSchema.parse(bodyFat);
+
+            if (validateBodyFat) {
                 const formattedDate = new Date(date).toISOString();
-                const res = await axios.post("/api/weight_measurements", {
-                    weight,
+
+                const res = await axios.post("/api/bf_measurements", {
+                    bodyfat: bodyFat,
                     createdAt: formattedDate,
                 });
 
                 if (res.status === 200) {
                     toast.success(
-                        `Successfully added new weight to user data.`
+                        `Current body fat has been updated to ${bodyFat} %.`
                     );
-                    setWeights((prev: unknown[]) =>
+                    setBodyFats((prev: BodyFatMeasurement[]) =>
                         [...prev, res.data].sort(
                             (a, b) =>
                                 new Date(b.createdAt).getTime() -
@@ -62,9 +62,9 @@ export default function AddBodyWeightFormModal({
 
     return (
         <div className="absolute bg-black/80 top-0 left-0 w-full h-[90vh] md:h-full z-50 flex justify-center pt-5">
-            <form className="bg-white w-[340px] md:w-[500px] p-4 my-4 md:px-8 rounded border border-primary h-fit">
+            <form className="bg-white w-[340px] md:w-[500px] p-4 my-4 md:px-8 rounded border border-primary h-fit flex flex-col gap-4">
                 <header className="flex justify-between items-center gap-4">
-                    <h2>Add Weight Measurement</h2>
+                    <h2>Add Bodyfat Measurement</h2>
                     <button
                         onClick={() => setIsOpen(false)}
                         className="btn btn--primary"
@@ -72,8 +72,7 @@ export default function AddBodyWeightFormModal({
                         X
                     </button>
                 </header>
-
-                <section className="w-full flex flex-col mt-4 gap-4 md:flex-row">
+                <section className="w-full flex flex-col gap-4 md:flex-row md:justify-between">
                     <section className="w-full flex flex-col gap-2">
                         <label className="font-bold" htmlFor="weight">
                             Date:{" "}
@@ -88,30 +87,28 @@ export default function AddBodyWeightFormModal({
                         />
                     </section>
                     <section className="w-full flex flex-col gap-2 items-end">
-                        <label className="font-bold" htmlFor="weight">
-                            Weight (lbs):
+                        <label className="font-bold" htmlFor="bf">
+                            Body Fat (%):
                         </label>
                         <input
                             className="w-full sm:w-24"
-                            onChange={(e) => setWeight(Number(e.target.value))}
-                            value={weight}
+                            onChange={(e) => setBodyFat(Number(e.target.value))}
+                            value={bodyFat}
                             type="number"
-                            id="weight"
-                            placeholder="weight"
+                            id="bf"
+                            placeholder="Body Fat Percentage"
                         />
                     </section>
                 </section>
 
-                <div className="flex justify-end gap-4 mt-4">
-                    <button
-                        onClick={submitCurrentWeight}
-                        type="button"
-                        disabled={loading}
-                        className="btn btn--primary"
-                    >
-                        Submit
-                    </button>
-                </div>
+                <button
+                    disabled={loading}
+                    onClick={submitCurrentBodyFat}
+                    type="button"
+                    className="btn btn--primary"
+                >
+                    Submit
+                </button>
             </form>
         </div>
     );

@@ -26,6 +26,7 @@ body {
 h1 {
     @apply text-3xl tracking-tighter;
 }
+
 h2 {
     @apply text-xl font-bold tracking-tighter;
 }
@@ -48,4 +49,8 @@ h2 {
 
 .btn--danger {
     @apply bg-red-500 hover:bg-red-700 text-white;
+}
+
+.container {
+    @apply bg-white border border-primary p-4 rounded-sm shadow-md;
 }

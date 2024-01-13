@@ -1,35 +1,28 @@
-"use client";
+"use state";
 
 import formatDateString from "@/helpers/dates/formatDateString";
 import axios from "axios";
-import React, { Dispatch, SetStateAction, useState } from "react";
+import React, { useState } from "react";
 import toast from "react-hot-toast";
 
-interface BodyWeightTableModalProps {
-    weights: WeightMeasurement[];
-    isOpen: boolean;
-    setIsOpen: Dispatch<SetStateAction<boolean>>;
-    setWeights: Dispatch<SetStateAction<WeightMeasurement>>;
-}
-
-export default function BodyWeightTableModal({
-    weights,
+export default function BodyFatTableModal({
+    bodyfats,
+    setBodyfats,
     isOpen,
     setIsOpen,
-    setWeights,
-}: BodyWeightTableModalProps) {
-    const [loading, setLoading] = useState<boolean>(false);
+}) {
+    const [loading, setLoading] = useState(false);
 
-    const deleteWeight = async (id: number) => {
+    const deleteBodyFat = async (id: number) => {
         try {
             setLoading(true);
-            const res = await axios.delete(`/api/weight_measurements/${id}`);
+            const res = await axios.delete(`/api/bf_measurements/${id}`);
 
             if (res.status == 200) {
-                setWeights((prev) =>
-                    [...prev].filter((weight) => weight.id !== id)
+                setBodyfats((prev: BodyFatMeasurement[]) =>
+                    [...prev].filter((bodyfats) => bodyfats.id !== id)
                 );
-                toast.success("Successfully deleted weight!");
+                toast.success("Successfully deleted bodyfat!");
             }
         } catch (error) {
             console.error(error);
@@ -42,10 +35,10 @@ export default function BodyWeightTableModal({
     if (!isOpen) return null;
 
     return (
-        <div className="absolute bg-black/80 top-0 left-0 w-full h-[90vh] md:h-screen z-50 flex justify-center pt-5">
+        <div className="absolute bg-black/80 top-0 left-0 w-full h-screen md:h-[calc(100vh-64px)] z-50 flex justify-center pt-5">
             <div className="bg-white h-[75vh] w-[340px] md:w-[500px] p-4 my-4 md:px-8 rounded border border-primary overflow-y-auto">
                 <header className="flex justify-between items-center mb-2">
-                    <h2>View all weights</h2>
+                    <h2>View all bodyfats</h2>
                     <button
                         onClick={() => setIsOpen(false)}
                         className="btn btn--primary"
@@ -55,26 +48,28 @@ export default function BodyWeightTableModal({
                 </header>
 
                 <table className="w-full">
-                    <thead>
+                    <thead className="text-left">
                         <tr>
-                            <th className="text-start">Date</th>
-                            <th className="text-start">Weight</th>
+                            <th>Date</th>
+                            <th>Body Fat</th>
                             <th className="flex justify-end mr-3">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {weights.map((weightObj: WeightMeasurement) => (
+                        {bodyfats.map((bodyfatObj: BodyFatMeasurement) => (
                             <tr
-                                key={weightObj.id}
+                                key={bodyfatObj.id}
                                 className="hover:bg-slate-100"
                             >
-                                <td>{formatDateString(weightObj.createdAt)}</td>
-                                <td>{weightObj.weight.toFixed(1)}</td>
+                                <td>
+                                    {formatDateString(bodyfatObj.createdAt)}
+                                </td>
+                                <td>{bodyfatObj.bodyfat.toFixed(1)}</td>
                                 <td className="flex justify-end">
                                     <button
                                         disabled={loading}
                                         onClick={() =>
-                                            deleteWeight(weightObj.id)
+                                            deleteBodyFat(bodyfatObj.id)
                                         }
                                         type="button"
                                         className="btn btn--danger"
