@@ -49,8 +49,13 @@ export default async function Plans({ params }: Props) {
 
     return (
         <main className="w-full min-h-[calc(100vh-90px)] overflow-y-auto mb-12 py-6 rounded-md flex flex-col gap-4 shadow-md px-4 md:px-[4%]">
-            <header className="flex justify-between font-bold pb-2 border-b-2 border-b-primary items-center">
-                <h1 className="text-xl sm:text-3xl font-bold">{`${user.firstName} ${user.lastName}'s Plans`}</h1>
+            <header className="bg-white border border-primary p-4 rounded-sm shadow-md flex justify-between">
+                <div className="flex flex-col">
+                    <h1>{`${user.firstName} ${user.lastName}'s Plans`}</h1>
+                    <p className="text-secondary tracking-tighter">
+                        View created and/or saved plans
+                    </p>
+                </div>
                 <section className="flex gap-4">
                     <Link
                         className="btn btn--primary flex gap-2"

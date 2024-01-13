@@ -3,7 +3,7 @@ import Link from "next/link";
 import { SigmaSquare } from "lucide-react";
 
 import SignOutButton from "@/components/profile/SignOutButton";
-import { clerkClient, currentUser } from "@clerk/nextjs/app-beta";
+import { clerkClient, currentUser } from "@clerk/nextjs";
 import StripeCheckOutButton from "@/components/profile/StripeCheckOutButton";
 import UpdateUserComponent from "@/components/profile/UpdateUserComponent";
 import { prisma } from "@/lib/client";
@@ -33,18 +33,18 @@ async function ProfilePage({ params }: Props) {
 
     return (
         <main className="w-full min-h-[calc(100vh-90px)] py-6 rounded-md flex flex-col gap-4 shadow-md px-4 lg:px-[4%] mb-12">
-            <header className="flex justify-between font-bold pb-2 border-b-2 border-b-primary items-center">
+            <header className="bg-white border border-primary p-4 rounded-sm shadow-md flex justify-between">
                 <h1>Profile</h1>
                 <SignOutButton />
             </header>
 
             {/* User Information */}
-            <section className="flex gap-4 items-center sm:mb-5">
+            <section className="bg-white border border-primary p-4 rounded-sm shadow-md flex gap-4">
                 <h2 className="text-xl sm:text-3xl font-semibold text-primary flex gap-4">
                     {`${userOnProfile?.firstName} ${userOnProfile?.lastName}`}
                 </h2>
                 {userIsSubscribed && (
-                    <span className="bg-primary rounded-full p-0.5 flex justify-center items-center">
+                    <span className="bg-primary h-9 w-9 rounded-full p-0.5 flex justify-center items-center">
                         <Check color="white" />
                     </span>
                 )}
@@ -63,7 +63,7 @@ async function ProfilePage({ params }: Props) {
                 </section>
             )}
 
-            <section className="flex flex-col gap-4 sm:flex-row sm:justify-between">
+            <section className="bg-white border border-primary p-4 rounded-sm shadow-md flex justify-between">
                 <section>
                     <h2 className="text-xl sm:text-2xl font-semibold text-primary">
                         Update Goals

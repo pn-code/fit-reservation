@@ -42,7 +42,7 @@ export default function UpdateUsernameComponent() {
     };
 
     return (
-        <section className="flex flex-col gap-4 w-full">
+        <section className="bg-white border border-primary p-4 rounded-sm shadow-md">
             <section className="flex flex-col gap-4 sm:flex-row sm:justify-between">
                 <section>
                     <h2 className="text-xl sm:text-2xl font-semibold text-primary">
