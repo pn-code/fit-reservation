@@ -48,19 +48,6 @@ const Navbar = () => {
                             alt="Fit Heroes Logo"
                         />
                     </Link>
-                    {user && (
-                        <Link
-                            href="/calculator"
-                            className="group flex flex-col gap-2 hover:underline"
-                        >
-                            <span className="flex gap-2 items-center text-sm">
-                                <Target color="rgb(245,158,11)" size={20} />
-                                {calorieGoal === "loading"
-                                    ? "loading..."
-                                    : `Goal - ${calorieGoal} kCal`}
-                            </span>
-                        </Link>
-                    )}
                 </header>
 
                 {!user && (
