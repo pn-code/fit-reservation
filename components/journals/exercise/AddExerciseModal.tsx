@@ -45,6 +45,13 @@ export default function AddExerciseModal({
 
             await axios.post("/api/exercise_entries", exerciseObj);
             toast.success(`${exercise} has been added to your journal.`);
+            setExercise("");
+            setType("");
+            setCalories(0);
+            setDuration(0);
+            setSets(0);
+            setReps(0);
+            setWeight(0);
             setIsOpen(false);
             router.refresh();
         } catch (error) {
@@ -57,7 +64,7 @@ export default function AddExerciseModal({
     if (!isOpen) return null;
 
     return (
-        <div className="fixed bg-black/80 top-0 left-0 w-full h-full md:h-full z-50 flex justify-center pt-16 md:pt-[8%]">
+        <div className="fixed bg-black/80 top-0 left-0 w-full h-full md:h-full z-50 flex justify-center pt-14 md:pt-[8%]">
             <div className="bg-white w-[340px] md:w-[500px] p-4 my-4 md:px-8 rounded border border-primary h-[420px] md:h-fit flex flex-col gap-4 overflow-y-auto">
                 <header className="flex justify-between items-center gap-4">
                     <h2>Add Exercise Entry</h2>
@@ -103,10 +110,10 @@ export default function AddExerciseModal({
                     {type === "resistance" && (
                         <section className="flex flex-col md:flex-row md:justify-between gap-2 w-full">
                             <section className="flex flex-col gap-2">
-                                <label htmlFor="weight">Weight:</label>
+                                <label htmlFor="weight">Weight (lbs):</label>
                                 <input
                                     className="w-full"
-                                    type="text"
+                                    type="number"
                                     id="weight"
                                     onChange={(e) =>
                                         setWeight(

@@ -32,6 +32,7 @@ function FoodEntryCard({
             setLoading(true);
             await axios.delete(`/api/food_entries/${id}`);
             toast.success("Food entry successfully deleted.");
+            router.refresh();
         } catch (error) {
             toast.error(
                 "An error has occurred while deleting this food entry."
@@ -43,29 +44,29 @@ function FoodEntryCard({
     };
 
     return (
-        <tr className="text-xs sm:text-[14px] bg-primary text-white">
-            <td className="py-2 whitespace-nowrap">
+        <tr className="text-xs sm:text-[14px] bg-white border border-primary">
+            <td className="p-2 whitespace-nowrap">
                 {name.length > 30 ? name.substring(0, 30) + "..." : name}
             </td>
-            <td className="py-2 whitespace-nowrap">{calories}</td>
-            <td className="py-2 whitespace-nowrap hidden sm:table-cell">
+            <td className="p-2 whitespace-nowrap">{calories}</td>
+            <td className="p-2 whitespace-nowrap hidden sm:table-cell">
                 {carbs}g
             </td>
-            <td className="py-2 whitespace-nowrap hidden sm:table-cell">
+            <td className="p-2 whitespace-nowrap hidden sm:table-cell">
                 {fats}g
             </td>
-            <td className="py-2 whitespace-nowrap hidden sm:table-cell">
+            <td className="p-2 whitespace-nowrap hidden sm:table-cell">
                 {protein}g
             </td>
             <td className="sm:hidden">{`${carbs}/${fats}/${protein}`}</td>
             {allowDelete && (
-                <td className="p-2 whitespace-nowrap">
+                <td className="p-2 whitespace-nowrap flex justify-end md:mr-4">
                     <button
                         className="btn btn--danger"
                         onClick={() => deleteFoodEntry(id)}
                         disabled={loading}
                     >
-                        <X color="white" size={24} />
+                        X
                     </button>
                 </td>
             )}

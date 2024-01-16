@@ -34,7 +34,7 @@ function ExerciseEntryCard({
         try {
             setLoading(true);
             await axios.delete(`/api/exercise_entries/${id}`);
-            toast.success("Successfully deleted entry.")
+            toast.success("Successfully deleted entry.");
             router.refresh();
         } catch (error) {
             console.log(error);
@@ -52,7 +52,15 @@ function ExerciseEntryCard({
                 </div>
             </td>
 
-            <td className="py-2 whitespace-nowrap">
+            <td className="py-2 whitespace-nowrap md:hidden">
+                <div className="p-2">
+                    {type === "resistance"
+                        ? `${sets} sets of ${reps} @ ${weight}lbs`
+                        : `${reps} miles in ${duration} mins`}
+                </div>
+            </td>
+
+            <td className="py-2 whitespace-nowrap hidden md:table-cell">
                 <div className="p-2">
                     {type === "resistance"
                         ? `${sets} sets`
@@ -60,13 +68,13 @@ function ExerciseEntryCard({
                 </div>
             </td>
 
-            <td className="py-2 whitespace-nowrap">
+            <td className="py-2 whitespace-nowrap hidden md:table-cell">
                 <div className="p-2">
                     {type === "resistance" ? `${reps} reps` : `${reps} mi`}
                 </div>
             </td>
 
-            <td className="py-2 whitespace-nowrap">
+            <td className="py-2 whitespace-nowrap hidden md:table-cell">
                 <div className="p-2">
                     {type === "resistance"
                         ? `${weight} lbs`
@@ -74,16 +82,14 @@ function ExerciseEntryCard({
                 </div>
             </td>
 
-            <td className="py-2 whitespace-nowrap flex">
-                <section className="flex items-center gap-2">
-                    <button
-                        className="btn btn--danger"
-                        disabled={loading}
-                        onClick={() => deleteExerciseEntry(id)}
-                    >
-                        X
-                    </button>
-                </section>
+            <td className="py-2 whitespace-nowrap flex justify-end md:pr-4">
+                <button
+                    className="btn btn--danger"
+                    disabled={loading}
+                    onClick={() => deleteExerciseEntry(id)}
+                >
+                    X
+                </button>
             </td>
         </tr>
     );

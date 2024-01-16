@@ -8,6 +8,7 @@ import { convertDateInputToDate } from "@/helpers/convertDateInputToDate";
 import NutritionJournal from "./nutrition/NutritionJournal";
 import ExerciseJournal from "./exercise/ExerciseJournal";
 import AddExerciseModal from "./exercise/AddExerciseModal";
+import AddFoodModal from "./nutrition/AddFoodModal";
 
 interface JournalSelectorProps {
     cardioEntries: ExerciseEntry[];
@@ -56,6 +57,11 @@ export default function JournalSelector({
             <AddExerciseModal
                 setIsOpen={setIsAddExerciseModalOpen}
                 isOpen={isAddExerciseModalOpen}
+            />
+
+            <AddFoodModal
+                setIsOpen={setIsAddFoodModalOpen}
+                isOpen={isAddFoodModalOpen}
             />
 
             <div className="flex flex-col gap-4">

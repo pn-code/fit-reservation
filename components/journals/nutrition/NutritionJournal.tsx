@@ -75,13 +75,13 @@ export default function NutritionJournal({ foodEntries, userId }: Props) {
                             </th>
                             <th>
                                 <div className="p-2 font-semibold text-left">
-                                    Action
+                                    
                                 </div>
                             </th>
                         </tr>
                     </thead>
 
-                    <tbody className="text-sm divide-y divide-gray-100">
+                    <tbody className="text-sm divide-y divide-primary">
                         {foodEntries?.map((entry) => (
                             <FoodEntryCard
                                 id={entry.id}

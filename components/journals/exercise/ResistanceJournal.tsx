@@ -15,32 +15,35 @@ export default function ResistanceJournal({
             </h3>
             <div className="overflow-x-auto w-full">
                 <table className="table-auto w-full text-xs md:text-sm">
-                    <thead className="h-8 uppercase bg-primary text-white">
+                    <thead className="h-8 uppercase bg-primary text-white border border-primary">
                         <tr className="p-2 whitespace-nowrap">
                             <th>
                                 <div className="p-2 font-semibold text-left">
                                     Exercise
                                 </div>
                             </th>
-                            <th>
+                            <th className="md:hidden">
                                 <div className="p-2 font-semibold text-left">
+                                    Details
+                                </div>
+                            </th>
+                            <th>
+                                <div className="p-2 font-semibold text-left hidden md:table-cell">
                                     Sets
                                 </div>
                             </th>
                             <th>
-                                <div className="p-2 font-semibold text-left">
+                                <div className="p-2 font-semibold text-left hidden md:table-cell">
                                     Reps
                                 </div>
                             </th>
                             <th>
-                                <div className="p-2 font-semibold text-left">
+                                <div className="p-2 font-semibold text-left hidden md:table-cell">
                                     Weight
                                 </div>
                             </th>
                             <th>
-                                <div className="p-2 font-semibold text-left">
-                                    Action
-                                </div>
+                                <div className="p-2 font-semibold text-left"></div>
                             </th>
                         </tr>
                     </thead>
