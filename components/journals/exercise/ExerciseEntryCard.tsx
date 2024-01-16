@@ -1,6 +1,9 @@
 "use client";
-import { ArrowBigLeft, Check, Edit, X } from "lucide-react";
+
+import axios from "axios";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 interface ExerciseEntryCardProps {
     id: number;
@@ -11,8 +14,6 @@ interface ExerciseEntryCardProps {
     sets: number;
     reps: number;
     calories: number;
-    deleteExerciseEntry: any;
-    updateExerciseEntry: any;
 }
 
 function ExerciseEntryCard({
@@ -23,134 +24,65 @@ function ExerciseEntryCard({
     weight,
     sets,
     reps,
-    deleteExerciseEntry,
-    updateExerciseEntry,
+    calories,
 }: ExerciseEntryCardProps) {
-    const [isEditing, setIsEditing] = useState(false);
     const [loading, setLoading] = useState(false);
 
-    const [currentSets, setCurrentSets] = useState(sets);
-    const [currentReps, setCurrentReps] = useState(
-        type === "resistance" ? reps : duration
-    );
-    const [currentWeight, setCurrentWeight] = useState(weight);
+    const router = useRouter();
 
-    const handleEditExerciseEntry = async () => {
+    const deleteExerciseEntry = async (id: number) => {
         try {
             setLoading(true);
-            await updateExerciseEntry(
-                id,
-                type,
-                {
-                    updatedSets: currentSets,
-                    updatedReps: currentReps,
-                    updatedWeight: currentWeight,
-                },
-                () => setIsEditing((edit) => !edit)
-            );
-            setIsEditing((edit) => !edit);
+            await axios.delete(`/api/exercise_entries/${id}`);
+            toast.success("Successfully deleted entry.")
+            router.refresh();
         } catch (error) {
-            console.error(error);
+            console.log(error);
+            toast.error("An error has occurred!");
         } finally {
             setLoading(false);
         }
     };
 
-    const handleDeleteExerciseEntry = async () => {
-        try {
-            setLoading(true);
-            await deleteExerciseEntry(id);
-        } catch (error) {
-            console.log(error)
-        } finally {
-            setLoading(false);
-        }
-    }
-
     return (
-        <tr className="text-xs sm:text-sm bg-blue-900/20 hover:bg-indigo-600 cursor-pointer hover:text-white">
+        <tr className="text-xs sm:text-sm bg-white">
             <td className="py-2 whitespace-nowrap">
-                <div>
+                <div className="p-2">
                     {name.length > 30 ? name.substring(0, 30) + "..." : name}
                 </div>
             </td>
-            <td className="py-2 whitespace-nowrap hidden sm:table-cell">
-                <div>{type}</div>
-            </td>
+
             <td className="py-2 whitespace-nowrap">
-                {isEditing ? (
-                    <input
-                        type="number"
-                        onChange={(e) => setCurrentSets(Number(e.target.value))}
-                        value={currentSets}
-                        className="w-9"
-                        aria-label="Exercise Sets"
-                    />
-                ) : (
-                    <div>{sets}</div>
-                )}
+                <div className="p-2">
+                    {type === "resistance"
+                        ? `${sets} sets`
+                        : `${duration} mins`}
+                </div>
             </td>
+
             <td className="py-2 whitespace-nowrap">
-                {isEditing ? (
-                    <input
-                        type="number"
-                        onChange={(e) => setCurrentReps(Number(e.target.value))}
-                        value={currentReps}
-                        className="w-9"
-                        aria-label="Exercise repetitions or duration"
-                    />
-                ) : (
-                    <div>
-                        {type == "resistance" ? `${reps}` : duration + " mins"}
-                    </div>
-                )}
+                <div className="p-2">
+                    {type === "resistance" ? `${reps} reps` : `${reps} mi`}
+                </div>
             </td>
+
             <td className="py-2 whitespace-nowrap">
-                {isEditing ? (
-                    <input
-                        type="number"
-                        onChange={(e) =>
-                            setCurrentWeight(Number(e.target.value))
-                        }
-                        value={currentWeight}
-                        className="w-12"
-                        aria-label="Exercise weight"
-                    />
-                ) : (
-                    <div>{weight} lbs</div>
-                )}
+                <div className="p-2">
+                    {type === "resistance"
+                        ? `${weight} lbs`
+                        : `${calories} Cal`}
+                </div>
             </td>
+
             <td className="py-2 whitespace-nowrap flex">
                 <section className="flex items-center gap-2">
-                    {!isEditing && (
-                        <button className="disabled:bg-slate-600" disabled={loading} onClick={handleDeleteExerciseEntry}>
-                            <X
-                                className="hover:bg-slate-300 rounded-full p-1 text-red-500"
-                                size={30}
-                            />
-                        </button>
-                    )}
-                    <button className="disabled:bg-slate-600" disabled={loading} onClick={() => setIsEditing((edit) => !edit)}>
-                        {!isEditing ? (
-                            <Edit
-                                className="hover:bg-slate-300 rounded-full text-green-500 p-1"
-                                size={30}
-                            />
-                        ) : (
-                            <ArrowBigLeft
-                                className="hover:bg-slate-300 rounded-full p-1 text-red-500"
-                                size={30}
-                            />
-                        )}
+                    <button
+                        className="btn btn--danger"
+                        disabled={loading}
+                        onClick={() => deleteExerciseEntry(id)}
+                    >
+                        X
                     </button>
-                    {isEditing && (
-                        <button className="disabled:bg-slate-600 rounded-md" disabled={loading} onClick={handleEditExerciseEntry} type="button">
-                            <Check
-                                className="hover:bg-slate-300 rounded-full p-1 text-green-500"
-                                size={30}
-                            />
-                        </button>
-                    )}
                 </section>
             </td>
         </tr>

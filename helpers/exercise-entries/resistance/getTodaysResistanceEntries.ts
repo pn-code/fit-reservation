@@ -1,8 +1,8 @@
-import { prisma } from "../lib/client";
+import { prisma } from "@/lib/client";
 import { currentUser } from "@clerk/nextjs";
-import getLocalTimezone from "./getLocalTimezone";
+import getLocalTimezone from "../../getLocalTimezone";
 
-const getExerciseEntries = async () => {
+const getTodaysResistanceEntries = async () => {
     try {
         const user = await currentUser();
 
@@ -17,8 +17,13 @@ const getExerciseEntries = async () => {
                     gte: localTime.startOfDay,
                     lt: localTime.endOfDay,
                 },
+                type: "resistance",
             },
         });
+
+        if (!exerciseEntries) {
+            return [];
+        }
 
         return exerciseEntries;
     } catch (error) {
@@ -26,4 +31,4 @@ const getExerciseEntries = async () => {
     }
 };
 
-export default getExerciseEntries;
+export default getTodaysResistanceEntries;

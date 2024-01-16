@@ -1,80 +1,20 @@
-"use client";
+import ResistanceJournal from "./ResistanceJournal";
+import CardioJournal from "./CardioJournal";
 
-import ExerciseEntryCard from "@/components/journals/exercise/ExerciseEntryCard";
-import Spinner from "@/components/Spinner";
-
-interface Props {
-  exercises: ExerciseEntry[];
-  updateExerciseEntry: any;
-  deleteExerciseEntry: any;
-  loadingExercises: boolean;
+interface ExerciseJournalProps {
+    resistanceEntries: ExerciseEntry[];
+    cardioEntries: ExerciseEntry[];
 }
 
 export default function ExerciseJournal({
-  exercises,
-  updateExerciseEntry,
-  deleteExerciseEntry,
-  loadingExercises,
-}: Props) {
-  return (
-    <section className="flex flex-col items-center gap-4 py-5 w-full">
-      {/* When loading exercises */}
-      {loadingExercises && <Spinner />}
+    resistanceEntries,
+    cardioEntries,
+}: ExerciseJournalProps) {
 
-      {/* When no exercises could be found. */}
-      {exercises.length === 0 && !loadingExercises && (
-        <p className="font-semibold text-sm">Currently has no entries.</p>
-      )}
-
-      {/* Successfully loaded exercises  */}
-      {exercises.length > 0 && !loadingExercises && (
-        <div className="w-full">
-          <div className="overflow-x-auto w-full">
-            <table className="table-auto w-full">
-              <thead className="h-8 text-xs sm:text-[16px] font-semibold uppercase text-yellow-50 bg-blue-900/60">
-                <tr className="p-2 whitespace-nowrap">
-                  <th>
-                    <div className="font-semibold text-left">Exercise</div>
-                  </th>
-                  <th className="hidden sm:table-cell">
-                    <div className="font-semibold text-left">Type</div>
-                  </th>
-                  <th>
-                    <div className="font-semibold text-left">Sets</div>
-                  </th>
-                  <th>
-                    <div className="font-semibold text-left">Reps</div>
-                  </th>
-                  <th>
-                    <div className="font-semibold text-left">Weight</div>
-                  </th>
-                  <th>
-                    <div className="font-semibold text-left">Action</div>
-                  </th>
-                </tr>
-              </thead>
-
-              <tbody className="text-sm divide-y divide-gray-100">
-                {exercises?.map((entry) => (
-                  <ExerciseEntryCard
-                    id={entry.id}
-                    name={entry.name}
-                    type={entry.type}
-                    duration={entry.duration}
-                    weight={entry.weight}
-                    sets={entry.sets}
-                    reps={entry.reps}
-                    calories={entry.calories}
-                    key={entry.id}
-                    deleteExerciseEntry={deleteExerciseEntry}
-                    updateExerciseEntry={updateExerciseEntry}
-                  />
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      )}
-    </section>
-  );
+    return (
+        <section className="flex flex-col gap-4 lg:flex-row">
+            <ResistanceJournal resistanceEntries={resistanceEntries} />
+            <CardioJournal cardioEntries={cardioEntries} />
+        </section>
+    );
 }

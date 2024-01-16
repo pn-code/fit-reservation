@@ -203,7 +203,7 @@ export default function ExerciseForm({ selectedDate }: ExerciseFormProps) {
   };
 
   return (
-    <section className="flex flex-col gap-4">
+    <section className="flex flex-col gap-4 bg-white border border-primary p-4 rounded-sm shadow-md">
       {showExerciseForm ? (
         <form className="w-full flex flex-col gap-4 lg:flex-row py-2 lg:items-center lg:justify-between">
           <section className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">

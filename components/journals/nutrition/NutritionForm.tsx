@@ -121,7 +121,7 @@ export default function NutritionForm({ selectedDate }: NutritionFormProps) {
   };
 
   return (
-    <section className="flex flex-col gap-4">
+    <section className="bg-white border border-primary p-4 rounded-sm shadow-md flex flex-col gap-4">
       <form className="w-full flex flex-col gap-8 lg:flex-row py-2 lg:items-center lg:justify-between">
         <section className="flex flex-col gap-4 sm:flex-row justify-center">
           <section className="flex flex-col gap-2">
@@ -203,7 +203,7 @@ export default function NutritionForm({ selectedDate }: NutritionFormProps) {
           disabled={loading}
           type="button"
           onClick={createFoodEntry}
-          className="bg-indigo-600 hover:bg-indigo-500 text-[#fafafa] px-4 h-10 lg:mt-7 rounded-md disabled:bg-slate-400 disabled:cursor-wait"
+          className="btn btn--primary"
         >
           {loading ? "Adding..." : "Submit"}
         </button>

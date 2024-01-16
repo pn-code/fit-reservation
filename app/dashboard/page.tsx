@@ -20,7 +20,7 @@ async function DashboardPage() {
                 </p>
             </header>
 
-            <section className="flex flex-col gap-4 lg:flex-row lg:gap-24">
+            <section className="flex flex-col gap-4 lg:flex-row lg:gap-16">
                 <BodyWeightSection userWeights={userWeights} />
                 <BodyFatSection userBodyfats={userBodyFats} />
             </section>

@@ -12,13 +12,13 @@ export default function AllNutritionEntries({ entries }: any) {
 
     return (
         <section>
-            <div>
+            <div className="flex flex-col gap-4">
                 {dates.map((date: any) => (
                     <div key={date}>
-                        <h2 className="text-xl text-primary font-bold tracking-tighter">
+                        <h2 className="sm:w-[75%] lg:w-[40%] text-xl text-primary font-bold tracking-tighter bg-white border border-primary p-4 rounded-sm shadow-md">
                             {date}
                         </h2>
-                        <div className="py-2 w-full sm:w-[75%] lg:w-[40%]">
+                        <div className="pb-2 w-full sm:w-[75%] lg:w-[40%]">
                             <div className="overflow-x-auto w-full">
                                 <table className="table-auto w-full divide-y divide-primary border border-primary">
                                     <thead className="h-8 text-xs sm:text-[16px] font-semibold uppercase text-white bg-secondary">

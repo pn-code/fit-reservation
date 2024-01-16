@@ -1,48 +1,71 @@
 "use client";
 
-import { useState } from "react";
+import { SetStateAction, useState } from "react";
 
 import DateSelector from "@/components/journals/DateSelector";
-import NutritionForm from "@/components/journals/nutrition/NutritionForm";
-import ExerciseForm from "@/components/journals/exercise/ExerciseForm";
 import { findFirstDate } from "@/helpers/findFirstDate";
 import { convertDateInputToDate } from "@/helpers/convertDateInputToDate";
+import NutritionJournal from "./nutrition/NutritionJournal";
+import ExerciseJournal from "./exercise/ExerciseJournal";
+import AddExerciseModal from "./exercise/AddExerciseModal";
 
-export default function JournalSelector() {
-  const [currentJournal, setCurrentJournal] = useState<string>("nutrition");
-  const [selectedDate, setSelectedDate] = useState<string>(findFirstDate());
+interface JournalSelectorProps {
+    cardioEntries: ExerciseEntry[];
+    resistanceEntries: ExerciseEntry[];
+    foodEntries: FoodEntry[];
+    userId: string;
+}
 
-  const convertedDate = convertDateInputToDate(selectedDate);
+export default function JournalSelector({
+    resistanceEntries,
+    cardioEntries,
+    foodEntries,
+    userId,
+}: JournalSelectorProps) {
+    const [selectedDate, setSelectedDate] = useState<string>(findFirstDate());
+    const [isAddFoodModalOpen, setIsAddFoodModalOpen] =
+        useState<boolean>(false);
+    const [isAddExerciseModalOpen, setIsAddExerciseModalOpen] =
+        useState<boolean>(false);
 
-  const handleChangeJournal = () => {
-    setCurrentJournal((prev) =>
-      prev === "nutrition" ? "exercise" : "nutrition"
+    return (
+        <div>
+            <div className="mb-4 flex items-center w-full justify-between bg-white border border-primary p-4 rounded-sm shadow-md">
+                <div className="flex gap-2">
+                    <button
+                        onClick={() => setIsAddFoodModalOpen(true)}
+                        type="button"
+                        className="btn btn--primary"
+                    >
+                        Add Food
+                    </button>
+                    <button
+                        onClick={() => setIsAddExerciseModalOpen(true)}
+                        type="button"
+                        className="btn btn--secondary"
+                    >
+                        Add Exercise
+                    </button>
+                </div>
+                <DateSelector
+                    selectedDate={selectedDate}
+                    setSelectedDate={setSelectedDate}
+                />
+            </div>
+
+            <AddExerciseModal
+                setIsOpen={setIsAddExerciseModalOpen}
+                isOpen={isAddExerciseModalOpen}
+            />
+
+            <div className="flex flex-col gap-4">
+                <NutritionJournal foodEntries={foodEntries} userId={userId} />
+                <ExerciseJournal
+                    resistanceEntries={resistanceEntries}
+                    cardioEntries={cardioEntries}
+                    userId={userId}
+                />
+            </div>
+        </div>
     );
-  };
-
-  return (
-    <div>
-      <header className="flex items-center w-full justify-between">
-        <h2 className="text-lg font-semibold">
-          <button
-            onClick={handleChangeJournal}
-            className="btn btn--secondary"
-          >
-            {currentJournal.toUpperCase()}
-          </button>
-        </h2>
-
-        <DateSelector
-          selectedDate={selectedDate}
-          setSelectedDate={setSelectedDate}
-        />
-      </header>
-
-      {currentJournal === "nutrition" ? (
-        <NutritionForm selectedDate={convertedDate} />
-      ) : (
-        <ExerciseForm selectedDate={convertedDate} />
-      )}
-    </div>
-  );
 }

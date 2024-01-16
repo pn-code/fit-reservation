@@ -16,14 +16,12 @@ export default function DateSelector({
     };
 
     return (
-        <div className="flex gap-2">
-            <input
-                onChange={(e) => handleDateChange(e)}
-                value={selectedDate}
-                aria-label="journal date"
-                className="btn btn--secondary"
-                type="date"
-            />
-        </div>
+        <input
+            onChange={(e) => handleDateChange(e)}
+            value={selectedDate}
+            aria-label="journal date"
+            className="btn "
+            type="date"
+        />
     );
 }
