@@ -1,11 +1,11 @@
-import Link from "next/link";
 import { redirect } from "next/navigation";
+import { currentUser } from "@clerk/nextjs";
 
 import JournalSelector from "@/components/journals/JournalSelector";
-import { currentUser } from "@clerk/nextjs";
 import getFoodEntries from "@/helpers/getFoodEntries";
-import getTodaysResistanceEntries from "@/helpers/exercise-entries/resistance/getTodaysResistanceEntries";
-import getTodaysCardioEntries from "@/helpers/exercise-entries/cardio/getTodaysCardioEntries";
+import getResistanceEntries from "@/helpers/exercise-entries/resistance/getResistanceEntries";
+import getCardioEntriesByDate from "@/helpers/exercise-entries/cardio/getCardioEntriesByDate";
+import getCardioEntries from "@/helpers/exercise-entries/cardio/getCardioEntries";
 
 export const metadata = {
     title: "Journal | FitHeroes",
@@ -17,8 +17,8 @@ const JournalPage = async () => {
     if (!user) return redirect("/");
 
     const foodEntries = await getFoodEntries();
-    const resistanceEntries = await getTodaysResistanceEntries();
-    const cardioEntries = await getTodaysCardioEntries();
+    const resistanceEntries = await getResistanceEntries();
+    const cardioEntries = await getCardioEntries();
 
     return (
         <main className="w-full min-h-[calc(100vh-64px)] pb-20 overflow-y-auto py-6 flex flex-col gap-4 px-4 md:px-[4%]">

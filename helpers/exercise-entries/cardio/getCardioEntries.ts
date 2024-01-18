@@ -1,8 +1,8 @@
-import { prisma } from "../lib/client";
+import { prisma } from "@/lib/client";
 import { currentUser } from "@clerk/nextjs";
-import getLocalTimezone from "../helpers/getLocalTimezone";
+import getLocalTimezone from "../../getLocalTimezone";
 
-const getFoodEntries = async () => {
+const getCardioEntries = async () => {
     try {
         const user = await currentUser();
 
@@ -10,24 +10,25 @@ const getFoodEntries = async () => {
 
         // const localTime = getLocalTimezone();
 
-        const foodEntry = await prisma.foodEntry.findMany({
+        const exerciseEntries = await prisma.exerciseEntry.findMany({
             where: {
                 userId: user.id,
                 // date: {
                 //     gte: localTime.startOfDay,
                 //     lt: localTime.endOfDay,
                 // },
+                type: "cardio",
             },
         });
 
-        if (!foodEntry) {
+        if (!exerciseEntries) {
             return [];
         }
-		
-        return foodEntry;
+
+        return exerciseEntries;
     } catch (error) {
         console.error(error);
     }
 };
 
-export default getFoodEntries;
+export default getCardioEntries;

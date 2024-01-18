@@ -2,13 +2,13 @@ import { prisma } from "@/lib/client";
 import { currentUser } from "@clerk/nextjs";
 import getLocalTimezone from "../../getLocalTimezone";
 
-const getTodaysCardioEntries = async () => {
+const getCardioEntriesByDate = async (date: Date) => {
     try {
         const user = await currentUser();
 
         if (!user) throw Error("This action is forbidden.");
 
-        const localTime = getLocalTimezone();
+        const localTime = getLocalTimezone(date);
 
         const exerciseEntries = await prisma.exerciseEntry.findMany({
             where: {
@@ -31,4 +31,4 @@ const getTodaysCardioEntries = async () => {
     }
 };
 
-export default getTodaysCardioEntries;
+export default getCardioEntriesByDate;

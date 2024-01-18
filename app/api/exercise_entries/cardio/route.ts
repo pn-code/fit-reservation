@@ -1,8 +1,8 @@
 import { prisma } from "@/lib/client";
 import { currentUser } from "@clerk/nextjs";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function GET() {
+export async function GET(req: NextRequest) {
     try {
         const user = await currentUser();
 

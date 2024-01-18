@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { ChangeEvent } from "react";
 
 interface DateSelectorProps {
@@ -11,6 +12,8 @@ export default function DateSelector({
     selectedDate,
     setSelectedDate,
 }: DateSelectorProps) {
+    const router = useRouter();
+
     const handleDateChange = (e: ChangeEvent<HTMLInputElement>) => {
         setSelectedDate(e.target.value);
     };

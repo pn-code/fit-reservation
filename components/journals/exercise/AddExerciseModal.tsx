@@ -9,11 +9,13 @@ import toast from "react-hot-toast";
 interface AddExerciseModalProps {
     setIsOpen: Dispatch<SetStateAction<boolean>>;
     isOpen: boolean;
+    date: string;
 }
 
 export default function AddExerciseModal({
     isOpen,
     setIsOpen,
+    date,
 }: AddExerciseModalProps) {
     const [exercise, setExercise] = useState("");
     const [type, setType] = useState("");
@@ -39,6 +41,7 @@ export default function AddExerciseModal({
                 reps,
                 calories,
                 duration,
+                date,
             };
 
             exerciseSchema.parse(exerciseObj);

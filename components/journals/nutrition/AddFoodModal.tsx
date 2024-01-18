@@ -10,9 +10,14 @@ import toast from "react-hot-toast";
 interface AddFoodModalProps {
     setIsOpen: Dispatch<SetStateAction<boolean>>;
     isOpen: boolean;
+    date: string;
 }
 
-export default function AddFoodModal({ isOpen, setIsOpen }: AddFoodModalProps) {
+export default function AddFoodModal({
+    isOpen,
+    setIsOpen,
+    date,
+}: AddFoodModalProps) {
     const [name, setName] = useState("");
     const [calories, setCalories] = useState(0);
     const [carbs, setCarbs] = useState(0);
@@ -33,6 +38,7 @@ export default function AddFoodModal({ isOpen, setIsOpen }: AddFoodModalProps) {
                 carbs,
                 fats,
                 protein,
+                date,
             };
 
             foodEntrySchema.parse(foodObj);
@@ -68,7 +74,10 @@ export default function AddFoodModal({ isOpen, setIsOpen }: AddFoodModalProps) {
                     </button>
                 </header>
 
-                <form onSubmit={addFood} className="w-full flex flex-col gap-8 py-2 lg:justify-between">
+                <form
+                    onSubmit={addFood}
+                    className="w-full flex flex-col gap-8 py-2 lg:justify-between"
+                >
                     <section className="flex flex-col gap-4">
                         <section className="flex flex-col gap-2">
                             <label htmlFor="name">Nutrition Item:</label>

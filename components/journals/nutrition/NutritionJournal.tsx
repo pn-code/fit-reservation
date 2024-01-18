@@ -1,22 +1,54 @@
-"use client";
-
 import FoodEntryCard from "@/components/journals/nutrition/FoodEntryCard";
-import Spinner from "@/components/Spinner";
+import { getSingleDayEntries } from "@/helpers/getSingleDayEntries";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
-interface Props {
+interface NutritionJournalProps {
     foodEntries: FoodEntry[];
     userId: string;
+    date: Date;
 }
 
-export default function NutritionJournal({ foodEntries, userId }: Props) {
-    const totalCalories = foodEntries?.reduce(
+export default function NutritionJournal({
+    foodEntries,
+    userId,
+    date,
+}: NutritionJournalProps) {
+    const [foodEntriesToShow, setFoodEntriesToShow] = useState<ExerciseEntry[]>(
+        []
+    );
+
+    useEffect(() => {
+        const fetchEntriesByDate = (date: Date) => {
+            try {
+                const currentEntries = getSingleDayEntries(
+                    new Date(date),
+                    foodEntries
+                );
+                setFoodEntriesToShow(currentEntries);
+            } catch (error) {
+                toast.error("Please enter a valid date.");
+                console.error(error);
+            }
+        };
+
+        fetchEntriesByDate(date);
+    }, [date, foodEntries]);
+
+    const totalCalories = foodEntriesToShow?.reduce(
         (acc, curr) => curr.calories + acc,
         0
     );
-    const totalCarbs = foodEntries?.reduce((acc, curr) => curr.carbs + acc, 0);
-    const totalFats = foodEntries?.reduce((acc, curr) => curr.fats + acc, 0);
-    const totalProtein = foodEntries?.reduce(
+    const totalCarbs = foodEntriesToShow?.reduce(
+        (acc, curr) => curr.carbs + acc,
+        0
+    );
+    const totalFats = foodEntriesToShow?.reduce(
+        (acc, curr) => curr.fats + acc,
+        0
+    );
+    const totalProtein = foodEntriesToShow?.reduce(
         (acc, curr) => curr.protein + acc,
         0
     );
@@ -38,7 +70,7 @@ export default function NutritionJournal({ foodEntries, userId }: Props) {
             <div className="overflow-x-auto w-full">
                 <table className="table-auto w-full text-xs md:text-sm">
                     <thead className="h-8 font-semibold uppercase text-white bg-primary">
-                        <tr className="p-2 whitespace-nowrap">
+                        <tr className="p-2 whitespace-nowrap border border-primary">
                             <th>
                                 <div className="p-2 font-semibold text-left">
                                     Name
@@ -74,15 +106,13 @@ export default function NutritionJournal({ foodEntries, userId }: Props) {
                                 </div>
                             </th>
                             <th>
-                                <div className="p-2 font-semibold text-left">
-                                    
-                                </div>
+                                <div className="p-2 font-semibold text-left"></div>
                             </th>
                         </tr>
                     </thead>
 
                     <tbody className="text-sm divide-y divide-primary">
-                        {foodEntries?.map((entry) => (
+                        {foodEntriesToShow?.map((entry) => (
                             <FoodEntryCard
                                 id={entry.id}
                                 name={entry.name}
@@ -97,7 +127,7 @@ export default function NutritionJournal({ foodEntries, userId }: Props) {
                     </tbody>
 
                     <tfoot className="h-8 font-semibold uppercase text-white bg-secondary">
-                        <tr className="p-2 whitespace-nowrap">
+                        <tr className="p-2 whitespace-nowrap border border-primary">
                             <th className="font-semibold text-left">
                                 <div className="p-2">Total</div>
                             </th>
@@ -123,7 +153,7 @@ export default function NutritionJournal({ foodEntries, userId }: Props) {
                     </tfoot>
                 </table>
 
-                {!foodEntries.length && (
+                {!foodEntriesToShow.length && (
                     <p className="text-center w-full pt-4">
                         You currently have no nutrition entries.
                     </p>

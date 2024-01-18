@@ -2,21 +2,21 @@ import { prisma } from "@/lib/client";
 import { currentUser } from "@clerk/nextjs";
 import getLocalTimezone from "../../getLocalTimezone";
 
-const getTodaysResistanceEntries = async () => {
+const getResistanceEntries = async () => {
     try {
         const user = await currentUser();
 
         if (!user) throw Error("This action is forbidden.");
 
-        const localTime = getLocalTimezone();
+        // const localTime = getLocalTimezone();
 
         const exerciseEntries = await prisma.exerciseEntry.findMany({
             where: {
                 userId: user.id,
-                date: {
-                    gte: localTime.startOfDay,
-                    lt: localTime.endOfDay,
-                },
+                // date: {
+                //     gte: localTime.startOfDay,
+                //     lt: localTime.endOfDay,
+                // },
                 type: "resistance",
             },
         });
@@ -31,4 +31,4 @@ const getTodaysResistanceEntries = async () => {
     }
 };
 
-export default getTodaysResistanceEntries;
+export default getResistanceEntries;

@@ -1,11 +1,40 @@
-import Link from "next/link";
+"use client";
+
+import toast from "react-hot-toast";
 import ExerciseEntryCard from "./ExerciseEntryCard";
+import { useEffect, useState } from "react";
+import { getSingleDayEntries } from "@/helpers/getSingleDayEntries";
 
 interface CardioJournalProps {
     cardioEntries: ExerciseEntry[];
+    date: Date;
 }
 
-export default function CardioJournal({ cardioEntries }: CardioJournalProps) {
+export default function CardioJournal({
+    cardioEntries,
+    date,
+}: CardioJournalProps) {
+    const [cardioEntriesToShow, setCardioEntriesToShow] = useState<
+        ExerciseEntry[]
+    >([]);
+
+    useEffect(() => {
+        const fetchEntriesByDate = (date: Date) => {
+            try {
+                const currentEntries = getSingleDayEntries(
+                    new Date(date),
+                    cardioEntries
+                );
+                setCardioEntriesToShow(currentEntries);
+            } catch (error) {
+                toast.error("Please enter a valid date.");
+                console.error(error);
+            }
+        };
+
+        fetchEntriesByDate(date);
+    }, [date, cardioEntries]);
+
     return (
         <section className="flex flex-col gap-4 py-5 w-full bg-white border border-primary p-4 rounded-sm shadow-md">
             <h3 className="font-bold text-xl tracking-tight">Cardio Journal</h3>
@@ -40,15 +69,13 @@ export default function CardioJournal({ cardioEntries }: CardioJournalProps) {
                                 </div>
                             </th>
                             <th>
-                                <div className="p-2 font-semibold text-left">
-                                    
-                                </div>
+                                <div className="p-2 font-semibold text-left"></div>
                             </th>
                         </tr>
                     </thead>
 
                     <tbody className="text-sm divide-y divide-primary border border-primary">
-                        {cardioEntries?.map((entry: ExerciseEntry) => (
+                        {cardioEntriesToShow?.map((entry: ExerciseEntry) => (
                             <ExerciseEntryCard
                                 id={entry.id}
                                 name={entry.name}
@@ -64,7 +91,7 @@ export default function CardioJournal({ cardioEntries }: CardioJournalProps) {
                     </tbody>
                 </table>
 
-                {!cardioEntries.length && (
+                {!cardioEntriesToShow.length && (
                     <p className="text-center w-full pt-4">
                         You currently have no cardio entries.
                     </p>

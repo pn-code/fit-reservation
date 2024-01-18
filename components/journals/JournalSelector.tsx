@@ -1,6 +1,6 @@
 "use client";
 
-import { SetStateAction, useState } from "react";
+import { useState } from "react";
 
 import DateSelector from "@/components/journals/DateSelector";
 import { findFirstDate } from "@/helpers/findFirstDate";
@@ -28,6 +28,9 @@ export default function JournalSelector({
         useState<boolean>(false);
     const [isAddExerciseModalOpen, setIsAddExerciseModalOpen] =
         useState<boolean>(false);
+
+    // Use this date as comparable to entry dates
+    const useableDate = convertDateInputToDate(selectedDate);
 
     return (
         <div>
@@ -57,19 +60,25 @@ export default function JournalSelector({
             <AddExerciseModal
                 setIsOpen={setIsAddExerciseModalOpen}
                 isOpen={isAddExerciseModalOpen}
+                date={useableDate.toISOString()}
             />
 
             <AddFoodModal
                 setIsOpen={setIsAddFoodModalOpen}
                 isOpen={isAddFoodModalOpen}
+                date={useableDate.toISOString()}
             />
 
             <div className="flex flex-col gap-4">
-                <NutritionJournal foodEntries={foodEntries} userId={userId} />
+                <NutritionJournal
+                    foodEntries={foodEntries}
+                    userId={userId}
+                    date={useableDate}
+                />
                 <ExerciseJournal
                     resistanceEntries={resistanceEntries}
                     cardioEntries={cardioEntries}
-                    userId={userId}
+                    date={useableDate}
                 />
             </div>
         </div>
