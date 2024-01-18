@@ -10,7 +10,7 @@ export default function NavbarMobile() {
     const pathname = usePathname();
 
     return (
-        <nav className="lg:hidden fixed bottom-0 w-full bg-white z-[999] h-16 px-4">
+        <nav className="lg:hidden fixed bottom-0 w-full bg-white z-[999] h-16 px-1">
             {user && (
                 <ul className="flex justify-between py-1.5 items-center">
                     <Link

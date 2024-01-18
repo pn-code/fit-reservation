@@ -34,19 +34,19 @@ export default function JournalSelector({
 
     return (
         <div>
-            <div className="mb-4 flex items-center w-full justify-between bg-white border border-primary p-4 rounded-sm shadow-md">
-                <div className="flex gap-2">
+            <div className="mb-4 flex md:items-center w-full md:justify-between flex-col md:flex-row bg-white border border-primary p-4 rounded-sm shadow-md">
+                <div className="flex gap-2 mb-2 md:mb-0">
                     <button
                         onClick={() => setIsAddFoodModalOpen(true)}
                         type="button"
-                        className="btn btn--primary"
+                        className="btn btn--primary w-full md:w-fit"
                     >
                         Add Food
                     </button>
                     <button
                         onClick={() => setIsAddExerciseModalOpen(true)}
                         type="button"
-                        className="btn btn--secondary"
+                        className="btn btn--secondary w-full md:w-fit"
                     >
                         Add Exercise
                     </button>

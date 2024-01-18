@@ -48,24 +48,24 @@ export default async function Plans({ params }: Props) {
     const savedPlans = await getSavedPlans();
 
     return (
-        <main className="w-full min-h-[calc(100vh-90px)] overflow-y-auto mb-12 py-6 rounded-md flex flex-col gap-4 shadow-md px-4 md:px-[4%]">
-            <header className="bg-white border border-primary p-4 rounded-sm shadow-md flex justify-between">
+        <main className="w-full min-h-[calc(100vh-64px)] h-full overflow-y-auto py-6 rounded-md flex flex-col gap-4 px-1 md:px-[4%] mb-20">
+            <header className="bg-white border border-primary p-4 rounded-sm shadow-md flex flex-col md:flex-row md:justify-between">
                 <div className="flex flex-col">
                     <h1>{`${user.firstName} ${user.lastName}'s Plans`}</h1>
                     <p className="text-secondary tracking-tighter">
                         View created and/or saved plans
                     </p>
                 </div>
-                <section className="flex gap-4">
+                <section className="flex gap-2 mt-2">
                     <Link
-                        className="btn btn--primary flex gap-2"
+                        className="btn btn--primary flex gap-2 w-full"
                         href="/plans/build"
                     >
                         <HammerIcon size={20} />
                         <span className="font-semibold">Build</span>
                     </Link>
                     <Link
-                        className="btn btn--secondary flex gap-2"
+                        className="btn btn--secondary flex gap-2 w-full"
                         href="/plans/explore"
                     >
                         <GlobeIcon size={20} />
@@ -76,6 +76,9 @@ export default async function Plans({ params }: Props) {
 
             {/* User Plans */}
             <section className="flex flex-col gap-2">
+                <h2 className="bg-white border border-primary p-4 rounded-sm shadow-md flex text-xl sm:text-3xl font-bold pb-4">
+                    Created Plans
+                </h2>
                 {userPlans.map((plan: any) => (
                     <TrainingPlanCard plan={plan} key={plan.id} />
                 ))}
@@ -89,9 +92,9 @@ export default async function Plans({ params }: Props) {
 
             {/* Saved Plans */}
             <section className="flex flex-col gap-2">
-                <h1 className="text-xl sm:text-3xl font-bold pb-2 border-b-2 border-b-primary">
+                <h2 className="bg-white border border-primary p-4 rounded-sm shadow-md flex text-xl sm:text-3xl font-bold pb-4">
                     Saved Plans
-                </h1>
+                </h2>
                 {savedPlans.map((plan: any) => (
                     <TrainingPlanCard plan={plan} key={plan.id} />
                 ))}

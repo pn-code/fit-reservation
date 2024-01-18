@@ -29,7 +29,7 @@ export default function BodyFatSection({ userBodyfats }: BodyFatSectionProps) {
 
     return (
         <section className="h-fit w-full rounded-md flex flex-col gap-2 flex-1 mt-5">
-            <header className="container flex justify-between sm:items-center">
+            <header className="bg-white border border-primary p-4 rounded-sm shadow-md flex justify-between sm:items-center">
                 <div className="flex flex-col">
                     <h3 className="text-lg font-bold tracking-tighter">
                         Body Fat
