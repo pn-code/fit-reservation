@@ -88,7 +88,7 @@ export default function UpdateUsernameComponent() {
                     <button
                         disabled={loading}
                         onClick={updateUserNames}
-                        className="sm:w-72 text-gray-100 group flex cursor-pointer py-2 px-4 bg-blue-600 hover:bg-blue-700 rounded-md justify-center disabled:bg-gray-50"
+                        className="btn btn--primary lg:w-72"
                     >
                         {loading ? <Spinner /> : "Submit New Name"}
                     </button>

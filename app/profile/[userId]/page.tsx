@@ -47,7 +47,7 @@ async function ProfilePage({ params }: Props) {
 
             {/* Upgrade Profile */}
             {!userIsSubscribed && userId === user?.id && (
-                <section className="flex flex-col gap-4 sm:flex-row sm:justify-between">
+                <section className="bg-white border border-primary p-4 rounded-sm shadow-md flex flex-col gap-4 sm:flex-row sm:justify-between">
                     <section>
                         <h2 className="text-xl sm:text-2xl font-semibold text-secondary">
                             Upgrade account to premium
