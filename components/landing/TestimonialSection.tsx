@@ -25,11 +25,12 @@ export default function TestimonialSection() {
             <h2 className="text-4xl font-bold tracking-tighter">
                 Customer Testimonials
             </h2>
-            <span>Here's what our users have to say.</span>
+            <span>Here&apos;s what our users have to say.</span>
 
             <div className="flex flex-col md:flex-row justify-between mt-6 gap-12 md:gap-24">
                 {testimonialData.map((testimonial) => (
                     <TestimonialCard
+                        key={testimonial.name}
                         title={testimonial.title}
                         name={testimonial.name}
                         text={testimonial.text}
@@ -39,10 +40,10 @@ export default function TestimonialSection() {
 
             <div className="flex justify-end gap-4 mt-4">
                 <button className="hover:text-slate-400 duration-150">
-                    <ArrowLeftCircle size={40}/>
+                    <ArrowLeftCircle size={40} />
                 </button>
                 <button className="hover:text-slate-400 duration-150">
-                    <ArrowRightCircle size={40}/>
+                    <ArrowRightCircle size={40} />
                 </button>
             </div>
         </section>

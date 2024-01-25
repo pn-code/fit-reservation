@@ -9,7 +9,7 @@ export default function ToolsSection() {
             <h2 className="w-full text-4xl flex gap-2 flex-col font-bold">
                 Leverage our fitness tools
                 <span className="text-[16px] sm:text-xl text-gray-700 font-normal">
-                    Featuring all you'll need to elevate your fitness.
+                    Featuring all you&apos;ll need to elevate your fitness.
                 </span>
             </h2>
 
