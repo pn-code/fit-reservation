@@ -51,7 +51,7 @@ export default function SavePlanButton({ planId, isSaved }: Props) {
             disabled={loading}
             onClick={handleSave}
             type="button"
-            className="btn btn--primary flex gap-2 items-center"
+            className="w-full btn btn--primary flex gap-2 items-center"
         >
             <Save color="white" />
             <p className="text-white">

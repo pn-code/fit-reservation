@@ -88,7 +88,7 @@ export default function ReviewCard({ review }: Props) {
     };
 
     return (
-        <article className="flex flex-col gap-2 py-2 bg-white border border-primary p-4 rounded-sm shadow-md w-full md:w-[50%] xl:w-[40%]">
+        <article className="flex flex-col gap-2 py-2 bg-white border border-primary p-4 rounded-sm shadow-md w-full">
             <header className="flex justify-between">
                 <section className="flex gap-2 items-center">
                     <h4 className="text-primary font-bold">{reviewer}</h4>
