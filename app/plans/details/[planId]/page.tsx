@@ -146,8 +146,8 @@ export default async function PlanDetails({ params }: Props) {
                     </tbody>
                 </table>
                 {/* Reviews */}
-                <section className="flex flex-col gap-2 w-full">
-                    <header className="flex justify-between items-center bg-white border border-primary p-4 rounded-sm shadow-md">
+                <section className="flex flex-col gap-2 w-full bg-white border border-primary p-4 rounded-sm shadow-md">
+                    <header className="flex justify-between items-center">
                         <h3 className="text-lg font-semibold">Reviews</h3>
                     </header>
 

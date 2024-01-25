@@ -8,7 +8,7 @@ interface Props {
 
 export default function SearchBar({ setSearchTerm }: Props) {
   return (
-    <section className="w-full mx-auto flex sm:justify-center gap-2 items-center">
+    <section className="w-full mx-auto flex sm:justify-center gap-2 items-center bg-white border border-primary p-4 rounded-sm shadow-md">
       <span className="relative w-full sm:w-fit">
         <input
           onChange={(e) => setSearchTerm(e.target.value)}
