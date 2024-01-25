@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { currentUser } from "@clerk/nextjs/app-beta";
+import { currentUser } from "@clerk/nextjs";
 import { prisma } from "@/lib/client";
 import AllNutritionEntries from "@/components/journals/nutrition/AllNutritionEntries";
 
@@ -15,12 +15,19 @@ async function fetchUserNutritionJournals(userId: string) {
             date: "desc",
         },
     });
-    return journals;
+
+    if (journals) {
+        return journals as unknown as FoodEntry[];
+    } else {
+        return [];
+    }
 }
 
 export default async function UserNutritionJournals() {
     const user = await currentUser();
-    const entries = await fetchUserNutritionJournals(user?.id as string);
+    const entries = (await fetchUserNutritionJournals(
+        user?.id as string
+    )) as FoodEntry[];
 
     return (
         <main className="w-full min-h-[calc(100vh-90px)] mb-20 sm:mb-0 py-6 rounded-md flex flex-col gap-4 shadow-md px-4 lg:px-[4%]">
@@ -37,7 +44,11 @@ export default async function UserNutritionJournals() {
                 </Link>
             </header>
 
-            {entries.length === 0 && <span className="bg-white border border-primary p-4 rounded-sm shadow-md">No journals were found.</span>}
+            {entries.length === 0 && (
+                <span className="bg-white border border-primary p-4 rounded-sm shadow-md">
+                    No journals were found.
+                </span>
+            )}
 
             {/* Render Journals */}
             <AllNutritionEntries entries={entries} />

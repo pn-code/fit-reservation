@@ -1,19 +1,13 @@
 import Link from "next/link";
-import { prisma } from "@/lib/client";
-
-import AllNutritionEntries from "@/components/journals/nutrition/AllNutritionEntries";
 import { currentUser } from "@clerk/nextjs";
-import NutritionJournal from "@/components/journals/nutrition/NutritionJournal";
-import CardioJournal from "@/components/journals/exercise/CardioJournal";
-import ResistanceJournal from "@/components/journals/exercise/ResistanceJournal";
+
 import getFoodEntries from "@/helpers/food-entries/getFoodEntries";
 import getCardioEntries from "@/helpers/exercise-entries/cardio/getCardioEntries";
 import getResistanceEntries from "@/helpers/exercise-entries/resistance/getResistanceEntries";
-import AllExerciseEntries from "@/components/journals/exercise/AllExerciseEntries";
 import AllJournalEntries from "@/components/journals/AllJournalEntries";
 
 export const metadata = {
-    title: "Journal: All Entries | FitHeroes",
+    title: "Journal: All | FitHeroes",
 };
 
 export default async function AllUserJournals() {
@@ -39,7 +33,6 @@ export default async function AllUserJournals() {
             </header>
 
             {/* Render Journals */}
-
             <AllJournalEntries
                 foodEntries={foodEntries}
                 cardioEntries={cardioEntries}
