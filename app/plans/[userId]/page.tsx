@@ -101,7 +101,7 @@ export default async function Plans({ params }: Props) {
                     ))}
                     {savedPlans.length === 0 && (
                         <p className="text-sm">
-                            Nothing to see here. Create your first plan to see
+                            Nothing to see here. Save a plan to see
                             it here.
                         </p>
                     )}

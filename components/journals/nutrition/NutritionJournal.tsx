@@ -7,7 +7,7 @@ import toast from "react-hot-toast";
 
 interface NutritionJournalProps {
     foodEntries: FoodEntry[];
-    date?: string;
+    date?: Date | string;
 }
 
 export default function NutritionJournal({
@@ -17,7 +17,7 @@ export default function NutritionJournal({
     const [foodEntriesToShow, setFoodEntriesToShow] = useState<FoodEntry[]>([]);
 
     useEffect(() => {
-        const fetchEntriesByDate = (date: string) => {
+        const fetchEntriesByDate = (date: string | Date) => {
             try {
                 const currentEntries = getSingleDayEntries(
                     new Date(date),

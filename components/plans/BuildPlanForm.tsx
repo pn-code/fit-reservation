@@ -214,7 +214,7 @@ export default function BuildPlanForm() {
                         </button>
                     </section>
 
-                    <table className="table-auto w-full">
+                    <table className="table-auto w-full border border-primary">
                         <thead className="h-8 text-xs md:text-[16px] font-semibold uppercase bg-primary text-white">
                             <tr className="p-2 whitespace-nowrap border-primary border">
                                 <th>
@@ -240,7 +240,7 @@ export default function BuildPlanForm() {
                             </tr>
                         </thead>
 
-                        <tbody className="text-sm divide-y divide-gray-100 w-full">
+                        <tbody className="text-sm divide-y divide-primary w-full border border-primary">
                             {exercises.length > 0 ? (
                                 exercises.map((exercise, idx) => (
                                     <tr

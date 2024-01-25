@@ -3,9 +3,9 @@ import AllNutritionEntries from "./nutrition/AllNutritionEntries";
 import AllExerciseEntries from "./exercise/AllExerciseEntries";
 
 interface AllNutritionEntriesProps {
-    foodEntries: FoodEntry[];
-    resistanceEntries: ExerciseEntry[];
-    cardioEntries: ExerciseEntry[];
+    foodEntries: any[];
+    resistanceEntries: any[];
+    cardioEntries: any[];
 }
 
 export default function AllJournalEntries({

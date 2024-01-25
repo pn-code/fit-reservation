@@ -17,6 +17,10 @@ export default async function AllUserJournals() {
     const cardioEntries = await getCardioEntries();
     const resistanceEntries = await getResistanceEntries();
 
+    if (!foodEntries || !cardioEntries || !resistanceEntries) {
+        throw new Error("Could not load journal entries. Please try again later.")
+    }
+
     return (
         <main className="w-full min-h-[calc(100vh-64px)] mb-20 sm:mb-0 py-6 rounded-md flex flex-col gap-4 px-1 lg:px-[4%]">
             <header className="flex items-center justify-between font-bold bg-white border border-primary p-4 rounded-sm shadow-md">

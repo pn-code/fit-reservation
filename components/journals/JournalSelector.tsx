@@ -11,9 +11,9 @@ import AddExerciseModal from "./exercise/AddExerciseModal";
 import AddFoodModal from "./nutrition/AddFoodModal";
 
 interface JournalSelectorProps {
-    cardioEntries: ExerciseEntry[];
-    resistanceEntries: ExerciseEntry[];
-    foodEntries: FoodEntry[];
+    cardioEntries: any[];
+    resistanceEntries: any[];
+    foodEntries: any[];
     userId: string;
 }
 
@@ -72,7 +72,6 @@ export default function JournalSelector({
             <div className="flex flex-col gap-4">
                 <NutritionJournal
                     foodEntries={foodEntries}
-                    userId={userId}
                     date={useableDate}
                 />
                 <ExerciseJournal

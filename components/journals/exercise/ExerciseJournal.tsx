@@ -4,7 +4,7 @@ import CardioJournal from "./CardioJournal";
 interface ExerciseJournalProps {
     resistanceEntries: ExerciseEntry[];
     cardioEntries: ExerciseEntry[];
-    date: Date;
+    date: string | Date;
 }
 
 export default function ExerciseJournal({

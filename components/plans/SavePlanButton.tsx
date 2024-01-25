@@ -55,7 +55,7 @@ export default function SavePlanButton({ planId, isSaved }: Props) {
         >
             <Save color="white" />
             <p className="text-white">
-                {hasCurrentUserSaved ? "Saved" : "Save Plan"}
+                {hasCurrentUserSaved ? "Saved" : "Save"}
             </p>
         </button>
     );

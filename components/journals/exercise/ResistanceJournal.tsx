@@ -7,7 +7,7 @@ import toast from "react-hot-toast";
 
 interface ResistanceJournalProps {
     resistanceEntries: ExerciseEntry[];
-    date?: string;
+    date?: string | Date;
 }
 
 export default function ResistanceJournal({
@@ -19,7 +19,7 @@ export default function ResistanceJournal({
     >([]);
 
     useEffect(() => {
-        const fetchEntriesByDate = (date: string) => {
+        const fetchEntriesByDate = (date: string | Date) => {
             try {
                 const currentEntries = getSingleDayEntries(
                     new Date(date),

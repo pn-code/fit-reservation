@@ -21,6 +21,10 @@ const JournalPage = async () => {
     const resistanceEntries = await getResistanceEntries();
     const cardioEntries = await getCardioEntries();
 
+    if (!foodEntries || !resistanceEntries || !cardioEntries) {
+        throw new Error("Could not load journal entries. Please try again later.")
+    }
+
     return (
         <main className="w-full min-h-[calc(100vh-64px)] pb-20 overflow-y-auto py-6 flex flex-col gap-4 px-1 md:px-[4%]">
             <header className="bg-white border border-primary p-4 rounded-sm shadow-md flex justify-between flex-col md:flex-row">

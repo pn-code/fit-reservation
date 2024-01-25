@@ -7,7 +7,7 @@ import { getSingleDayEntries } from "@/helpers/getSingleDayEntries";
 
 interface CardioJournalProps {
     cardioEntries: ExerciseEntry[];
-    date?: string;
+    date?: string | Date;
 }
 
 export default function CardioJournal({
@@ -19,7 +19,7 @@ export default function CardioJournal({
     >([]);
 
     useEffect(() => {
-        const fetchEntriesByDate = (date: string) => {
+        const fetchEntriesByDate = (date: string | Date) => {
             try {
                 const currentEntries = getSingleDayEntries(
                     new Date(date),

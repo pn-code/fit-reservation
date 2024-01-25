@@ -58,7 +58,7 @@ const Navbar = () => {
 
                 {/* Navbar on medium to larger devices */}
                 {user && (
-                    <ul className="hidden lg:flex lg:gap-6 text-[14px] lg:text-[16px] font-semibold tracking-tighter">
+                    <ul className="hidden lg:flex lg:gap-6 text-[14px] lg:text-[18px] font-semibold tracking-tighter">
                         <li>
                             <Link
                                 className={`flex gap-2 group relative hover:text-slate-500 items-center ${
