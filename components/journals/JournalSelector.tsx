@@ -11,9 +11,9 @@ import AddExerciseModal from "./exercise/AddExerciseModal";
 import AddFoodModal from "./nutrition/AddFoodModal";
 
 interface JournalSelectorProps {
-    cardioEntries: any[];
-    resistanceEntries: any[];
-    foodEntries: any[];
+    cardioEntries: any;
+    resistanceEntries: any;
+    foodEntries: any;
     userId: string;
 }
 
@@ -21,7 +21,6 @@ export default function JournalSelector({
     resistanceEntries,
     cardioEntries,
     foodEntries,
-    userId,
 }: JournalSelectorProps) {
     const [selectedDate, setSelectedDate] = useState<string>(findFirstDate());
     const [isAddFoodModalOpen, setIsAddFoodModalOpen] =

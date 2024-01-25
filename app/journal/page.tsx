@@ -4,7 +4,6 @@ import { currentUser } from "@clerk/nextjs";
 import JournalSelector from "@/components/journals/JournalSelector";
 import getFoodEntries from "@/helpers/food-entries/getFoodEntries";
 import getResistanceEntries from "@/helpers/exercise-entries/resistance/getResistanceEntries";
-import getCardioEntriesByDate from "@/helpers/exercise-entries/cardio/getCardioEntriesByDate";
 import getCardioEntries from "@/helpers/exercise-entries/cardio/getCardioEntries";
 import Link from "next/link";
 
@@ -20,10 +19,6 @@ const JournalPage = async () => {
     const foodEntries = await getFoodEntries();
     const resistanceEntries = await getResistanceEntries();
     const cardioEntries = await getCardioEntries();
-
-    if (!foodEntries || !resistanceEntries || !cardioEntries) {
-        throw new Error("Could not load journal entries. Please try again later.")
-    }
 
     return (
         <main className="w-full min-h-[calc(100vh-64px)] pb-20 overflow-y-auto py-6 flex flex-col gap-4 px-1 md:px-[4%]">
