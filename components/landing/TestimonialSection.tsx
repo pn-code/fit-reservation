@@ -21,13 +21,13 @@ const testimonialData = [
 
 export default function TestimonialSection() {
     return (
-        <section className="px-12 md:px-[4%] py-12 md:py-20 flex flex-col bg-slate-600 text-slate-100">
+        <section className="px-12 md:px-[4%] py-12 md:py-20 flex flex-col bg-slate-800 text-slate-100">
             <h2 className="text-4xl font-bold tracking-tighter">
                 Customer Testimonials
             </h2>
             <span>Here&apos;s what our users have to say.</span>
 
-            <div className="flex flex-col md:flex-row justify-between mt-6 gap-12 md:gap-24">
+            <div className="flex flex-col md:flex-row justify-between mt-6 gap-12">
                 {testimonialData.map((testimonial) => (
                     <TestimonialCard
                         key={testimonial.name}
