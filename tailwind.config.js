@@ -10,6 +10,11 @@ module.exports = {
             fontFamily: {
                 roboto: ["var(--font-roboto)"],
             },
+            colors: {
+                primary: "#0F170E",
+                secondary: "#465569",
+                accent: "#F59E0B",
+            },
         },
     },
     plugins: [],

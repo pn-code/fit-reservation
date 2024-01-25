@@ -1,6 +1,5 @@
 import { Karla } from "next/font/google";
-
-import { ClerkProvider } from "@clerk/nextjs/app-beta";
+import { ClerkProvider } from "@clerk/nextjs";
 import Navbar from "@/components/navigation/Navbar";
 import "@/app/globals.css";
 import ToastProvider from "@/providers/ToastProvider";
@@ -24,7 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <ClerkProvider>
-        <body className={`${karla.className} bg-gray-900 h-full`}>
+        <body className={`${karla.className}`}>
           <Navbar />
           <ToastProvider />
           {children}

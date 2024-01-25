@@ -3,12 +3,13 @@
 @tailwind utilities;
 
 input,
-select {
-    @apply text-black px-2 rounded-sm py-1 shadow-sm focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50;
+select,
+textarea {
+    @apply text-black border border-primary px-2 rounded-sm py-1 shadow-sm tracking-tight focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50;
 }
 
-body {
-    @apply bg-[#cacaca];
+label{
+    @apply tracking-tight
 }
 
 html,
@@ -16,12 +17,45 @@ body {
     margin: 0;
     padding: 0;
     scroll-behavior: smooth;
+    background: #f1f5f9;
 }
 
 @layer base {
     input[type="number"]::-webkit-inner-spin-button,
     input[type="number"]::-webkit-outer-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
+        -webkit-appearance: none;
+        margin: 0;
     }
-  }
+}
+
+h1 {
+    @apply text-3xl tracking-tighter font-bold;
+}
+
+h2 {
+    @apply text-xl font-bold tracking-tighter;
+}
+
+.bg-hero {
+    background-image: url("../public/assets/hero.png");
+}
+
+.btn {
+    @apply flex text-sm md:text-[16px] justify-center items-center px-3 md:px-8 py-2 md:py-3 rounded-sm duration-150 border border-primary disabled:bg-secondary disabled:cursor-wait;
+}
+
+.btn--primary {
+    @apply bg-black hover:bg-black/80 text-white;
+}
+
+.btn--secondary {
+    @apply hover:text-white hover:bg-gray-500/80  bg-gray-700/90 text-white;
+}
+
+.btn--danger {
+    @apply bg-red-500 hover:bg-red-700 text-white;
+}
+
+.container {
+    @apply bg-white border border-primary p-4 rounded-sm shadow-md;
+}

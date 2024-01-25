@@ -1,43 +1,53 @@
-import Link from "next/link";
 import { redirect } from "next/navigation";
-
-import JournalSelector from "@/components/journals/JournalSelector";
 import { currentUser } from "@clerk/nextjs";
 
+import JournalSelector from "@/components/journals/JournalSelector";
+import getFoodEntries from "@/helpers/food-entries/getFoodEntries";
+import getResistanceEntries from "@/helpers/exercise-entries/resistance/getResistanceEntries";
+import getCardioEntriesByDate from "@/helpers/exercise-entries/cardio/getCardioEntriesByDate";
+import getCardioEntries from "@/helpers/exercise-entries/cardio/getCardioEntries";
+import Link from "next/link";
+
 export const metadata = {
-  title: "Journal | FitHeroes",
+    title: "Journal | FitHeroes",
 };
 
 const JournalPage = async () => {
-  const user = await currentUser();
+    const user = await currentUser();
 
-  if (!user) return redirect("/");
+    if (!user) return redirect("/");
 
-  return (
-    <main className="w-full min-h-[calc(100vh-100px)] pb-20 overflow-y-auto bg-gray-900 py-6 rounded-md flex flex-col gap-4 shadow-md px-2 lg:px-[20%] text-white/90">
-      <header className="w-full flex justify-between border-b-2 border-b-indigo-600">
-        <section className="w-full flex justify-between font-bold pb-2 items-center h-full">
-          <h1 className="text-xl sm:text-3xl">Journal</h1>
-          <div>
-            <Link
-              className="text-sm font-semibold p-2 underline hover:text-slate-300"
-              href={`/journal/nutrition/user/${user.id}`}
-            >
-              All Nutrition
-            </Link>
-            <Link
-              className="text-sm font-semibold p-2 underline hover:text-slate-300"
-              href={`/journal/exercise/user/${user.id}`}
-            >
-              All Exercises
-            </Link>
-          </div>
-        </section>
-      </header>
+    const foodEntries = await getFoodEntries();
+    const resistanceEntries = await getResistanceEntries();
+    const cardioEntries = await getCardioEntries();
 
-      <JournalSelector />
-    </main>
-  );
+    if (!foodEntries || !resistanceEntries || !cardioEntries) {
+        throw new Error("Could not load journal entries. Please try again later.")
+    }
+
+    return (
+        <main className="w-full min-h-[calc(100vh-64px)] pb-20 overflow-y-auto py-6 flex flex-col gap-4 px-1 md:px-[4%]">
+            <header className="bg-white border border-primary p-4 rounded-sm shadow-md flex justify-between flex-col md:flex-row">
+                <div className="flex flex-col">
+                    <h1>Journal</h1>
+                    <p className="tracking-tighter text-secondary">
+                        Keep track of progress
+                    </p>
+                </div>
+
+                <Link href={`/journal/${user.id}`} className="btn btn--primary mt-1">
+                    View All
+                </Link>
+            </header>
+
+            <JournalSelector
+                foodEntries={foodEntries}
+                cardioEntries={cardioEntries}
+                resistanceEntries={resistanceEntries}
+                userId={user.id}
+            />
+        </main>
+    );
 };
 
 export default JournalPage;

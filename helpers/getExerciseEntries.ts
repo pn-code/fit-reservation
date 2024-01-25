@@ -1,28 +1,29 @@
 import { prisma } from "../lib/client";
-import { currentUser } from "@clerk/nextjs/app-beta";
+import { currentUser } from "@clerk/nextjs";
 import getLocalTimezone from "./getLocalTimezone";
 
 const getExerciseEntries = async () => {
-	try {
-		const user = await currentUser();
-		if (!user) throw Error("This action is forbidden.");
+    try {
+        const user = await currentUser();
 
-		const localTime = getLocalTimezone();
+        if (!user) throw Error("This action is forbidden.");
 
-		const exerciseEntries = await prisma.exerciseEntry.findMany({
-			where: {
-				userId: user.id,
-				date: {
-					gte: localTime.startOfDay,
-					lt: localTime.endOfDay,
-				},
-			},
-		});
+        const localTime = getLocalTimezone();
 
-		return exerciseEntries;
-	} catch (error) {
-		console.error(error);
-	}
+        const exerciseEntries = await prisma.exerciseEntry.findMany({
+            where: {
+                userId: user.id,
+                date: {
+                    gte: localTime.startOfDay,
+                    lt: localTime.endOfDay,
+                },
+            },
+        });
+
+        return exerciseEntries;
+    } catch (error) {
+        console.error(error);
+    }
 };
 
 export default getExerciseEntries;

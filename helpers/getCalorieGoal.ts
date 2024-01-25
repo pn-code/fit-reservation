@@ -1,5 +1,5 @@
 import { prisma } from "../lib/client";
-import { currentUser } from "@clerk/nextjs/app-beta";
+import { currentUser } from "@clerk/nextjs";
 
 interface calorieGoal {
     userId: string;

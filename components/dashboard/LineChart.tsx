@@ -11,8 +11,6 @@ import {
 import "chartjs-adapter-moment";
 import { Line } from "react-chartjs-2";
 
-import LineDivider from "@/components/LineDivider";
-
 Chart.register(
     TimeScale,
     LinearScale,
@@ -39,18 +37,20 @@ export default function LineChart({
     pointColor,
 }: Props) {
     const options = {
+        redraw: true,
+        updateMode: "resize",
         responsive: true,
         plugins: {
             legend: {
                 labels: {
-                    color: "rgb(224, 224, 224)",
+                    color: "black",
                 },
                 position: "bottom" as const,
             },
             title: {
                 display: true,
                 text: title,
-                color: "rgb(240, 240, 240)",
+                color: "black",
             },
         },
         scales: {
@@ -63,14 +63,14 @@ export default function LineChart({
                     },
                 },
                 ticks: {
-                    color: "rgb(224, 224, 224)",
+                    color: "black",
                 },
             },
             y: {
                 beginAtZero: false,
                 ticks: {
                     stepSize: 1,
-                    color: "rgb(224, 224, 224)",
+                    color: "black",
                 },
             },
         },
@@ -90,11 +90,10 @@ export default function LineChart({
     };
 
     return (
-        <section className="w-full h-full">
+        <section className="w-full h-full bg-white border border-primary md:p-4 rounded-sm">
             {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
             {/* @ts-ignore */}
             <Line data={data} options={options} />
-            <LineDivider />
         </section>
     );
 }

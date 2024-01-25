@@ -2,15 +2,16 @@ import Spinner from "@/components/Spinner";
 
 export default function Loading() {
     return (
-        <main className="w-full min-h-[calc(100vh-90px)] bg-gray-900 py-6 rounded-md flex flex-col gap-4 shadow-md px-2 lg:px-[20%] text-white/90">
-            <header className="flex flex-col w-full gap-2">
-                <h1 className="text-xl sm:text-3xl font-bold border-b-indigo-600 border-b-2">
-                    Dashboard
-                </h1>
+        <main className="w-full min-h-[calc(100vh-64px)] py-6 mb-12 md:mb-0 flex flex-col px-4 md:px-[4%] relative">
+            <header className="bg-white border border-primary p-4 rounded-sm shadow-md">
+                <h1 className="font-bold">Dashboard</h1>
+                <p className="text-secondary tracking-tighter">
+                    View your progress
+                </p>
             </header>
 
             <section className="w-full h-full flex justify-center mt-40">
-                <Spinner size={16}/>
+                <Spinner size={16} />
             </section>
         </main>
     );
