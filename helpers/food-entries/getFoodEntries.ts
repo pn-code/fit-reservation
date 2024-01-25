@@ -1,6 +1,6 @@
-import { prisma } from "../lib/client";
+import { prisma } from "../../lib/client";
 import { currentUser } from "@clerk/nextjs";
-import getLocalTimezone from "../helpers/getLocalTimezone";
+// import getLocalTimezone from "../helpers/getLocalTimezone";
 
 const getFoodEntries = async () => {
     try {
@@ -18,12 +18,15 @@ const getFoodEntries = async () => {
                 //     lt: localTime.endOfDay,
                 // },
             },
+            orderBy: {
+                date: "desc",
+            },
         });
 
         if (!foodEntry) {
             return [];
         }
-		
+
         return foodEntry;
     } catch (error) {
         console.error(error);

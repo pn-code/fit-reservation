@@ -48,7 +48,7 @@ export default async function Plans({ params }: Props) {
     const savedPlans = await getSavedPlans();
 
     return (
-        <main className="w-full min-h-[calc(100vh-64px)] h-full overflow-y-auto py-6 rounded-md flex flex-col gap-4 px-1 md:px-[4%] mb-20">
+        <main className="w-full min-h-[calc(100vh-64px)] h-full overflow-y-auto py-6 rounded-md flex flex-col gap-4 px-1 md:px-[4%] mb-20 md:mb-0">
             <header className="bg-white border border-primary p-4 rounded-sm shadow-md flex flex-col md:flex-row md:justify-between">
                 <div className="flex flex-col">
                     <h1>{`${user.firstName} ${user.lastName}'s Plans`}</h1>
@@ -74,37 +74,39 @@ export default async function Plans({ params }: Props) {
                 </section>
             </header>
 
-            {/* User Plans */}
-            <section className="flex flex-col gap-2">
-                <h2 className="bg-white border border-primary p-4 rounded-sm shadow-md flex text-xl sm:text-3xl font-bold pb-4">
-                    Created Plans
-                </h2>
-                {userPlans.map((plan: any) => (
-                    <TrainingPlanCard plan={plan} key={plan.id} />
-                ))}
-                {userPlans.length === 0 && (
-                    <p className="text-sm">
-                        Nothing to see here. Create your first plan to see it
-                        here.
-                    </p>
-                )}
-            </section>
+            <div className="flex flex-col gap-4 md:flex-row">
+                {/* User Plans */}
+                <section className="flex flex-col gap-2 w-full">
+                    <h3 className="bg-white border border-primary p-4 rounded-sm shadow-md flex text-xl font-bold tracking-tighter pb-4">
+                        Created Plans
+                    </h3>
+                    {userPlans.map((plan: any) => (
+                        <TrainingPlanCard plan={plan} key={plan.id} />
+                    ))}
+                    {userPlans.length === 0 && (
+                        <p className="text-sm">
+                            Nothing to see here. Create your first plan to see
+                            it here.
+                        </p>
+                    )}
+                </section>
 
-            {/* Saved Plans */}
-            <section className="flex flex-col gap-2">
-                <h2 className="bg-white border border-primary p-4 rounded-sm shadow-md flex text-xl sm:text-3xl font-bold pb-4">
-                    Saved Plans
-                </h2>
-                {savedPlans.map((plan: any) => (
-                    <TrainingPlanCard plan={plan} key={plan.id} />
-                ))}
-                {savedPlans.length === 0 && (
-                    <p className="text-sm">
-                        Nothing to see here. Create your first plan to see it
-                        here.
-                    </p>
-                )}
-            </section>
+                {/* Saved Plans */}
+                <section className="flex flex-col gap-2 w-full">
+                    <h3 className="bg-white border border-primary p-4 rounded-sm shadow-md flex text-xl font-bold tracking-tighter pb-4">
+                        Saved Plans
+                    </h3>
+                    {savedPlans.map((plan: any) => (
+                        <TrainingPlanCard plan={plan} key={plan.id} />
+                    ))}
+                    {savedPlans.length === 0 && (
+                        <p className="text-sm">
+                            Nothing to see here. Create your first plan to see
+                            it here.
+                        </p>
+                    )}
+                </section>
+            </div>
         </main>
     );
 }

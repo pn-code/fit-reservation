@@ -39,6 +39,8 @@ export default function LineChart({
     pointColor,
 }: Props) {
     const options = {
+        redraw: true,
+        updateMode: "resize",
         responsive: true,
         plugins: {
             legend: {

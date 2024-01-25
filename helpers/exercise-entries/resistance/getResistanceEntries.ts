@@ -19,6 +19,9 @@ const getResistanceEntries = async () => {
                 // },
                 type: "resistance",
             },
+            orderBy: {
+                date: "desc",
+            }
         });
 
         if (!exerciseEntries) {

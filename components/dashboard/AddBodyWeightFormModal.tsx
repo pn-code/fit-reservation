@@ -5,6 +5,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 
 import { weightSchema } from "@/validations/weightValidator";
+import { useRouter } from "next/navigation";
 
 interface AddBodyWeightFormModalProps {
     setWeights: any;
@@ -22,6 +23,7 @@ export default function AddBodyWeightFormModal({
     const [weight, setWeight] = useState<number>(160);
     const [date, setDate] = useState(today);
     const [loading, setLoading] = useState(false);
+    const router = useRouter();
 
     const submitCurrentWeight = async () => {
         try {
@@ -45,10 +47,9 @@ export default function AddBodyWeightFormModal({
                                 new Date(a.createdAt).getTime()
                         )
                     );
-                } else {
-                    throw Error;
                 }
                 setIsOpen(false);
+                router.refresh();
             }
         } catch (error) {
             console.error(error);
@@ -61,8 +62,8 @@ export default function AddBodyWeightFormModal({
     if (!isOpen) return null;
 
     return (
-        <div className="absolute bg-black/80 top-0 left-0 w-full h-[90vh] md:h-full z-50 flex justify-center pt-5">
-            <form className="bg-white w-[340px] md:w-[500px] p-4 my-4 md:px-8 rounded border border-primary h-fit">
+        <div className="fixed bg-black/80 top-0 left-0 w-full h-full md:h-screen z-50 flex justify-center pt-14 md:pt-24">
+            <form className="bg-white w-[340px] md:w-[380px] p-4 my-4 md:px-8 rounded border border-primary h-fit">
                 <header className="flex justify-between items-center gap-4">
                     <h2>Add Weight Measurement</h2>
                     <button

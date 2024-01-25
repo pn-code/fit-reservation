@@ -1,4 +1,5 @@
 "use client";
+
 import { useEffect, useState } from "react";
 import ExerciseEntryCard from "./ExerciseEntryCard";
 import { getSingleDayEntries } from "@/helpers/getSingleDayEntries";
@@ -6,7 +7,7 @@ import toast from "react-hot-toast";
 
 interface ResistanceJournalProps {
     resistanceEntries: ExerciseEntry[];
-    date: Date;
+    date?: string;
 }
 
 export default function ResistanceJournal({
@@ -18,7 +19,7 @@ export default function ResistanceJournal({
     >([]);
 
     useEffect(() => {
-        const fetchEntriesByDate = (date: Date) => {
+        const fetchEntriesByDate = (date: string) => {
             try {
                 const currentEntries = getSingleDayEntries(
                     new Date(date),
@@ -31,7 +32,9 @@ export default function ResistanceJournal({
             }
         };
 
-        fetchEntriesByDate(date);
+        if (date) {
+            fetchEntriesByDate(date);
+        }
     }, [date, resistanceEntries]);
     return (
         <section className="flex flex-col gap-4 py-5 w-full bg-white border border-primary p-4 rounded-sm shadow-md">

@@ -3,6 +3,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 
 import { bodyFatSchema } from "@/validations/bodyFatValidator";
+import { useRouter } from "next/navigation";
 
 interface BodyFatFormModalProps {
     setBodyFats: any;
@@ -16,6 +17,8 @@ export default function BodyFatFormModal({
     setIsOpen,
 }: BodyFatFormModalProps) {
     const today = new Date().toISOString().split("T")[0];
+
+    const router = useRouter();
 
     const [bodyFat, setBodyFat] = useState<number>(15);
     const [date, setDate] = useState(today);
@@ -45,10 +48,9 @@ export default function BodyFatFormModal({
                                 new Date(a.createdAt).getTime()
                         )
                     );
-                } else {
-                    throw Error;
                 }
                 setIsOpen(false);
+                router.refresh();
             }
         } catch (error) {
             console.error(error);
@@ -61,8 +63,8 @@ export default function BodyFatFormModal({
     if (!isOpen) return null;
 
     return (
-        <div className="absolute bg-black/80 top-0 left-0 w-full h-[90vh] md:h-full z-50 flex justify-center pt-5">
-            <form className="bg-white w-[340px] md:w-[500px] p-4 my-4 md:px-8 rounded border border-primary h-fit flex flex-col gap-4">
+        <div className="fixed bg-black/80 top-0 left-0 w-full h-full md:h-screen z-50 flex justify-center pt-14 md:pt-24">
+            <form className="bg-white w-[340px] md:w-[380px] p-4 my-4 md:px-8 rounded border border-primary h-fit flex flex-col gap-4">
                 <header className="flex justify-between items-center gap-4">
                     <h2>Add Bodyfat Measurement</h2>
                     <button

@@ -19,6 +19,9 @@ const getCardioEntries = async () => {
                 // },
                 type: "cardio",
             },
+            orderBy: {
+                date: "desc",
+            },
         });
 
         if (!exerciseEntries) {

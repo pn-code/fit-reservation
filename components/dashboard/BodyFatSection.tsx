@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import LineChart from "./LineChart";
 import formatDateString from "@/helpers/dates/formatDateString";
-import BodyFatFormModal from "./BodyFatFormModal";
+import BodyFatFormModal from "./AddBodyFatFormModal";
 import BodyFatTableModal from "./BodyFatTableModal";
 
 interface BodyFatSectionProps {

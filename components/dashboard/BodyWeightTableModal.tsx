@@ -2,6 +2,7 @@
 
 import formatDateString from "@/helpers/dates/formatDateString";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 import React, { Dispatch, SetStateAction, useState } from "react";
 import toast from "react-hot-toast";
 
@@ -9,7 +10,7 @@ interface BodyWeightTableModalProps {
     weights: WeightMeasurement[];
     isOpen: boolean;
     setIsOpen: Dispatch<SetStateAction<boolean>>;
-    setWeights: Dispatch<SetStateAction<WeightMeasurement>>;
+    setWeights: Dispatch<SetStateAction<WeightMeasurement[]>>;
 }
 
 export default function BodyWeightTableModal({
@@ -19,6 +20,7 @@ export default function BodyWeightTableModal({
     setWeights,
 }: BodyWeightTableModalProps) {
     const [loading, setLoading] = useState<boolean>(false);
+    const router = useRouter();
 
     const deleteWeight = async (id: number) => {
         try {
@@ -26,11 +28,13 @@ export default function BodyWeightTableModal({
             const res = await axios.delete(`/api/weight_measurements/${id}`);
 
             if (res.status == 200) {
-                setWeights((prev) =>
-                    [...prev].filter((weight) => weight.id !== id)
+                const updatedWeights = weights.filter(
+                    (weight) => weight.id !== id
                 );
+                setWeights(updatedWeights);
                 toast.success("Successfully deleted weight!");
             }
+            router.refresh();
         } catch (error) {
             console.error(error);
             toast.error("An error has occurred during deletion.");
@@ -42,7 +46,7 @@ export default function BodyWeightTableModal({
     if (!isOpen) return null;
 
     return (
-        <div className="absolute bg-black/80 top-0 left-0 w-full h-full md:h-screen z-50 flex justify-center pt-5">
+        <div className="fixed bg-black/80 top-0 left-0 w-full h-full md:h-screen z-50 flex justify-center pt-14 md:pt-24">
             <div className="bg-white h-[75vh] w-[340px] md:w-[500px] p-4 my-4 md:px-8 rounded border border-primary overflow-y-auto">
                 <header className="flex justify-between items-center mb-2">
                     <h2>View all weights</h2>

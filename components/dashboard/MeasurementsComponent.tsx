@@ -6,7 +6,7 @@ import { toast } from "react-hot-toast";
 
 import LineChart from "@/components/dashboard/LineChart";
 import BodyWeightForm from "@/components/dashboard/AddBodyWeightFormModal";
-import BodyFatForm from "@/components/dashboard/BodyFatFormModal";
+import BodyFatForm from "@/components/dashboard/AddBodyFatFormModal";
 import { getPrevMonthDateISOString } from "@/helpers/getPrevMonthDateISOString";
 
 export default function MeasurementsComponent() {

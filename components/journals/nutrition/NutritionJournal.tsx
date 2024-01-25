@@ -1,26 +1,23 @@
+"use client";
+
 import FoodEntryCard from "@/components/journals/nutrition/FoodEntryCard";
 import { getSingleDayEntries } from "@/helpers/getSingleDayEntries";
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
 interface NutritionJournalProps {
     foodEntries: FoodEntry[];
-    userId: string;
-    date: Date;
+    date?: string;
 }
 
 export default function NutritionJournal({
     foodEntries,
-    userId,
     date,
 }: NutritionJournalProps) {
-    const [foodEntriesToShow, setFoodEntriesToShow] = useState<ExerciseEntry[]>(
-        []
-    );
+    const [foodEntriesToShow, setFoodEntriesToShow] = useState<FoodEntry[]>([]);
 
     useEffect(() => {
-        const fetchEntriesByDate = (date: Date) => {
+        const fetchEntriesByDate = (date: string) => {
             try {
                 const currentEntries = getSingleDayEntries(
                     new Date(date),
@@ -33,7 +30,11 @@ export default function NutritionJournal({
             }
         };
 
-        fetchEntriesByDate(date);
+        if (date) {
+            fetchEntriesByDate(date);
+        } else {
+            setFoodEntriesToShow(foodEntries)
+        }
     }, [date, foodEntries]);
 
     const totalCalories = foodEntriesToShow?.reduce(
@@ -59,12 +60,6 @@ export default function NutritionJournal({
                 <h3 className="font-bold text-xl tracking-tight">
                     Nutrition Journal
                 </h3>
-                <Link
-                    className="btn btn--primary"
-                    href={`/journal/nutrition/user/${userId}`}
-                >
-                    View All
-                </Link>
             </header>
 
             <div className="overflow-x-auto w-full">

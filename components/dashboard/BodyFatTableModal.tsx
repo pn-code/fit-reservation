@@ -2,16 +2,25 @@
 
 import formatDateString from "@/helpers/dates/formatDateString";
 import axios from "axios";
-import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import toast from "react-hot-toast";
+
+interface BodyFatTableModalProps {
+    bodyfats: BodyFatMeasurement[];
+    setBodyfats: Dispatch<SetStateAction<BodyFatMeasurement[]>>;
+    isOpen: boolean;
+    setIsOpen: Dispatch<SetStateAction<boolean>>;
+}
 
 export default function BodyFatTableModal({
     bodyfats,
     setBodyfats,
     isOpen,
     setIsOpen,
-}) {
+}: BodyFatTableModalProps) {
     const [loading, setLoading] = useState(false);
+    const router = useRouter();
 
     const deleteBodyFat = async (id: number) => {
         try {
@@ -24,6 +33,7 @@ export default function BodyFatTableModal({
                 );
                 toast.success("Successfully deleted bodyfat!");
             }
+            router.refresh();
         } catch (error) {
             console.error(error);
             toast.error("An error has occurred during deletion.");
@@ -35,7 +45,7 @@ export default function BodyFatTableModal({
     if (!isOpen) return null;
 
     return (
-        <div className="absolute bg-black/80 top-0 left-0 w-full h-screen md:h-[calc(100vh-64px)] z-50 flex justify-center pt-5">
+        <div className="fixed bg-black/80 top-0 left-0 w-full h-full md:h-screen z-50 flex justify-center pt-14 md:pt-24">
             <div className="bg-white h-[75vh] w-[340px] md:w-[500px] p-4 my-4 md:px-8 rounded border border-primary overflow-y-auto">
                 <header className="flex justify-between items-center mb-2">
                     <h2>View all bodyfats</h2>
